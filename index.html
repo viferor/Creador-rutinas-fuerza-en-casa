@@ -136,6 +136,14 @@ textarea{resize:vertical;min-height:70px}
 .import-zone{border:2px dashed var(--border);border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:all .15s;margin-top:10px}
 .import-zone:hover{border-color:var(--accent);background:rgba(10,132,255,.05)}
 .import-zone input{display:none}
+.legal-footer{margin-top:40px;padding:24px 20px;border-top:1px solid var(--border);text-align:center;font-size:11px;color:var(--muted);line-height:1.7}
+.legal-footer a{color:var(--accent);text-decoration:none}
+.legal-footer a:hover{text-decoration:underline}
+.legal-footer .credit{margin-bottom:8px;font-size:12px}
+.legal-footer .disclaimer{max-width:700px;margin:12px auto 0;padding:12px;background:var(--card2);border-radius:8px;font-size:11px;text-align:left}
+.legal-footer .disclaimer strong{color:var(--text);font-size:12px;display:block;margin-bottom:4px}
+.legal-footer .license-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.legal-footer .badge{background:var(--card2);border:1px solid var(--border);padding:4px 10px;border-radius:20px;font-size:10px;font-weight:600}
 </style>
 </head>
 <body>
@@ -151,12 +159,10 @@ textarea{resize:vertical;min-height:70px}
   <button class="tab" data-view="session">💪 Sesión</button>
   <button class="tab" data-view="library">📚 Biblioteca</button>
   <button class="tab" data-view="history">📅 Historial</button>
+  <button class="tab" data-view="legal">⚖️ Legal</button>
 </div>
 <div class="view active" id="view-create">
-  <div id="loaderBlock" class="loader">
-    <div class="spinner"></div>
-    Cargando base de datos de ejercicios…
-  </div>
+  <div id="loaderBlock" class="loader"><div class="spinner"></div>Cargando base de datos…</div>
   <div id="formBlock" style="display:none">
     <div class="section">
       <h3>1 · Tu nivel de experiencia</h3>
@@ -167,7 +173,7 @@ textarea{resize:vertical;min-height:70px}
         <option value="advanced">🔥 Avanzado · 2 - 5 años</option>
         <option value="expert">⚡ Experto · Más de 5 años</option>
       </select>
-      <div class="level-hint" id="levelHint">💪 Ejercicios equilibrados con técnica intermedia. Ideal para quienes ya dominan los movimientos básicos.</div>
+      <div class="level-hint" id="levelHint">💪 Ejercicios equilibrados con técnica intermedia.</div>
     </div>
     <div class="section">
       <h3>2 · Tipo de sesión</h3>
@@ -187,7 +193,6 @@ textarea{resize:vertical;min-height:70px}
     </div>
     <div class="section">
       <h3>3 · Estilo de ejercicio</h3>
-      <label class="sel-label">Tipo de ejercicios a incluir</label>
       <select id="exerciseStyle">
         <option value="all">Todos (máx. variedad)</option>
         <option value="bodyweight">Solo peso corporal</option>
@@ -197,27 +202,21 @@ textarea{resize:vertical;min-height:70px}
     </div>
     <div class="section">
       <h3>4 · Volumen de series</h3>
-      <label class="sel-label">Nivel de exigencia</label>
       <select id="level">
-        <option value="2">Baja · 2 series (mantenimiento)</option>
-        <option value="3" selected>Media · 3 series (clásico)</option>
-        <option value="4">Alta · 4 series (máximo estímulo)</option>
+        <option value="2">Baja · 2 series</option>
+        <option value="3" selected>Media · 3 series</option>
+        <option value="4">Alta · 4 series</option>
       </select>
     </div>
     <div class="section">
       <h3>5 · Tu equipamiento hoy</h3>
       <div class="equip-grid" id="equipGrid"></div>
     </div>
-    <button class="btn btn-primary" id="btnGenerate">
-      <span>🚀</span><span>Generar Rutina a Medida</span>
-    </button>
+    <button class="btn btn-primary" id="btnGenerate"><span>🚀</span><span>Generar Rutina a Medida</span></button>
   </div>
 </div>
 <div class="view" id="view-session">
-  <div id="sessionEmpty" class="empty">
-    <div class="ic">🏋️</div>
-    No hay sesión en curso.<br>Ve a la pestaña <b>Crear</b> para empezar.
-  </div>
+  <div id="sessionEmpty" class="empty"><div class="ic">🏋️</div>No hay sesión en curso.<br>Ve a <b>Crear</b> para empezar.</div>
   <div id="sessionContent" style="display:none">
     <div class="section" style="padding:12px 16px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
@@ -232,7 +231,7 @@ textarea{resize:vertical;min-height:70px}
       <h3 style="margin-bottom:10px">💾 Compartir esta rutina</h3>
       <div class="btn-row">
         <button class="btn btn-accent" id="btnSaveToLibrary" style="padding:12px;font-size:13px">💾 Guardar</button>
-        <button class="btn btn-purple" id="btnShareLink" style="padding:12px;font-size:13px">🔗 Copiar enlace</button>
+        <button class="btn btn-purple" id="btnShareLink" style="padding:12px;font-size:13px">🔗 Enlace</button>
         <button class="btn btn-secondary" id="btnExportJSON" style="padding:12px;font-size:13px">📤 Exportar</button>
         <button class="btn btn-secondary" id="btnImportJSON" style="padding:12px;font-size:13px">📥 Importar</button>
       </div>
@@ -240,15 +239,15 @@ textarea{resize:vertical;min-height:70px}
     </div>
     <div id="exercisesList" class="exercise-grid"></div>
     <div class="sticky-bottom">
-      <textarea id="sessionNotes" placeholder="📝 Notas: cómo te sentiste, pesos usados, sensaciones…"></textarea>
-      <button class="btn btn-green" id="btnFinish">✓ Finalizar y guardar entrenamiento</button>
+      <textarea id="sessionNotes" placeholder="📝 Notas del entrenamiento…"></textarea>
+      <button class="btn btn-green" id="btnFinish">✓ Finalizar y guardar</button>
     </div>
   </div>
 </div>
 <div class="view" id="view-library">
   <div class="section" style="padding:12px 16px;margin-bottom:12px">
     <h3 style="margin-bottom:10px">📚 Mi biblioteca de rutinas</h3>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:12px">Guarda tus rutinas favoritas, compártelas con amigos o úsalas en otro dispositivo.</p>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:12px">Guarda tus rutinas favoritas y compártelas.</p>
     <div class="import-zone" id="importZone">
       <div style="font-size:32px;margin-bottom:8px">📥</div>
       <div style="font-weight:600;margin-bottom:4px">Importar rutina desde archivo</div>
@@ -258,20 +257,50 @@ textarea{resize:vertical;min-height:70px}
     <div style="margin-top:10px">
       <label class="sel-label">O pega un enlace compartido:</label>
       <div style="display:flex;gap:8px">
-        <input type="text" id="importLinkInput" placeholder="Pega aquí el enlace compartido...">
+        <input type="text" id="importLinkInput" placeholder="Pega aquí el enlace...">
         <button class="btn btn-accent" id="btnImportLink" style="width:auto;padding:12px 20px;white-space:nowrap">Cargar</button>
       </div>
     </div>
   </div>
   <div id="libraryList" class="hist-grid"></div>
 </div>
-<div class="view" id="view-history">
-  <div id="historyList" class="hist-grid"></div>
-</div>
+<div class="view" id="view-history"><div id="historyList" class="hist-grid"></div></div>
 <div class="view" id="view-detail">
   <button class="detail-back" id="btnBackHist">← Volver</button>
   <div id="detailBody"></div>
 </div>
+<div class="view" id="view-legal">
+  <div class="section">
+    <h3>⚖️ Avisos legales y atribuciones</h3>
+    <p style="color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:16px">Esta aplicación utiliza recursos de terceros bajo distintas licencias.</p>
+    <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--accent)">
+      <h4 style="font-size:14px;margin-bottom:6px">🎬 Animaciones e imágenes</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6">Las animaciones GIF y las imágenes son propiedad de <strong style="color:var(--text)">© Gym visual</strong> y se utilizan con permiso a través del dataset <em>exercises-dataset</em> de <a href="https://github.com/hasaneyldrm/exercises-dataset" target="_blank" style="color:var(--accent)">hasaneyldrm</a>.</p>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px">→ Más información: <a href="https://gymvisual.com" target="_blank" style="color:var(--accent)">gymvisual.com</a></p>
+    </div>
+    <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--green)">
+      <h4 style="font-size:14px;margin-bottom:6px">📋 Base de datos</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6">La estructura de datos, nombres e instrucciones están bajo <strong style="color:var(--text)">MIT License</strong>.</p>
+    </div>
+    <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--orange)">
+      <h4 style="font-size:14px;margin-bottom:6px">⚠️ Descargo de responsabilidad</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6">Esta aplicación es una herramienta de organización personal. <strong style="color:var(--text)">No sustituye el consejo de un profesional cualificado</strong>. Consulta con un especialista antes de iniciar cualquier programa de entrenamiento.</p>
+    </div>
+    <div style="background:var(--card2);border-radius:10px;padding:14px;border-left:3px solid var(--purple)">
+      <h4 style="font-size:14px;margin-bottom:6px">💾 Privacidad</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6">Todos tus datos se almacenan <strong style="color:var(--text)">exclusivamente en tu navegador</strong>. <strong style="color:var(--text)">No se envía información a servidores externos</strong>.</p>
+    </div>
+  </div>
+</div>
+</div>
+<div class="legal-footer">
+  <div class="credit"><strong>Creador de Rutinas Viferor</strong></div>
+  <div>Animaciones © <a href="https://gymvisual.com" target="_blank">Gym visual</a> · Dataset <a href="https://github.com/hasaneyldrm/exercises-dataset" target="_blank">exercises-dataset</a> (MIT)</div>
+  <div class="license-badges"><span class="badge">MIT License</span><span class="badge">© Gym visual</span><span class="badge">Datos locales</span></div>
+  <div class="disclaimer">
+    <strong>⚠️ Aviso importante:</strong>
+    Esta aplicación es una herramienta de organización personal. No sustituye el consejo médico ni de un entrenador profesional. Consulta con un especialista antes de iniciar cualquier programa de entrenamiento. Los medios visuales son propiedad de Gym visual y se utilizan con permiso.
+  </div>
 </div>
 <div class="modal" id="gifModal">
   <button class="modal-close" id="modalClose">✕</button>
@@ -279,6 +308,7 @@ textarea{resize:vertical;min-height:70px}
     <img id="modalImg" src="" alt="">
     <h3 id="modalTitle"></h3>
     <div class="instructions" id="modalInstr"></div>
+    <div style="margin-top:10px;font-size:11px;color:var(--muted)">Animación © <a href="https://gymvisual.com" target="_blank" style="color:var(--accent)">Gym visual</a></div>
   </div>
 </div>
 <div class="modal" id="replaceModal">
@@ -354,11 +384,8 @@ function showToast(msg, color){
 
 function compressRoutine(session){
   const slim = {
-    v: 1,
-    rt: session.routineType,
-    lv: session.level,
-    el: session.experienceLevel,
-    eq: session.equipment,
+    v: 1, rt: session.routineType, lv: session.level,
+    el: session.experienceLevel, eq: session.equipment,
     nm: session.name || '',
     ex: session.exercises.map(e => ({
       id: e.id, name: e.name, category: e.category,
@@ -386,8 +413,7 @@ function saveToLibrary(session){
   if(!name) return;
   const lib = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
   const entry = {
-    id: Date.now(),
-    name: name,
+    id: Date.now(), name: name,
     date: new Date().toISOString(),
     data: compressRoutine(session)
   };
@@ -587,7 +613,6 @@ function bindEvents(){
   document.getElementById('replaceModal').addEventListener('click', e=>{if(e.target.id==='replaceModal') e.currentTarget.classList.remove('show');});
   document.getElementById('btnBackHist').addEventListener('click',()=>showView('history'));
 }
-
 function generateRoutine(){
   const rt = document.getElementById('routineType').value;
   const level = parseInt(document.getElementById('level').value);
@@ -669,7 +694,7 @@ function buildExerciseCard(ex, idx){
     <div class="exercise-actions">
       <button class="act-btn" title="Subir" data-act="up">↑</button>
       <button class="act-btn" title="Bajar" data-act="down">↓</button>
-      <button class="act-btn" title="Cambiar ejercicio" data-act="replace">🔄</button>
+      <button class="act-btn" title="Cambiar" data-act="replace">🔄</button>
       <button class="act-btn danger" title="Eliminar" data-act="remove">✕</button>
     </div>
     <div class="exercise-head">
@@ -729,8 +754,48 @@ function removeExercise(idx){
 }
 
 function openReplaceModal(idx){
-  replaceIdx = idx;  const ex = currentSession.exercises[idx];  const expLevel = currentSession.experienceLevel || 'intermediate';  document.getElementById('replaceInfo').textContent = `Sustituyendo: ${ex.name} (${formatCategory(ex.category)})`;  const equipSet = new Set(currentSession.equipment);  let alternatives = DB.filter(e => e.category === ex.category && e.name !== ex.name && equipSet.has(e.equipment));  alternatives = filterByLevel(alternatives, expLevel).slice(0, 20);  const list = document.getElementById('replaceList');  if(alternatives.length === 0){    list.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px">No hay alternativas disponibles.</p>';  } else {    const diffLabels = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'};    list.innerHTML = alternatives.map((alt,i)=>{      const d = classifyDifficulty(alt);      return `<div class="replace-item" data-idx="${i}"><img src="${alt.image ? MEDIA_BASE + alt.image : ''}" onerror="this.style.background='#2a2a2a'"><div class="info"><h4>${alt.name}</h4><p>${diffLabels[d]||''} ${formatEquip(alt.equipment)}${alt.target ? ' · 🎯 '+alt.target : ''}</p></div></div>`;    }).join('');  }  list.querySelectorAll('.replace-item').forEach(item=>{    item.addEventListener('click',()=>{      const altIdx = parseInt(item.dataset.idx);      const alt = alternatives[altIdx];      currentSession.exercises[replaceIdx] = {        ...alt, difficulty: classifyDifficulty(alt),        sets: currentSession.exercises[replaceIdx].sets      };      document.getElementById('replaceModal').classList.remove('show');      renderSessionView();    });  });  document.getElementById('replaceModal').classList.add('show');}function openGifModal(ex){  const modal = document.getElementById('gifModal');  const gifUrl = ex.gif_url ? MEDIA_BASE + ex.gif_url : (ex.image ? MEDIA_BASE + ex.image : '');  document.getElementById('modalImg').src = gifUrl;  document.getElementById('modalTitle').textContent = ex.name;  document.getElementById('modalInstr').textContent = ex.instructions?.es || ex.instructions?.en || 'Sigue las indicaciones del GIF.';  modal.classList.add('show');}
-  function finishSession(){
+  replaceIdx = idx;
+  const ex = currentSession.exercises[idx];
+  const expLevel = currentSession.experienceLevel || 'intermediate';
+  document.getElementById('replaceInfo').textContent = `Sustituyendo: ${ex.name} (${formatCategory(ex.category)})`;
+  const equipSet = new Set(currentSession.equipment);
+  let alternatives = DB.filter(e => e.category === ex.category && e.name !== ex.name && equipSet.has(e.equipment));
+  alternatives = filterByLevel(alternatives, expLevel).slice(0, 20);
+  const list = document.getElementById('replaceList');
+  if(alternatives.length === 0){
+    list.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px">No hay alternativas disponibles.</p>';
+  } else {
+    const diffLabels = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'};
+    list.innerHTML = alternatives.map((alt,i)=>{
+      const d = classifyDifficulty(alt);
+      return `<div class="replace-item" data-idx="${i}"><img src="${alt.image ? MEDIA_BASE + alt.image : ''}" onerror="this.style.background='#2a2a2a'"><div class="info"><h4>${alt.name}</h4><p>${diffLabels[d]||''} ${formatEquip(alt.equipment)}${alt.target ? ' · 🎯 '+alt.target : ''}</p></div></div>`;
+    }).join('');
+  }
+  list.querySelectorAll('.replace-item').forEach(item=>{
+    item.addEventListener('click',()=>{
+      const altIdx = parseInt(item.dataset.idx);
+      const alt = alternatives[altIdx];
+      currentSession.exercises[replaceIdx] = {
+        ...alt, difficulty: classifyDifficulty(alt),
+        sets: currentSession.exercises[replaceIdx].sets
+      };
+      document.getElementById('replaceModal').classList.remove('show');
+      renderSessionView();
+    });
+  });
+  document.getElementById('replaceModal').classList.add('show');
+}
+
+function openGifModal(ex){
+  const modal = document.getElementById('gifModal');
+  const gifUrl = ex.gif_url ? MEDIA_BASE + ex.gif_url : (ex.image ? MEDIA_BASE + ex.image : '');
+  document.getElementById('modalImg').src = gifUrl;
+  document.getElementById('modalTitle').textContent = ex.name;
+  document.getElementById('modalInstr').textContent = ex.instructions?.es || ex.instructions?.en || 'Sigue las indicaciones del GIF.';
+  modal.classList.add('show');
+}
+
+function finishSession(){
   if(!currentSession) return;
   currentSession.notes = document.getElementById('sessionNotes').value.trim();
   const anyDone = currentSession.exercises.some(e=>e.sets.some(s=>s.done));
