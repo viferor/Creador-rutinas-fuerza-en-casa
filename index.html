@@ -13,8 +13,8 @@ header{position:sticky;top:0;background:rgba(10,10,10,.85);backdrop-filter:blur(
 header h1{font-size:22px;font-weight:800;letter-spacing:-.5px}
 header .sub{font-size:12px;color:var(--muted);font-weight:500}
 .container{max-width:1400px;margin:0 auto;padding:0 20px}
-.tabs{display:flex;gap:4px;padding:12px 0}
-.tab{background:var(--card);border:none;color:var(--muted);padding:10px 18px;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;flex:1;min-width:0}
+.tabs{display:flex;gap:4px;padding:12px 0;flex-wrap:wrap}
+.tab{background:var(--card);border:none;color:var(--muted);padding:10px 14px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;flex:1;min-width:0}
 .tab.active{background:var(--accent);color:#fff}
 .view{display:none;padding:16px 0;animation:fade .25s ease}
 .view.active{display:block}
@@ -42,6 +42,11 @@ textarea{resize:vertical;min-height:70px}
 .btn-primary{background:#fff;color:#000}
 .btn-green{background:var(--green);color:#000;margin-top:10px}
 .btn-red{background:var(--red);color:#fff;padding:10px;font-size:13px;width:auto}
+.btn-secondary{background:var(--card2);color:var(--text);border:1px solid var(--border);padding:12px;font-size:14px}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-purple{background:var(--purple);color:#fff}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+@media(min-width:600px){.btn-row{grid-template-columns:repeat(4,1fr)}}
 .loader{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px}
 .spinner{width:28px;height:28px;border:3px solid var(--card2);border-top-color:var(--accent);border-radius:50%;margin:0 auto 14px;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -96,13 +101,21 @@ textarea{resize:vertical;min-height:70px}
 .hist-grid{display:grid;grid-template-columns:1fr;gap:10px}
 @media(min-width:768px){.hist-grid{grid-template-columns:1fr 1fr}}
 @media(min-width:1200px){.hist-grid{grid-template-columns:repeat(3,1fr)}}
-.hist-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:transform .1s}
+.hist-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:transform .1s;position:relative}
 .hist-card:active{transform:scale(.98)}
 .hist-date{color:var(--accent);font-size:13px;font-weight:700;margin-bottom:4px}
 .hist-title{font-size:15px;font-weight:700;margin-bottom:6px}
 .hist-stats{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:6px;flex-wrap:wrap}
 .hist-stats span strong{color:var(--text);font-weight:700}
 .hist-del{float:right;background:none;border:none;color:var(--red);font-size:18px;cursor:pointer;padding:4px}
+.lib-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;position:relative}
+.lib-card h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.lib-card .meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+.lib-card .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.lib-card .actions button{flex:1;min-width:80px;padding:8px;font-size:12px;border-radius:8px;border:none;font-weight:600;cursor:pointer}
+.lib-card .load{background:var(--accent);color:#fff}
+.lib-card .share{background:var(--purple);color:#fff}
+.lib-card .del{background:var(--red);color:#fff}
 .detail-back{display:inline-flex;align-items:center;gap:4px;color:var(--accent);background:none;border:none;font-size:15px;font-weight:600;cursor:pointer;padding:8px 0;margin-bottom:8px;font-family:inherit}
 .detail-head{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:12px;border:1px solid var(--border)}
 .detail-head h2{font-size:20px;font-weight:800;margin-bottom:4px}
@@ -117,6 +130,12 @@ textarea{resize:vertical;min-height:70px}
 .empty-state p{color:var(--muted);font-size:14px}
 .sticky-bottom{position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 60%,transparent);padding:16px;margin:-16px -16px 0;z-index:50}
 .level-hint{margin-top:10px;padding:10px 12px;background:var(--card2);border-radius:8px;font-size:12px;color:var(--muted);line-height:1.5;border-left:3px solid var(--purple)}
+.share-box{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:10px;word-break:break-all;font-size:12px;color:var(--muted);max-height:120px;overflow-y:auto;font-family:monospace}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;padding:12px 24px;border-radius:30px;font-weight:700;font-size:14px;z-index:2000;box-shadow:0 10px 30px rgba(0,0,0,.5);animation:toastIn .3s ease}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
+.import-zone{border:2px dashed var(--border);border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:all .15s;margin-top:10px}
+.import-zone:hover{border-color:var(--accent);background:rgba(10,132,255,.05)}
+.import-zone input{display:none}
 </style>
 </head>
 <body>
@@ -130,6 +149,7 @@ textarea{resize:vertical;min-height:70px}
 <div class="tabs">
   <button class="tab active" data-view="create">➕ Crear</button>
   <button class="tab" data-view="session">💪 Sesión</button>
+  <button class="tab" data-view="library">📚 Biblioteca</button>
   <button class="tab" data-view="history">📅 Historial</button>
 </div>
 <div class="view active" id="view-create">
@@ -147,9 +167,8 @@ textarea{resize:vertical;min-height:70px}
         <option value="advanced">🔥 Avanzado · 2 - 5 años</option>
         <option value="expert">⚡ Experto · Más de 5 años</option>
       </select>
-      <div class="level-hint" id="levelHint">Ejercicios equilibrados con técnica intermedia. Ideal para quienes ya dominan los movimientos básicos.</div>
+      <div class="level-hint" id="levelHint">💪 Ejercicios equilibrados con técnica intermedia. Ideal para quienes ya dominan los movimientos básicos.</div>
     </div>
-
     <div class="section">
       <h3>2 · Tipo de sesión</h3>
       <label class="sel-label">Objetivo</label>
@@ -166,7 +185,6 @@ textarea{resize:vertical;min-height:70px}
         <select id="customGroup"></select>
       </div>
     </div>
-
     <div class="section">
       <h3>3 · Estilo de ejercicio</h3>
       <label class="sel-label">Tipo de ejercicios a incluir</label>
@@ -177,7 +195,6 @@ textarea{resize:vertical;min-height:70px}
         <option value="mix">Mixto (equipo + peso corporal)</option>
       </select>
     </div>
-
     <div class="section">
       <h3>4 · Volumen de series</h3>
       <label class="sel-label">Nivel de exigencia</label>
@@ -187,12 +204,10 @@ textarea{resize:vertical;min-height:70px}
         <option value="4">Alta · 4 series (máximo estímulo)</option>
       </select>
     </div>
-
     <div class="section">
       <h3>5 · Tu equipamiento hoy</h3>
       <div class="equip-grid" id="equipGrid"></div>
     </div>
-
     <button class="btn btn-primary" id="btnGenerate">
       <span>🚀</span><span>Generar Rutina a Medida</span>
     </button>
@@ -213,12 +228,42 @@ textarea{resize:vertical;min-height:70px}
         <button class="btn btn-red" id="btnCancelSession">✕</button>
       </div>
     </div>
+    <div class="section" style="padding:12px 16px;margin-bottom:12px">
+      <h3 style="margin-bottom:10px">💾 Compartir esta rutina</h3>
+      <div class="btn-row">
+        <button class="btn btn-accent" id="btnSaveToLibrary" style="padding:12px;font-size:13px">💾 Guardar</button>
+        <button class="btn btn-purple" id="btnShareLink" style="padding:12px;font-size:13px">🔗 Copiar enlace</button>
+        <button class="btn btn-secondary" id="btnExportJSON" style="padding:12px;font-size:13px">📤 Exportar</button>
+        <button class="btn btn-secondary" id="btnImportJSON" style="padding:12px;font-size:13px">📥 Importar</button>
+      </div>
+      <div id="shareBox" class="share-box" style="display:none"></div>
+    </div>
     <div id="exercisesList" class="exercise-grid"></div>
     <div class="sticky-bottom">
       <textarea id="sessionNotes" placeholder="📝 Notas: cómo te sentiste, pesos usados, sensaciones…"></textarea>
       <button class="btn btn-green" id="btnFinish">✓ Finalizar y guardar entrenamiento</button>
     </div>
   </div>
+</div>
+<div class="view" id="view-library">
+  <div class="section" style="padding:12px 16px;margin-bottom:12px">
+    <h3 style="margin-bottom:10px">📚 Mi biblioteca de rutinas</h3>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:12px">Guarda tus rutinas favoritas, compártelas con amigos o úsalas en otro dispositivo.</p>
+    <div class="import-zone" id="importZone">
+      <div style="font-size:32px;margin-bottom:8px">📥</div>
+      <div style="font-weight:600;margin-bottom:4px">Importar rutina desde archivo</div>
+      <div style="font-size:12px;color:var(--muted)">Haz clic o arrastra un archivo .json</div>
+      <input type="file" id="importFile" accept=".json">
+    </div>
+    <div style="margin-top:10px">
+      <label class="sel-label">O pega un enlace compartido:</label>
+      <div style="display:flex;gap:8px">
+        <input type="text" id="importLinkInput" placeholder="Pega aquí el enlace compartido...">
+        <button class="btn btn-accent" id="btnImportLink" style="width:auto;padding:12px 20px;white-space:nowrap">Cargar</button>
+      </div>
+    </div>
+  </div>
+  <div id="libraryList" class="hist-grid"></div>
 </div>
 <div class="view" id="view-history">
   <div id="historyList" class="hist-grid"></div>
@@ -265,32 +310,19 @@ let DB = [];
 let currentSession = null;
 let replaceIdx = null;
 const STORAGE_KEY = 'viferor_sessions_v1';
+const LIBRARY_KEY = 'viferor_library_v1';
 
-// ===== CLASIFICACIÓN DE DIFICULTAD =====
 const DIFFICULTY = {
-  beginner: {
-    keywords: ['beginner','basic','assisted','machine','bodyweight','body weight','easy','light','simple','supported','knee','incline','decline push','wall','seated','lying','chest supported'],
-    exclude: ['advanced','expert','plyometric','explosive','one arm','one leg','single arm','single leg','pistol','handstand','planche','muscle up','weighted','heavy']
-  },
-  intermediate: {
-    keywords: ['dumbbell','barbell','kettlebell','cable','press','curl','row','squat','lunge','raise','extension','fly','pull','push'],
-    exclude: ['advanced','expert','plyometric','explosive','one arm','one leg','single arm','single leg','pistol','handstand','planche','muscle up']
-  },
-  advanced: {
-    keywords: ['bulgarian','single leg','single arm','one arm','one leg','unilateral','plyometric','jump','explosive','deficit','paused','tempo','weighted','close grip','wide grip','incline','decline'],
-    exclude: ['beginner','basic','assisted','machine']
-  },
-  expert: {
-    keywords: ['handstand','pistol','planche','muscle up','l-sit','dragon flag','human flag','one arm pull','explosive','clap','plyo','advanced','complex','turkish','windmill','sotts','zercher','front squat','overhead squat','snatch','clean','jerk'],
-    exclude: []
-  }
+  beginner: {keywords:['beginner','basic','assisted','machine','bodyweight','body weight','easy','light','simple','supported','knee','incline','decline push','wall','seated','lying','chest supported']},
+  intermediate: {keywords:['dumbbell','barbell','kettlebell','cable','press','curl','row','squat','lunge','raise','extension','fly','pull','push']},
+  advanced: {keywords:['bulgarian','single leg','single arm','one arm','one leg','unilateral','plyometric','jump','explosive','deficit','paused','tempo','weighted','close grip','wide grip','incline','decline']},
+  expert: {keywords:['handstand','pistol','planche','muscle up','l-sit','dragon flag','human flag','one arm pull','explosive','clap','plyo','advanced','complex','turkish','windmill','sotts','zercher','front squat','overhead squat','snatch','clean','jerk']}
 };
-
 const LEVEL_HINTS = {
-  beginner: '🌱 Ejercicios básicos y sencillos. Prioriza aprender la técnica correcta antes de subir peso.',
-  intermediate: '💪 Ejercicios equilibrados con técnica intermedia. Ideal para quienes ya dominan los movimientos básicos.',
-  advanced: '🔥 Movimientos más técnicos y exigentes. Unilaterales, pliométricos y variantes avanzadas.',
-  expert: '⚡ Ejercicios de alta complejidad técnica. Solo para atletas con años de experiencia sólida.'
+  beginner:'🌱 Ejercicios básicos y sencillos. Prioriza aprender la técnica correcta antes de subir peso.',
+  intermediate:'💪 Ejercicios equilibrados con técnica intermedia. Ideal para quienes ya dominan los movimientos básicos.',
+  advanced:'🔥 Movimientos más técnicos y exigentes. Unilaterales, pliométricos y variantes avanzadas.',
+  expert:'⚡ Ejercicios de alta complejidad técnica. Solo para atletas con años de experiencia sólida.'
 };
 
 function classifyDifficulty(exercise){
@@ -306,17 +338,137 @@ function classifyDifficulty(exercise){
 }
 
 function filterByLevel(exercises, level){
-  const allowed = {
-    beginner: ['beginner'],
-    intermediate: ['beginner','intermediate'],
-    advanced: ['beginner','intermediate','advanced'],
-    expert: ['beginner','intermediate','advanced','expert']
-  };
+  const allowed = {beginner:['beginner'],intermediate:['beginner','intermediate'],advanced:['beginner','intermediate','advanced'],expert:['beginner','intermediate','advanced','expert']};
   const permitted = new Set(allowed[level]);
   return exercises.filter(ex => permitted.has(classifyDifficulty(ex)));
 }
 
-// ===== INICIALIZACIÓN =====
+function showToast(msg, color){
+  const t = document.createElement('div');
+  t.className = 'toast';
+  if(color) t.style.background = color;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 2500);
+}
+
+function compressRoutine(session){
+  const slim = {
+    v: 1,
+    rt: session.routineType,
+    lv: session.level,
+    el: session.experienceLevel,
+    eq: session.equipment,
+    nm: session.name || '',
+    ex: session.exercises.map(e => ({
+      id: e.id, name: e.name, category: e.category,
+      equipment: e.equipment, target: e.target, difficulty: e.difficulty
+    }))
+  };
+  return btoa(unescape(encodeURIComponent(JSON.stringify(slim))));
+}
+
+function decompressRoutine(str){
+  try {
+    const json = decodeURIComponent(escape(atob(str)));
+    return JSON.parse(json);
+  } catch(e){ return null; }
+}
+
+function generateShareLink(session){
+  const data = compressRoutine(session);
+  const base = window.location.href.split('#')[0].split('?')[0];
+  return base + '#r=' + data;
+}
+
+function saveToLibrary(session){
+  const name = prompt('Nombre para esta rutina:', session.name || 'Mi rutina');
+  if(!name) return;
+  const lib = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
+  const entry = {
+    id: Date.now(),
+    name: name,
+    date: new Date().toISOString(),
+    data: compressRoutine(session)
+  };
+  lib.unshift(entry);
+  localStorage.setItem(LIBRARY_KEY, JSON.stringify(lib));
+  showToast('💾 Guardada en tu biblioteca');
+  renderLibrary();
+}
+
+function loadFromLibrary(data){
+  const slim = decompressRoutine(data);
+  if(!slim){ alert('❌ Enlace o archivo inválido'); return; }
+  const exercises = slim.ex.map(s => {
+    const full = DB.find(e => e.id === s.id) || s;
+    return {
+      ...full, name: s.name, category: s.category,
+      equipment: s.equipment, target: s.target,
+      difficulty: s.difficulty || classifyDifficulty(full),
+      sets: Array.from({length: slim.lv}, (_,i)=>({n:i+1,kg:'',reps:'',done:false}))
+    };
+  });
+  currentSession = {
+    id: Date.now(), date: new Date().toISOString(),
+    routineType: slim.rt, level: slim.lv,
+    experienceLevel: slim.el || 'intermediate',
+    equipment: slim.eq, name: slim.nm || '',
+    exercises: exercises, notes: ''
+  };
+  renderSessionView();
+  showView('session');
+  showToast('✅ Rutina cargada');
+}
+
+function exportJSON(session){
+  const data = {version: 1, exported: new Date().toISOString(), routine: session};
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `rutina-viferor-${Date.now()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('📤 Archivo descargado');
+}
+
+function importJSONFile(file){
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if(data.routine){ loadFromRoutine(data.routine); }
+      else { alert('❌ Formato de archivo no válido'); }
+    } catch(err){ alert('❌ Error al leer el archivo'); }
+  };
+  reader.readAsText(file);
+}
+
+function loadFromRoutine(routine){
+  currentSession = {
+    ...routine, id: Date.now(),
+    exercises: routine.exercises.map(ex => ({
+      ...ex,
+      sets: Array.from({length: routine.level}, (_,i)=>({n:i+1,kg:'',reps:'',done:false}))
+    }))
+  };
+  renderSessionView();
+  showView('session');
+  showToast('✅ Rutina importada');
+}
+
+function checkURLForSharedRoutine(){
+  const hash = window.location.hash;
+  if(hash.startsWith('#r=')){
+    const data = hash.substring(3);
+    if(confirm('Se ha detectado una rutina compartida. ¿Cargarla ahora?')){
+      loadFromLibrary(data);
+      history.replaceState(null, '', window.location.pathname);
+    }
+  }
+}
+
 (async function init(){
   const grid = document.getElementById('equipGrid');
   EQUIP_LIST.forEach(eq=>{
@@ -330,11 +482,13 @@ function filterByLevel(exercises, level){
     document.getElementById('loaderBlock').style.display='none';
     document.getElementById('formBlock').style.display='block';
     populateGroups();
+    checkURLForSharedRoutine();
   } catch(e){
     document.getElementById('loaderBlock').innerHTML = '❌ Error cargando la base de datos.';
     return;
   }
   renderHistory();
+  renderLibrary();
   bindEvents();
 })();
 
@@ -366,6 +520,11 @@ function formatCategory(c){
   return map[c] || c;
 }
 
+function formatEquip(eq){
+  const map = {'body weight':'Peso corporal','dumbbell':'Mancuernas','barbell':'Barra','kettlebell':'Kettlebell','cable':'Polea','leverage machine':'Máquina','smith machine':'Smith','band':'Banda','stability ball':'Fitball','ez barbell':'Barra Z'};
+  return map[eq] || eq;
+}
+
 function bindEvents(){
   const rt = document.getElementById('routineType');
   rt.addEventListener('change',()=>{
@@ -373,16 +532,54 @@ function bindEvents(){
   });
   const expSel = document.getElementById('experienceLevel');
   const hint = document.getElementById('levelHint');
-  expSel.addEventListener('change',()=>{
-    hint.textContent = LEVEL_HINTS[expSel.value];
-  });
+  expSel.addEventListener('change',()=>{ hint.textContent = LEVEL_HINTS[expSel.value]; });
   document.getElementById('btnGenerate').addEventListener('click', generateRoutine);
   document.getElementById('btnFinish').addEventListener('click', finishSession);
   document.getElementById('btnCancelSession').addEventListener('click', ()=>{
-    if(confirm('¿Descartar la sesión actual?')){
-      currentSession = null;
-      renderSessionView();
-    }
+    if(confirm('¿Descartar la sesión actual?')){ currentSession = null; renderSessionView(); }
+  });
+  document.getElementById('btnSaveToLibrary').addEventListener('click', ()=>{
+    if(!currentSession){alert('No hay sesión activa');return;}
+    saveToLibrary(currentSession);
+  });
+  document.getElementById('btnShareLink').addEventListener('click', ()=>{
+    if(!currentSession){alert('No hay sesión activa');return;}
+    const link = generateShareLink(currentSession);
+    const box = document.getElementById('shareBox');
+    box.textContent = link;
+    box.style.display = 'block';
+    navigator.clipboard.writeText(link).then(()=>{
+      showToast('📋 Enlace copiado al portapapeles');
+    }).catch(()=>{
+      showToast('Enlace generado (cópialo manualmente)', '#ff9f0a');
+    });
+  });
+  document.getElementById('btnExportJSON').addEventListener('click', ()=>{
+    if(!currentSession){alert('No hay sesión activa');return;}
+    exportJSON(currentSession);
+  });
+  document.getElementById('btnImportJSON').addEventListener('click', ()=>{
+    document.getElementById('importFile').click();
+  });
+  document.getElementById('importFile').addEventListener('change', e=>{
+    if(e.target.files[0]) importJSONFile(e.target.files[0]);
+  });
+  const importZone = document.getElementById('importZone');
+  importZone.addEventListener('click', ()=>document.getElementById('importFile').click());
+  importZone.addEventListener('dragover', e=>{e.preventDefault();importZone.style.borderColor='var(--accent)';});
+  importZone.addEventListener('dragleave', ()=>{importZone.style.borderColor='';});
+  importZone.addEventListener('drop', e=>{
+    e.preventDefault();
+    importZone.style.borderColor='';
+    if(e.dataTransfer.files[0]) importJSONFile(e.dataTransfer.files[0]);
+  });
+  document.getElementById('btnImportLink').addEventListener('click', ()=>{
+    const input = document.getElementById('importLinkInput');
+    const val = input.value.trim();
+    if(!val){alert('Pega un enlace');return;}
+    const match = val.match(/#r=([^&]+)/);
+    if(match){ loadFromLibrary(match[1]); input.value = ''; }
+    else { loadFromLibrary(val); }
   });
   document.getElementById('modalClose').addEventListener('click',()=>document.getElementById('gifModal').classList.remove('show'));
   document.getElementById('gifModal').addEventListener('click', e=>{if(e.target.id==='gifModal') e.currentTarget.classList.remove('show');});
@@ -408,7 +605,7 @@ function generateRoutine(){
     isoPool = pool.filter(isIso);
     pool = pool.filter(e=>!isIso(e));
   }
-  if(pool.length===0){alert('No hay ejercicios disponibles con ese nivel y equipamiento. Prueba a marcar más equipamiento.');return;}
+  if(pool.length===0){alert('No hay ejercicios disponibles con ese nivel y equipamiento.');return;}
   let targetCats = [];
   const countPerCat = {};
   if(rt==='fullbody'){targetCats = ['chest','back','shoulders','upper legs','waist'];targetCats.forEach(c=>countPerCat[c]=2);}
@@ -420,24 +617,17 @@ function generateRoutine(){
   const chosen = [];
   targetCats.forEach(cat=>{
     const catPool = pool.filter(e=>e.category===cat);
-    const shuffled = shuffle(catPool);
-    chosen.push(...shuffled.slice(0,countPerCat[cat]||2));
+    chosen.push(...shuffle(catPool).slice(0,countPerCat[cat]||2));
   });
   if(style==='iso' && isoPool.length){chosen.push(...shuffle(isoPool).slice(0,2));}
   const finalExercises = shuffle(chosen).map(ex=>({
-    ...ex,
-    difficulty: classifyDifficulty(ex),
+    ...ex, difficulty: classifyDifficulty(ex),
     sets: Array.from({length:level},(_,i)=>({n:i+1,kg:'',reps:'',done:false}))
   }));
   currentSession = {
-    id: Date.now(),
-    date: new Date().toISOString(),
-    routineType: rt,
-    level: level,
-    experienceLevel: expLevel,
-    equipment: [...equipSet],
-    exercises: finalExercises,
-    notes: ''
+    id: Date.now(), date: new Date().toISOString(),
+    routineType: rt, level: level, experienceLevel: expLevel,
+    equipment: [...equipSet], exercises: finalExercises, notes: ''
   };
   renderSessionView();
   showView('session');
@@ -464,6 +654,7 @@ function renderSessionView(){
   const list = document.getElementById('exercisesList');
   list.innerHTML = '';
   currentSession.exercises.forEach((ex,idx)=>{list.appendChild(buildExerciseCard(ex,idx));});
+  document.getElementById('shareBox').style.display = 'none';
 }
 
 function buildExerciseCard(ex, idx){
@@ -474,7 +665,6 @@ function buildExerciseCard(ex, idx){
   const isIso = (ex.name||'').toLowerCase().match(/plank|hold|isometric|wall sit|hollow|superman hold|bridge hold|static|l-sit|dead hang|handstand hold/);
   const diff = ex.difficulty || classifyDifficulty(ex);
   const diffLabels = {beginner:'🌱 Fácil',intermediate:'💪 Media',advanced:'🔥 Difícil',expert:'⚡ Experto'};
-
   card.innerHTML = `
     <div class="exercise-actions">
       <button class="act-btn" title="Subir" data-act="up">↑</button>
@@ -497,7 +687,6 @@ function buildExerciseCard(ex, idx){
       <div class="hdr"><div>SET</div><div>KG</div><div>REPS</div><div></div></div>
       ${ex.sets.map((s,i)=>`<div class="set-row" data-set="${i}"><div class="num">${i+1}</div><input type="number" step="0.5" min="0" placeholder="0" value="${s.kg}" data-field="kg"><input type="number" min="0" placeholder="0" value="${s.reps}" data-field="reps"><button class="set-check ${s.done?'done':''}">✓</button></div>`).join('')}
     </div>`;
-
   card.querySelectorAll('.act-btn').forEach(btn=>{
     btn.addEventListener('click',()=>{
       const act = btn.dataset.act;
@@ -507,7 +696,6 @@ function buildExerciseCard(ex, idx){
       else if(act==='remove') removeExercise(idx);
     });
   });
-
   card.querySelector('.exercise-thumb').addEventListener('click',()=>openGifModal(ex));
   card.querySelectorAll('input').forEach(inp=>{
     inp.addEventListener('input', e=>{
@@ -541,67 +729,7 @@ function removeExercise(idx){
 }
 
 function openReplaceModal(idx){
-  replaceIdx = idx;
-  const ex = currentSession.exercises[idx];
-  const expLevel = currentSession.experienceLevel || 'intermediate';
-  document.getElementById('replaceInfo').textContent = `Sustituyendo: ${ex.name} (${formatCategory(ex.category)})`;
-  const equipSet = new Set(currentSession.equipment);
-  let alternatives = DB.filter(e =>
-    e.category === ex.category &&
-    e.name !== ex.name &&
-    equipSet.has(e.equipment)
-  );
-  alternatives = filterByLevel(alternatives, expLevel);
-  alternatives = alternatives.slice(0, 20);
-
-  const list = document.getElementById('replaceList');
-  if(alternatives.length === 0){
-    list.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px">No hay alternativas disponibles.</p>';
-  } else {
-    const diffLabels = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'};
-    list.innerHTML = alternatives.map((alt,i)=>{
-      const d = classifyDifficulty(alt);
-      return `
-      <div class="replace-item" data-idx="${i}">
-        <img src="${alt.image ? MEDIA_BASE + alt.image : ''}" onerror="this.style.background='#2a2a2a'">
-        <div class="info">
-          <h4>${alt.name}</h4>
-          <p>${diffLabels[d]||''} ${formatEquip(alt.equipment)}${alt.target ? ' · 🎯 '+alt.target : ''}</p>
-        </div>
-      </div>`;
-    }).join('');
-  }
-
-  list.querySelectorAll('.replace-item').forEach(item=>{
-    item.addEventListener('click',()=>{
-      const altIdx = parseInt(item.dataset.idx);
-      const alt = alternatives[altIdx];
-      currentSession.exercises[replaceIdx] = {
-        ...alt,
-        difficulty: classifyDifficulty(alt),
-        sets: currentSession.exercises[replaceIdx].sets
-      };
-      document.getElementById('replaceModal').classList.remove('show');
-      renderSessionView();
-    });
-  });
-
-  document.getElementById('replaceModal').classList.add('show');
-}
-
-function formatEquip(eq){
-  const map = {'body weight':'Peso corporal','dumbbell':'Mancuernas','barbell':'Barra','kettlebell':'Kettlebell','cable':'Polea','leverage machine':'Máquina','smith machine':'Smith','band':'Banda','stability ball':'Fitball','ez barbell':'Barra Z'};
-  return map[eq] || eq;
-}
-
-function openGifModal(ex){
-  const modal = document.getElementById('gifModal');
-  const gifUrl = ex.gif_url ? MEDIA_BASE + ex.gif_url : (ex.image ? MEDIA_BASE + ex.image : '');
-  document.getElementById('modalImg').src = gifUrl;
-  document.getElementById('modalTitle').textContent = ex.name;
-  document.getElementById('modalInstr').textContent = ex.instructions?.es || ex.instructions?.en || 'Sigue las indicaciones del GIF.';
-  modal.classList.add('show');
-}
+  replaceIdx = idx;  const ex = currentSession.exercises[idx];  const expLevel = currentSession.experienceLevel || 'intermediate';  document.getElementById('replaceInfo').textContent = `Sustituyendo: ${ex.name} (${formatCategory(ex.category)})`;  const equipSet = new Set(currentSession.equipment);  let alternatives = DB.filter(e => e.category === ex.category && e.name !== ex.name && equipSet.has(e.equipment));  alternatives = filterByLevel(alternatives, expLevel).slice(0, 20);  const list = document.getElementById('replaceList');  if(alternatives.length === 0){    list.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px">No hay alternativas disponibles.</p>';  } else {    const diffLabels = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'};    list.innerHTML = alternatives.map((alt,i)=>{      const d = classifyDifficulty(alt);      return `<div class="replace-item" data-idx="${i}"><img src="${alt.image ? MEDIA_BASE + alt.image : ''}" onerror="this.style.background='#2a2a2a'"><div class="info"><h4>${alt.name}</h4><p>${diffLabels[d]||''} ${formatEquip(alt.equipment)}${alt.target ? ' · 🎯 '+alt.target : ''}</p></div></div>`;    }).join('');  }  list.querySelectorAll('.replace-item').forEach(item=>{    item.addEventListener('click',()=>{      const altIdx = parseInt(item.dataset.idx);      const alt = alternatives[altIdx];      currentSession.exercises[replaceIdx] = {        ...alt, difficulty: classifyDifficulty(alt),        sets: currentSession.exercises[replaceIdx].sets      };      document.getElementById('replaceModal').classList.remove('show');      renderSessionView();    });  });  document.getElementById('replaceModal').classList.add('show');}function openGifModal(ex){  const modal = document.getElementById('gifModal');  const gifUrl = ex.gif_url ? MEDIA_BASE + ex.gif_url : (ex.image ? MEDIA_BASE + ex.image : '');  document.getElementById('modalImg').src = gifUrl;  document.getElementById('modalTitle').textContent = ex.name;  document.getElementById('modalInstr').textContent = ex.instructions?.es || ex.instructions?.en || 'Sigue las indicaciones del GIF.';  modal.classList.add('show');}
   function finishSession(){
   if(!currentSession) return;
   currentSession.notes = document.getElementById('sessionNotes').value.trim();
@@ -653,6 +781,62 @@ function renderHistory(){
       const h = JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]').filter(x=>x.id!==id);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(h));
       renderHistory();
+    });
+  });
+}
+
+function renderLibrary(){
+  const list = document.getElementById('libraryList');
+  const lib = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
+  if(lib.length===0){
+    list.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="ic">📚</div><h3>Tu biblioteca está vacía</h3><p>Guarda rutinas desde la sesión para tenerlas siempre a mano.</p></div>`;
+    return;
+  }
+  list.innerHTML = lib.map(item=>{
+    const d = new Date(item.date);
+    const dateStr = d.toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'});
+    const slim = decompressRoutine(item.data);
+    const exCount = slim?.ex?.length || 0;
+    const expNames = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'};
+    const rtNames = {fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Específico'};
+    return `<div class="lib-card">
+      <h4>${item.name}</h4>
+      <div class="meta">${dateStr} · ${expNames[slim?.el]||''} ${rtNames[slim?.rt]||''} · ${exCount} ejercicios</div>
+      <div class="actions">
+        <button class="load" data-load="${item.id}">📂 Cargar</button>
+        <button class="share" data-share="${item.id}">🔗 Compartir</button>
+        <button class="del" data-del="${item.id}">🗑 Borrar</button>
+      </div>
+    </div>`;
+  }).join('');
+  list.querySelectorAll('[data-load]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const id = parseInt(b.dataset.load);
+      const item = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').find(x=>x.id===id);
+      if(item) loadFromLibrary(item.data);
+    });
+  });
+  list.querySelectorAll('[data-share]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const id = parseInt(b.dataset.share);
+      const item = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').find(x=>x.id===id);
+      if(!item) return;
+      const link = window.location.href.split('#')[0].split('?')[0] + '#r=' + item.data;
+      navigator.clipboard.writeText(link).then(()=>{
+        showToast(`📋 Enlace de "${item.name}" copiado`);
+      }).catch(()=>{
+        prompt('Copia este enlace:', link);
+      });
+    });
+  });
+  list.querySelectorAll('[data-del]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      if(!confirm('¿Eliminar esta rutina de tu biblioteca?')) return;
+      const id = parseInt(b.dataset.del);
+      const lib = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').filter(x=>x.id!==id);
+      localStorage.setItem(LIBRARY_KEY, JSON.stringify(lib));
+      renderLibrary();
+      showToast('🗑 Rutina eliminada');
     });
   });
 }
