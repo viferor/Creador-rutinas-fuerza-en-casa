@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Creador de Rutinas Viferor</title>
 <style>
-:root{--bg:#0a0a0a;--bg2:#151515;--card:#1c1c1e;--card2:#252527;--border:#2e2e30;--text:#fff;--muted:#8e8e93;--accent:#0a84ff;--green:#32d74b;--red:#ff453a;--orange:#ff9f0a;--radius:14px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,sans-serif}
+:root{--bg:#0a0a0a;--bg2:#151515;--card:#1c1c1e;--card2:#252527;--border:#2e2e30;--text:#fff;--muted:#8e8e93;--accent:#0a84ff;--green:#32d74b;--red:#ff453a;--orange:#ff9f0a;--purple:#bf5af2;--radius:14px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,sans-serif}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
 body{margin:0 auto;padding:0 0 120px;width:100%}
@@ -65,6 +65,7 @@ textarea{resize:vertical;min-height:70px}
 .exercise-info .tag{display:inline-block;background:var(--card2);color:var(--muted);padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;margin-right:4px;margin-top:4px}
 .exercise-info .tag.body{background:rgba(50,215,75,.15);color:var(--green)}
 .exercise-info .tag.iso{background:rgba(255,159,10,.15);color:var(--orange)}
+.exercise-info .tag.diff{background:rgba(191,90,242,.15);color:var(--purple)}
 .sets-table{width:100%}
 .sets-table .hdr{display:grid;grid-template-columns:32px 1fr 1fr 36px;gap:6px;padding:4px 6px;font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
 .set-row{display:grid;grid-template-columns:32px 1fr 1fr 36px;gap:6px;margin-bottom:6px;align-items:center}
@@ -99,7 +100,7 @@ textarea{resize:vertical;min-height:70px}
 .hist-card:active{transform:scale(.98)}
 .hist-date{color:var(--accent);font-size:13px;font-weight:700;margin-bottom:4px}
 .hist-title{font-size:15px;font-weight:700;margin-bottom:6px}
-.hist-stats{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:6px}
+.hist-stats{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:6px;flex-wrap:wrap}
 .hist-stats span strong{color:var(--text);font-weight:700}
 .hist-del{float:right;background:none;border:none;color:var(--red);font-size:18px;cursor:pointer;padding:4px}
 .detail-back{display:inline-flex;align-items:center;gap:4px;color:var(--accent);background:none;border:none;font-size:15px;font-weight:600;cursor:pointer;padding:8px 0;margin-bottom:8px;font-family:inherit}
@@ -115,6 +116,7 @@ textarea{resize:vertical;min-height:70px}
 .empty-state h3{font-size:18px;margin-bottom:6px;font-weight:700}
 .empty-state p{color:var(--muted);font-size:14px}
 .sticky-bottom{position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 60%,transparent);padding:16px;margin:-16px -16px 0;z-index:50}
+.level-hint{margin-top:10px;padding:10px 12px;background:var(--card2);border-radius:8px;font-size:12px;color:var(--muted);line-height:1.5;border-left:3px solid var(--purple)}
 </style>
 </head>
 <body>
@@ -137,7 +139,19 @@ textarea{resize:vertical;min-height:70px}
   </div>
   <div id="formBlock" style="display:none">
     <div class="section">
-      <h3>1 · Tipo de sesión</h3>
+      <h3>1 · Tu nivel de experiencia</h3>
+      <label class="sel-label">¿Cuánto llevas entrenando?</label>
+      <select id="experienceLevel">
+        <option value="beginner">🌱 Principiante · Menos de 6 meses</option>
+        <option value="intermediate" selected>💪 Intermedio · 6 meses - 2 años</option>
+        <option value="advanced">🔥 Avanzado · 2 - 5 años</option>
+        <option value="expert">⚡ Experto · Más de 5 años</option>
+      </select>
+      <div class="level-hint" id="levelHint">Ejercicios equilibrados con técnica intermedia. Ideal para quienes ya dominan los movimientos básicos.</div>
+    </div>
+
+    <div class="section">
+      <h3>2 · Tipo de sesión</h3>
       <label class="sel-label">Objetivo</label>
       <select id="routineType">
         <option value="fullbody">Full Body · Global equilibrado</option>
@@ -152,8 +166,9 @@ textarea{resize:vertical;min-height:70px}
         <select id="customGroup"></select>
       </div>
     </div>
+
     <div class="section">
-      <h3>2 · Estilo de ejercicio</h3>
+      <h3>3 · Estilo de ejercicio</h3>
       <label class="sel-label">Tipo de ejercicios a incluir</label>
       <select id="exerciseStyle">
         <option value="all">Todos (máx. variedad)</option>
@@ -162,8 +177,9 @@ textarea{resize:vertical;min-height:70px}
         <option value="mix">Mixto (equipo + peso corporal)</option>
       </select>
     </div>
+
     <div class="section">
-      <h3>3 · Volumen de series</h3>
+      <h3>4 · Volumen de series</h3>
       <label class="sel-label">Nivel de exigencia</label>
       <select id="level">
         <option value="2">Baja · 2 series (mantenimiento)</option>
@@ -171,10 +187,12 @@ textarea{resize:vertical;min-height:70px}
         <option value="4">Alta · 4 series (máximo estímulo)</option>
       </select>
     </div>
+
     <div class="section">
-      <h3>4 · Tu equipamiento hoy</h3>
+      <h3>5 · Tu equipamiento hoy</h3>
       <div class="equip-grid" id="equipGrid"></div>
     </div>
+
     <button class="btn btn-primary" id="btnGenerate">
       <span>🚀</span><span>Generar Rutina a Medida</span>
     </button>
@@ -248,6 +266,57 @@ let currentSession = null;
 let replaceIdx = null;
 const STORAGE_KEY = 'viferor_sessions_v1';
 
+// ===== CLASIFICACIÓN DE DIFICULTAD =====
+const DIFFICULTY = {
+  beginner: {
+    keywords: ['beginner','basic','assisted','machine','bodyweight','body weight','easy','light','simple','supported','knee','incline','decline push','wall','seated','lying','chest supported'],
+    exclude: ['advanced','expert','plyometric','explosive','one arm','one leg','single arm','single leg','pistol','handstand','planche','muscle up','weighted','heavy']
+  },
+  intermediate: {
+    keywords: ['dumbbell','barbell','kettlebell','cable','press','curl','row','squat','lunge','raise','extension','fly','pull','push'],
+    exclude: ['advanced','expert','plyometric','explosive','one arm','one leg','single arm','single leg','pistol','handstand','planche','muscle up']
+  },
+  advanced: {
+    keywords: ['bulgarian','single leg','single arm','one arm','one leg','unilateral','plyometric','jump','explosive','deficit','paused','tempo','weighted','close grip','wide grip','incline','decline'],
+    exclude: ['beginner','basic','assisted','machine']
+  },
+  expert: {
+    keywords: ['handstand','pistol','planche','muscle up','l-sit','dragon flag','human flag','one arm pull','explosive','clap','plyo','advanced','complex','turkish','windmill','sotts','zercher','front squat','overhead squat','snatch','clean','jerk'],
+    exclude: []
+  }
+};
+
+const LEVEL_HINTS = {
+  beginner: '🌱 Ejercicios básicos y sencillos. Prioriza aprender la técnica correcta antes de subir peso.',
+  intermediate: '💪 Ejercicios equilibrados con técnica intermedia. Ideal para quienes ya dominan los movimientos básicos.',
+  advanced: '🔥 Movimientos más técnicos y exigentes. Unilaterales, pliométricos y variantes avanzadas.',
+  expert: '⚡ Ejercicios de alta complejidad técnica. Solo para atletas con años de experiencia sólida.'
+};
+
+function classifyDifficulty(exercise){
+  const name = (exercise.name || '').toLowerCase();
+  let score = 0;
+  DIFFICULTY.expert.keywords.forEach(k => { if(name.includes(k)) score += 4; });
+  DIFFICULTY.advanced.keywords.forEach(k => { if(name.includes(k)) score += 2; });
+  DIFFICULTY.beginner.keywords.forEach(k => { if(name.includes(k)) score -= 2; });
+  if(score >= 6) return 'expert';
+  if(score >= 3) return 'advanced';
+  if(score >= 0) return 'intermediate';
+  return 'beginner';
+}
+
+function filterByLevel(exercises, level){
+  const allowed = {
+    beginner: ['beginner'],
+    intermediate: ['beginner','intermediate'],
+    advanced: ['beginner','intermediate','advanced'],
+    expert: ['beginner','intermediate','advanced','expert']
+  };
+  const permitted = new Set(allowed[level]);
+  return exercises.filter(ex => permitted.has(classifyDifficulty(ex)));
+}
+
+// ===== INICIALIZACIÓN =====
 (async function init(){
   const grid = document.getElementById('equipGrid');
   EQUIP_LIST.forEach(eq=>{
@@ -302,6 +371,11 @@ function bindEvents(){
   rt.addEventListener('change',()=>{
     document.getElementById('customGroupWrap').style.display = rt.value==='custom'?'block':'none';
   });
+  const expSel = document.getElementById('experienceLevel');
+  const hint = document.getElementById('levelHint');
+  expSel.addEventListener('change',()=>{
+    hint.textContent = LEVEL_HINTS[expSel.value];
+  });
   document.getElementById('btnGenerate').addEventListener('click', generateRoutine);
   document.getElementById('btnFinish').addEventListener('click', finishSession);
   document.getElementById('btnCancelSession').addEventListener('click', ()=>{
@@ -321,9 +395,11 @@ function generateRoutine(){
   const rt = document.getElementById('routineType').value;
   const level = parseInt(document.getElementById('level').value);
   const style = document.getElementById('exerciseStyle').value;
+  const expLevel = document.getElementById('experienceLevel').value;
   const equipSet = new Set([...document.querySelectorAll('#equipGrid input:checked')].map(i=>i.value));
   if(equipSet.size===0){alert('Selecciona al menos un equipamiento.');return;}
   let pool = DB.filter(e => equipSet.has(e.equipment));
+  pool = filterByLevel(pool, expLevel);
   let isoPool = [];
   if(style==='bodyweight'){pool = pool.filter(e => e.equipment === 'body weight');}
   else if(style==='iso'){
@@ -332,7 +408,7 @@ function generateRoutine(){
     isoPool = pool.filter(isIso);
     pool = pool.filter(e=>!isIso(e));
   }
-  if(pool.length===0){alert('No hay ejercicios disponibles.');return;}
+  if(pool.length===0){alert('No hay ejercicios disponibles con ese nivel y equipamiento. Prueba a marcar más equipamiento.');return;}
   let targetCats = [];
   const countPerCat = {};
   if(rt==='fullbody'){targetCats = ['chest','back','shoulders','upper legs','waist'];targetCats.forEach(c=>countPerCat[c]=2);}
@@ -350,9 +426,19 @@ function generateRoutine(){
   if(style==='iso' && isoPool.length){chosen.push(...shuffle(isoPool).slice(0,2));}
   const finalExercises = shuffle(chosen).map(ex=>({
     ...ex,
+    difficulty: classifyDifficulty(ex),
     sets: Array.from({length:level},(_,i)=>({n:i+1,kg:'',reps:'',done:false}))
   }));
-  currentSession = {id: Date.now(),date: new Date().toISOString(),routineType: rt,level: level,equipment: [...equipSet],exercises: finalExercises,notes: ''};
+  currentSession = {
+    id: Date.now(),
+    date: new Date().toISOString(),
+    routineType: rt,
+    level: level,
+    experienceLevel: expLevel,
+    equipment: [...equipSet],
+    exercises: finalExercises,
+    notes: ''
+  };
   renderSessionView();
   showView('session');
 }
@@ -373,7 +459,8 @@ function renderSessionView(){
   empty.style.display='none';
   content.style.display='block';
   const rtNames = {fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Músculo específico'};
-  document.getElementById('sessionTitle').textContent = rtNames[currentSession.routineType] || 'Sesión';
+  const expNames = {beginner:'🌱 Principiante',intermediate:'💪 Intermedio',advanced:'🔥 Avanzado',expert:'⚡ Experto'};
+  document.getElementById('sessionTitle').textContent = (rtNames[currentSession.routineType] || 'Sesión') + ' · ' + (expNames[currentSession.experienceLevel] || '');
   const list = document.getElementById('exercisesList');
   list.innerHTML = '';
   currentSession.exercises.forEach((ex,idx)=>{list.appendChild(buildExerciseCard(ex,idx));});
@@ -385,6 +472,8 @@ function buildExerciseCard(ex, idx){
   const thumbUrl = ex.image ? MEDIA_BASE + ex.image : '';
   const isBodyweight = ex.equipment === 'body weight';
   const isIso = (ex.name||'').toLowerCase().match(/plank|hold|isometric|wall sit|hollow|superman hold|bridge hold|static|l-sit|dead hang|handstand hold/);
+  const diff = ex.difficulty || classifyDifficulty(ex);
+  const diffLabels = {beginner:'🌱 Fácil',intermediate:'💪 Media',advanced:'🔥 Difícil',expert:'⚡ Experto'};
 
   card.innerHTML = `
     <div class="exercise-actions">
@@ -400,6 +489,7 @@ function buildExerciseCard(ex, idx){
         <div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div>
         ${isBodyweight?'<span class="tag body">🏃 Peso corporal</span>':''}
         ${isIso?'<span class="tag iso">⏱ Isométrico</span>':''}
+        <span class="tag diff">${diffLabels[diff] || diff}</span>
         ${ex.target?`<span class="tag">🎯 ${ex.target}</span>`:''}
       </div>
     </div>
@@ -453,26 +543,33 @@ function removeExercise(idx){
 function openReplaceModal(idx){
   replaceIdx = idx;
   const ex = currentSession.exercises[idx];
+  const expLevel = currentSession.experienceLevel || 'intermediate';
   document.getElementById('replaceInfo').textContent = `Sustituyendo: ${ex.name} (${formatCategory(ex.category)})`;
   const equipSet = new Set(currentSession.equipment);
-  const alternatives = DB.filter(e =>
+  let alternatives = DB.filter(e =>
     e.category === ex.category &&
     e.name !== ex.name &&
     equipSet.has(e.equipment)
-  ).slice(0, 20);
+  );
+  alternatives = filterByLevel(alternatives, expLevel);
+  alternatives = alternatives.slice(0, 20);
 
   const list = document.getElementById('replaceList');
   if(alternatives.length === 0){
     list.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px">No hay alternativas disponibles.</p>';
   } else {
-    list.innerHTML = alternatives.map((alt,i)=>`
+    const diffLabels = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'};
+    list.innerHTML = alternatives.map((alt,i)=>{
+      const d = classifyDifficulty(alt);
+      return `
       <div class="replace-item" data-idx="${i}">
         <img src="${alt.image ? MEDIA_BASE + alt.image : ''}" onerror="this.style.background='#2a2a2a'">
         <div class="info">
           <h4>${alt.name}</h4>
-          <p>${formatEquip(alt.equipment)}${alt.target ? ' · 🎯 '+alt.target : ''}</p>
+          <p>${diffLabels[d]||''} ${formatEquip(alt.equipment)}${alt.target ? ' · 🎯 '+alt.target : ''}</p>
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
   }
 
   list.querySelectorAll('.replace-item').forEach(item=>{
@@ -481,6 +578,7 @@ function openReplaceModal(idx){
       const alt = alternatives[altIdx];
       currentSession.exercises[replaceIdx] = {
         ...alt,
+        difficulty: classifyDifficulty(alt),
         sets: currentSession.exercises[replaceIdx].sets
       };
       document.getElementById('replaceModal').classList.remove('show');
@@ -504,8 +602,7 @@ function openGifModal(ex){
   document.getElementById('modalInstr').textContent = ex.instructions?.es || ex.instructions?.en || 'Sigue las indicaciones del GIF.';
   modal.classList.add('show');
 }
-
-function finishSession(){
+  function finishSession(){
   if(!currentSession) return;
   currentSession.notes = document.getElementById('sessionNotes').value.trim();
   const anyDone = currentSession.exercises.some(e=>e.sets.some(s=>s.done));
@@ -536,10 +633,11 @@ function renderHistory(){
     const dateStr = d.toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'short'});
     const timeStr = d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
     const rtNames = {fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Específico'};
+    const expNames = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'};
     const done = s.stats?.doneSets ?? 0;
     const total = s.stats?.totalSets ?? 0;
     const vol = s.stats?.volume ?? 0;
-    return `<div class="hist-card" data-id="${s.id}"><button class="hist-del" data-del="${s.id}">🗑</button><div class="hist-date">${dateStr} · ${timeStr}</div><div class="hist-title">${rtNames[s.routineType]||'Sesión'}</div><div class="hist-stats"><span><strong>${s.exercises?.length||0}</strong> ejercicios</span><span><strong>${done}/${total}</strong> series</span>${vol?`<span><strong>${vol.toLocaleString('es-ES')}</strong> kg</span>`:''}</div></div>`;
+    return `<div class="hist-card" data-id="${s.id}"><button class="hist-del" data-del="${s.id}">🗑</button><div class="hist-date">${dateStr} · ${timeStr}</div><div class="hist-title">${expNames[s.experienceLevel]||''} ${rtNames[s.routineType]||'Sesión'}</div><div class="hist-stats"><span><strong>${s.exercises?.length||0}</strong> ejercicios</span><span><strong>${done}/${total}</strong> series</span>${vol?`<span><strong>${vol.toLocaleString('es-ES')}</strong> kg</span>`:''}</div></div>`;
   }).join('');
   list.querySelectorAll('.hist-card').forEach(c=>{
     c.addEventListener('click', e=>{
@@ -565,8 +663,9 @@ function openDetail(id){
   if(!s) return;
   const d = new Date(s.date);
   const rtNames = {fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Específico'};
+  const expNames = {beginner:'🌱 Principiante',intermediate:'💪 Intermedio',advanced:'🔥 Avanzado',expert:'⚡ Experto'};
   const body = document.getElementById('detailBody');
-  body.innerHTML = `<div class="detail-head"><h2>${rtNames[s.routineType]||'Sesión'}</h2><div class="meta">${d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</div><div class="detail-stats"><div class="detail-stat"><div class="v">${s.exercises?.length||0}</div><div class="l">Ejercicios</div></div><div class="detail-stat"><div class="v">${s.stats?.doneSets||0}</div><div class="l">Series</div></div><div class="detail-stat"><div class="v">${(s.stats?.volume||0).toLocaleString('es-ES')}</div><div class="l">Volumen (kg)</div></div></div></div><div class="exercise-grid">${s.exercises.map(ex=>`<div class="exercise-card"><div class="exercise-head"><img class="exercise-thumb" src="${ex.image?MEDIA_BASE+ex.image:''}"><div class="exercise-info"><h4>${ex.name}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">${ex.sets.map(set=>`<div style="background:var(--card2);padding:6px 10px;border-radius:8px;font-size:12px;${set.done?'':'opacity:.5'}">${set.n}ª · ${set.kg||'–'}kg × ${set.reps||'–'} ${set.done?'✓':''}</div>`).join('')}</div></div>`).join('')}</div>${s.notes ? `<div class="section" style="font-style:italic;color:var(--muted)">"${s.notes}"</div>` : ''}`;
+  body.innerHTML = `<div class="detail-head"><h2>${rtNames[s.routineType]||'Sesión'}</h2><div class="meta">${d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${expNames[s.experienceLevel]||''}</div><div class="detail-stats"><div class="detail-stat"><div class="v">${s.exercises?.length||0}</div><div class="l">Ejercicios</div></div><div class="detail-stat"><div class="v">${s.stats?.doneSets||0}</div><div class="l">Series</div></div><div class="detail-stat"><div class="v">${(s.stats?.volume||0).toLocaleString('es-ES')}</div><div class="l">Volumen (kg)</div></div></div></div><div class="exercise-grid">${s.exercises.map(ex=>`<div class="exercise-card"><div class="exercise-head"><img class="exercise-thumb" src="${ex.image?MEDIA_BASE+ex.image:''}"><div class="exercise-info"><h4>${ex.name}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">${ex.sets.map(set=>`<div style="background:var(--card2);padding:6px 10px;border-radius:8px;font-size:12px;${set.done?'':'opacity:.5'}">${set.n}ª · ${set.kg||'–'}kg × ${set.reps||'–'} ${set.done?'✓':''}</div>`).join('')}</div></div>`).join('')}</div>${s.notes ? `<div class="section" style="font-style:italic;color:var(--muted)">"${s.notes}"</div>` : ''}`;
   body.querySelectorAll('.exercise-thumb').forEach((t,i)=>{
     t.addEventListener('click',()=>openGifModal(s.exercises[i]));
   });
