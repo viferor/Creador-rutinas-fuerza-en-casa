@@ -10,14 +10,13 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
 body{margin:0 auto;padding:0 0 120px;width:100%}
-header{position:sticky;top:0;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:16px 24px;border-bottom:1px solid var(--border);z-index:100;display:flex;justify-content:space-between;align-items:center;gap:12px}
+header{position:sticky;top:0;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:16px 24px;border-bottom:1px solid var(--border);z-index:100;display:flex;justify-content:space-between;align-items:center;gap:8px}
 header h1{font-size:22px;font-weight:800;letter-spacing:-.5px;flex:1}
 header .sub{font-size:12px;color:var(--muted);font-weight:500}
-.lang-btn{background:var(--card2);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
-.lang-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.lang-btn,.settings-btn{background:var(--card2);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lang-btn:hover,.settings-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
 .donate-btn{background:linear-gradient(135deg,var(--yellow),var(--orange));color:#000;border:none;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px}
 .donate-btn:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(255,214,10,.3)}
-.donate-btn:active{transform:scale(.95)}
 .container{max-width:1400px;margin:0 auto;padding:0 20px}
 .tabs{display:flex;gap:4px;padding:12px 0;flex-wrap:wrap}
 .tab{background:var(--card);border:none;color:var(--muted);padding:10px 14px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;flex:1;min-width:0}
@@ -169,6 +168,37 @@ textarea{resize:vertical;min-height:70px}
 .my-routine-panel{background:var(--card);border:1px solid var(--accent);border-radius:var(--radius);padding:16px;margin-bottom:14px}
 .my-routine-panel h3{color:var(--accent);margin-bottom:10px;font-size:14px}
 .my-routine-count{background:var(--accent);color:#fff;border-radius:12px;padding:2px 10px;font-size:12px;font-weight:700;margin-left:8px}
+
+/* WIZARD */
+.wizard-modal{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px;backdrop-filter:blur(20px)}
+.wizard-modal.show{display:flex;animation:fade .3s ease}
+.wizard-box{max-width:640px;width:100%;background:var(--card);border-radius:20px;padding:28px;max-height:90vh;overflow-y:auto;border:1px solid var(--border)}
+.wizard-header{text-align:center;margin-bottom:24px}
+.wizard-header h2{font-size:22px;font-weight:800;margin-bottom:6px}
+.wizard-header p{font-size:13px;color:var(--muted)}
+.wizard-progress{display:flex;gap:6px;margin:20px 0;justify-content:center}
+.wizard-step-dot{width:40px;height:4px;border-radius:2px;background:var(--border);transition:background .3s}
+.wizard-step-dot.active{background:var(--accent)}
+.wizard-step-dot.done{background:var(--green)}
+.wizard-step{display:none}
+.wizard-step.active{display:block;animation:fade .3s ease}
+.wizard-question{font-size:16px;font-weight:700;margin-bottom:14px;text-align:center}
+.wizard-options{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:20px}
+@media(min-width:500px){.wizard-options{grid-template-columns:1fr 1fr}}
+.wizard-option{background:var(--card2);border:2px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;transition:all .2s;text-align:left}
+.wizard-option:hover{border-color:var(--accent);background:rgba(10,132,255,.05)}
+.wizard-option.selected{border-color:var(--accent);background:rgba(10,132,255,.15)}
+.wizard-option .opt-icon{font-size:26px;margin-bottom:4px}
+.wizard-option .opt-title{font-size:15px;font-weight:700;margin-bottom:3px}
+.wizard-option .opt-desc{font-size:12px;color:var(--muted);line-height:1.4}
+.wizard-nav{display:flex;gap:10px;margin-top:20px}
+.wizard-nav .btn{flex:1}
+.wizard-summary{background:var(--card2);border-radius:12px;padding:16px;margin-bottom:16px;text-align:left}
+.wizard-summary h4{font-size:14px;margin-bottom:10px;color:var(--accent)}
+.wizard-summary .sum-row{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px solid var(--border)}
+.wizard-summary .sum-row:last-child{border:none}
+.wizard-summary .sum-label{color:var(--muted)}
+.wizard-summary .sum-value{font-weight:700}
 </style>
 </head>
 <body>
@@ -177,7 +207,8 @@ textarea{resize:vertical;min-height:70px}
     <h1 data-i18n="title">Cuidate !!</h1>
     <div class="sub" data-i18n="sub">¡Tu app de entrenamiento!</div>
   </div>
-  <div style="display:flex;gap:8px">
+  <div style="display:flex;gap:6px">
+    <button class="settings-btn" id="btnSettings" title="Ajustes">⚙️</button>
     <button class="lang-btn" id="langToggle" data-i18n="langBtn">🇬🇧 EN</button>
     <button class="donate-btn" id="btnDonateHeader">☕</button>
   </div>
@@ -192,9 +223,22 @@ textarea{resize:vertical;min-height:70px}
   <button class="tab" data-view="legal" data-i18n="tabLegal">⚖️ Legal</button>
 </div>
 
+<!-- VISTA: CREAR -->
 <div class="view active" id="view-create">
   <div id="loaderBlock" class="loader"><div class="spinner"></div><span data-i18n="loading">Cargando base de datos…</span></div>
   <div id="formBlock" style="display:none">
+    
+    <!-- PERFIL GUARDADO -->
+    <div id="profileBanner" style="display:none;background:linear-gradient(135deg,rgba(10,132,255,.15),rgba(191,90,242,.15));border:1px solid var(--accent);border-radius:var(--radius);padding:16px;margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px">
+          <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:4px" data-i18n="profileLabel">Tu perfil configurado</div>
+          <div id="profileSummary" style="font-size:13px;font-weight:600"></div>
+        </div>
+        <button class="btn btn-secondary" id="btnEditProfile" style="width:auto;padding:8px 14px;font-size:12px" data-i18n="btnEditProfile">⚙️ Editar perfil</button>
+      </div>
+    </div>
+    
     <div class="section"><h3 data-i18n="sec1">1 · Tu nivel de experiencia</h3><label class="sel-label" data-i18n="sec1Label">¿Cuánto llevas entrenando?</label><select id="experienceLevel"><option value="beginner" data-i18n="optBeginner">🌱 Principiante · Menos de 6 meses</option><option value="intermediate" selected data-i18n="optIntermediate">💪 Intermedio · 6 meses - 2 años</option><option value="advanced" data-i18n="optAdvanced">🔥 Avanzado · 2 - 5 años</option><option value="expert" data-i18n="optExpert">⚡ Experto · Más de 5 años</option></select><div class="level-hint" id="levelHint" data-i18n="hintIntermediate">💪 Ejercicios equilibrados con técnica intermedia.</div></div>
     <div class="section"><h3 data-i18n="sec2">2 · Tipo de sesión</h3><label class="sel-label" data-i18n="sec2Label">Objetivo</label><select id="routineType"><option value="fullbody" data-i18n="optFullbody">Full Body · Global equilibrado</option><option value="upper" data-i18n="optUpper">Tren Superior · Torso completo</option><option value="lower" data-i18n="optLower">Tren Inferior · Pierna y glúteo</option><option value="push" data-i18n="optPush">Empuje · Pecho, hombro, tríceps</option><option value="pull" data-i18n="optPull">Tirón · Espalda, bíceps, trapecio</option><option value="custom" data-i18n="optCustom">🎯 Músculo específico…</option></select><div id="customGroupWrap" style="display:none;margin-top:12px"><label class="sel-label" data-i18n="customLabel">Elige el grupo muscular</label><select id="customGroup"></select></div></div>
     <div class="section"><h3 data-i18n="sec3">3 · Estilo de ejercicio</h3><label class="sel-label" data-i18n="sec3Label">Tipo de ejercicios a incluir</label><select id="exerciseStyle"><option value="all" data-i18n="optAll">Todos (máx. variedad)</option><option value="bodyweight" data-i18n="optBodyweight">Solo peso corporal</option><option value="iso" data-i18n="optIso">Incluir isométricos</option><option value="mix" data-i18n="optMix">Mixto (equipo + peso corporal)</option></select></div>
@@ -204,6 +248,7 @@ textarea{resize:vertical;min-height:70px}
   </div>
 </div>
 
+<!-- VISTA: EXPLORAR -->
 <div class="view" id="view-browse">
   <div class="section">
     <h3 data-i18n="browseTitle">🔍 Explorar ejercicios</h3>
@@ -223,6 +268,7 @@ textarea{resize:vertical;min-height:70px}
   </div>
 </div>
 
+<!-- VISTA: SESIÓN -->
 <div class="view" id="view-session">
   <div id="sessionEmpty" class="empty"><div class="ic">🏋️</div><span data-i18n="emptySession">No hay sesión en curso.<br>Ve a <b>Crear</b> o <b>Ejercicios</b> para empezar.</span></div>
   <div id="sessionContent" style="display:none">
@@ -234,6 +280,7 @@ textarea{resize:vertical;min-height:70px}
   </div>
 </div>
 
+<!-- VISTA: BIBLIOTECA -->
 <div class="view" id="view-library">
   <div class="section" style="padding:12px 16px;margin-bottom:12px">
     <h3 style="margin-bottom:10px" data-i18n="libTitle">📚 Mi biblioteca de rutinas</h3>
@@ -245,7 +292,6 @@ textarea{resize:vertical;min-height:70px}
 </div>
 
 <div class="view" id="view-history"><div id="historyList" class="hist-grid"></div></div>
-
 <div class="view" id="view-detail"><button class="detail-back" id="btnBackHist">← <span data-i18n="btnBack">Volver</span></button><div id="detailBody"></div></div>
 
 <div class="view" id="view-legal">
@@ -267,6 +313,86 @@ textarea{resize:vertical;min-height:70px}
   <div class="disclaimer"><strong data-i18n="footerDisclaimerTitle">⚠️ Aviso importante:</strong><span data-i18n="footerDisclaimer">Esta aplicación es una herramienta de organización personal. No sustituye el consejo médico ni de un entrenador profesional. Los medios visuales son propiedad de Gym visual y se utilizan con permiso.</span></div>
 </div>
 
+<!-- WIZARD MODAL -->
+<div class="wizard-modal" id="wizardModal">
+  <div class="wizard-box">
+    <div class="wizard-header">
+      <h2 id="wizardTitle" data-i18n="wizardWelcomeTitle">👋 ¡Bienvenido a Cuidate !!</h2>
+      <p id="wizardSubtitle" data-i18n="wizardWelcomeSub">Vamos a personalizar tu experiencia en 3 pasos rápidos</p>
+    </div>
+    <div class="wizard-progress">
+      <div class="wizard-step-dot active" data-step="1"></div>
+      <div class="wizard-step-dot" data-step="2"></div>
+      <div class="wizard-step-dot" data-step="3"></div>
+    </div>
+    
+    <!-- PASO 1: DEPORTE -->
+    <div class="wizard-step active" data-step="1">
+      <div class="wizard-question" data-i18n="wizardQ1">¿Cuál es tu deporte principal?</div>
+      <div class="wizard-options" id="wizardSportOptions">
+        <div class="wizard-option" data-value="cycling"><div class="opt-icon">🚴</div><div class="opt-title" data-i18n="sportCycling">Ciclismo</div><div class="opt-desc" data-i18n="sportCyclingDesc">Carretera, MTB, gravel, pista</div></div>
+        <div class="wizard-option" data-value="running"><div class="opt-icon">🏃</div><div class="opt-title" data-i18n="sportRunning">Running</div><div class="opt-desc" data-i18n="sportRunningDesc">Trail, asfalto, ultra</div></div>
+        <div class="wizard-option" data-value="fitness"><div class="opt-icon">💪</div><div class="opt-title" data-i18n="sportFitness">Fitness general</div><div class="opt-desc" data-i18n="sportFitnessDesc">Gimnasio, tonificación</div></div>
+        <div class="wizard-option" data-value="other"><div class="opt-icon">🎯</div><div class="opt-title" data-i18n="sportOther">Otro deporte</div><div class="opt-desc" data-i18n="sportOtherDesc">Fútbol, natación, etc.</div></div>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn btn-secondary" id="wizardSkip" data-i18n="wizardSkip">Saltar por ahora</button>
+        <button class="btn btn-accent" id="wizardNext1" data-i18n="wizardNext">Siguiente →</button>
+      </div>
+    </div>
+    
+    <!-- PASO 2: CONTEXTO -->
+    <div class="wizard-step" data-step="2">
+      <div class="wizard-question" data-i18n="wizardQ2">¿Cuántos días a la semana puedes entrenar fuerza?</div>
+      <div class="wizard-options" id="wizardDaysOptions">
+        <div class="wizard-option" data-value="1"><div class="opt-icon">1️⃣</div><div class="opt-title" data-i18n="days1">1 día</div><div class="opt-desc" data-i18n="days1Desc">Mantenimiento básico</div></div>
+        <div class="wizard-option" data-value="2"><div class="opt-icon">2️⃣</div><div class="opt-title" data-i18n="days2">2 días</div><div class="opt-desc" data-i18n="days2Desc">Progreso moderado</div></div>
+        <div class="wizard-option" data-value="3"><div class="opt-icon">3️⃣</div><div class="opt-title" data-i18n="days3">3 días</div><div class="opt-desc" data-i18n="days3Desc">Progreso óptimo</div></div>
+        <div class="wizard-option" data-value="4"><div class="opt-icon">4️⃣+</div><div class="opt-title" data-i18n="days4">4+ días</div><div class="opt-desc" data-i18n="days4Desc">Máximo rendimiento</div></div>
+      </div>
+      
+      <div class="wizard-question" style="margin-top:20px" data-i18n="wizardQ2b">¿Cuánto tiempo tienes por sesión?</div>
+      <div class="wizard-options" id="wizardTimeOptions">
+        <div class="wizard-option" data-value="30"><div class="opt-icon">⏱️</div><div class="opt-title" data-i18n="time30">30 minutos</div><div class="opt-desc" data-i18n="time30Desc">Sesión express</div></div>
+        <div class="wizard-option" data-value="45"><div class="opt-icon">⏰</div><div class="opt-title" data-i18n="time45">45 minutos</div><div class="opt-desc" data-i18n="time45Desc">Sesión estándar</div></div>
+        <div class="wizard-option" data-value="60"><div class="opt-icon">🕐</div><div class="opt-title" data-i18n="time60">60 minutos</div><div class="opt-desc" data-i18n="time60Desc">Sesión completa</div></div>
+        <div class="wizard-option" data-value="90"><div class="opt-icon">🕑</div><div class="opt-title" data-i18n="time90">+60 minutos</div><div class="opt-desc" data-i18n="time90Desc">Sesión extendida</div></div>
+      </div>
+      
+      <div class="wizard-nav">
+        <button class="btn btn-secondary" id="wizardBack2" data-i18n="wizardBack">← Atrás</button>
+        <button class="btn btn-accent" id="wizardNext2" data-i18n="wizardNext">Siguiente →</button>
+      </div>
+    </div>
+    
+    <!-- PASO 3: OBJETIVO -->
+    <div class="wizard-step" data-step="3">
+      <div class="wizard-question" data-i18n="wizardQ3">¿Qué buscas con el entrenamiento de fuerza?</div>
+      <div class="wizard-options" id="wizardGoalOptions">
+        <div class="wizard-option" data-value="performance"><div class="opt-icon">🚀</div><div class="opt-title" data-i18n="goalPerformance">Rendir más en mi deporte</div><div class="opt-desc" data-i18n="goalPerformanceDesc">Más potencia, velocidad, resistencia</div></div>
+        <div class="wizard-option" data-value="injury"><div class="opt-icon">🛡️</div><div class="opt-title" data-i18n="goalInjury">Prevenir lesiones</div><div class="opt-desc" data-i18n="goalInjuryDesc">Core, estabilidad, movilidad</div></div>
+        <div class="wizard-option" data-value="weight"><div class="opt-icon">⚖️</div><div class="opt-title" data-i18n="goalWeight">Perder peso</div><div class="opt-desc" data-i18n="goalWeightDesc">Quemar calorías, tonificar</div></div>
+        <div class="wizard-option" data-value="muscle"><div class="opt-icon">💪</div><div class="opt-title" data-i18n="goalMuscle">Ganar músculo</div><div class="opt-desc" data-i18n="goalMuscleDesc">Hipertrofia, fuerza máxima</div></div>
+        <div class="wizard-option" data-value="balance" style="grid-column:1/-1"><div class="opt-icon">🧘</div><div class="opt-title" data-i18n="goalBalance">Equilibrio general</div><div class="opt-desc" data-i18n="goalBalanceDesc">Salud global, bienestar, forma física</div></div>
+      </div>
+      
+      <div class="wizard-nav">
+        <button class="btn btn-secondary" id="wizardBack3" data-i18n="wizardBack">← Atrás</button>
+        <button class="btn btn-green" id="wizardFinish" data-i18n="wizardFinish">✨ Configurar mi app</button>
+      </div>
+    </div>
+    
+    <!-- RESUMEN -->
+    <div class="wizard-step" data-step="4">
+      <div class="wizard-question" data-i18n="wizardSummaryTitle">✨ ¡Tu perfil está listo!</div>
+      <div class="wizard-summary" id="wizardSummary"></div>
+      <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:16px" data-i18n="wizardSummaryDesc">Hemos pre-configurado la app con tu equipamiento ideal, tipo de rutina y volumen de series. Puedes modificarlo cuando quieras.</p>
+      <button class="btn btn-green" id="wizardStart" data-i18n="wizardStart">🚀 Empezar a entrenar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODALES EXISTENTES -->
 <div class="modal" id="gifModal"><button class="modal-close" id="modalClose">✕</button><div class="modal-content"><img id="modalImg" src="" alt=""><h3 id="modalTitle"></h3><div class="instructions" id="modalInstr"></div><div style="margin-top:10px;font-size:11px;color:var(--muted)">Animación © <a href="https://gymvisual.com" target="_blank" style="color:var(--accent)">Gym visual</a></div></div></div>
 <div class="modal" id="replaceModal"><button class="modal-close" id="replaceModalClose">✕</button><div class="modal-content"><h3 style="margin-bottom:12px" data-i18n="modalReplaceTitle">🔄 Cambiar ejercicio</h3><p style="color:var(--muted);font-size:13px;margin-bottom:12px"><span data-i18n="modalReplaceInfo">Sustituyendo:</span> <span id="replaceInfo"></span></p><div class="replace-list" id="replaceList"></div></div></div>
 <div class="modal" id="donateModal"><button class="modal-close" id="donateModalClose">✕</button><div class="modal-content" style="padding:24px"><h3 style="margin-bottom:16px;color:var(--yellow)">☕ Invítame a una cerveza</h3><p style="font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:20px" data-i18n="donateText">Esta app es 100% gratuita y sin anuncios. Si consideras que mi trabajo merece la pena, puedes invitarme a una cerveza o hacer una donación. ¡Gracias por tu apoyo! 🍺</p><div style="display:flex;flex-direction:column;gap:10px"><a href="https://www.paypal.com/paypalme/viferor" target="_blank" class="btn btn-accent" style="text-decoration:none">💳 Donar con PayPal</a><button class="btn btn-purple" id="btnCopyBizumModal">📱 Copiar Bizum: +34 638 00 05 05</button></div></div></div>
@@ -280,97 +406,46 @@ const DATA_URLS = [
   'https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/data/exercises.json'
 ];
 const MEDIA_BASE = 'https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/';
+const PROFILE_KEY = 'viferor_profile_v1';
 
-// Lista completa de equipamientos (incluyendo los que NO están en la DB pero son útiles)
 const EQUIP_LIST = [
-  {key:'body weight',label:'equipBodyweight'},
-  {key:'dumbbell',label:'equipDumbbell'},
-  {key:'barbell',label:'equipBarbell'},
-  {key:'kettlebell',label:'equipKettlebell'},
-  {key:'cable',label:'equipCable'},
-  {key:'leverage machine',label:'equipMachine'},
-  {key:'smith machine',label:'equipSmith'},
-  {key:'band',label:'equipBand'},
-  {key:'bands',label:'equipBand'},
-  {key:'stability ball',label:'equipBall'},
-  {key:'exercise ball',label:'equipBall'},
-  {key:'ez barbell',label:'equipEZ'},
-  {key:'medicine ball',label:'equipMedBall'},
-  {key:'foam roll',label:'equipFoamRoll'},
-  {key:'pull-up bar',label:'equipPullUpBar'},
-  {key:'battle rope',label:'equipBattleRope'},
-  {key:'tire',label:'equipTire'},
-  {key:'sled',label:'equipSled'},
-  {key:'rope',label:'equipRope'},
-  {key:'stationary bike',label:'equipBike'},
+  {key:'body weight',label:'equipBodyweight'},{key:'dumbbell',label:'equipDumbbell'},{key:'barbell',label:'equipBarbell'},
+  {key:'kettlebell',label:'equipKettlebell'},{key:'cable',label:'equipCable'},{key:'leverage machine',label:'equipMachine'},
+  {key:'smith machine',label:'equipSmith'},{key:'band',label:'equipBand'},{key:'stability ball',label:'equipBall'},
+  {key:'ez barbell',label:'equipEZ'},{key:'medicine ball',label:'equipMedBall'},{key:'foam roll',label:'equipFoamRoll'},
+  {key:'pull-up bar',label:'equipPullUpBar'},{key:'battle rope',label:'equipBattleRope'},
   {key:'other',label:'equipOther'}
 ];
 
-// Equipamientos marcados por defecto
-const DEFAULT_EQUIP = new Set(['body weight','dumbbell','barbell','kettlebell','cable','leverage machine','pull-up bar']);
+let DB=[],currentSession=null,replaceIdx=null,myCustomRoutine=[];
+const STORAGE_KEY='viferor_sessions_v1',LIBRARY_KEY='viferor_library_v1';
 
-let DB = [];
-let currentSession = null;
-let replaceIdx = null;
-let myCustomRoutine = [];
-
-const STORAGE_KEY = 'viferor_sessions_v1';
-const LIBRARY_KEY = 'viferor_library_v1';
-
-// Mapeo de claves de equipamiento a claves de traducción
 const EQUIP_MAP = {
-  'body weight':'equipBodyweight',
-  'bodyweight':'equipBodyweight',
-  'dumbbell':'equipDumbbell',
-  'barbell':'equipBarbell',
-  'kettlebell':'equipKettlebell',
-  'cable':'equipCable',
-  'leverage machine':'equipMachine',
-  'machine':'equipMachine',
-  'smith machine':'equipSmith',
-  'band':'equipBand',
-  'bands':'equipBand',
-  'stability ball':'equipBall',
-  'exercise ball':'equipBall',
-  'swiss ball':'equipBall',
-  'ez barbell':'equipEZ',
-  'ez bar':'equipEZ',
-  'medicine ball':'equipMedBall',
-  'foam roll':'equipFoamRoll',
-  'pull-up bar':'equipPullUpBar',
-  'pullup bar':'equipPullUpBar',
-  'battle rope':'equipBattleRope',
-  'tire':'equipTire',
-  'sled':'equipSled',
-  'rope':'equipRope',
-  'stationary bike':'equipBike',
-  'other':'equipOther'
+  'body weight':'equipBodyweight','bodyweight':'equipBodyweight',
+  'dumbbell':'equipDumbbell','barbell':'equipBarbell','kettlebell':'equipKettlebell',
+  'cable':'equipCable','leverage machine':'equipMachine','machine':'equipMachine',
+  'smith machine':'equipSmith','band':'equipBand','bands':'equipBand',
+  'stability ball':'equipBall','exercise ball':'equipBall',
+  'ez barbell':'equipEZ','ez bar':'equipEZ','medicine ball':'equipMedBall',
+  'foam roll':'equipFoamRoll','pull-up bar':'equipPullUpBar',
+  'battle rope':'equipBattleRope','other':'equipOther'
 };
 
-// Palabras clave para identificar ejercicios de barra de dominadas
-const PULLUP_KEYWORDS = ['pull-up','pullup','pull up','chin-up','chinup','chin up','hanging','muscle-up','muscleup','muscle up','toes to bar','knee raise','leg raise','l-sit'];
+const PULLUP_KEYWORDS=['pull-up','pullup','pull up','chin-up','chinup','chin up','hanging','muscle-up','toes to bar','knee raise','leg raise','l-sit'];
+function isPullUpExercise(ex){const name=(ex.name||'').toLowerCase();return PULLUP_KEYWORDS.some(k=>name.includes(k));}
 
-function isPullUpExercise(ex) {
-  const name = (ex.name || '').toLowerCase();
-  return PULLUP_KEYWORDS.some(k => name.includes(k));
-}
-
-// ============================================
-// TRADUCCIONES DE EJERCICIOS
-// ============================================
-const exerciseTranslations = {
+const exerciseTranslations={
   'Barbell Bench Press':'Press de Banca con Barra','Dumbbell Bench Press':'Press de Banca con Mancuernas',
   'Push-Up':'Flexión','Pushups':'Flexiones','Pull-Up':'Dominada','Pullups':'Dominadas','Chin-Up':'Dominada Supina',
   'Barbell Squat':'Sentadilla con Barra','Squats':'Sentadillas','Front Squat':'Sentadilla Frontal',
-  'Deadlift':'Peso Muerto','Deadlifts':'Peso Muerto','Romanian Deadlift':'Peso Muerto Rumano',
+  'Deadlift':'Peso Muerto','Romanian Deadlift':'Peso Muerto Rumano',
   'Barbell Row':'Remo con Barra','Dumbbell Row':'Remo con Mancuerna',
   'Overhead Press':'Press Militar','Shoulder Press':'Press de Hombros',
-  'Lateral Raise':'Elevaciones Laterales','Bicep Curl':'Curl de Bíceps','Bicep Curls':'Curl de Bíceps',
+  'Lateral Raise':'Elevaciones Laterales','Bicep Curl':'Curl de Bíceps',
   'Hammer Curl':'Curl Martillo','Tricep Extension':'Extensión de Tríceps','Tricep Pushdown':'Pushdown de Tríceps',
   'Leg Press':'Prensa de Piernas','Leg Curl':'Curl de Pierna','Leg Extension':'Extensión de Pierna',
-  'Calf Raise':'Elevación de Gemelos','Plank':'Plancha','Planks':'Planchas',
-  'Side Plank':'Plancha Lateral','Crunch':'Abdominal Crunch','Crunches':'Abdominales',
-  'Sit-Up':'Abdominal Sit-Up','Sit-Ups':'Abdominales','Russian Twist':'Giros Rusos',
+  'Calf Raise':'Elevación de Gemelos','Plank':'Plancha','Side Plank':'Plancha Lateral',
+  'Crunch':'Abdominal Crunch','Sit-Up':'Abdominal Sit-Up','Russian Twist':'Giros Rusos',
   'Lunge':'Zancada','Lunges':'Zancadas','Bulgarian Split Squat':'Sentadilla Búlgara',
   'Hip Thrust':'Hip Thrust','Glute Bridge':'Puente de Glúteos','Lat Pulldown':'Jalón al Pecho',
   'Cable Fly':'Cruce de Poleas','Chest Fly':'Aperturas de Pecho',
@@ -384,31 +459,25 @@ const exerciseTranslations = {
   'Hanging Leg Raise':'Elevación de Piernas Colgado','Knee Raise':'Elevación de Rodillas',
   'Superman':'Superman','Back Extension':'Extensión de Espalda',
   'Kettlebell Swing':'Swing con Kettlebell','Turkish Get-Up':'Turkish Get-Up',
-  'Goblet Squat':'Sentadilla Goblet','Clean and Press':'Cargada y Press',
-  'Snatch':'Arranque','Clean':'Cargada','Jerk':'Envión',
-  'Farmers Walk':'Paseo del Granjero','Battle Rope':'Cuerda de Batalla',
-  'Sled Push':'Empuje de Trineo','Medicine Ball Slam':'Lanzamiento de Balón Medicinal',
-  'Box Squat':'Sentadilla en Caja','Sumo Deadlift':'Peso Muerto Sumo',
+  'Goblet Squat':'Sentadilla Goblet','Sumo Deadlift':'Peso Muerto Sumo',
   'Single Leg Deadlift':'Peso Muerto a Una Pierna','Pistol Squat':'Sentadilla Pistol',
   'Handstand Push-Up':'Flexión de Pino','Muscle-Up':'Muscle-Up',
   'L-Sit':'L-Sit','Dragon Flag':'Dragon Flag','Planche':'Planche',
-  'Front Lever':'Front Lever','Back Lever':'Back Lever',
   'Ring Dip':'Fondos en Anillas','Ring Push-Up':'Flexión en Anillas','Ring Row':'Remo en Anillas',
-  'TRX Row':'Remo TRX','TRX Push-Up':'Flexión TRX','Cable Crunch':'Crunch en Polea',
+  'TRX Row':'Remo TRX','Cable Crunch':'Crunch en Polea',
   'Woodchopper':'Leñador','Pallof Press':'Pallof Press','Ab Wheel Rollout':'Rueda Abdominal',
   'Hanging Knee Raise':'Elevación de Rodillas Colgado','Decline Crunch':'Crunch Declinado',
   'Reverse Crunch':'Crunch Inverso','Bicycle Crunch':'Crunch de Bicicleta',
-  'Flutter Kick':'Patada Flutter','Scissor Kick':'Patada de Tijera',
   'Leg Raise':'Elevación de Piernas','Hip Raise':'Elevación de Cadera',
   'Glute Kickback':'Patada de Glúteo','Donkey Kick':'Patada de Burro',
   'Fire Hydrant':'Hidrante','Clamshell':'Almeja','Monster Walk':'Caminata de Monstruo',
-  'Toes To Bar':'Pies a la Barra','Hanging Toes To Bar':'Pies a la Barra Colgado'
+  'Toes To Bar':'Pies a la Barra','Battle Rope':'Cuerda de Batalla',
+  'Medicine Ball Slam':'Lanzamiento de Balón Medicinal','Farmers Walk':'Paseo del Granjero',
+  'Sled Push':'Empuje de Trineo','Clean and Press':'Cargada y Press',
+  'Snatch':'Arranque','Clean':'Cargada','Jerk':'Envión'
 };
 
-function formatExerciseName(name) {
-  if (currentLang === 'es' && exerciseTranslations[name]) return exerciseTranslations[name];
-  return name;
-}
+function formatExerciseName(name){if(currentLang==='es'&&exerciseTranslations[name])return exerciseTranslations[name];return name;}
 
 // ============================================
 // i18n
@@ -417,7 +486,8 @@ const i18n = {
   es: {
     title:"Cuidate !!",sub:"¡Tu app de entrenamiento!",langBtn:"🇬🇧 EN",
     tabCreate:"➕ Crear",tabBrowse:"🔍 Ejercicios",tabSession:"💪 Sesión",tabLibrary:"📚 Biblioteca",tabHistory:"📅 Historial",tabLegal:"⚖️ Legal",
-    loading:"Cargando base de datos de ejercicios…",sec1:"1 · Tu nivel de experiencia",sec1Label:"¿Cuánto llevas entrenando?",
+    loading:"Cargando base de datos de ejercicios…",
+    sec1:"1 · Tu nivel de experiencia",sec1Label:"¿Cuánto llevas entrenando?",
     optBeginner:"🌱 Principiante · Menos de 6 meses",optIntermediate:"💪 Intermedio · 6 meses - 2 años",
     optAdvanced:"🔥 Avanzado · 2 - 5 años",optExpert:"⚡ Experto · Más de 5 años",
     hintBeginner:"🌱 Ejercicios básicos y sencillos. Prioriza aprender la técnica correcta.",
@@ -469,8 +539,7 @@ const i18n = {
     equipSmith:"🔩 Smith",equipBand:"🎽 Banda elástica",equipBall:"⚽ Fitball",
     equipEZ:"🌀 Barra Z",equipMedBall:"💊 Balón medicinal",equipFoamRoll:"🧘 Rodillo de espuma",
     equipPullUpBar:"🏗️ Barra de dominadas",equipBattleRope:"🪢 Cuerda de batalla",
-    equipTire:"🛞 Neumático",equipSled:"🛷 Trineo",equipRope:"🪢 Cuerda",
-    equipBike:"🚴 Bici estática",equipOther:"➕ Otro",
+    equipOther:"➕ Otro",
     routineTypes:{fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Músculo específico'},
     expLevels:{beginner:'🌱 Principiante',intermediate:'💪 Intermedio',advanced:'🔥 Avanzado',expert:'⚡ Experto'},
     diffLabels:{beginner:'🌱 Fácil',intermediate:'💪 Media',advanced:'🔥 Difícil',expert:'⚡ Experto'},
@@ -480,12 +549,45 @@ const i18n = {
     load:'Cargar',share:'Compartir',delete:'Eliminar',
     detailExercises:'Ejercicios',detailSets:'Series',detailVolume:'Volumen (kg)',
     alreadyInRoutine:"⚠️ Ya está en tu rutina",customRoutine:"Rutina personalizada",
-    pdfGenerating:"Generando PDF...",pdfDone:"✅ PDF descargado"
+    pdfGenerating:"Generando PDF...",pdfDone:"✅ PDF descargado",
+    // WIZARD
+    wizardWelcomeTitle:"👋 ¡Bienvenido a Cuidate !!",
+    wizardWelcomeSub:"Vamos a personalizar tu experiencia en 3 pasos rápidos",
+    wizardQ1:"¿Cuál es tu deporte principal?",
+    sportCycling:"Ciclismo",sportCyclingDesc:"Carretera, MTB, gravel, pista",
+    sportRunning:"Running",sportRunningDesc:"Trail, asfalto, ultra",
+    sportFitness:"Fitness general",sportFitnessDesc:"Gimnasio, tonificación",
+    sportOther:"Otro deporte",sportOtherDesc:"Fútbol, natación, etc.",
+    wizardQ2:"¿Cuántos días a la semana puedes entrenar fuerza?",
+    days1:"1 día",days1Desc:"Mantenimiento básico",
+    days2:"2 días",days2Desc:"Progreso moderado",
+    days3:"3 días",days3Desc:"Progreso óptimo",
+    days4:"4+ días",days4Desc:"Máximo rendimiento",
+    wizardQ2b:"¿Cuánto tiempo tienes por sesión?",
+    time30:"30 minutos",time30Desc:"Sesión express",
+    time45:"45 minutos",time45Desc:"Sesión estándar",
+    time60:"60 minutos",time60Desc:"Sesión completa",
+    time90:"+60 minutos",time90Desc:"Sesión extendida",
+    wizardQ3:"¿Qué buscas con el entrenamiento de fuerza?",
+    goalPerformance:"Rendir más en mi deporte",goalPerformanceDesc:"Más potencia, velocidad, resistencia",
+    goalInjury:"Prevenir lesiones",goalInjuryDesc:"Core, estabilidad, movilidad",
+    goalWeight:"Perder peso",goalWeightDesc:"Quemar calorías, tonificar",
+    goalMuscle:"Ganar músculo",goalMuscleDesc:"Hipertrofia, fuerza máxima",
+    goalBalance:"Equilibrio general",goalBalanceDesc:"Salud global, bienestar, forma física",
+    wizardSkip:"Saltar por ahora",wizardNext:"Siguiente →",wizardBack:"← Atrás",
+    wizardFinish:"✨ Configurar mi app",
+    wizardSummaryTitle:"✨ ¡Tu perfil está listo!",
+    wizardSummaryDesc:"Hemos pre-configurado la app con tu equipamiento ideal, tipo de rutina y volumen de series. Puedes modificarlo cuando quieras.",
+    wizardStart:"🚀 Empezar a entrenar",
+    profileLabel:"Tu perfil configurado",btnEditProfile:"⚙️ Editar perfil",
+    sumSport:"Deporte",sumDays:"Días/semana",sumTime:"Tiempo/sesión",sumGoal:"Objetivo",
+    profileConfigured:"✅ Perfil configurado"
   },
   en: {
     title:"Cuidate !!",sub:"Your workout app!",langBtn:"🇪🇸 ES",
     tabCreate:"➕ Create",tabBrowse:"🔍 Exercises",tabSession:"💪 Session",tabLibrary:"📚 Library",tabHistory:"📅 History",tabLegal:"⚖️ Legal",
-    loading:"Loading exercise database…",sec1:"1 · Your experience level",sec1Label:"How long have you been training?",
+    loading:"Loading exercise database…",
+    sec1:"1 · Your experience level",sec1Label:"How long have you been training?",
     optBeginner:"🌱 Beginner · Less than 6 months",optIntermediate:"💪 Intermediate · 6 months - 2 years",
     optAdvanced:"🔥 Advanced · 2 - 5 years",optExpert:"⚡ Expert · More than 5 years",
     hintBeginner:"🌱 Basic and simple exercises. Prioritize learning correct technique.",
@@ -537,8 +639,7 @@ const i18n = {
     equipSmith:"🔩 Smith",equipBand:"🎽 Band",equipBall:"⚽ Fitball",
     equipEZ:"🌀 EZ Bar",equipMedBall:"💊 Medicine ball",equipFoamRoll:"🧘 Foam roll",
     equipPullUpBar:"🏗️ Pull-up bar",equipBattleRope:"🪢 Battle rope",
-    equipTire:"🛞 Tire",equipSled:"🛷 Sled",equipRope:"🪢 Rope",
-    equipBike:"🚴 Stationary bike",equipOther:"➕ Other",
+    equipOther:"➕ Other",
     routineTypes:{fullbody:'Full Body',upper:'Upper Body',lower:'Lower Body',push:'Push',pull:'Pull',custom:'Specific Muscle'},
     expLevels:{beginner:'🌱 Beginner',intermediate:'💪 Intermediate',advanced:'🔥 Advanced',expert:'⚡ Expert'},
     diffLabels:{beginner:'🌱 Easy',intermediate:'💪 Medium',advanced:'🔥 Hard',expert:'⚡ Expert'},
@@ -548,14 +649,275 @@ const i18n = {
     load:'Load',share:'Share',delete:'Delete',
     detailExercises:'Exercises',detailSets:'Sets',detailVolume:'Volume (kg)',
     alreadyInRoutine:"⚠️ Already in your routine",customRoutine:"Custom routine",
-    pdfGenerating:"Generating PDF...",pdfDone:"✅ PDF downloaded"
+    pdfGenerating:"Generating PDF...",pdfDone:"✅ PDF downloaded",
+    // WIZARD
+    wizardWelcomeTitle:"👋 Welcome to Cuidate !!",
+    wizardWelcomeSub:"Let's personalize your experience in 3 quick steps",
+    wizardQ1:"What's your main sport?",
+    sportCycling:"Cycling",sportCyclingDesc:"Road, MTB, gravel, track",
+    sportRunning:"Running",sportRunningDesc:"Trail, road, ultra",
+    sportFitness:"General fitness",sportFitnessDesc:"Gym, toning",
+    sportOther:"Other sport",sportOtherDesc:"Soccer, swimming, etc.",
+    wizardQ2:"How many days a week can you train strength?",
+    days1:"1 day",days1Desc:"Basic maintenance",
+    days2:"2 days",days2Desc:"Moderate progress",
+    days3:"3 days",days3Desc:"Optimal progress",
+    days4:"4+ days",days4Desc:"Maximum performance",
+    wizardQ2b:"How much time per session?",
+    time30:"30 minutes",time30Desc:"Express session",
+    time45:"45 minutes",time45Desc:"Standard session",
+    time60:"60 minutes",time60Desc:"Full session",
+    time90:"+60 minutes",time90Desc:"Extended session",
+    wizardQ3:"What are you looking for with strength training?",
+    goalPerformance:"Perform better in my sport",goalPerformanceDesc:"More power, speed, endurance",
+    goalInjury:"Prevent injuries",goalInjuryDesc:"Core, stability, mobility",
+    goalWeight:"Lose weight",goalWeightDesc:"Burn calories, tone up",
+    goalMuscle:"Gain muscle",goalMuscleDesc:"Hypertrophy, max strength",
+    goalBalance:"General balance",goalBalanceDesc:"Overall health, wellness, fitness",
+    wizardSkip:"Skip for now",wizardNext:"Next →",wizardBack:"← Back",
+    wizardFinish:"✨ Configure my app",
+    wizardSummaryTitle:"✨ Your profile is ready!",
+    wizardSummaryDesc:"We've pre-configured the app with your ideal equipment, routine type and set volume. You can change it anytime.",
+    wizardStart:"🚀 Start training",
+    profileLabel:"Your configured profile",btnEditProfile:"⚙️ Edit profile",
+    sumSport:"Sport",sumDays:"Days/week",sumTime:"Time/session",sumGoal:"Goal",
+    profileConfigured:"✅ Profile configured"
   }
 };
 
 let currentLang = localStorage.getItem('viferor_lang') || 'es';
 
 // ============================================
-// FUNCIONES DE CARGA
+// WIZARD
+// ============================================
+const wizardState = { sport: null, days: null, time: null, goal: null };
+
+function openWizard() {
+  document.getElementById('wizardModal').classList.add('show');
+  showWizardStep(1);
+}
+
+function closeWizard() {
+  document.getElementById('wizardModal').classList.remove('show');
+}
+
+function showWizardStep(step) {
+  document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
+  document.querySelector(`.wizard-step[data-step="${step}"]`).classList.add('active');
+  document.querySelectorAll('.wizard-step-dot').forEach(d => {
+    const s = parseInt(d.dataset.step);
+    d.classList.remove('active','done');
+    if (s === step) d.classList.add('active');
+    else if (s < step) d.classList.add('done');
+  });
+}
+
+function selectOption(containerId, value) {
+  const container = document.getElementById(containerId);
+  container.querySelectorAll('.wizard-option').forEach(o => {
+    o.classList.toggle('selected', o.dataset.value === value);
+  });
+}
+
+function getSelectedOption(containerId) {
+  const selected = document.querySelector(`#${containerId} .wizard-option.selected`);
+  return selected ? selected.dataset.value : null;
+}
+
+function applyProfileToForm() {
+  const profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null');
+  if (!profile) return;
+  
+  // Mapear deporte a tipo de rutina
+  const sportToRoutine = {
+    'cycling': 'lower',
+    'running': 'lower',
+    'fitness': 'fullbody',
+    'other': 'fullbody'
+  };
+  
+  // Mapear objetivo a estilo
+  const goalToStyle = {
+    'performance': 'all',
+    'injury': 'iso',
+    'weight': 'all',
+    'muscle': 'all',
+    'balance': 'mix'
+  };
+  
+  // Mapear días a volumen
+  const daysToLevel = {
+    '1': '4',
+    '2': '3',
+    '3': '3',
+    '4': '2'
+  };
+  
+  // Mapear deporte a equipamiento recomendado
+  const sportToEquip = {
+    'cycling': ['body weight','dumbbell','kettlebell','band','stability ball','foam roll','pull-up bar'],
+    'running': ['body weight','band','stability ball','foam roll','pull-up bar'],
+    'fitness': ['body weight','dumbbell','barbell','kettlebell','cable','leverage machine'],
+    'other': ['body weight','dumbbell','barbell','kettlebell','band']
+  };
+  
+  // Aplicar valores
+  if (sportToRoutine[profile.sport]) {
+    document.getElementById('routineType').value = sportToRoutine[profile.sport];
+  }
+  if (goalToStyle[profile.goal]) {
+    document.getElementById('exerciseStyle').value = goalToStyle[profile.goal];
+  }
+  if (daysToLevel[profile.days]) {
+    document.getElementById('level').value = daysToLevel[profile.days];
+  }
+  
+  // Aplicar equipamiento
+  const recommendedEquip = sportToEquip[profile.sport] || ['body weight','dumbbell','barbell'];
+  document.querySelectorAll('#equipGrid input').forEach(input => {
+    input.checked = recommendedEquip.includes(input.value);
+  });
+  
+  // Mostrar banner de perfil
+  updateProfileBanner(profile);
+}
+
+function updateProfileBanner(profile) {
+  const banner = document.getElementById('profileBanner');
+  const summary = document.getElementById('profileSummary');
+  const t = i18n[currentLang];
+  
+  const sportNames = {
+    cycling: currentLang === 'es' ? '🚴 Ciclismo' : '🚴 Cycling',
+    running: currentLang === 'es' ? '🏃 Running' : '🏃 Running',
+    fitness: currentLang === 'es' ? '💪 Fitness' : '💪 Fitness',
+    other: currentLang === 'es' ? '🎯 Otro' : '🎯 Other'
+  };
+  
+  const goalNames = {
+    performance: currentLang === 'es' ? '🚀 Rendimiento' : '🚀 Performance',
+    injury: currentLang === 'es' ? '🛡️ Prevención' : '🛡️ Injury prevention',
+    weight: currentLang === 'es' ? '⚖️ Peso' : '⚖️ Weight loss',
+    muscle: currentLang === 'es' ? '💪 Músculo' : '💪 Muscle',
+    balance: currentLang === 'es' ? '🧘 Equilibrio' : '🧘 Balance'
+  };
+  
+  summary.innerHTML = `${sportNames[profile.sport] || profile.sport} · ${profile.days} ${currentLang==='es'?'días':'days'}/sem · ${profile.time}min · ${goalNames[profile.goal] || profile.goal}`;
+  banner.style.display = 'block';
+}
+
+function showWizardSummary() {
+  const t = i18n[currentLang];
+  const summary = document.getElementById('wizardSummary');
+  
+  const sportNames = {
+    cycling: t.sportCycling, running: t.sportRunning,
+    fitness: t.sportFitness, other: t.sportOther
+  };
+  const goalNames = {
+    performance: t.goalPerformance, injury: t.goalInjury,
+    weight: t.goalWeight, muscle: t.goalMuscle, balance: t.goalBalance
+  };
+  
+  summary.innerHTML = `
+    <h4>${t.wizardSummaryTitle}</h4>
+    <div class="sum-row"><span class="sum-label">${t.sumSport}</span><span class="sum-value">${sportNames[wizardState.sport] || wizardState.sport}</span></div>
+    <div class="sum-row"><span class="sum-label">${t.sumDays}</span><span class="sum-value">${wizardState.days}</span></div>
+    <div class="sum-row"><span class="sum-label">${t.sumTime}</span><span class="sum-value">${wizardState.time} min</span></div>
+    <div class="sum-row"><span class="sum-label">${t.sumGoal}</span><span class="sum-value">${goalNames[wizardState.goal] || wizardState.goal}</span></div>
+  `;
+}
+
+function finishWizard() {
+  const profile = {
+    sport: wizardState.sport,
+    days: wizardState.days,
+    time: wizardState.time,
+    goal: wizardState.goal,
+    date: new Date().toISOString()
+  };
+  localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+  showWizardSummary();
+  showWizardStep(4);
+}
+
+function initWizard() {
+  // Opciones de deporte
+  document.querySelectorAll('#wizardSportOptions .wizard-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      selectOption('wizardSportOptions', opt.dataset.value);
+      wizardState.sport = opt.dataset.value;
+    });
+  });
+  
+  // Opciones de días
+  document.querySelectorAll('#wizardDaysOptions .wizard-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      selectOption('wizardDaysOptions', opt.dataset.value);
+      wizardState.days = opt.dataset.value;
+    });
+  });
+  
+  // Opciones de tiempo
+  document.querySelectorAll('#wizardTimeOptions .wizard-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      selectOption('wizardTimeOptions', opt.dataset.value);
+      wizardState.time = opt.dataset.value;
+    });
+  });
+  
+  // Opciones de objetivo
+  document.querySelectorAll('#wizardGoalOptions .wizard-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      selectOption('wizardGoalOptions', opt.dataset.value);
+      wizardState.goal = opt.dataset.value;
+    });
+  });
+  
+  // Navegación
+  document.getElementById('wizardSkip').addEventListener('click', closeWizard);
+  document.getElementById('wizardNext1').addEventListener('click', () => {
+    if (!wizardState.sport) {
+      showToast(currentLang === 'es' ? '⚠️ Selecciona tu deporte' : '⚠️ Select your sport');
+      return;
+    }
+    showWizardStep(2);
+  });
+  document.getElementById('wizardBack2').addEventListener('click', () => showWizardStep(1));
+  document.getElementById('wizardNext2').addEventListener('click', () => {
+    if (!wizardState.days || !wizardState.time) {
+      showToast(currentLang === 'es' ? '⚠️ Completa ambos campos' : '⚠️ Complete both fields');
+      return;
+    }
+    showWizardStep(3);
+  });
+  document.getElementById('wizardBack3').addEventListener('click', () => showWizardStep(2));
+  document.getElementById('wizardFinish').addEventListener('click', () => {
+    if (!wizardState.goal) {
+      showToast(currentLang === 'es' ? '⚠️ Selecciona tu objetivo' : '⚠️ Select your goal');
+      return;
+    }
+    finishWizard();
+  });
+  document.getElementById('wizardStart').addEventListener('click', () => {
+    closeWizard();
+    applyProfileToForm();
+    showToast(i18n[currentLang].profileConfigured);
+  });
+  
+  // Botón editar perfil
+  document.getElementById('btnEditProfile').addEventListener('click', () => {
+    openWizard();
+  });
+  
+  // Botón ajustes
+  document.getElementById('btnSettings').addEventListener('click', () => {
+    openWizard();
+  });
+}
+
+// ============================================
+// CARGA DE DB
 // ============================================
 async function retryLoadDB() {
   document.getElementById('loaderBlock').innerHTML = '<div class="spinner"></div><span>Cargando base de datos…</span>';
@@ -579,6 +941,20 @@ async function loadDatabase() {
       renderHistory();
       renderLibrary();
       bindEvents();
+      
+      // Aplicar perfil si existe
+      const profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null');
+      if (profile) {
+        wizardState.sport = profile.sport;
+        wizardState.days = profile.days;
+        wizardState.time = profile.time;
+        wizardState.goal = profile.goal;
+        applyProfileToForm();
+      } else {
+        // Primera visita: mostrar wizard
+        setTimeout(openWizard, 500);
+      }
+      
       return true;
     } catch (e) {
       console.warn('URL ' + (i+1) + ' failed:', e.message);
@@ -607,9 +983,8 @@ function updateLanguage(lang) {
   document.querySelectorAll('#equipGrid label').forEach(lbl => {
     const input = lbl.querySelector('input');
     const span = lbl.querySelector('span:last-child');
-    if (input && span) {
-      const mapKey = EQUIP_MAP[input.value];
-      if (mapKey && t[mapKey]) span.textContent = t[mapKey];
+    if (input && span && EQUIP_MAP[input.value] && t[EQUIP_MAP[input.value]]) {
+      span.textContent = t[EQUIP_MAP[input.value]];
     }
   });
   if (DB.length && document.getElementById('view-browse').classList.contains('active')) {
@@ -621,6 +996,10 @@ function updateLanguage(lang) {
   if (currentSession) renderSessionView();
   if (document.getElementById('view-history').classList.contains('active')) renderHistory();
   if (document.getElementById('view-library').classList.contains('active')) renderLibrary();
+  
+  // Actualizar banner de perfil
+  const profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null');
+  if (profile) updateProfileBanner(profile);
 }
 
 function updateSelect(id) {
@@ -769,22 +1148,18 @@ function checkURLForSharedRoutine() {
 // ============================================
 (async function init() {
   const grid = document.getElementById('equipGrid');
-  // Evitar duplicados en la cuadrícula (band/bands, stability ball/exercise ball)
   const shown = new Set();
   EQUIP_LIST.forEach(eq => {
     if (shown.has(eq.key)) return;
     shown.add(eq.key);
-    // Si ya mostramos 'band', no mostrar 'bands'
-    if (eq.key === 'bands' && shown.has('band')) return;
-    if (eq.key === 'exercise ball' && shown.has('stability ball')) return;
-    
     const lbl = document.createElement('label');
     const mapKey = EQUIP_MAP[eq.key];
     const translatedLabel = i18n[currentLang][mapKey] || eq.label;
-    lbl.innerHTML = `<input type="checkbox" value="${eq.key}" ${DEFAULT_EQUIP.has(eq.key)?'checked':''}><span class="dot"></span><span>${translatedLabel}</span>`;
+    lbl.innerHTML = `<input type="checkbox" value="${eq.key}"><span class="dot"></span><span>${translatedLabel}</span>`;
     grid.appendChild(lbl);
   });
   updateLanguage(currentLang);
+  initWizard();
   await loadDatabase();
 })();
 
@@ -834,7 +1209,6 @@ function populateBrowseFilters() {
   catSel.innerHTML = `<option value="">${t.allCategories}</option>` +
     cats.map(c => `<option value="${c}">${catT[c] || c}</option>`).join('');
   
-  // Lista única de equipamientos para el filtro (incluyendo pull-up bar aunque no esté en DB)
   const uniqueEquips = [];
   const seen = new Set();
   EQUIP_LIST.forEach(eq => {
@@ -859,10 +1233,6 @@ function populateBrowseFilters() {
     'foam roll': t.equipFoamRoll,
     'pull-up bar': t.equipPullUpBar,
     'battle rope': t.equipBattleRope,
-    'tire': t.equipTire,
-    'sled': t.equipSled,
-    'rope': t.equipRope,
-    'stationary bike': t.equipBike,
     'other': t.equipOther
   };
   
@@ -893,32 +1263,17 @@ function formatEquip(eq) {
   return eq;
 }
 
-// Función especial para filtrar por equipamiento (maneja casos especiales)
 function filterByEquipment(exercises, equipment) {
   if (!equipment) return exercises;
-  
-  // Caso especial: barra de dominadas - mostrar ejercicios body weight con palabras clave
   if (equipment === 'pull-up bar') {
-    return exercises.filter(ex => 
-      ex.equipment === 'body weight' && isPullUpExercise(ex)
-    );
+    return exercises.filter(ex => ex.equipment === 'body weight' && isPullUpExercise(ex));
   }
-  
-  // Caso especial: bandas (band o bands)
   if (equipment === 'band') {
     return exercises.filter(ex => ex.equipment === 'band' || ex.equipment === 'bands');
   }
-  
-  // Caso especial: fitball (stability ball o exercise ball)
   if (equipment === 'stability ball') {
-    return exercises.filter(ex => 
-      ex.equipment === 'stability ball' || 
-      ex.equipment === 'exercise ball' || 
-      ex.equipment === 'swiss ball'
-    );
+    return exercises.filter(ex => ex.equipment === 'stability ball' || ex.equipment === 'exercise ball');
   }
-  
-  // Caso normal
   return exercises.filter(ex => ex.equipment === equipment);
 }
 
@@ -1163,12 +1518,10 @@ function generateRoutine() {
   
   if (equipSet.size === 0) { alert(i18n[currentLang].selectEquip); return; }
   
-  // Filtrar por equipamiento (usando función especial para casos como pull-up bar)
   let pool = [];
   equipSet.forEach(eq => {
     pool = pool.concat(filterByEquipment(DB, eq));
   });
-  // Eliminar duplicados por id
   pool = pool.filter((ex, idx, self) => self.findIndex(e => e.id === ex.id) === idx);
   
   pool = filterByLevel(pool, expLevel);
