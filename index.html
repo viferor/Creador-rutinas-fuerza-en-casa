@@ -169,6 +169,23 @@ textarea{resize:vertical;min-height:70px}
 .my-routine-panel h3{color:var(--accent);margin-bottom:10px;font-size:14px}
 .my-routine-count{background:var(--accent);color:#fff;border-radius:12px;padding:2px 10px;font-size:12px;font-weight:700;margin-left:8px}
 
+/* FATIGA SELECTOR */
+.fatigue-selector{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
+@media(min-width:600px){.fatigue-selector{grid-template-columns:repeat(4,1fr)}}
+.fatigue-option{background:var(--card2);border:2px solid var(--border);border-radius:12px;padding:14px 10px;cursor:pointer;transition:all .2s;text-align:center;user-select:none}
+.fatigue-option:hover{transform:translateY(-2px)}
+.fatigue-option.selected{transform:translateY(-2px)}
+.fatigue-option .fat-icon{font-size:28px;margin-bottom:4px}
+.fatigue-option .fat-title{font-size:13px;font-weight:700;margin-bottom:2px}
+.fatigue-option .fat-desc{font-size:11px;color:var(--muted);line-height:1.3}
+.fatigue-option[data-value="fresh"]{--fat-color:var(--green)}
+.fatigue-option[data-value="normal"]{--fat-color:var(--accent)}
+.fatigue-option[data-value="tired"]{--fat-color:var(--orange)}
+.fatigue-option[data-value="exhausted"]{--fat-color:var(--red)}
+.fatigue-option.selected{border-color:var(--fat-color);background:color-mix(in srgb,var(--fat-color) 15%,transparent);box-shadow:0 4px 12px color-mix(in srgb,var(--fat-color) 30%,transparent)}
+.fatigue-option.selected .fat-title{color:var(--fat-color)}
+.fatigue-hint{margin-top:10px;padding:10px 12px;background:var(--card2);border-radius:8px;font-size:12px;color:var(--muted);line-height:1.5;border-left:3px solid var(--accent)}
+
 /* WIZARD */
 .wizard-modal{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px;backdrop-filter:blur(20px)}
 .wizard-modal.show{display:flex;animation:fade .3s ease}
@@ -177,7 +194,7 @@ textarea{resize:vertical;min-height:70px}
 .wizard-header h2{font-size:22px;font-weight:800;margin-bottom:6px}
 .wizard-header p{font-size:13px;color:var(--muted)}
 .wizard-progress{display:flex;gap:6px;margin:20px 0;justify-content:center}
-.wizard-step-dot{width:40px;height:4px;border-radius:2px;background:var(--border);transition:background .3s}
+.wizard-step-dot{width:32px;height:4px;border-radius:2px;background:var(--border);transition:background .3s}
 .wizard-step-dot.active{background:var(--accent)}
 .wizard-step-dot.done{background:var(--green)}
 .wizard-step{display:none}
@@ -199,6 +216,9 @@ textarea{resize:vertical;min-height:70px}
 .wizard-summary .sum-row:last-child{border:none}
 .wizard-summary .sum-label{color:var(--muted)}
 .wizard-summary .sum-value{font-weight:700}
+.equip-recommend{background:var(--card2);border-radius:12px;padding:16px;margin:16px 0}
+.equip-recommend h4{font-size:14px;margin-bottom:12px;color:var(--orange);display:flex;align-items:center;gap:8px}
+.equip-recommend .equip-note{font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -223,12 +243,9 @@ textarea{resize:vertical;min-height:70px}
   <button class="tab" data-view="legal" data-i18n="tabLegal">⚖️ Legal</button>
 </div>
 
-<!-- VISTA: CREAR -->
 <div class="view active" id="view-create">
   <div id="loaderBlock" class="loader"><div class="spinner"></div><span data-i18n="loading">Cargando base de datos…</span></div>
   <div id="formBlock" style="display:none">
-    
-    <!-- PERFIL GUARDADO -->
     <div id="profileBanner" style="display:none;background:linear-gradient(135deg,rgba(10,132,255,.15),rgba(191,90,242,.15));border:1px solid var(--accent);border-radius:var(--radius);padding:16px;margin-bottom:14px">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
         <div style="flex:1;min-width:200px">
@@ -237,6 +254,35 @@ textarea{resize:vertical;min-height:70px}
         </div>
         <button class="btn btn-secondary" id="btnEditProfile" style="width:auto;padding:8px 14px;font-size:12px" data-i18n="btnEditProfile">⚙️ Editar perfil</button>
       </div>
+    </div>
+    
+    <!-- SELECTOR DE FATIGA DIARIO -->
+    <div class="section">
+      <h3 data-i18n="fatigueSection">⚡ ¿Cómo te sientes hoy?</h3>
+      <label class="sel-label" data-i18n="fatigueLabel">Ajusta la sesión a tu nivel de energía del día</label>
+      <div class="fatigue-selector" id="fatigueSelector">
+        <div class="fatigue-option" data-value="fresh">
+          <div class="fat-icon">🟢</div>
+          <div class="fat-title" data-i18n="fatFresh">Fresco</div>
+          <div class="fat-desc" data-i18n="fatFreshDesc">Descansado, a tope</div>
+        </div>
+        <div class="fatigue-option selected" data-value="normal">
+          <div class="fat-icon">🟡</div>
+          <div class="fat-title" data-i18n="fatNormal">Normal</div>
+          <div class="fat-desc" data-i18n="fatNormalDesc">Día estándar</div>
+        </div>
+        <div class="fatigue-option" data-value="tired">
+          <div class="fat-icon">🟠</div>
+          <div class="fat-title" data-i18n="fatTired">Cansado</div>
+          <div class="fat-desc" data-i18n="fatTiredDesc">Baja energía</div>
+        </div>
+        <div class="fatigue-option" data-value="exhausted">
+          <div class="fat-icon">🔴</div>
+          <div class="fat-title" data-i18n="fatExhausted">Agotado</div>
+          <div class="fat-desc" data-i18n="fatExhaustedDesc">Solo movilidad</div>
+        </div>
+      </div>
+      <div class="fatigue-hint" id="fatigueHint" data-i18n="fatHintNormal">🟡 Sesión estándar. Volumen y intensidad normales.</div>
     </div>
     
     <div class="section"><h3 data-i18n="sec1">1 · Tu nivel de experiencia</h3><label class="sel-label" data-i18n="sec1Label">¿Cuánto llevas entrenando?</label><select id="experienceLevel"><option value="beginner" data-i18n="optBeginner">🌱 Principiante · Menos de 6 meses</option><option value="intermediate" selected data-i18n="optIntermediate">💪 Intermedio · 6 meses - 2 años</option><option value="advanced" data-i18n="optAdvanced">🔥 Avanzado · 2 - 5 años</option><option value="expert" data-i18n="optExpert">⚡ Experto · Más de 5 años</option></select><div class="level-hint" id="levelHint" data-i18n="hintIntermediate">💪 Ejercicios equilibrados con técnica intermedia.</div></div>
@@ -248,7 +294,6 @@ textarea{resize:vertical;min-height:70px}
   </div>
 </div>
 
-<!-- VISTA: EXPLORAR -->
 <div class="view" id="view-browse">
   <div class="section">
     <h3 data-i18n="browseTitle">🔍 Explorar ejercicios</h3>
@@ -268,7 +313,6 @@ textarea{resize:vertical;min-height:70px}
   </div>
 </div>
 
-<!-- VISTA: SESIÓN -->
 <div class="view" id="view-session">
   <div id="sessionEmpty" class="empty"><div class="ic">🏋️</div><span data-i18n="emptySession">No hay sesión en curso.<br>Ve a <b>Crear</b> o <b>Ejercicios</b> para empezar.</span></div>
   <div id="sessionContent" style="display:none">
@@ -280,7 +324,6 @@ textarea{resize:vertical;min-height:70px}
   </div>
 </div>
 
-<!-- VISTA: BIBLIOTECA -->
 <div class="view" id="view-library">
   <div class="section" style="padding:12px 16px;margin-bottom:12px">
     <h3 style="margin-bottom:10px" data-i18n="libTitle">📚 Mi biblioteca de rutinas</h3>
@@ -318,12 +361,14 @@ textarea{resize:vertical;min-height:70px}
   <div class="wizard-box">
     <div class="wizard-header">
       <h2 id="wizardTitle" data-i18n="wizardWelcomeTitle">👋 ¡Bienvenido a Cuidate !!</h2>
-      <p id="wizardSubtitle" data-i18n="wizardWelcomeSub">Vamos a personalizar tu experiencia en 3 pasos rápidos</p>
+      <p id="wizardSubtitle" data-i18n="wizardWelcomeSub">Vamos a personalizar tu experiencia en 5 pasos rápidos</p>
     </div>
     <div class="wizard-progress">
       <div class="wizard-step-dot active" data-step="1"></div>
       <div class="wizard-step-dot" data-step="2"></div>
       <div class="wizard-step-dot" data-step="3"></div>
+      <div class="wizard-step-dot" data-step="4"></div>
+      <div class="wizard-step-dot" data-step="5"></div>
     </div>
     
     <!-- PASO 1: DEPORTE -->
@@ -350,7 +395,6 @@ textarea{resize:vertical;min-height:70px}
         <div class="wizard-option" data-value="3"><div class="opt-icon">3️⃣</div><div class="opt-title" data-i18n="days3">3 días</div><div class="opt-desc" data-i18n="days3Desc">Progreso óptimo</div></div>
         <div class="wizard-option" data-value="4"><div class="opt-icon">4️⃣+</div><div class="opt-title" data-i18n="days4">4+ días</div><div class="opt-desc" data-i18n="days4Desc">Máximo rendimiento</div></div>
       </div>
-      
       <div class="wizard-question" style="margin-top:20px" data-i18n="wizardQ2b">¿Cuánto tiempo tienes por sesión?</div>
       <div class="wizard-options" id="wizardTimeOptions">
         <div class="wizard-option" data-value="30"><div class="opt-icon">⏱️</div><div class="opt-title" data-i18n="time30">30 minutos</div><div class="opt-desc" data-i18n="time30Desc">Sesión express</div></div>
@@ -358,7 +402,6 @@ textarea{resize:vertical;min-height:70px}
         <div class="wizard-option" data-value="60"><div class="opt-icon">🕐</div><div class="opt-title" data-i18n="time60">60 minutos</div><div class="opt-desc" data-i18n="time60Desc">Sesión completa</div></div>
         <div class="wizard-option" data-value="90"><div class="opt-icon">🕑</div><div class="opt-title" data-i18n="time90">+60 minutos</div><div class="opt-desc" data-i18n="time90Desc">Sesión extendida</div></div>
       </div>
-      
       <div class="wizard-nav">
         <button class="btn btn-secondary" id="wizardBack2" data-i18n="wizardBack">← Atrás</button>
         <button class="btn btn-accent" id="wizardNext2" data-i18n="wizardNext">Siguiente →</button>
@@ -375,18 +418,64 @@ textarea{resize:vertical;min-height:70px}
         <div class="wizard-option" data-value="muscle"><div class="opt-icon">💪</div><div class="opt-title" data-i18n="goalMuscle">Ganar músculo</div><div class="opt-desc" data-i18n="goalMuscleDesc">Hipertrofia, fuerza máxima</div></div>
         <div class="wizard-option" data-value="balance" style="grid-column:1/-1"><div class="opt-icon">🧘</div><div class="opt-title" data-i18n="goalBalance">Equilibrio general</div><div class="opt-desc" data-i18n="goalBalanceDesc">Salud global, bienestar, forma física</div></div>
       </div>
-      
       <div class="wizard-nav">
         <button class="btn btn-secondary" id="wizardBack3" data-i18n="wizardBack">← Atrás</button>
+        <button class="btn btn-accent" id="wizardNext3" data-i18n="wizardNext">Siguiente →</button>
+      </div>
+    </div>
+    
+    <!-- PASO 4: EQUIPAMIENTO -->
+    <div class="wizard-step" data-step="4">
+      <div class="wizard-question" data-i18n="wizardQ4">¿Qué equipamiento tienes disponible?</div>
+      <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:16px" data-i18n="wizardQ4Desc">Selecciona el material con el que puedes entrenar. Te recomendamos algunos según tu deporte, pero puedes ajustar.</p>
+      <div class="equip-recommend">
+        <h4>💡 <span data-i18n="equipRecommended">Equipamiento recomendado para tu perfil</span></h4>
+        <p class="equip-note" id="equipRecommendNote" data-i18n="equipRecommendNote">Hemos pre-seleccionado el equipamiento ideal. Los marcados con ⭐ son los más recomendados.</p>
+        <div class="equip-grid" id="wizardEquipGrid"></div>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn btn-secondary" id="wizardBack4" data-i18n="wizardBack">← Atrás</button>
+        <button class="btn btn-accent" id="wizardNext4" data-i18n="wizardNext">Siguiente →</button>
+      </div>
+    </div>
+    
+    <!-- PASO 5: FATIGA -->
+    <div class="wizard-step" data-step="5">
+      <div class="wizard-question" data-i18n="wizardQ5">¿Cómo te sientes normalmente al entrenar?</div>
+      <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:16px" data-i18n="wizardQ5Desc">Este será tu nivel de fatiga por defecto. Podrás ajustarlo cada día en la pantalla principal.</p>
+      <div class="fatigue-selector" id="wizardFatigueSelector">
+        <div class="fatigue-option" data-value="fresh">
+          <div class="fat-icon">🟢</div>
+          <div class="fat-title" data-i18n="fatFresh">Fresco</div>
+          <div class="fat-desc" data-i18n="fatFreshDesc">Normalmente descansado</div>
+        </div>
+        <div class="fatigue-option selected" data-value="normal">
+          <div class="fat-icon">🟡</div>
+          <div class="fat-title" data-i18n="fatNormal">Normal</div>
+          <div class="fat-desc" data-i18n="fatNormalDesc">Energía estándar</div>
+        </div>
+        <div class="fatigue-option" data-value="tired">
+          <div class="fat-icon">🟠</div>
+          <div class="fat-title" data-i18n="fatTired">Cansado</div>
+          <div class="fat-desc" data-i18n="fatTiredDesc">Suelo llegar cansado</div>
+        </div>
+        <div class="fatigue-option" data-value="exhausted">
+          <div class="fat-icon">🔴</div>
+          <div class="fat-title" data-i18n="fatExhausted">Agotado</div>
+          <div class="fat-desc" data-i18n="fatExhaustedDesc">Siempre muy cansado</div>
+        </div>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn btn-secondary" id="wizardBack5" data-i18n="wizardBack">← Atrás</button>
         <button class="btn btn-green" id="wizardFinish" data-i18n="wizardFinish">✨ Configurar mi app</button>
       </div>
     </div>
     
     <!-- RESUMEN -->
-    <div class="wizard-step" data-step="4">
+    <div class="wizard-step" data-step="6">
       <div class="wizard-question" data-i18n="wizardSummaryTitle">✨ ¡Tu perfil está listo!</div>
       <div class="wizard-summary" id="wizardSummary"></div>
-      <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:16px" data-i18n="wizardSummaryDesc">Hemos pre-configurado la app con tu equipamiento ideal, tipo de rutina y volumen de series. Puedes modificarlo cuando quieras.</p>
+      <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:16px" data-i18n="wizardSummaryDesc">Hemos pre-configurado la app con tu equipamiento real, tipo de rutina y volumen de series. Recuerda que puedes ajustar la fatiga cada día.</p>
       <button class="btn btn-green" id="wizardStart" data-i18n="wizardStart">🚀 Empezar a entrenar</button>
     </div>
   </div>
@@ -487,6 +576,17 @@ const i18n = {
     title:"Cuidate !!",sub:"¡Tu app de entrenamiento!",langBtn:"🇬🇧 EN",
     tabCreate:"➕ Crear",tabBrowse:"🔍 Ejercicios",tabSession:"💪 Sesión",tabLibrary:"📚 Biblioteca",tabHistory:"📅 Historial",tabLegal:"⚖️ Legal",
     loading:"Cargando base de datos de ejercicios…",
+    // FATIGA
+    fatigueSection:"⚡ ¿Cómo te sientes hoy?",
+    fatigueLabel:"Ajusta la sesión a tu nivel de energía del día",
+    fatFresh:"Fresco",fatFreshDesc:"Descansado, a tope",
+    fatNormal:"Normal",fatNormalDesc:"Día estándar",
+    fatTired:"Cansado",fatTiredDesc:"Baja energía",
+    fatExhausted:"Agotado",fatExhaustedDesc:"Solo movilidad",
+    fatHintFresh:"🟢 ¡A por todas! Volumen alto, ejercicios técnicos y complejos. Aprovecha el buen día.",
+    fatHintNormal:"🟡 Sesión estándar. Volumen y intensidad normales.",
+    fatHintTired:"🟠 Sesión adaptada. Menos series, prioridad a técnica. Escucha a tu cuerpo.",
+    fatHintExhausted:"🔴 Solo movilidad y recuperación activa. Estiramientos y suaves. ¡Mañana será otro día!",
     sec1:"1 · Tu nivel de experiencia",sec1Label:"¿Cuánto llevas entrenando?",
     optBeginner:"🌱 Principiante · Menos de 6 meses",optIntermediate:"💪 Intermedio · 6 meses - 2 años",
     optAdvanced:"🔥 Avanzado · 2 - 5 años",optExpert:"⚡ Experto · Más de 5 años",
@@ -540,7 +640,7 @@ const i18n = {
     equipEZ:"🌀 Barra Z",equipMedBall:"💊 Balón medicinal",equipFoamRoll:"🧘 Rodillo de espuma",
     equipPullUpBar:"🏗️ Barra de dominadas",equipBattleRope:"🪢 Cuerda de batalla",
     equipOther:"➕ Otro",
-    routineTypes:{fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Músculo específico'},
+    routineTypes:{fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Músculo específico',recovery:'🌿 Recuperación'},
     expLevels:{beginner:'🌱 Principiante',intermediate:'💪 Intermedio',advanced:'🔥 Avanzado',expert:'⚡ Experto'},
     diffLabels:{beginner:'🌱 Fácil',intermediate:'💪 Media',advanced:'🔥 Difícil',expert:'⚡ Experto'},
     exerciseActions:{up:'Subir',down:'Bajar',replace:'Cambiar',remove:'Eliminar'},
@@ -550,9 +650,8 @@ const i18n = {
     detailExercises:'Ejercicios',detailSets:'Series',detailVolume:'Volumen (kg)',
     alreadyInRoutine:"⚠️ Ya está en tu rutina",customRoutine:"Rutina personalizada",
     pdfGenerating:"Generando PDF...",pdfDone:"✅ PDF descargado",
-    // WIZARD
     wizardWelcomeTitle:"👋 ¡Bienvenido a Cuidate !!",
-    wizardWelcomeSub:"Vamos a personalizar tu experiencia en 3 pasos rápidos",
+    wizardWelcomeSub:"Vamos a personalizar tu experiencia en 5 pasos rápidos",
     wizardQ1:"¿Cuál es tu deporte principal?",
     sportCycling:"Ciclismo",sportCyclingDesc:"Carretera, MTB, gravel, pista",
     sportRunning:"Running",sportRunningDesc:"Trail, asfalto, ultra",
@@ -574,19 +673,36 @@ const i18n = {
     goalWeight:"Perder peso",goalWeightDesc:"Quemar calorías, tonificar",
     goalMuscle:"Ganar músculo",goalMuscleDesc:"Hipertrofia, fuerza máxima",
     goalBalance:"Equilibrio general",goalBalanceDesc:"Salud global, bienestar, forma física",
+    wizardQ4:"¿Qué equipamiento tienes disponible?",
+    wizardQ4Desc:"Selecciona el material con el que puedes entrenar. Te recomendamos algunos según tu deporte, pero puedes ajustar.",
+    equipRecommended:"Equipamiento recomendado para tu perfil",
+    equipRecommendNote:"Hemos pre-seleccionado el equipamiento ideal. Los marcados con ⭐ son los más recomendados.",
+    wizardQ5:"¿Cómo te sientes normalmente al entrenar?",
+    wizardQ5Desc:"Este será tu nivel de fatiga por defecto. Podrás ajustarlo cada día en la pantalla principal.",
     wizardSkip:"Saltar por ahora",wizardNext:"Siguiente →",wizardBack:"← Atrás",
     wizardFinish:"✨ Configurar mi app",
     wizardSummaryTitle:"✨ ¡Tu perfil está listo!",
-    wizardSummaryDesc:"Hemos pre-configurado la app con tu equipamiento ideal, tipo de rutina y volumen de series. Puedes modificarlo cuando quieras.",
+    wizardSummaryDesc:"Hemos pre-configurado la app con tu equipamiento real, tipo de rutina y volumen de series. Recuerda que puedes ajustar la fatiga cada día.",
     wizardStart:"🚀 Empezar a entrenar",
     profileLabel:"Tu perfil configurado",btnEditProfile:"⚙️ Editar perfil",
-    sumSport:"Deporte",sumDays:"Días/semana",sumTime:"Tiempo/sesión",sumGoal:"Objetivo",
+    sumSport:"Deporte",sumDays:"Días/semana",sumTime:"Tiempo/sesión",sumGoal:"Objetivo",sumEquip:"Equipamiento",sumFatigue:"Fatiga habitual",
     profileConfigured:"✅ Perfil configurado"
   },
   en: {
     title:"Cuidate !!",sub:"Your workout app!",langBtn:"🇪🇸 ES",
     tabCreate:"➕ Create",tabBrowse:"🔍 Exercises",tabSession:"💪 Session",tabLibrary:"📚 Library",tabHistory:"📅 History",tabLegal:"⚖️ Legal",
     loading:"Loading exercise database…",
+    // FATIGUE
+    fatigueSection:"⚡ How do you feel today?",
+    fatigueLabel:"Adjust the session to your energy level",
+    fatFresh:"Fresh",fatFreshDesc:"Rested, full power",
+    fatNormal:"Normal",fatNormalDesc:"Standard day",
+    fatTired:"Tired",fatTiredDesc:"Low energy",
+    fatExhausted:"Exhausted",fatExhaustedDesc:"Mobility only",
+    fatHintFresh:"🟢 Go for it! High volume, technical exercises. Make the most of a good day.",
+    fatHintNormal:"🟡 Standard session. Normal volume and intensity.",
+    fatHintTired:"🟠 Adapted session. Fewer sets, focus on technique. Listen to your body.",
+    fatHintExhausted:"🔴 Mobility and active recovery only. Stretching and gentle work. Tomorrow is another day!",
     sec1:"1 · Your experience level",sec1Label:"How long have you been training?",
     optBeginner:"🌱 Beginner · Less than 6 months",optIntermediate:"💪 Intermediate · 6 months - 2 years",
     optAdvanced:"🔥 Advanced · 2 - 5 years",optExpert:"⚡ Expert · More than 5 years",
@@ -640,7 +756,7 @@ const i18n = {
     equipEZ:"🌀 EZ Bar",equipMedBall:"💊 Medicine ball",equipFoamRoll:"🧘 Foam roll",
     equipPullUpBar:"🏗️ Pull-up bar",equipBattleRope:"🪢 Battle rope",
     equipOther:"➕ Other",
-    routineTypes:{fullbody:'Full Body',upper:'Upper Body',lower:'Lower Body',push:'Push',pull:'Pull',custom:'Specific Muscle'},
+    routineTypes:{fullbody:'Full Body',upper:'Upper Body',lower:'Lower Body',push:'Push',pull:'Pull',custom:'Specific Muscle',recovery:'🌿 Recovery'},
     expLevels:{beginner:'🌱 Beginner',intermediate:'💪 Intermediate',advanced:'🔥 Advanced',expert:'⚡ Expert'},
     diffLabels:{beginner:'🌱 Easy',intermediate:'💪 Medium',advanced:'🔥 Hard',expert:'⚡ Expert'},
     exerciseActions:{up:'Move Up',down:'Move Down',replace:'Replace',remove:'Remove'},
@@ -650,9 +766,8 @@ const i18n = {
     detailExercises:'Exercises',detailSets:'Sets',detailVolume:'Volume (kg)',
     alreadyInRoutine:"⚠️ Already in your routine",customRoutine:"Custom routine",
     pdfGenerating:"Generating PDF...",pdfDone:"✅ PDF downloaded",
-    // WIZARD
     wizardWelcomeTitle:"👋 Welcome to Cuidate !!",
-    wizardWelcomeSub:"Let's personalize your experience in 3 quick steps",
+    wizardWelcomeSub:"Let's personalize your experience in 5 quick steps",
     wizardQ1:"What's your main sport?",
     sportCycling:"Cycling",sportCyclingDesc:"Road, MTB, gravel, track",
     sportRunning:"Running",sportRunningDesc:"Trail, road, ultra",
@@ -674,27 +789,148 @@ const i18n = {
     goalWeight:"Lose weight",goalWeightDesc:"Burn calories, tone up",
     goalMuscle:"Gain muscle",goalMuscleDesc:"Hypertrophy, max strength",
     goalBalance:"General balance",goalBalanceDesc:"Overall health, wellness, fitness",
+    wizardQ4:"What equipment do you have available?",
+    wizardQ4Desc:"Select the equipment you can train with. We recommend some based on your sport, but you can adjust.",
+    equipRecommended:"Recommended equipment for your profile",
+    equipRecommendNote:"We've pre-selected the ideal equipment. Those marked with ⭐ are the most recommended.",
+    wizardQ5:"How do you usually feel when training?",
+    wizardQ5Desc:"This will be your default fatigue level. You can adjust it every day on the main screen.",
     wizardSkip:"Skip for now",wizardNext:"Next →",wizardBack:"← Back",
     wizardFinish:"✨ Configure my app",
     wizardSummaryTitle:"✨ Your profile is ready!",
-    wizardSummaryDesc:"We've pre-configured the app with your ideal equipment, routine type and set volume. You can change it anytime.",
+    wizardSummaryDesc:"We've pre-configured the app with your real equipment, routine type and set volume. Remember you can adjust fatigue every day.",
     wizardStart:"🚀 Start training",
     profileLabel:"Your configured profile",btnEditProfile:"⚙️ Edit profile",
-    sumSport:"Sport",sumDays:"Days/week",sumTime:"Time/session",sumGoal:"Goal",
+    sumSport:"Sport",sumDays:"Days/week",sumTime:"Time/session",sumGoal:"Goal",sumEquip:"Equipment",sumFatigue:"Usual fatigue",
     profileConfigured:"✅ Profile configured"
   }
 };
 
 let currentLang = localStorage.getItem('viferor_lang') || 'es';
+let currentFatigue = 'normal'; // fatiga actual del día
+
+// ============================================
+// FATIGA
+// ============================================
+function initFatigueSelector() {
+  // Selector diario
+  document.querySelectorAll('#fatigueSelector .fatigue-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('#fatigueSelector .fatigue-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      currentFatigue = opt.dataset.value;
+      updateFatigueHint();
+    });
+  });
+  
+  // Selector del wizard
+  document.querySelectorAll('#wizardFatigueSelector .fatigue-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('#wizardFatigueSelector .fatigue-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      wizardState.fatigue = opt.dataset.value;
+    });
+  });
+  
+  // Aplicar fatiga del perfil si existe
+  const profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null');
+  if (profile && profile.fatigue) {
+    currentFatigue = profile.fatigue;
+    document.querySelectorAll('#fatigueSelector .fatigue-option').forEach(o => {
+      o.classList.toggle('selected', o.dataset.value === currentFatigue);
+    });
+  }
+  
+  updateFatigueHint();
+}
+
+function updateFatigueHint() {
+  const hint = document.getElementById('fatigueHint');
+  const t = i18n[currentLang];
+  const hints = {
+    fresh: t.fatHintFresh,
+    normal: t.fatHintNormal,
+    tired: t.fatHintTired,
+    exhausted: t.fatHintExhausted
+  };
+  hint.innerHTML = hints[currentFatigue] || t.fatHintNormal;
+  
+  // Cambiar color del borde izquierdo según fatiga
+  const colors = {fresh:'var(--green)',normal:'var(--accent)',tired:'var(--orange)',exhausted:'var(--red)'};
+  hint.style.borderLeftColor = colors[currentFatigue] || 'var(--accent)';
+}
+
+// Ajusta la rutina según la fatiga
+function adjustForFatigue(routine) {
+  if (currentFatigue === 'fresh') {
+    // Volumen alto, ejercicios complejos permitidos
+    return routine;
+  } else if (currentFatigue === 'normal') {
+    // Estándar, sin cambios
+    return routine;
+  } else if (currentFatigue === 'tired') {
+    // Reducir series, priorizar ejercicios básicos
+    routine.exercises = routine.exercises.map(ex => {
+      // Reducir series a 2
+      ex.sets = ex.sets.slice(0, 2);
+      return ex;
+    });
+    // Eliminar ejercicios muy complejos si los hay
+    routine.exercises = routine.exercises.filter(ex => {
+      const diff = ex.difficulty || classifyDifficulty(ex);
+      return diff !== 'expert';
+    });
+    routine.level = 2;
+    return routine;
+  } else if (currentFatigue === 'exhausted') {
+    // Solo movilidad y recuperación
+    routine.routineType = 'recovery';
+    routine.exercises = routine.exercises.filter(ex => {
+      const name = (ex.name || '').toLowerCase();
+      const isRecovery = ['stretch','mobility','foam','roll','plank','bridge','cat','cow','child pose','hip flexor','piriformis'].some(k => name.includes(k));
+      const isEasy = classifyDifficulty(ex) === 'beginner';
+      return isRecovery || isEasy;
+    }).slice(0, 5);
+    routine.exercises = routine.exercises.map(ex => {
+      ex.sets = [{n:1,kg:'',reps:'',done:false}];
+      return ex;
+    });
+    routine.level = 1;
+    return routine;
+  }
+  return routine;
+}
 
 // ============================================
 // WIZARD
 // ============================================
-const wizardState = { sport: null, days: null, time: null, goal: null };
+const wizardState = { sport: null, days: null, time: null, goal: null, equipment: [], fatigue: 'normal' };
 
 function openWizard() {
   document.getElementById('wizardModal').classList.add('show');
   showWizardStep(1);
+  
+  // Restaurar estado si existe perfil
+  const profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null');
+  if (profile) {
+    wizardState.sport = profile.sport;
+    wizardState.days = profile.days;
+    wizardState.time = profile.time;
+    wizardState.goal = profile.goal;
+    wizardState.equipment = profile.equipment || [];
+    wizardState.fatigue = profile.fatigue || 'normal';
+    
+    // Marcar opciones seleccionadas
+    if (wizardState.sport) selectOption('wizardSportOptions', wizardState.sport);
+    if (wizardState.days) selectOption('wizardDaysOptions', wizardState.days);
+    if (wizardState.time) selectOption('wizardTimeOptions', wizardState.time);
+    if (wizardState.goal) selectOption('wizardGoalOptions', wizardState.goal);
+    
+    // Marcar fatiga
+    document.querySelectorAll('#wizardFatigueSelector .fatigue-option').forEach(o => {
+      o.classList.toggle('selected', o.dataset.value === wizardState.fatigue);
+    });
+  }
 }
 
 function closeWizard() {
@@ -710,6 +946,8 @@ function showWizardStep(step) {
     if (s === step) d.classList.add('active');
     else if (s < step) d.classList.add('done');
   });
+  
+  if (step === 4) generateWizardEquipGrid();
 }
 
 function selectOption(containerId, value) {
@@ -719,66 +957,70 @@ function selectOption(containerId, value) {
   });
 }
 
-function getSelectedOption(containerId) {
-  const selected = document.querySelector(`#${containerId} .wizard-option.selected`);
-  return selected ? selected.dataset.value : null;
+function getRecommendedEquip(sport, goal) {
+  const base = ['body weight'];
+  const sportEquip = {
+    'cycling': ['band','stability ball','foam roll','kettlebell','dumbbell','pull-up bar'],
+    'running': ['band','stability ball','foam roll','pull-up bar','dumbbell'],
+    'fitness': ['dumbbell','barbell','kettlebell','cable','leverage machine','band','stability ball'],
+    'other': ['dumbbell','kettlebell','band','body weight']
+  };
+  const goalAdjustments = {
+    'performance': ['kettlebell','dumbbell'],
+    'injury': ['band','foam roll','stability ball'],
+    'weight': ['kettlebell','battle rope','dumbbell'],
+    'muscle': ['barbell','dumbbell','leverage machine'],
+    'balance': ['band','stability ball','body weight']
+  };
+  let recommended = [...base];
+  if (sportEquip[sport]) recommended = recommended.concat(sportEquip[sport]);
+  if (goalAdjustments[goal]) recommended = recommended.concat(goalAdjustments[goal]);
+  return [...new Set(recommended)];
+}
+
+function generateWizardEquipGrid() {
+  const grid = document.getElementById('wizardEquipGrid');
+  const t = i18n[currentLang];
+  const recommended = getRecommendedEquip(wizardState.sport, wizardState.goal);
+  
+  grid.innerHTML = EQUIP_LIST.map(eq => {
+    const isChecked = recommended.includes(eq.key) || wizardState.equipment.includes(eq.key);
+    const label = t[EQUIP_MAP[eq.key]] || eq.label;
+    const isRecommended = recommended.includes(eq.key);
+    return `<label style="${isRecommended ? 'border-color:var(--orange);' : ''}">
+      <input type="checkbox" value="${eq.key}" ${isChecked ? 'checked' : ''}>
+      <span class="dot"></span>
+      <span>${label}${isRecommended ? ' ⭐' : ''}</span>
+    </label>`;
+  }).join('');
 }
 
 function applyProfileToForm() {
   const profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null');
   if (!profile) return;
   
-  // Mapear deporte a tipo de rutina
-  const sportToRoutine = {
-    'cycling': 'lower',
-    'running': 'lower',
-    'fitness': 'fullbody',
-    'other': 'fullbody'
-  };
+  const sportToRoutine = {'cycling':'lower','running':'lower','fitness':'fullbody','other':'fullbody'};
+  const goalToStyle = {'performance':'all','injury':'iso','weight':'all','muscle':'all','balance':'mix'};
+  const daysToLevel = {'1':'4','2':'3','3':'3','4':'2'};
   
-  // Mapear objetivo a estilo
-  const goalToStyle = {
-    'performance': 'all',
-    'injury': 'iso',
-    'weight': 'all',
-    'muscle': 'all',
-    'balance': 'mix'
-  };
+  if (sportToRoutine[profile.sport]) document.getElementById('routineType').value = sportToRoutine[profile.sport];
+  if (goalToStyle[profile.goal]) document.getElementById('exerciseStyle').value = goalToStyle[profile.goal];
+  if (daysToLevel[profile.days]) document.getElementById('level').value = daysToLevel[profile.days];
   
-  // Mapear días a volumen
-  const daysToLevel = {
-    '1': '4',
-    '2': '3',
-    '3': '3',
-    '4': '2'
-  };
-  
-  // Mapear deporte a equipamiento recomendado
-  const sportToEquip = {
-    'cycling': ['body weight','dumbbell','kettlebell','band','stability ball','foam roll','pull-up bar'],
-    'running': ['body weight','band','stability ball','foam roll','pull-up bar'],
-    'fitness': ['body weight','dumbbell','barbell','kettlebell','cable','leverage machine'],
-    'other': ['body weight','dumbbell','barbell','kettlebell','band']
-  };
-  
-  // Aplicar valores
-  if (sportToRoutine[profile.sport]) {
-    document.getElementById('routineType').value = sportToRoutine[profile.sport];
-  }
-  if (goalToStyle[profile.goal]) {
-    document.getElementById('exerciseStyle').value = goalToStyle[profile.goal];
-  }
-  if (daysToLevel[profile.days]) {
-    document.getElementById('level').value = daysToLevel[profile.days];
-  }
-  
-  // Aplicar equipamiento
-  const recommendedEquip = sportToEquip[profile.sport] || ['body weight','dumbbell','barbell'];
+  const realEquip = profile.equipment || [];
   document.querySelectorAll('#equipGrid input').forEach(input => {
-    input.checked = recommendedEquip.includes(input.value);
+    input.checked = realEquip.includes(input.value);
   });
   
-  // Mostrar banner de perfil
+  // Aplicar fatiga por defecto
+  if (profile.fatigue) {
+    currentFatigue = profile.fatigue;
+    document.querySelectorAll('#fatigueSelector .fatigue-option').forEach(o => {
+      o.classList.toggle('selected', o.dataset.value === currentFatigue);
+    });
+    updateFatigueHint();
+  }
+  
   updateProfileBanner(profile);
 }
 
@@ -786,134 +1028,91 @@ function updateProfileBanner(profile) {
   const banner = document.getElementById('profileBanner');
   const summary = document.getElementById('profileSummary');
   const t = i18n[currentLang];
-  
-  const sportNames = {
-    cycling: currentLang === 'es' ? '🚴 Ciclismo' : '🚴 Cycling',
-    running: currentLang === 'es' ? '🏃 Running' : '🏃 Running',
-    fitness: currentLang === 'es' ? '💪 Fitness' : '💪 Fitness',
-    other: currentLang === 'es' ? '🎯 Otro' : '🎯 Other'
-  };
-  
-  const goalNames = {
-    performance: currentLang === 'es' ? '🚀 Rendimiento' : '🚀 Performance',
-    injury: currentLang === 'es' ? '🛡️ Prevención' : '🛡️ Injury prevention',
-    weight: currentLang === 'es' ? '⚖️ Peso' : '⚖️ Weight loss',
-    muscle: currentLang === 'es' ? '💪 Músculo' : '💪 Muscle',
-    balance: currentLang === 'es' ? '🧘 Equilibrio' : '🧘 Balance'
-  };
-  
-  summary.innerHTML = `${sportNames[profile.sport] || profile.sport} · ${profile.days} ${currentLang==='es'?'días':'days'}/sem · ${profile.time}min · ${goalNames[profile.goal] || profile.goal}`;
+  const sportNames = {cycling:'🚴 '+(currentLang==='es'?'Ciclismo':'Cycling'),running:'🏃 Running',fitness:'💪 Fitness',other:'🎯 '+(currentLang==='es'?'Otro':'Other')};
+  const goalNames = {performance:'🚀 '+(currentLang==='es'?'Rendimiento':'Performance'),injury:'🛡️ '+(currentLang==='es'?'Prevención':'Prevention'),weight:'⚖️ '+(currentLang==='es'?'Peso':'Weight'),muscle:'💪 '+(currentLang==='es'?'Músculo':'Muscle'),balance:'🧘 '+(currentLang==='es'?'Equilibrio':'Balance')};
+  const fatigueNames = {fresh:'🟢 '+(currentLang==='es'?'Fresco':'Fresh'),normal:'🟡 '+(currentLang==='es'?'Normal':'Normal'),tired:'🟠 '+(currentLang==='es'?'Cansado':'Tired'),exhausted:'🔴 '+(currentLang==='es'?'Agotado':'Exhausted')};
+  const equipCount = profile.equipment ? profile.equipment.length : 0;
+  summary.innerHTML = `${sportNames[profile.sport]||profile.sport} · ${profile.days}${currentLang==='es'?'d':'d'}/sem · ${profile.time}min · ${goalNames[profile.goal]||profile.goal} · ${fatigueNames[profile.fatigue]||fatigueNames.normal} · ${equipCount} ${currentLang==='es'?'equipamientos':'equipment'}`;
   banner.style.display = 'block';
 }
 
 function showWizardSummary() {
   const t = i18n[currentLang];
   const summary = document.getElementById('wizardSummary');
-  
-  const sportNames = {
-    cycling: t.sportCycling, running: t.sportRunning,
-    fitness: t.sportFitness, other: t.sportOther
-  };
-  const goalNames = {
-    performance: t.goalPerformance, injury: t.goalInjury,
-    weight: t.goalWeight, muscle: t.goalMuscle, balance: t.goalBalance
-  };
-  
+  const sportNames = {cycling:t.sportCycling,running:t.sportRunning,fitness:t.sportFitness,other:t.sportOther};
+  const goalNames = {performance:t.goalPerformance,injury:t.goalInjury,weight:t.goalWeight,muscle:t.goalMuscle,balance:t.goalBalance};
+  const fatigueNames = {fresh:t.fatFresh,normal:t.fatNormal,tired:t.fatTired,exhausted:t.fatExhausted};
+  const equipCount = wizardState.equipment.length;
   summary.innerHTML = `
     <h4>${t.wizardSummaryTitle}</h4>
-    <div class="sum-row"><span class="sum-label">${t.sumSport}</span><span class="sum-value">${sportNames[wizardState.sport] || wizardState.sport}</span></div>
+    <div class="sum-row"><span class="sum-label">${t.sumSport}</span><span class="sum-value">${sportNames[wizardState.sport]||wizardState.sport}</span></div>
     <div class="sum-row"><span class="sum-label">${t.sumDays}</span><span class="sum-value">${wizardState.days}</span></div>
     <div class="sum-row"><span class="sum-label">${t.sumTime}</span><span class="sum-value">${wizardState.time} min</span></div>
-    <div class="sum-row"><span class="sum-label">${t.sumGoal}</span><span class="sum-value">${goalNames[wizardState.goal] || wizardState.goal}</span></div>
+    <div class="sum-row"><span class="sum-label">${t.sumGoal}</span><span class="sum-value">${goalNames[wizardState.goal]||wizardState.goal}</span></div>
+    <div class="sum-row"><span class="sum-label">${t.sumEquip}</span><span class="sum-value">${equipCount} ${currentLang==='es'?'tipos':'types'}</span></div>
+    <div class="sum-row"><span class="sum-label">${t.sumFatigue}</span><span class="sum-value">${fatigueNames[wizardState.fatigue]||fatigueNames.normal}</span></div>
   `;
 }
 
 function finishWizard() {
+  const selectedEquip = [];
+  document.querySelectorAll('#wizardEquipGrid input:checked').forEach(input => selectedEquip.push(input.value));
+  if (selectedEquip.length === 0) {
+    showToast(currentLang === 'es' ? '⚠️ Selecciona al menos un equipamiento' : '⚠️ Select at least one equipment');
+    return;
+  }
+  wizardState.equipment = selectedEquip;
   const profile = {
-    sport: wizardState.sport,
-    days: wizardState.days,
-    time: wizardState.time,
-    goal: wizardState.goal,
+    sport: wizardState.sport, days: wizardState.days, time: wizardState.time,
+    goal: wizardState.goal, equipment: wizardState.equipment,
+    fatigue: wizardState.fatigue || 'normal',
     date: new Date().toISOString()
   };
   localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
   showWizardSummary();
-  showWizardStep(4);
+  showWizardStep(6);
 }
 
 function initWizard() {
-  // Opciones de deporte
   document.querySelectorAll('#wizardSportOptions .wizard-option').forEach(opt => {
-    opt.addEventListener('click', () => {
-      selectOption('wizardSportOptions', opt.dataset.value);
-      wizardState.sport = opt.dataset.value;
-    });
+    opt.addEventListener('click', () => { selectOption('wizardSportOptions', opt.dataset.value); wizardState.sport = opt.dataset.value; });
   });
-  
-  // Opciones de días
   document.querySelectorAll('#wizardDaysOptions .wizard-option').forEach(opt => {
-    opt.addEventListener('click', () => {
-      selectOption('wizardDaysOptions', opt.dataset.value);
-      wizardState.days = opt.dataset.value;
-    });
+    opt.addEventListener('click', () => { selectOption('wizardDaysOptions', opt.dataset.value); wizardState.days = opt.dataset.value; });
   });
-  
-  // Opciones de tiempo
   document.querySelectorAll('#wizardTimeOptions .wizard-option').forEach(opt => {
-    opt.addEventListener('click', () => {
-      selectOption('wizardTimeOptions', opt.dataset.value);
-      wizardState.time = opt.dataset.value;
-    });
+    opt.addEventListener('click', () => { selectOption('wizardTimeOptions', opt.dataset.value); wizardState.time = opt.dataset.value; });
   });
-  
-  // Opciones de objetivo
   document.querySelectorAll('#wizardGoalOptions .wizard-option').forEach(opt => {
-    opt.addEventListener('click', () => {
-      selectOption('wizardGoalOptions', opt.dataset.value);
-      wizardState.goal = opt.dataset.value;
-    });
+    opt.addEventListener('click', () => { selectOption('wizardGoalOptions', opt.dataset.value); wizardState.goal = opt.dataset.value; });
   });
   
-  // Navegación
   document.getElementById('wizardSkip').addEventListener('click', closeWizard);
   document.getElementById('wizardNext1').addEventListener('click', () => {
-    if (!wizardState.sport) {
-      showToast(currentLang === 'es' ? '⚠️ Selecciona tu deporte' : '⚠️ Select your sport');
-      return;
-    }
+    if (!wizardState.sport) { showToast(currentLang === 'es' ? '⚠️ Selecciona tu deporte' : '⚠️ Select your sport'); return; }
     showWizardStep(2);
   });
   document.getElementById('wizardBack2').addEventListener('click', () => showWizardStep(1));
   document.getElementById('wizardNext2').addEventListener('click', () => {
-    if (!wizardState.days || !wizardState.time) {
-      showToast(currentLang === 'es' ? '⚠️ Completa ambos campos' : '⚠️ Complete both fields');
-      return;
-    }
+    if (!wizardState.days || !wizardState.time) { showToast(currentLang === 'es' ? '⚠️ Completa ambos campos' : '⚠️ Complete both fields'); return; }
     showWizardStep(3);
   });
   document.getElementById('wizardBack3').addEventListener('click', () => showWizardStep(2));
-  document.getElementById('wizardFinish').addEventListener('click', () => {
-    if (!wizardState.goal) {
-      showToast(currentLang === 'es' ? '⚠️ Selecciona tu objetivo' : '⚠️ Select your goal');
-      return;
-    }
-    finishWizard();
+  document.getElementById('wizardNext3').addEventListener('click', () => {
+    if (!wizardState.goal) { showToast(currentLang === 'es' ? '⚠️ Selecciona tu objetivo' : '⚠️ Select your goal'); return; }
+    showWizardStep(4);
   });
+  document.getElementById('wizardBack4').addEventListener('click', () => showWizardStep(3));
+  document.getElementById('wizardNext4').addEventListener('click', () => showWizardStep(5));
+  document.getElementById('wizardBack5').addEventListener('click', () => showWizardStep(4));
+  document.getElementById('wizardFinish').addEventListener('click', finishWizard);
   document.getElementById('wizardStart').addEventListener('click', () => {
     closeWizard();
     applyProfileToForm();
     showToast(i18n[currentLang].profileConfigured);
   });
-  
-  // Botón editar perfil
-  document.getElementById('btnEditProfile').addEventListener('click', () => {
-    openWizard();
-  });
-  
-  // Botón ajustes
-  document.getElementById('btnSettings').addEventListener('click', () => {
-    openWizard();
-  });
+  document.getElementById('btnEditProfile').addEventListener('click', openWizard);
+  document.getElementById('btnSettings').addEventListener('click', openWizard);
 }
 
 // ============================================
@@ -941,20 +1140,16 @@ async function loadDatabase() {
       renderHistory();
       renderLibrary();
       bindEvents();
-      
-      // Aplicar perfil si existe
       const profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null');
       if (profile) {
-        wizardState.sport = profile.sport;
-        wizardState.days = profile.days;
-        wizardState.time = profile.time;
-        wizardState.goal = profile.goal;
+        wizardState.sport = profile.sport; wizardState.days = profile.days;
+        wizardState.time = profile.time; wizardState.goal = profile.goal;
+        wizardState.equipment = profile.equipment || [];
+        wizardState.fatigue = profile.fatigue || 'normal';
         applyProfileToForm();
       } else {
-        // Primera visita: mostrar wizard
         setTimeout(openWizard, 500);
       }
-      
       return true;
     } catch (e) {
       console.warn('URL ' + (i+1) + ' failed:', e.message);
@@ -969,47 +1164,32 @@ function updateLanguage(lang) {
   currentLang = lang;
   localStorage.setItem('viferor_lang', lang);
   const t = i18n[lang];
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (t[key]) el.innerHTML = t[key];
-  });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.getAttribute('data-i18n-placeholder');
-    if (t[key]) el.placeholder = t[key];
-  });
+  document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (t[key]) el.innerHTML = t[key]; });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { const key = el.getAttribute('data-i18n-placeholder'); if (t[key]) el.placeholder = t[key]; });
   ['experienceLevel','routineType','exerciseStyle','level','filterDiff'].forEach(updateSelect);
   const expSel = document.getElementById('experienceLevel');
   if (expSel) document.getElementById('levelHint').innerHTML = t['hint'+expSel.value.charAt(0).toUpperCase()+expSel.value.slice(1)] || t.hintIntermediate;
   document.querySelectorAll('#equipGrid label').forEach(lbl => {
     const input = lbl.querySelector('input');
     const span = lbl.querySelector('span:last-child');
-    if (input && span && EQUIP_MAP[input.value] && t[EQUIP_MAP[input.value]]) {
-      span.textContent = t[EQUIP_MAP[input.value]];
-    }
+    if (input && span && EQUIP_MAP[input.value] && t[EQUIP_MAP[input.value]]) span.textContent = t[EQUIP_MAP[input.value]];
   });
-  if (DB.length && document.getElementById('view-browse').classList.contains('active')) {
-    populateBrowseFilters();
-    renderBrowse();
-  }
+  if (DB.length && document.getElementById('view-browse').classList.contains('active')) { populateBrowseFilters(); renderBrowse(); }
   document.documentElement.lang = lang;
   document.title = t.title;
   if (currentSession) renderSessionView();
   if (document.getElementById('view-history').classList.contains('active')) renderHistory();
   if (document.getElementById('view-library').classList.contains('active')) renderLibrary();
-  
-  // Actualizar banner de perfil
   const profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null');
   if (profile) updateProfileBanner(profile);
+  updateFatigueHint();
 }
 
 function updateSelect(id) {
   const sel = document.getElementById(id);
   if (!sel) return;
   const t = i18n[currentLang];
-  Array.from(sel.options).forEach(opt => {
-    const key = opt.getAttribute('data-i18n');
-    if (key && t[key]) opt.textContent = t[key];
-  });
+  Array.from(sel.options).forEach(opt => { const key = opt.getAttribute('data-i18n'); if (key && t[key]) opt.textContent = t[key]; });
 }
 
 function showToast(msg) {
@@ -1044,26 +1224,12 @@ function filterByLevel(exercises, level) {
 }
 
 function compressRoutine(session) {
-  const slim = {
-    v: 1, rt: session.routineType, lv: session.level,
-    el: session.experienceLevel, eq: session.equipment,
-    nm: session.name || '',
-    ex: session.exercises.map(e => ({
-      id: e.id, name: e.name, category: e.category,
-      equipment: e.equipment, target: e.target, difficulty: e.difficulty
-    }))
-  };
+  const slim = { v: 1, rt: session.routineType, lv: session.level, el: session.experienceLevel, eq: session.equipment, nm: session.name || '', ex: session.exercises.map(e => ({ id: e.id, name: e.name, category: e.category, equipment: e.equipment, target: e.target, difficulty: e.difficulty })) };
   return btoa(unescape(encodeURIComponent(JSON.stringify(slim))));
 }
 
-function decompressRoutine(str) {
-  try { return JSON.parse(decodeURIComponent(escape(atob(str)))); }
-  catch (e) { return null; }
-}
-
-function generateShareLink(session) {
-  return window.location.href.split('#')[0].split('?')[0] + '#r=' + compressRoutine(session);
-}
+function decompressRoutine(str) { try { return JSON.parse(decodeURIComponent(escape(atob(str)))); } catch (e) { return null; } }
+function generateShareLink(session) { return window.location.href.split('#')[0].split('?')[0] + '#r=' + compressRoutine(session); }
 
 function saveToLibrary(session) {
   const name = prompt(currentLang==='es'?'Nombre para esta rutina:':'Name for this routine:', session.name || (currentLang==='es'?'Mi rutina':'My routine'));
@@ -1080,66 +1246,35 @@ function loadFromLibrary(data) {
   if (!slim) { alert(i18n[currentLang].invalidFile); return; }
   const exercises = slim.ex.map(s => {
     const full = DB.find(e => e.id === s.id) || s;
-    return {
-      ...full, name: s.name, category: s.category, equipment: s.equipment, target: s.target,
-      difficulty: s.difficulty || classifyDifficulty(full),
-      sets: Array.from({length: slim.lv}, (_,i) => ({n:i+1,kg:'',reps:'',done:false}))
-    };
+    return { ...full, name: s.name, category: s.category, equipment: s.equipment, target: s.target, difficulty: s.difficulty || classifyDifficulty(full), sets: Array.from({length: slim.lv}, (_,i) => ({n:i+1,kg:'',reps:'',done:false})) };
   });
-  currentSession = {
-    id: Date.now(), date: new Date().toISOString(),
-    routineType: slim.rt, level: slim.lv,
-    experienceLevel: slim.el || 'intermediate',
-    equipment: slim.eq, name: slim.nm || '',
-    exercises: exercises, notes: ''
-  };
-  renderSessionView();
-  showView('session');
-  showToast(i18n[currentLang].routineLoaded);
+  currentSession = { id: Date.now(), date: new Date().toISOString(), routineType: slim.rt, level: slim.lv, experienceLevel: slim.el || 'intermediate', equipment: slim.eq, name: slim.nm || '', exercises: exercises, notes: '' };
+  renderSessionView(); showView('session'); showToast(i18n[currentLang].routineLoaded);
 }
 
 function exportJSON(session) {
   const blob = new Blob([JSON.stringify({version: 1, exported: new Date().toISOString(), routine: session}, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `routine-cuidate-${Date.now()}.json`;
-  a.click();
+  const a = document.createElement('a'); a.href = url; a.download = `routine-cuidate-${Date.now()}.json`; a.click();
   URL.revokeObjectURL(url);
   showToast(i18n[currentLang].fileDownloaded);
 }
 
 function importJSONFile(file) {
   const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const data = JSON.parse(e.target.result);
-      if (data.routine) loadFromRoutine(data.routine);
-      else alert(i18n[currentLang].invalidFile);
-    } catch (err) { alert(i18n[currentLang].readError); }
-  };
+  reader.onload = e => { try { const data = JSON.parse(e.target.result); if (data.routine) loadFromRoutine(data.routine); else alert(i18n[currentLang].invalidFile); } catch (err) { alert(i18n[currentLang].readError); } };
   reader.readAsText(file);
 }
 
 function loadFromRoutine(routine) {
-  currentSession = {
-    ...routine, id: Date.now(),
-    exercises: routine.exercises.map(ex => ({
-      ...ex, sets: Array.from({length: routine.level}, (_,i) => ({n:i+1,kg:'',reps:'',done:false}))
-    }))
-  };
-  renderSessionView();
-  showView('session');
-  showToast(i18n[currentLang].routineImported);
+  currentSession = { ...routine, id: Date.now(), exercises: routine.exercises.map(ex => ({ ...ex, sets: Array.from({length: routine.level}, (_,i) => ({n:i+1,kg:'',reps:'',done:false})) })) };
+  renderSessionView(); showView('session'); showToast(i18n[currentLang].routineImported);
 }
 
 function checkURLForSharedRoutine() {
   const hash = window.location.hash;
   if (hash.startsWith('#r=')) {
-    if (confirm(i18n[currentLang].sharedRoutineDetected)) {
-      loadFromLibrary(hash.substring(3));
-      history.replaceState(null, '', window.location.pathname);
-    }
+    if (confirm(i18n[currentLang].sharedRoutineDetected)) { loadFromLibrary(hash.substring(3)); history.replaceState(null, '', window.location.pathname); }
   }
 }
 
@@ -1160,6 +1295,7 @@ function checkURLForSharedRoutine() {
   });
   updateLanguage(currentLang);
   initWizard();
+  initFatigueSelector();
   await loadDatabase();
 })();
 
@@ -1192,7 +1328,6 @@ function populateBrowseFilters() {
   const equipSel = document.getElementById('filterEquip');
   const cats = [...new Set(DB.map(e => e.category))].sort();
   const t = i18n[currentLang];
-  
   const catT = {
     'chest': currentLang === 'es' ? 'Pecho' : 'Chest',
     'back': currentLang === 'es' ? 'Espalda' : 'Back',
@@ -1205,54 +1340,23 @@ function populateBrowseFilters() {
     'cardio': 'Cardio',
     'neck': currentLang === 'es' ? 'Cuello' : 'Neck'
   };
-  
-  catSel.innerHTML = `<option value="">${t.allCategories}</option>` +
-    cats.map(c => `<option value="${c}">${catT[c] || c}</option>`).join('');
-  
+  catSel.innerHTML = `<option value="">${t.allCategories}</option>` + cats.map(c => `<option value="${c}">${catT[c] || c}</option>`).join('');
   const uniqueEquips = [];
   const seen = new Set();
-  EQUIP_LIST.forEach(eq => {
-    if (!seen.has(eq.key)) {
-      seen.add(eq.key);
-      uniqueEquips.push(eq);
-    }
-  });
-  
+  EQUIP_LIST.forEach(eq => { if (!seen.has(eq.key)) { seen.add(eq.key); uniqueEquips.push(eq); } });
   const eqT = {
-    'body weight': t.equipBodyweight,
-    'dumbbell': t.equipDumbbell,
-    'barbell': t.equipBarbell,
-    'kettlebell': t.equipKettlebell,
-    'cable': t.equipCable,
-    'leverage machine': t.equipMachine,
-    'smith machine': t.equipSmith,
-    'band': t.equipBand,
-    'stability ball': t.equipBall,
-    'ez barbell': t.equipEZ,
-    'medicine ball': t.equipMedBall,
-    'foam roll': t.equipFoamRoll,
-    'pull-up bar': t.equipPullUpBar,
-    'battle rope': t.equipBattleRope,
-    'other': t.equipOther
+    'body weight': t.equipBodyweight, 'dumbbell': t.equipDumbbell, 'barbell': t.equipBarbell,
+    'kettlebell': t.equipKettlebell, 'cable': t.equipCable, 'leverage machine': t.equipMachine,
+    'smith machine': t.equipSmith, 'band': t.equipBand, 'stability ball': t.equipBall,
+    'ez barbell': t.equipEZ, 'medicine ball': t.equipMedBall, 'foam roll': t.equipFoamRoll,
+    'pull-up bar': t.equipPullUpBar, 'battle rope': t.equipBattleRope, 'other': t.equipOther
   };
-  
-  equipSel.innerHTML = `<option value="">${t.allEquipment}</option>` +
-    uniqueEquips.map(eq => `<option value="${eq.key}">${eqT[eq.key] || eq.key}</option>`).join('');
+  equipSel.innerHTML = `<option value="">${t.allEquipment}</option>` + uniqueEquips.map(eq => `<option value="${eq.key}">${eqT[eq.key] || eq.key}</option>`).join('');
 }
 
 function formatCategory(c) {
-  const map = {
-    'chest':'Pecho','back':'Espalda','shoulders':'Hombros',
-    'upper arms':'Brazos','lower arms':'Antebrazos',
-    'upper legs':'Muslos','lower legs':'Pantorrillas',
-    'waist':'Core/Abdomen','cardio':'Cardio','neck':'Cuello'
-  };
-  const mapEn = {
-    'chest':'Chest','back':'Back','shoulders':'Shoulders',
-    'upper arms':'Arms','lower arms':'Forearms',
-    'upper legs':'Legs','lower legs':'Calves',
-    'waist':'Core/Abs','cardio':'Cardio','neck':'Neck'
-  };
+  const map = {'chest':'Pecho','back':'Espalda','shoulders':'Hombros','upper arms':'Brazos','lower arms':'Antebrazos','upper legs':'Muslos','lower legs':'Pantorrillas','waist':'Core/Abdomen','cardio':'Cardio','neck':'Cuello'};
+  const mapEn = {'chest':'Chest','back':'Back','shoulders':'Shoulders','upper arms':'Arms','lower arms':'Forearms','upper legs':'Legs','lower legs':'Calves','waist':'Core/Abs','cardio':'Cardio','neck':'Neck'};
   return currentLang === 'en' ? (mapEn[c] || c) : (map[c] || c);
 }
 
@@ -1265,15 +1369,9 @@ function formatEquip(eq) {
 
 function filterByEquipment(exercises, equipment) {
   if (!equipment) return exercises;
-  if (equipment === 'pull-up bar') {
-    return exercises.filter(ex => ex.equipment === 'body weight' && isPullUpExercise(ex));
-  }
-  if (equipment === 'band') {
-    return exercises.filter(ex => ex.equipment === 'band' || ex.equipment === 'bands');
-  }
-  if (equipment === 'stability ball') {
-    return exercises.filter(ex => ex.equipment === 'stability ball' || ex.equipment === 'exercise ball');
-  }
+  if (equipment === 'pull-up bar') return exercises.filter(ex => ex.equipment === 'body weight' && isPullUpExercise(ex));
+  if (equipment === 'band') return exercises.filter(ex => ex.equipment === 'band' || ex.equipment === 'bands');
+  if (equipment === 'stability ball') return exercises.filter(ex => ex.equipment === 'stability ball' || ex.equipment === 'exercise ball');
   return exercises.filter(ex => ex.equipment === equipment);
 }
 
@@ -1281,45 +1379,21 @@ function filterByEquipment(exercises, equipment) {
 // EVENTOS
 // ============================================
 function bindEvents() {
-  document.getElementById('langToggle').addEventListener('click', () => {
-    updateLanguage(currentLang === 'es' ? 'en' : 'es');
-  });
-  document.getElementById('btnDonateHeader').addEventListener('click', () => {
-    document.getElementById('donateModal').classList.add('show');
-  });
-  document.getElementById('donateModalClose').addEventListener('click', () => {
-    document.getElementById('donateModal').classList.remove('show');
-  });
-  document.getElementById('donateModal').addEventListener('click', e => {
-    if (e.target.id === 'donateModal') e.currentTarget.classList.remove('show');
-  });
-  document.getElementById('btnCopyBizumModal').addEventListener('click', () => {
-    navigator.clipboard.writeText('+34 638 00 05 05').then(() => showToast(i18n[currentLang].bizumCopied));
-  });
-  document.getElementById('routineType').addEventListener('change', function() {
-    document.getElementById('customGroupWrap').style.display = this.value === 'custom' ? 'block' : 'none';
-  });
+  document.getElementById('langToggle').addEventListener('click', () => updateLanguage(currentLang === 'es' ? 'en' : 'es'));
+  document.getElementById('btnDonateHeader').addEventListener('click', () => document.getElementById('donateModal').classList.add('show'));
+  document.getElementById('donateModalClose').addEventListener('click', () => document.getElementById('donateModal').classList.remove('show'));
+  document.getElementById('donateModal').addEventListener('click', e => { if (e.target.id === 'donateModal') e.currentTarget.classList.remove('show'); });
+  document.getElementById('btnCopyBizumModal').addEventListener('click', () => navigator.clipboard.writeText('+34 638 00 05 05').then(() => showToast(i18n[currentLang].bizumCopied)));
+  document.getElementById('routineType').addEventListener('change', function() { document.getElementById('customGroupWrap').style.display = this.value === 'custom' ? 'block' : 'none'; });
   document.getElementById('experienceLevel').addEventListener('change', function() {
     const hints = {beginner:'hintBeginner',intermediate:'hintIntermediate',advanced:'hintAdvanced',expert:'hintExpert'};
     document.getElementById('levelHint').innerHTML = i18n[currentLang][hints[this.value]];
   });
   document.getElementById('btnGenerate').addEventListener('click', generateRoutine);
-  document.getElementById('btnFinish').addEventListener('click', () => {
-    finishSession(document.getElementById('exportPDF').checked);
-  });
-  document.getElementById('btnCancelSession').addEventListener('click', () => {
-    if (confirm(i18n[currentLang].confirmDiscard)) {
-      currentSession = null;
-      renderSessionView();
-    }
-  });
-  document.getElementById('btnCopyBizum').addEventListener('click', () => {
-    navigator.clipboard.writeText('+34 638 00 05 05').then(() => showToast(i18n[currentLang].bizumCopied));
-  });
-  document.getElementById('btnSaveToLibrary').addEventListener('click', () => {
-    if (!currentSession) { alert(i18n[currentLang].noActiveSession); return; }
-    saveToLibrary(currentSession);
-  });
+  document.getElementById('btnFinish').addEventListener('click', () => finishSession(document.getElementById('exportPDF').checked));
+  document.getElementById('btnCancelSession').addEventListener('click', () => { if (confirm(i18n[currentLang].confirmDiscard)) { currentSession = null; renderSessionView(); } });
+  document.getElementById('btnCopyBizum').addEventListener('click', () => navigator.clipboard.writeText('+34 638 00 05 05').then(() => showToast(i18n[currentLang].bizumCopied)));
+  document.getElementById('btnSaveToLibrary').addEventListener('click', () => { if (!currentSession) { alert(i18n[currentLang].noActiveSession); return; } saveToLibrary(currentSession); });
   document.getElementById('btnShareLink').addEventListener('click', () => {
     if (!currentSession) { alert(i18n[currentLang].noActiveSession); return; }
     const link = generateShareLink(currentSession);
@@ -1328,23 +1402,14 @@ function bindEvents() {
     box.style.display = 'block';
     navigator.clipboard.writeText(link).then(() => showToast(i18n[currentLang].linkCopied)).catch(() => showToast(i18n[currentLang].linkCopied));
   });
-  document.getElementById('btnExportJSON').addEventListener('click', () => {
-    if (!currentSession) { alert(i18n[currentLang].noActiveSession); return; }
-    exportJSON(currentSession);
-  });
+  document.getElementById('btnExportJSON').addEventListener('click', () => { if (!currentSession) { alert(i18n[currentLang].noActiveSession); return; } exportJSON(currentSession); });
   document.getElementById('btnImportJSON').addEventListener('click', () => document.getElementById('importFile').click());
-  document.getElementById('importFile').addEventListener('change', e => {
-    if (e.target.files[0]) importJSONFile(e.target.files[0]);
-  });
+  document.getElementById('importFile').addEventListener('change', e => { if (e.target.files[0]) importJSONFile(e.target.files[0]); });
   const iz = document.getElementById('importZone');
   iz.addEventListener('click', () => document.getElementById('importFile').click());
   iz.addEventListener('dragover', e => { e.preventDefault(); iz.style.borderColor = 'var(--accent)'; });
   iz.addEventListener('dragleave', () => { iz.style.borderColor = ''; });
-  iz.addEventListener('drop', e => {
-    e.preventDefault();
-    iz.style.borderColor = '';
-    if (e.dataTransfer.files[0]) importJSONFile(e.dataTransfer.files[0]);
-  });
+  iz.addEventListener('drop', e => { e.preventDefault(); iz.style.borderColor = ''; if (e.dataTransfer.files[0]) importJSONFile(e.dataTransfer.files[0]); });
   document.getElementById('btnImportLink').addEventListener('click', () => {
     const val = document.getElementById('importLinkInput').value.trim();
     if (!val) { alert(i18n[currentLang].pasteLink); return; }
@@ -1353,13 +1418,9 @@ function bindEvents() {
     document.getElementById('importLinkInput').value = '';
   });
   document.getElementById('modalClose').addEventListener('click', () => document.getElementById('gifModal').classList.remove('show'));
-  document.getElementById('gifModal').addEventListener('click', e => {
-    if (e.target.id === 'gifModal') e.currentTarget.classList.remove('show');
-  });
+  document.getElementById('gifModal').addEventListener('click', e => { if (e.target.id === 'gifModal') e.currentTarget.classList.remove('show'); });
   document.getElementById('replaceModalClose').addEventListener('click', () => document.getElementById('replaceModal').classList.remove('show'));
-  document.getElementById('replaceModal').addEventListener('click', e => {
-    if (e.target.id === 'replaceModal') e.currentTarget.classList.remove('show');
-  });
+  document.getElementById('replaceModal').addEventListener('click', e => { if (e.target.id === 'replaceModal') e.currentTarget.classList.remove('show'); });
   document.getElementById('btnBackHist').addEventListener('click', () => showView('history'));
   document.getElementById('exerciseSearch').addEventListener('input', renderBrowse);
   document.getElementById('filterCategory').addEventListener('change', renderBrowse);
@@ -1383,21 +1444,13 @@ function bindEvents() {
         const slim = decompressRoutine(item.data);
         if (slim) {
           const session = {
-            id: item.id, date: item.date,
-            routineType: slim.rt, level: slim.lv,
-            experienceLevel: slim.el || 'intermediate',
-            equipment: slim.eq, name: item.name,
+            id: item.id, date: item.date, routineType: slim.rt, level: slim.lv,
+            experienceLevel: slim.el || 'intermediate', equipment: slim.eq, name: item.name,
             exercises: slim.ex.map(s => {
               const full = DB.find(e => e.id === s.id) || s;
-              return {
-                ...full, name: s.name, category: s.category,
-                equipment: s.equipment, target: s.target,
-                difficulty: s.difficulty || classifyDifficulty(full),
-                sets: Array.from({length: slim.lv}, (_,i) => ({n:i+1,kg:'',reps:'',done:false}))
-              };
+              return { ...full, name: s.name, category: s.category, equipment: s.equipment, target: s.target, difficulty: s.difficulty || classifyDifficulty(full), sets: Array.from({length: slim.lv}, (_,i) => ({n:i+1,kg:'',reps:'',done:false})) };
             }),
-            notes: '',
-            stats: { exercises: slim.ex.length, totalSets: slim.ex.length * slim.lv, doneSets: 0, volume: 0 }
+            notes: '', stats: { exercises: slim.ex.length, totalSets: slim.ex.length * slim.lv, doneSets: 0, volume: 0 }
           };
           exportSessionToPDF(session);
         }
@@ -1414,7 +1467,6 @@ function renderBrowse() {
   const catFilter = document.getElementById('filterCategory').value;
   const equipFilter = document.getElementById('filterEquip').value;
   const diffFilter = document.getElementById('filterDiff').value;
-  
   let filtered = DB.filter(ex => {
     const nt = formatExerciseName(ex.name).toLowerCase();
     const ms = !search || ex.name.toLowerCase().includes(search) || nt.includes(search) || (ex.target||'').toLowerCase().includes(search) || (ex.equipment||'').toLowerCase().includes(search) || formatCategory(ex.category).toLowerCase().includes(search);
@@ -1424,15 +1476,12 @@ function renderBrowse() {
     const md = !diffFilter || d === diffFilter;
     return ms && mc && me && md;
   });
-  
   document.getElementById('resultCount').textContent = `${filtered.length} ${i18n[currentLang].exercises}`;
   const list = document.getElementById('browseList');
-  
   if (filtered.length === 0) {
     list.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="ic">🔍</div><h3>${currentLang==='es'?'Sin resultados':'No results'}</h3><p>${currentLang==='es'?'Prueba con otros filtros':'Try different filters'}</p></div>`;
     return;
   }
-  
   list.innerHTML = filtered.slice(0, 100).map(ex => {
     const diff = classifyDifficulty(ex);
     const isAdded = myCustomRoutine.some(r => r.id === ex.id);
@@ -1440,17 +1489,13 @@ function renderBrowse() {
     const dn = formatExerciseName(ex.name);
     return `<div class="browse-card"><div class="exercise-head"><img class="browse-thumb" src="${thumbUrl}" alt="" loading="lazy" onerror="this.style.background='#2a2a2a'" onclick="openGifModal(DB.find(e=>e.id==='${ex.id}'))"><div class="browse-info"><h4>${dn}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div><span class="tag diff">${i18n[currentLang].diffLabels[diff] || diff}</span>${ex.target?`<span class="tag">🎯 ${ex.target}</span>`:''}</div></div><button class="add-btn" ${isAdded?'disabled':''} onclick="addToCustomRoutine('${ex.id}')">${isAdded ? (currentLang==='es'?'✓ Añadido':'✓ Added') : (currentLang==='es'?'+ Añadir a mi rutina':'+ Add to my routine')}</button></div>`;
   }).join('');
-  
   renderMyRoutinePanel();
 }
 
 function addToCustomRoutine(id) {
   const ex = DB.find(e => e.id === id);
   if (!ex) return;
-  if (myCustomRoutine.some(r => r.id === id)) {
-    showToast(i18n[currentLang].alreadyInRoutine);
-    return;
-  }
+  if (myCustomRoutine.some(r => r.id === id)) { showToast(i18n[currentLang].alreadyInRoutine); return; }
   myCustomRoutine.push({...ex, difficulty: classifyDifficulty(ex)});
   showToast(i18n[currentLang].addedToRoutine);
   renderBrowse();
@@ -1490,14 +1535,10 @@ function startCustomRoutine() {
   if (myCustomRoutine.length === 0) return;
   const level = 3;
   currentSession = {
-    id: Date.now(), date: new Date().toISOString(),
-    routineType: 'custom', level: level,
-    experienceLevel: 'intermediate',
-    equipment: [...new Set(myCustomRoutine.map(e => e.equipment))],
+    id: Date.now(), date: new Date().toISOString(), routineType: 'custom', level: level,
+    experienceLevel: 'intermediate', equipment: [...new Set(myCustomRoutine.map(e => e.equipment))],
     name: i18n[currentLang].customRoutine,
-    exercises: myCustomRoutine.map(ex => ({
-      ...ex, sets: Array.from({length: level}, (_,i) => ({n:i+1,kg:'',reps:'',done:false}))
-    })),
+    exercises: myCustomRoutine.map(ex => ({ ...ex, sets: Array.from({length: level}, (_,i) => ({n:i+1,kg:'',reps:'',done:false})) })),
     notes: ''
   };
   myCustomRoutine = [];
@@ -1507,7 +1548,7 @@ function startCustomRoutine() {
 }
 
 // ============================================
-// GENERADOR
+// GENERADOR (con ajuste por fatiga)
 // ============================================
 function generateRoutine() {
   const rt = document.getElementById('routineType').value;
@@ -1518,11 +1559,42 @@ function generateRoutine() {
   
   if (equipSet.size === 0) { alert(i18n[currentLang].selectEquip); return; }
   
+  // Si está agotado, generar rutina de recuperación directamente
+  if (currentFatigue === 'exhausted') {
+    const recoveryExercises = DB.filter(ex => {
+      const name = (ex.name || '').toLowerCase();
+      const isRecovery = ['stretch','mobility','foam','roll','plank','bridge','cat','cow','child','hip flexor','piriformis','superman','bird'].some(k => name.includes(k));
+      return isRecovery || classifyDifficulty(ex) === 'beginner';
+    }).slice(0, 6);
+    
+    if (recoveryExercises.length === 0) { alert(i18n[currentLang].noExercises); return; }
+    
+    currentSession = {
+      id: Date.now(), date: new Date().toISOString(),
+      routineType: 'recovery', level: 1, experienceLevel: 'beginner',
+      equipment: ['body weight'],
+      exercises: recoveryExercises.map(ex => ({
+        ...ex, difficulty: 'beginner',
+        sets: [{n:1,kg:'',reps:'',done:false}]
+      })),
+      notes: currentLang === 'es' ? '🌿 Sesión de recuperación activa - día de baja energía' : '🌿 Active recovery session - low energy day',
+      fatigue: currentFatigue
+    };
+    
+    renderSessionView();
+    showView('session');
+    showToast(currentLang === 'es' ? '🌿 Sesión de recuperación generada' : '🌿 Recovery session generated');
+    return;
+  }
+  
   let pool = [];
-  equipSet.forEach(eq => {
-    pool = pool.concat(filterByEquipment(DB, eq));
-  });
+  equipSet.forEach(eq => { pool = pool.concat(filterByEquipment(DB, eq)); });
   pool = pool.filter((ex, idx, self) => self.findIndex(e => e.id === ex.id) === idx);
+  
+  // Si está cansado, filtrar ejercicios expertos
+  if (currentFatigue === 'tired') {
+    pool = pool.filter(ex => classifyDifficulty(ex) !== 'expert');
+  }
   
   pool = filterByLevel(pool, expLevel);
   let isoPool = [];
@@ -1539,28 +1611,18 @@ function generateRoutine() {
   if (pool.length === 0) { alert(i18n[currentLang].noExercises); return; }
   
   let targetCats = [], countPerCat = {};
-  if (rt === 'fullbody') {
-    targetCats = ['chest','back','shoulders','upper legs','waist'];
-    targetCats.forEach(c => countPerCat[c] = 2);
-  } else if (rt === 'upper') {
-    targetCats = ['chest','back','shoulders','upper arms'];
-    countPerCat.chest = 2; countPerCat.back = 2;
-    countPerCat.shoulders = 2; countPerCat['upper arms'] = 2;
-  } else if (rt === 'lower') {
-    targetCats = ['upper legs','lower legs','waist'];
-    countPerCat['upper legs'] = 3; countPerCat['lower legs'] = 2;
-    countPerCat.waist = 2;
-  } else if (rt === 'push') {
-    targetCats = ['chest','shoulders','upper arms'];
-    countPerCat.chest = 2; countPerCat.shoulders = 2;
-    countPerCat['upper arms'] = 2;
-  } else if (rt === 'pull') {
-    targetCats = ['back','upper arms'];
-    countPerCat.back = 3; countPerCat['upper arms'] = 2;
-  } else {
-    const g = document.getElementById('customGroup').value;
-    targetCats = [g];
-    countPerCat[g] = 5;
+  if (rt === 'fullbody') { targetCats = ['chest','back','shoulders','upper legs','waist']; targetCats.forEach(c => countPerCat[c] = 2); }
+  else if (rt === 'upper') { targetCats = ['chest','back','shoulders','upper arms']; countPerCat.chest = 2; countPerCat.back = 2; countPerCat.shoulders = 2; countPerCat['upper arms'] = 2; }
+  else if (rt === 'lower') { targetCats = ['upper legs','lower legs','waist']; countPerCat['upper legs'] = 3; countPerCat['lower legs'] = 2; countPerCat.waist = 2; }
+  else if (rt === 'push') { targetCats = ['chest','shoulders','upper arms']; countPerCat.chest = 2; countPerCat.shoulders = 2; countPerCat['upper arms'] = 2; }
+  else if (rt === 'pull') { targetCats = ['back','upper arms']; countPerCat.back = 3; countPerCat['upper arms'] = 2; }
+  else { const g = document.getElementById('customGroup').value; targetCats = [g]; countPerCat[g] = 5; }
+  
+  // Ajustar cantidad según fatiga
+  if (currentFatigue === 'tired') {
+    Object.keys(countPerCat).forEach(k => countPerCat[k] = Math.max(1, countPerCat[k] - 1));
+  } else if (currentFatigue === 'fresh') {
+    Object.keys(countPerCat).forEach(k => countPerCat[k] = countPerCat[k] + 1);
   }
   
   const chosen = [];
@@ -1574,19 +1636,32 @@ function generateRoutine() {
     chosen.push(...[...isoPool].sort(() => Math.random() - .5).slice(0, 2));
   }
   
+  // Ajustar series según fatiga
+  let actualLevel = level;
+  if (currentFatigue === 'tired') actualLevel = Math.max(2, level - 1);
+  else if (currentFatigue === 'fresh') actualLevel = Math.min(4, level + 1);
+  
   currentSession = {
     id: Date.now(), date: new Date().toISOString(),
-    routineType: rt, level: level,
-    experienceLevel: expLevel, equipment: [...equipSet],
+    routineType: rt, level: actualLevel, experienceLevel: expLevel,
+    equipment: [...equipSet],
     exercises: [...chosen].sort(() => Math.random() - .5).map(ex => ({
       ...ex, difficulty: classifyDifficulty(ex),
-      sets: Array.from({length: level}, (_,i) => ({n:i+1,kg:'',reps:'',done:false}))
+      sets: Array.from({length: actualLevel}, (_,i) => ({n:i+1,kg:'',reps:'',done:false}))
     })),
-    notes: ''
+    notes: '',
+    fatigue: currentFatigue
   };
   
   renderSessionView();
   showView('session');
+  
+  const fatigueMsg = {
+    fresh: currentLang === 'es' ? '🟢 Sesión a tope' : '🟢 Full power session',
+    normal: currentLang === 'es' ? '🟡 Sesión estándar' : '🟡 Standard session',
+    tired: currentLang === 'es' ? '🟠 Sesión adaptada (menos series)' : '🟠 Adapted session (fewer sets)'
+  };
+  showToast(fatigueMsg[currentFatigue] || fatigueMsg.normal);
 }
 
 // ============================================
@@ -1595,17 +1670,14 @@ function generateRoutine() {
 function renderSessionView() {
   const empty = document.getElementById('sessionEmpty');
   const content = document.getElementById('sessionContent');
-  if (!currentSession) {
-    empty.style.display = 'block';
-    content.style.display = 'none';
-    return;
-  }
+  if (!currentSession) { empty.style.display = 'block'; content.style.display = 'none'; return; }
   empty.style.display = 'none';
   content.style.display = 'block';
   const t = i18n[currentLang];
   const name = t.routineTypes[currentSession.routineType] || (currentLang==='es'?'Sesión':'Session');
   const exp = t.expLevels[currentSession.experienceLevel] || '';
-  document.getElementById('sessionTitle').textContent = name + ' · ' + exp;
+  const fatigueIcon = {fresh:'🟢',normal:'🟡',tired:'🟠',exhausted:'🔴'}[currentSession.fatigue] || '';
+  document.getElementById('sessionTitle').textContent = `${fatigueIcon} ${name} · ${exp}`;
   const list = document.getElementById('exercisesList');
   list.innerHTML = '';
   currentSession.exercises.forEach((ex, idx) => list.appendChild(buildExerciseCard(ex, idx)));
@@ -1621,9 +1693,7 @@ function buildExerciseCard(ex, idx) {
   const diff = ex.difficulty || classifyDifficulty(ex);
   const t = i18n[currentLang];
   const dn = formatExerciseName(ex.name);
-  
   card.innerHTML = `<div class="exercise-actions"><button class="act-btn" title="${t.exerciseActions.up}" data-act="up">↑</button><button class="act-btn" title="${t.exerciseActions.down}" data-act="down">↓</button><button class="act-btn" title="${t.exerciseActions.replace}" data-act="replace">🔄</button><button class="act-btn danger" title="${t.exerciseActions.remove}" data-act="remove">✕</button></div><div class="exercise-head"><img class="exercise-thumb" src="${thumbUrl}" alt="" loading="lazy" onerror="this.style.background='#2a2a2a'"><div class="exercise-info"><h4>${dn}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div>${isBodyweight?`<span class="tag body">🏃 ${currentLang==='es'?'Peso corporal':'Bodyweight'}</span>`:''}${isIso?`<span class="tag iso">⏱ ${currentLang==='es'?'Isométrico':'Isometric'}</span>`:''}<span class="tag diff">${t.diffLabels[diff] || diff}</span>${ex.target?`<span class="tag">🎯 ${ex.target}</span>`:''}</div></div><div class="sets-table"><div class="hdr"><div>${t.setHeaders.set}</div><div>${t.setHeaders.kg}</div><div>${t.setHeaders.reps}</div><div></div></div>${ex.sets.map((s,i) => `<div class="set-row" data-set="${i}"><div class="num">${i+1}</div><input type="number" step="0.5" min="0" placeholder="0" value="${s.kg}" data-field="kg"><input type="number" min="0" placeholder="0" value="${s.reps}" data-field="reps"><button class="set-check ${s.done?'done':''}">✓</button></div>`).join('')}</div>`;
-  
   card.querySelectorAll('.act-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const act = btn.dataset.act;
@@ -1671,7 +1741,6 @@ function openReplaceModal(idx) {
   let alternatives = DB.filter(e => e.category === ex.category && e.name !== ex.name && equipSet.has(e.equipment));
   alternatives = filterByLevel(alternatives, currentSession.experienceLevel).slice(0, 20);
   const list = document.getElementById('replaceList');
-  
   if (alternatives.length === 0) {
     list.innerHTML = `<p style="color:var(--muted);text-align:center;padding:20px">${i18n[currentLang].noAlternatives}</p>`;
   } else {
@@ -1681,14 +1750,10 @@ function openReplaceModal(idx) {
       return `<div class="replace-item" data-idx="${i}"><img src="${alt.image ? MEDIA_BASE + alt.image : ''}" onerror="this.style.background='#2a2a2a'"><div class="info"><h4>${formatExerciseName(alt.name)}</h4><p>${dl[d]||''} ${formatEquip(alt.equipment)}${alt.target ? ' · 🎯 '+alt.target : ''}</p></div></div>`;
     }).join('');
   }
-  
   list.querySelectorAll('.replace-item').forEach(item => {
     item.addEventListener('click', () => {
       const alt = alternatives[parseInt(item.dataset.idx)];
-      currentSession.exercises[replaceIdx] = {
-        ...alt, difficulty: classifyDifficulty(alt),
-        sets: currentSession.exercises[replaceIdx].sets
-      };
+      currentSession.exercises[replaceIdx] = { ...alt, difficulty: classifyDifficulty(alt), sets: currentSession.exercises[replaceIdx].sets };
       document.getElementById('replaceModal').classList.remove('show');
       renderSessionView();
     });
@@ -1710,23 +1775,14 @@ function finishSession(exportPDF = false) {
   currentSession.notes = document.getElementById('sessionNotes').value.trim();
   const anyDone = currentSession.exercises.some(e => e.sets.some(s => s.done));
   if (!anyDone && !confirm(i18n[currentLang].noSeriesMarked)) return;
-  
   const totalSets = currentSession.exercises.reduce((a, e) => a + e.sets.length, 0);
   const doneSets = currentSession.exercises.reduce((a, e) => a + e.sets.filter(s => s.done).length, 0);
   const totalVolume = currentSession.exercises.reduce((a, e) => a + e.sets.reduce((b, s) => b + (s.done && s.kg && s.reps ? parseFloat(s.kg) * parseInt(s.reps) : 0), 0), 0);
-  
-  currentSession.stats = {
-    exercises: currentSession.exercises.length,
-    totalSets, doneSets,
-    volume: Math.round(totalVolume)
-  };
-  
+  currentSession.stats = { exercises: currentSession.exercises.length, totalSets, doneSets, volume: Math.round(totalVolume) };
   const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   all.unshift(currentSession);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-  
   if (exportPDF) exportSessionToPDF(currentSession);
-  
   currentSession = null;
   document.getElementById('sessionNotes').value = '';
   document.getElementById('exportPDF').checked = false;
@@ -1742,24 +1798,20 @@ function renderHistory() {
   const list = document.getElementById('historyList');
   const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   const t = i18n[currentLang];
-  
   if (all.length === 0) {
     list.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="ic">📋</div><h3>${t.emptyHistory}</h3><p>${t.emptyHistoryDesc}</p></div>`;
     return;
   }
-  
   list.innerHTML = all.map(s => {
     const d = new Date(s.date);
     const dateStr = d.toLocaleDateString(currentLang==='es'?'es-ES':'en-US', {weekday:'short',day:'numeric',month:'short'});
     const timeStr = d.toLocaleTimeString(currentLang==='es'?'es-ES':'en-US', {hour:'2-digit',minute:'2-digit'});
     const expNames = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'};
-    return `<div class="hist-card" data-id="${s.id}"><button class="hist-del" data-del="${s.id}">🗑</button><button class="hist-pdf" data-pdf="${s.id}">📄 PDF</button><div class="hist-date">${dateStr} · ${timeStr}</div><div class="hist-title">${expNames[s.experienceLevel]||''} ${t.routineTypes[s.routineType]||'Session'}</div><div class="hist-stats"><span><strong>${s.exercises?.length||0}</strong> ${t.exercises}</span><span><strong>${s.stats?.doneSets??0}/${s.stats?.totalSets??0}</strong> ${t.sets}</span>${s.stats?.volume?`<span><strong>${s.stats.volume.toLocaleString(currentLang==='es'?'es-ES':'en-US')}</strong> kg</span>`:''}</div></div>`;
+    const fatigueIcon = {fresh:'🟢',normal:'🟡',tired:'🟠',exhausted:'🔴'}[s.fatigue] || '';
+    return `<div class="hist-card" data-id="${s.id}"><button class="hist-del" data-del="${s.id}">🗑</button><button class="hist-pdf" data-pdf="${s.id}">📄 PDF</button><div class="hist-date">${fatigueIcon} ${dateStr} · ${timeStr}</div><div class="hist-title">${expNames[s.experienceLevel]||''} ${t.routineTypes[s.routineType]||'Session'}</div><div class="hist-stats"><span><strong>${s.exercises?.length||0}</strong> ${t.exercises}</span><span><strong>${s.stats?.doneSets??0}/${s.stats?.totalSets??0}</strong> ${t.sets}</span>${s.stats?.volume?`<span><strong>${s.stats.volume.toLocaleString(currentLang==='es'?'es-ES':'en-US')}</strong> kg</span>`:''}</div></div>`;
   }).join('');
-  
   list.querySelectorAll('.hist-card').forEach(c => c.addEventListener('click', e => {
-    if (!e.target.dataset.del && !e.target.classList.contains('hist-pdf')) {
-      openDetail(parseInt(c.dataset.id));
-    }
+    if (!e.target.dataset.del && !e.target.classList.contains('hist-pdf')) openDetail(parseInt(c.dataset.id));
   }));
   list.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', e => {
     e.stopPropagation();
@@ -1777,12 +1829,10 @@ function renderLibrary() {
   const list = document.getElementById('libraryList');
   const lib = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
   const t = i18n[currentLang];
-  
   if (lib.length === 0) {
     list.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="ic">📚</div><h3>${t.emptyLibrary}</h3><p>${t.emptyLibraryDesc}</p></div>`;
     return;
   }
-  
   list.innerHTML = lib.map(item => {
     const d = new Date(item.date);
     const dateStr = d.toLocaleDateString(currentLang==='es'?'es-ES':'en-US', {day:'numeric',month:'short',year:'numeric'});
@@ -1790,7 +1840,6 @@ function renderLibrary() {
     const expNames = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'};
     return `<div class="lib-card"><h4>${item.name}</h4><div class="meta">${dateStr} · ${expNames[slim?.el]||''} ${t.routineTypes[slim?.rt]||''} · ${slim?.ex?.length||0} ${t.exercises}</div><div class="actions"><button class="load" data-load="${item.id}">📂 ${t.load}</button><button class="share" data-share="${item.id}">🔗 ${t.share}</button><button class="pdf-btn" data-pdf-lib="${item.id}">📄 PDF</button><button class="del" data-del="${item.id}">🗑 ${t.delete}</button></div></div>`;
   }).join('');
-  
   list.querySelectorAll('[data-load]').forEach(b => b.addEventListener('click', () => {
     const item = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').find(x => x.id === parseInt(b.dataset.load));
     if (item) loadFromLibrary(item.data);
@@ -1819,9 +1868,8 @@ function openDetail(id) {
   const d = new Date(s.date);
   const t = i18n[currentLang];
   const body = document.getElementById('detailBody');
-  
-  body.innerHTML = `<div class="detail-head"><h2>${t.routineTypes[s.routineType]||'Session'}</h2><div class="meta">${d.toLocaleDateString(currentLang==='es'?'es-ES':'en-US', {weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${t.expLevels[s.experienceLevel]||''}</div><div class="detail-stats"><div class="detail-stat"><div class="v">${s.exercises?.length||0}</div><div class="l">${t.detailExercises}</div></div><div class="detail-stat"><div class="v">${s.stats?.doneSets||0}</div><div class="l">${t.detailSets}</div></div><div class="detail-stat"><div class="v">${(s.stats?.volume||0).toLocaleString(currentLang==='es'?'es-ES':'en-US')}</div><div class="l">${t.detailVolume}</div></div></div></div><div class="exercise-grid">${s.exercises.map(ex => `<div class="exercise-card"><div class="exercise-head"><img class="exercise-thumb" src="${ex.image?MEDIA_BASE+ex.image:''}"><div class="exercise-info"><h4>${formatExerciseName(ex.name)}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">${ex.sets.map(set => `<div style="background:var(--card2);padding:6px 10px;border-radius:8px;font-size:12px;${set.done?'':'opacity:.5'}">${set.n}ª · ${set.kg||'–'}kg × ${set.reps||'–'} ${set.done?'✓':''}</div>`).join('')}</div></div>`).join('')}</div>${s.notes ? `<div class="section" style="font-style:italic;color:var(--muted)">"${s.notes}"</div>` : ''}`;
-  
+  const fatigueIcon = {fresh:'🟢',normal:'🟡',tired:'🟠',exhausted:'🔴'}[s.fatigue] || '';
+  body.innerHTML = `<div class="detail-head"><h2>${fatigueIcon} ${t.routineTypes[s.routineType]||'Session'}</h2><div class="meta">${d.toLocaleDateString(currentLang==='es'?'es-ES':'en-US', {weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${t.expLevels[s.experienceLevel]||''}</div><div class="detail-stats"><div class="detail-stat"><div class="v">${s.exercises?.length||0}</div><div class="l">${t.detailExercises}</div></div><div class="detail-stat"><div class="v">${s.stats?.doneSets||0}</div><div class="l">${t.detailSets}</div></div><div class="detail-stat"><div class="v">${(s.stats?.volume||0).toLocaleString(currentLang==='es'?'es-ES':'en-US')}</div><div class="l">${t.detailVolume}</div></div></div></div><div class="exercise-grid">${s.exercises.map(ex => `<div class="exercise-card"><div class="exercise-head"><img class="exercise-thumb" src="${ex.image?MEDIA_BASE+ex.image:''}"><div class="exercise-info"><h4>${formatExerciseName(ex.name)}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">${ex.sets.map(set => `<div style="background:var(--card2);padding:6px 10px;border-radius:8px;font-size:12px;${set.done?'':'opacity:.5'}">${set.n}ª · ${set.kg||'–'}kg × ${set.reps||'–'} ${set.done?'✓':''}</div>`).join('')}</div></div>`).join('')}</div>${s.notes ? `<div class="section" style="font-style:italic;color:var(--muted)">"${s.notes}"</div>` : ''}`;
   body.querySelectorAll('.exercise-thumb').forEach((el, i) => el.addEventListener('click', () => openGifModal(s.exercises[i])));
   showView('detail');
 }
@@ -1833,95 +1881,11 @@ function exportSessionToPDF(session) {
   const t = i18n[currentLang];
   const date = new Date(session.date);
   const dateStr = date.toLocaleDateString(currentLang==='es'?'es-ES':'en-US', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  
+  const fatigueIcon = {fresh:'🟢',normal:'🟡',tired:'🟠',exhausted:'🔴'}[session.fatigue] || '';
+  const fatigueNames = {fresh:currentLang==='es'?'Fresco':'Fresh',normal:currentLang==='es'?'Normal':'Normal',tired:currentLang==='es'?'Cansado':'Tired',exhausted:currentLang==='es'?'Agotado':'Exhausted'};
   const exercisesHTML = session.exercises.map((ex, idx) => {
     const dn = formatExerciseName(ex.name);
-    const setsHTML = ex.sets.map(set => `
-      <tr style="border-bottom:1px solid #e5e7eb">
-        <td style="padding:8px;text-align:center;font-weight:600">${set.n}</td>
-        <td style="padding:8px;text-align:center">${set.kg || '–'}</td>
-        <td style="padding:8px;text-align:center">${set.reps || '–'}</td>
-        <td style="padding:8px;text-align:center">${set.done ? '✅' : '⬜'}</td>
-      </tr>
-    `).join('');
-    
-    return `
-      <div style="margin-bottom:20px;padding:12px;background:#f9fafb;border-radius:8px">
-        <h3 style="margin:0 0 8px 0;color:#1f2937;font-size:16px">${idx+1}. ${dn}</h3>
-        <p style="margin:0 0 10px 0;color:#6b7280;font-size:13px">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)} · ${t.diffLabels[ex.difficulty] || ex.difficulty}</p>
-        <table style="width:100%;border-collapse:collapse;font-size:13px">
-          <thead>
-            <tr style="background:#e5e7eb">
-              <th style="padding:8px;text-align:center">${currentLang==='es'?'Serie':'Set'}</th>
-              <th style="padding:8px;text-align:center">KG</th>
-              <th style="padding:8px;text-align:center">Reps</th>
-              <th style="padding:8px;text-align:center">${currentLang==='es'?'Estado':'Status'}</th>
-            </tr>
-          </thead>
-          <tbody>${setsHTML}</tbody>
-        </table>
-      </div>
-    `;
+    const setsHTML = ex.sets.map(set => `<tr style="border-bottom:1px solid #e5e7eb"><td style="padding:8px;text-align:center;font-weight:600">${set.n}</td><td style="padding:8px;text-align:center">${set.kg || '–'}</td><td style="padding:8px;text-align:center">${set.reps || '–'}</td><td style="padding:8px;text-align:center">${set.done ? '✅' : '⬜'}</td></tr>`).join('');
+    return `<div style="margin-bottom:20px;padding:12px;background:#f9fafb;border-radius:8px"><h3 style="margin:0 0 8px 0;color:#1f2937;font-size:16px">${idx+1}. ${dn}</h3><p style="margin:0 0 10px 0;color:#6b7280;font-size:13px">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)} · ${t.diffLabels[ex.difficulty] || ex.difficulty}</p><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="background:#e5e7eb"><th style="padding:8px;text-align:center">${currentLang==='es'?'Serie':'Set'}</th><th style="padding:8px;text-align:center">KG</th><th style="padding:8px;text-align:center">Reps</th><th style="padding:8px;text-align:center">${currentLang==='es'?'Estado':'Status'}</th></tr></thead><tbody>${setsHTML}</tbody></table></div>`;
   }).join('');
-  
-  const pdfContent = `
-    <div style="font-family:Arial,sans-serif;max-width:800px;margin:0 auto;padding:20px;color:#333">
-      <div style="text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:3px solid #0a84ff">
-        <h1 style="margin:0;color:#0a84ff;font-size:28px">💪 Cuidate !!</h1>
-        <p style="margin:5px 0 0 0;color:#6b7280;font-size:14px">${t.sub}</p>
-      </div>
-      <div style="background:#f3f4f6;padding:15px;border-radius:8px;margin-bottom:20px">
-        <h2 style="margin:0 0 10px 0;color:#1f2937;font-size:20px">${t.routineTypes[session.routineType] || 'Session'}</h2>
-        <p style="margin:5px 0;color:#4b5563;font-size:14px">📅 ${dateStr}</p>
-        <p style="margin:5px 0;color:#4b5563;font-size:14px">${t.expLevels[session.experienceLevel] || ''}</p>
-      </div>
-      <div style="display:flex;gap:15px;margin-bottom:25px;flex-wrap:wrap">
-        <div style="flex:1;min-width:150px;background:#0a84ff;color:#fff;padding:15px;border-radius:8px;text-align:center">
-          <div style="font-size:24px;font-weight:bold">${session.exercises?.length||0}</div>
-          <div style="font-size:12px;opacity:0.9">${t.detailExercises}</div>
-        </div>
-        <div style="flex:1;min-width:150px;background:#32d74b;color:#fff;padding:15px;border-radius:8px;text-align:center">
-          <div style="font-size:24px;font-weight:bold">${session.stats?.doneSets||0}/${session.stats?.totalSets||0}</div>
-          <div style="font-size:12px;opacity:0.9">${t.detailSets}</div>
-        </div>
-        <div style="flex:1;min-width:150px;background:#bf5af2;color:#fff;padding:15px;border-radius:8px;text-align:center">
-          <div style="font-size:24px;font-weight:bold">${(session.stats?.volume||0).toLocaleString(currentLang==='es'?'es-ES':'en-US')}</div>
-          <div style="font-size:12px;opacity:0.9">${t.detailVolume}</div>
-        </div>
-      </div>
-      <h2 style="color:#1f2937;border-bottom:2px solid #0a84ff;padding-bottom:8px;margin-bottom:15px">🏋️ ${t.detailExercises}</h2>
-      ${exercisesHTML}
-      ${session.notes ? `
-        <div style="margin-top:25px;padding:15px;background:#fef3c7;border-left:4px solid #f59e0b;border-radius:4px">
-          <h3 style="margin:0 0 8px 0;color:#92400e;font-size:16px">📝 ${currentLang==='es'?'Notas':'Notes'}</h3>
-          <p style="margin:0;color:#78350f;font-style:italic">${session.notes}</p>
-        </div>
-      ` : ''}
-      <div style="margin-top:30px;padding-top:20px;border-top:1px solid #e5e7eb;text-align:center;color:#9ca3af;font-size:12px">
-        <p>Generado por Cuidate !! · ${new Date().toLocaleString(currentLang==='es'?'es-ES':'en-US')}</p>
-        <p>github.com/viferor/Creador-rutinas-fuerza-en-casa</p>
-      </div>
-    </div>
-  `;
-  
-  const container = document.createElement('div');
-  container.innerHTML = pdfContent;
-  document.body.appendChild(container);
-  
-  const opt = {
-    margin: 10,
-    filename: `cuidate-${session.routineType}-${session.id}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  };
-  
-  showToast(t.pdfGenerating);
-  html2pdf().set(opt).from(container).save().then(() => {
-    document.body.removeChild(container);
-    showToast(t.pdfDone);
-  });
-}
-</script>
-</body>
-</html>
+  const pdfContent = `<div style="font-family:Arial,sans-serif;max-width:800px;margin:0 auto;padding:20px;color:#333"><div style="text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:3px solid #0a84ff"><h1 style="margin:0;color:#0a84ff;font-size:28px">💪 Cuidate !!</h1><p style="margin:5px 0 0 0;color:#6b7280;font-size:14px">${t.sub}</p></div><div style="background:#f3f4f6;padding:15px;border-radius:8px;margin-bottom:20px"><h2 style="margin:0 0 10px 0;color:#1f2937;font-size:20px">${fatigueIcon} ${t.routineTypes[session.routineType] || 'Session'}</h2><p style="margin:5px 0;color:#4b5563;font-size:14px">📅 ${dateStr}</p><p style="margin:5px 0;color:#4b5563;font-size:14px">${t.expLevels[session.experienceLevel] || ''} · ${currentLang==='es'?'Fatiga':'Fatigue'}: ${fatigueNames[session.fatigue]||fatigueNames.normal}</p></div><div style="display:flex;gap:15px;margin-bottom:25px;flex-wrap:wrap"><div style="flex:1;min-width:150px;background:#0a84ff;color:#fff;padding:15px;border-radius:8px;text-align:center"><div style="font-size:24px;font-weight:bold">${session.exercises?.length||0}</div><div style="font-size:12px;opacity:0.9">${t.detailExercises}</div></div><div style="flex:1;min-width:150px;background:#32d74b;color:#fff;padding:15px;border-radius:8px;text-align:center"><div style="font-size:24px;font-weight:bold">${session.stats?.doneSets||0}/${session.stats?.totalSets||0}</div><div style="font-size:12px;opacity:0.9">${t.detailSets}</div></div><div style="flex:1;min-width:150px;background:#bf5af2;color:#fff;padding:15px;border-radius:8px;text-align:center"><div style="font-size:24px;font-weight:bold">${(session.stats?.volume||0).toLocaleString(currentLang==='es'?'es-ES':'en-US')}</div><div style="font-size:12px;opacity:0.9">${t.detailVolume}</div></div></div><h2 style="color:#1f2937;border-bottom:2px solid #0a84ff;padding-bottom:8px;margin-bottom:15px">🏋️ ${t.detailExercises}</h2>${exercisesHTML}${session.notes ? `<div style="margin-top:25px;padding:15px;background:#fef3c7;border-left:4px solid #f59e0b;border-radius:4px"><h3 style="margin:0 0 8px 0;color:#92400e;font-size:16px">📝 ${currentLang==='es'?'Notas':'Notes'}</h3><p style="margin:0;color:#78350f;font-style:italic">${session.notes}</p></div>` : ''}<div style="margin-top:30px;padding-top:20px;border-top:1px solid #e5e7eb;text-align:center;color:#9ca3af;font-size:12px"><p>Generado por Cuidate !! · ${new Date().toLocaleString(currentLang==='es'?'es-ES':'en-US')}</p><p>github.com/viferor/Creador-rutinas-fuerza-en-casa</p></div></div>`;
