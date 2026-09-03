@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' https: data: blob:; connect-src 'self' https:; font-src 'self' https: data:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-eval' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data: blob:; connect-src 'self' https:; font-src 'self' https: data:;">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Cuidate !!</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -11,370 +11,504 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh}
 body{margin:0 auto;padding:0 0 120px;width:100%}
-header{position:sticky;top:0;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);padding:16px 24px;border-bottom:1px solid var(--border);z-index:100;display:flex;justify-content:space-between;align-items:center;gap:8px}
-header h1{font-size:22px;font-weight:800;flex:1}
-header .sub{font-size:12px;color:var(--muted)}
-.lang-btn,.settings-btn{background:var(--card2);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer}
-.donate-btn{background:linear-gradient(135deg,var(--yellow),var(--orange));color:#000;border:none;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer}
-.container{max-width:1400px;margin:0 auto;padding:0 20px}
-.tabs{display:flex;gap:4px;padding:12px 0;flex-wrap:wrap}
-.tab{background:var(--card);border:none;color:var(--muted);padding:10px 14px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;flex:1}
+header{position:sticky;top:0;background:rgba(10,10,10,.9);backdrop-filter:blur(20px);padding:16px 20px;border-bottom:1px solid var(--border);z-index:100;display:flex;justify-content:space-between;align-items:center;gap:8px}
+header h1{font-size:20px;font-weight:800;flex:1}
+header .sub{font-size:11px;color:var(--muted)}
+.lang-btn,.settings-btn{background:var(--card2);border:1px solid var(--border);color:var(--text);padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer}
+.donate-btn{background:linear-gradient(135deg,var(--yellow),var(--orange));color:#000;border:none;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer}
+.container{max-width:1200px;margin:0 auto;padding:0 16px}
+.tabs{display:flex;gap:4px;padding:12px 0;overflow-x:auto;flex-wrap:nowrap}
+.tab{background:var(--card);border:none;color:var(--muted);padding:8px 12px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
 .tab.active{background:var(--accent);color:#fff}
 .view{display:none;padding:16px 0}
 .view.active{display:block}
-.section{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:14px}
-.section h3{font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;margin-bottom:12px}
-label.sel-label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:600}
-select,input[type=text],input[type=number],textarea{width:100%;padding:13px 14px;background:var(--card2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;font-family:inherit}
-textarea{resize:vertical;min-height:70px}
-.equip-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.section{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:14px}
+.section h3{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;margin-bottom:10px}
+label.sel-label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:600}
+select,input,textarea{width:100%;padding:12px;background:var(--card2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;font-family:inherit}
+textarea{resize:vertical;min-height:60px}
+.equip-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 @media(min-width:600px){.equip-grid{grid-template-columns:repeat(3,1fr)}}
-.equip-grid label{background:var(--card2);border:1.5px solid var(--border);border-radius:10px;padding:12px;display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;user-select:none}
+.equip-grid label{background:var(--card2);border:1.5px solid var(--border);border-radius:10px;padding:10px;display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer}
 .equip-grid input{display:none}
-.equip-grid label:has(input:checked){border-color:var(--accent);background:rgba(10,132,255,.08)}
-.equip-grid .dot{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--border);display:inline-flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.equip-grid label:has(input:checked){border-color:var(--accent);background:rgba(10,132,255,.1)}
+.equip-grid .dot{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border);display:inline-flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
 .equip-grid input:checked+.dot{background:var(--accent);border-color:var(--accent);color:#fff}
 .equip-grid input:checked+.dot::after{content:'✓'}
-.search-box{position:relative;margin-bottom:14px}
-.search-box input{padding-left:40px}
-.search-box .icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
-.btn{width:100%;padding:16px;border:none;border-radius:12px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px}
 .btn-primary{background:#fff;color:#000}
-.btn-green{background:var(--green);color:#000;margin-top:10px}
-.btn-red{background:var(--red);color:#fff;padding:10px;font-size:13px;width:auto}
-.btn-secondary{background:var(--card2);color:var(--text);border:1px solid var(--border);padding:12px;font-size:14px}
+.btn-green{background:var(--green);color:#000}
+.btn-red{background:var(--red);color:#fff}
+.btn-secondary{background:var(--card2);color:var(--text);border:1px solid var(--border)}
 .btn-accent{background:var(--accent);color:#fff}
 .btn-purple{background:var(--purple);color:#fff}
-.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .loader{text-align:center;padding:40px 20px;color:var(--muted)}
-.spinner{width:28px;height:28px;border:3px solid var(--card2);border-top-color:var(--accent);border-radius:50%;margin:0 auto 14px;animation:spin 1s linear infinite}
+.spinner{width:24px;height:24px;border:3px solid var(--card2);border-top-color:var(--accent);border-radius:50%;margin:0 auto 10px;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.empty{text-align:center;padding:40px 20px;color:var(--muted)}
-.exercise-grid,.browse-grid{display:grid;grid-template-columns:1fr;gap:12px}
-@media(min-width:768px){.exercise-grid,.browse-grid{grid-template-columns:1fr 1fr}}
-.exercise-card,.browse-card{background:var(--card);border-radius:var(--radius);padding:14px;border:1px solid var(--border)}
-.exercise-actions{display:flex;justify-content:flex-end;gap:4px;margin-bottom:8px}
-.act-btn{background:var(--card2);border:none;color:var(--muted);width:30px;height:30px;border-radius:8px;font-size:14px;cursor:pointer}
-.act-btn.danger:hover{background:var(--red)}
-.add-btn{background:var(--green);color:#000;border:none;border-radius:8px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer;margin-top:8px;width:100%}
-.add-btn:disabled{background:var(--card2);color:var(--muted)}
-.exercise-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
-.exercise-thumb,.browse-thumb{width:64px;height:64px;border-radius:10px;object-fit:cover;background:var(--card2);flex-shrink:0;cursor:pointer}
-.exercise-info{flex:1;min-width:0}
-.exercise-info h4{font-size:15px;font-weight:700;margin-bottom:3px}
-.exercise-info .meta{font-size:12px;color:var(--muted)}
-.exercise-info .tag{display:inline-block;background:var(--card2);color:var(--muted);padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;margin-right:4px;margin-top:4px}
-.tag.body{background:rgba(50,215,75,.15);color:var(--green)}
-.tag.iso{background:rgba(255,159,10,.15);color:var(--orange)}
+.exercise-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:768px){.exercise-grid{grid-template-columns:1fr 1fr}}
+.exercise-card{background:var(--card);border-radius:var(--radius);padding:12px;border:1px solid var(--border)}
+.exercise-head{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.exercise-thumb{width:50px;height:50px;border-radius:8px;object-fit:cover;background:var(--card2);flex-shrink:0;cursor:pointer}
+.exercise-info{flex:1}
+.exercise-info h4{font-size:14px;font-weight:700;margin-bottom:2px}
+.exercise-info .meta{font-size:11px;color:var(--muted)}
+.tag{display:inline-block;background:var(--card2);color:var(--muted);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600;margin-right:4px}
 .tag.diff{background:rgba(191,90,242,.15);color:var(--purple)}
-.sets-table .hdr{display:grid;grid-template-columns:32px 1fr 1fr 36px;gap:6px;padding:4px 6px;font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase}
-.set-row{display:grid;grid-template-columns:32px 1fr 1fr 36px;gap:6px;margin-bottom:6px;align-items:center}
-.set-row .num{background:var(--card2);border-radius:8px;height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--muted)}
-.set-row input{padding:10px;background:var(--card2);border:1px solid var(--border);border-radius:8px;color:var(--text);text-align:center;font-size:14px;height:38px}
-.set-check{height:38px;border-radius:8px;border:none;background:var(--card2);color:var(--muted);font-size:16px;cursor:pointer}
+.set-row{display:grid;grid-template-columns:30px 1fr 1fr 30px;gap:4px;margin-bottom:4px;align-items:center}
+.set-row .num{background:var(--card2);border-radius:6px;height:34px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--muted)}
+.set-row input{padding:8px;background:var(--card2);border:1px solid var(--border);border-radius:6px;color:var(--text);text-align:center;font-size:13px;height:34px}
+.set-check{height:34px;border-radius:6px;border:none;background:var(--card2);color:var(--muted);font-size:14px;cursor:pointer}
 .set-check.done{background:var(--green);color:#000}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
 .modal.show{display:flex}
-.modal-content{max-width:600px;width:100%;text-align:center;max-height:90vh;overflow-y:auto}
-.modal-content img{max-width:100%;max-height:50vh;border-radius:12px}
-.modal-content h3{margin-top:14px;font-size:18px}
-.modal-content .instructions{margin-top:12px;color:var(--muted);font-size:13px;line-height:1.5;max-height:180px;overflow-y:auto;text-align:left;padding:12px;background:rgba(255,255,255,.05);border-radius:10px}
-.modal-close{position:absolute;top:20px;right:20px;background:rgba(255,255,255,.15);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;z-index:10}
-.replace-list{max-height:60vh;overflow-y:auto;padding:8px}
-.replace-item,.my-routine-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--card2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;cursor:pointer}
-.replace-item img,.my-routine-item img{width:48px;height:48px;border-radius:8px;object-fit:cover}
-.replace-item .info,.my-routine-item .info{flex:1}
-.replace-item .info h4,.my-routine-item .info h4{font-size:14px;font-weight:600}
-.replace-item .info p,.my-routine-item .info p{font-size:12px;color:var(--muted)}
-.my-routine-item .remove-btn{background:var(--red);color:#fff;border:none;border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer}
-.hist-grid,.lib-grid{display:grid;grid-template-columns:1fr;gap:10px}
-@media(min-width:768px){.hist-grid,.lib-grid{grid-template-columns:1fr 1fr}}
-.hist-card,.lib-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;position:relative}
-.hist-date{color:var(--accent);font-size:13px;font-weight:700;margin-bottom:4px}
-.hist-title,.lib-card h4{font-size:15px;font-weight:700;margin-bottom:6px}
-.hist-stats{display:flex;gap:14px;font-size:12px;color:var(--muted);flex-wrap:wrap}
-.hist-stats strong{color:var(--text)}
-.hist-del{position:absolute;top:10px;right:10px;background:none;border:none;color:var(--red);font-size:18px;cursor:pointer}
-.hist-pdf{position:absolute;top:10px;right:40px;background:var(--purple);color:#fff;border:none;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer}
-.lib-card .meta{font-size:12px;color:var(--muted);margin-bottom:8px}
-.lib-card .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.lib-card .actions button{flex:1;min-width:70px;padding:8px;font-size:12px;border-radius:8px;border:none;font-weight:600;cursor:pointer}
-.lib-card .load{background:var(--accent);color:#fff}
-.lib-card .share{background:var(--purple);color:#fff}
-.lib-card .pdf-btn{background:var(--orange);color:#fff}
-.lib-card .del{background:var(--red);color:#fff}
-.detail-back{display:inline-flex;align-items:center;gap:4px;color:var(--accent);background:none;border:none;font-size:15px;font-weight:600;cursor:pointer;padding:8px 0;margin-bottom:8px}
-.detail-head{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:12px}
-.detail-head h2{font-size:20px;font-weight:800}
-.detail-head .meta{color:var(--muted);font-size:13px}
-.detail-stats{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
-.detail-stat{flex:1;min-width:120px;background:var(--card2);border-radius:10px;padding:12px;text-align:center}
-.detail-stat .v{font-size:20px;font-weight:800;color:var(--accent)}
-.detail-stat .l{font-size:11px;color:var(--muted);text-transform:uppercase}
-.empty-state{text-align:center;padding:80px 20px}
-.empty-state .ic{font-size:60px;opacity:.3;margin-bottom:14px}
-.sticky-bottom{position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 60%,transparent);padding:16px;margin:-16px -16px 0;z-index:50}
-.level-hint{margin-top:10px;padding:10px 12px;background:var(--card2);border-radius:8px;font-size:12px;color:var(--muted);border-left:3px solid var(--purple)}
-.share-box{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:10px;word-break:break-all;font-size:12px;color:var(--muted);max-height:120px;overflow-y:auto}
-.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;padding:12px 24px;border-radius:30px;font-weight:700;font-size:14px;z-index:2000}
-.import-zone{border:2px dashed var(--border);border-radius:12px;padding:24px;text-align:center;cursor:pointer;margin-top:10px}
-.import-zone input{display:none}
-.donate-section{background:linear-gradient(135deg,rgba(255,214,10,.1),rgba(255,159,10,.1));border:1px solid rgba(255,214,10,.3);border-radius:var(--radius);padding:18px;margin-bottom:14px;text-align:center}
-.donate-section h3{color:var(--yellow);margin-bottom:8px}
-.donate-section p{font-size:13px;color:var(--muted);margin-bottom:14px}
-.donate-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.donate-actions .btn{width:auto;padding:10px 16px;font-size:13px}
-.legal-footer{margin-top:40px;padding:24px 20px;border-top:1px solid var(--border);text-align:center;font-size:11px;color:var(--muted)}
-.legal-footer a{color:var(--accent)}
-.legal-footer .disclaimer{max-width:700px;margin:12px auto 0;padding:12px;background:var(--card2);border-radius:8px;text-align:left}
-.legal-footer .disclaimer strong{color:var(--text);display:block;margin-bottom:4px}
-.legal-footer .license-badges{display:flex;gap:8px;justify-content:center;margin-top:10px}
-.legal-footer .badge{background:var(--card2);border:1px solid var(--border);padding:4px 10px;border-radius:20px;font-size:10px}
-.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.filter-bar select{flex:1;min-width:140px}
-.result-count{color:var(--muted);font-size:13px;margin-bottom:12px}
-.my-routine-panel{background:var(--card);border:1px solid var(--accent);border-radius:var(--radius);padding:16px;margin-bottom:14px}
-.my-routine-panel h3{color:var(--accent);margin-bottom:10px}
-.my-routine-count{background:var(--accent);color:#fff;border-radius:12px;padding:2px 10px;font-size:12px;margin-left:8px}
-.fatigue-selector{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
-@media(min-width:600px){.fatigue-selector{grid-template-columns:repeat(4,1fr)}}
-.fatigue-option{background:var(--card2);border:2px solid var(--border);border-radius:12px;padding:14px 10px;cursor:pointer;text-align:center;user-select:none}
-.fatigue-option .fat-icon{font-size:28px;margin-bottom:4px}
-.fatigue-option .fat-title{font-size:13px;font-weight:700}
-.fatigue-option .fat-desc{font-size:11px;color:var(--muted)}
-.fatigue-option.selected{transform:translateY(-2px)}
+.modal-content{max-width:500px;width:100%;text-align:center;max-height:90vh;overflow-y:auto;background:var(--card);padding:20px;border-radius:16px}
+.modal-content img{max-width:100%;max-height:40vh;border-radius:10px}
+.modal-close{position:absolute;top:15px;right:15px;background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer}
+.fatigue-selector{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px}
+.fatigue-option{background:var(--card2);border:2px solid var(--border);border-radius:10px;padding:10px;cursor:pointer;text-align:center}
+.fatigue-option .fat-icon{font-size:24px}
+.fatigue-option .fat-title{font-size:12px;font-weight:700}
+.fatigue-option.selected{border-color:var(--fc)}
 .fatigue-option[data-value=fresh]{--fc:var(--green)}
 .fatigue-option[data-value=normal]{--fc:var(--accent)}
 .fatigue-option[data-value=tired]{--fc:var(--orange)}
 .fatigue-option[data-value=exhausted]{--fc:var(--red)}
-.fatigue-option.selected{border-color:var(--fc)}
-.fatigue-option.selected .fat-title{color:var(--fc)}
-.fatigue-hint{margin-top:10px;padding:10px 12px;background:var(--card2);border-radius:8px;font-size:12px;color:var(--muted);border-left:3px solid var(--accent)}
+.fatigue-hint{margin-top:8px;padding:8px;background:var(--card2);border-radius:6px;font-size:11px;color:var(--muted);border-left:3px solid var(--accent)}
+.mode-selector{display:flex;gap:6px;margin-bottom:14px}
+.mode-btn{flex:1;background:var(--card2);border:1px solid var(--border);color:var(--muted);padding:10px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;text-align:center}
+.mode-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.plan-day-card{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.plan-day-info h4{font-size:14px;font-weight:700}
+.plan-day-info p{font-size:11px;color:var(--muted)}
+.plan-day-actions button{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:6px 10px;font-size:11px;cursor:pointer;margin-left:4px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;padding:10px 20px;border-radius:20px;font-weight:700;font-size:13px;z-index:2000}
 .wizard-modal{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px}
 .wizard-modal.show{display:flex}
-.wizard-box{max-width:640px;width:100%;background:var(--card);border-radius:20px;padding:28px;max-height:90vh;overflow-y:auto;border:1px solid var(--border)}
-.wizard-header{text-align:center;margin-bottom:24px}
-.wizard-header h2{font-size:22px;font-weight:800}
-.wizard-header p{font-size:13px;color:var(--muted)}
-.wizard-progress{display:flex;gap:6px;margin:20px 0;justify-content:center}
-.wizard-step-dot{width:32px;height:4px;border-radius:2px;background:var(--border)}
-.wizard-step-dot.active{background:var(--accent)}
-.wizard-step-dot.done{background:var(--green)}
+.wizard-box{max-width:500px;width:100%;background:var(--card);border-radius:16px;padding:20px;max-height:90vh;overflow-y:auto}
 .wizard-step{display:none}
 .wizard-step.active{display:block}
-.wizard-question{font-size:16px;font-weight:700;margin-bottom:14px;text-align:center}
-.wizard-options{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:20px}
-@media(min-width:500px){.wizard-options{grid-template-columns:1fr 1fr}}
-.wizard-option{background:var(--card2);border:2px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;text-align:left}
-.wizard-option.selected{border-color:var(--accent);background:rgba(10,132,255,.15)}
-.wizard-option .opt-icon{font-size:26px;margin-bottom:4px}
-.wizard-option .opt-title{font-size:15px;font-weight:700}
-.wizard-option .opt-desc{font-size:12px;color:var(--muted)}
-.wizard-nav{display:flex;gap:10px;margin-top:20px}
-.wizard-nav .btn{flex:1}
-.wizard-summary{background:var(--card2);border-radius:12px;padding:16px;margin-bottom:16px;text-align:left}
-.wizard-summary h4{font-size:14px;margin-bottom:10px;color:var(--accent)}
-.wizard-summary .sum-row{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px solid var(--border)}
-.wizard-summary .sum-row:last-child{border:none}
-.wizard-summary .sum-label{color:var(--muted)}
-.wizard-summary .sum-value{font-weight:700}
-.equip-recommend{background:var(--card2);border-radius:12px;padding:16px;margin:16px 0}
-.equip-recommend h4{font-size:14px;margin-bottom:12px;color:var(--orange)}
-.equip-recommend .equip-note{font-size:12px;color:var(--muted);margin-bottom:12px}
+.wizard-option{background:var(--card2);border:2px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer}
+.wizard-option.selected{border-color:var(--accent);background:rgba(10,132,255,.1)}
 </style>
 </head>
 <body>
 <header>
-  <div><h1 data-i18n="title">Cuidate !!</h1><div class="sub" data-i18n="sub">¡Tu app de entrenamiento!</div></div>
+  <div><h1>Cuidate !!</h1><div class="sub">Tu app de entrenamiento</div></div>
   <div style="display:flex;gap:6px">
     <button class="settings-btn" id="btnSettings">⚙️</button>
-    <button class="lang-btn" id="langToggle" data-i18n="langBtn">🇬🇧 EN</button>
+    <button class="lang-btn" id="langToggle">🇬🇧 EN</button>
     <button class="donate-btn" id="btnDonateHeader">☕</button>
   </div>
 </header>
 <div class="container">
 <div class="tabs">
-  <button class="tab active" data-view="create" data-i18n="tabCreate">➕ Crear</button>
-  <button class="tab" data-view="browse" data-i18n="tabBrowse">🔍 Ejercicios</button>
-  <button class="tab" data-view="session" data-i18n="tabSession">💪 Sesión</button>
-  <button class="tab" data-view="library" data-i18n="tabLibrary">📚 Biblioteca</button>
-  <button class="tab" data-view="history" data-i18n="tabHistory">📅 Historial</button>
-  <button class="tab" data-view="legal" data-i18n="tabLegal">⚖️ Legal</button>
+  <button class="tab active" data-view="create">➕ Crear</button>
+  <button class="tab" data-view="browse">🔍 Ejercicios</button>
+  <button class="tab" data-view="session">💪 Sesión</button>
+  <button class="tab" data-view="plans"> Planes</button>
+  <button class="tab" data-view="library">📚 Biblioteca</button>
+  <button class="tab" data-view="history">📅 Historial</button>
+  <button class="tab" data-view="legal">⚖️ Legal</button>
 </div>
 
 <div class="view active" id="view-create">
-  <div id="loaderBlock" class="loader"><div class="spinner"></div><span data-i18n="loading">Cargando base de datos…</span></div>
+  <div id="loaderBlock" class="loader"><div class="spinner"></div><span>Cargando base de datos…</span></div>
   <div id="formBlock" style="display:none">
-    <div id="profileBanner" style="display:none;background:linear-gradient(135deg,rgba(10,132,255,.15),rgba(191,90,242,.15));border:1px solid var(--accent);border-radius:var(--radius);padding:16px;margin-bottom:14px">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-        <div style="flex:1;min-width:200px"><div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:4px" data-i18n="profileLabel">Tu perfil configurado</div><div id="profileSummary" style="font-size:13px;font-weight:600"></div></div>
-        <button class="btn btn-secondary" id="btnEditProfile" style="width:auto;padding:8px 14px;font-size:12px" data-i18n="btnEditProfile">⚙️ Editar perfil</button>
-      </div>
+    <div class="mode-selector">
+      <div class="mode-btn active" data-mode="today">📅 Hoy</div>
+      <div class="mode-btn" data-mode="weekly">📆 Semanal</div>
+      <div class="mode-btn" data-mode="monthly">📆 Mensual</div>
     </div>
-    <div class="section">
-      <h3 data-i18n="fatigueSection">⚡ ¿Cómo te sientes hoy?</h3>
-      <label class="sel-label" data-i18n="fatigueLabel">Ajusta la sesión a tu nivel de energía del día</label>
-      <div class="fatigue-selector" id="fatigueSelector">
-        <div class="fatigue-option" data-value="fresh"><div class="fat-icon">🟢</div><div class="fat-title" data-i18n="fatFresh">Fresco</div><div class="fat-desc" data-i18n="fatFreshDesc">Descansado, a tope</div></div>
-        <div class="fatigue-option selected" data-value="normal"><div class="fat-icon">🟡</div><div class="fat-title" data-i18n="fatNormal">Normal</div><div class="fat-desc" data-i18n="fatNormalDesc">Día estándar</div></div>
-        <div class="fatigue-option" data-value="tired"><div class="fat-icon">🟠</div><div class="fat-title" data-i18n="fatTired">Cansado</div><div class="fat-desc" data-i18n="fatTiredDesc">Baja energía</div></div>
-        <div class="fatigue-option" data-value="exhausted"><div class="fat-icon">🔴</div><div class="fat-title" data-i18n="fatExhausted">Agotado</div><div class="fat-desc" data-i18n="fatExhaustedDesc">Solo movilidad</div></div>
+    
+    <div id="todayForm">
+      <div class="section">
+        <h3>⚡ ¿Cómo te sientes hoy?</h3>
+        <div class="fatigue-selector" id="fatigueSelector">
+          <div class="fatigue-option" data-value="fresh"><div class="fat-icon">🟢</div><div class="fat-title">Fresco</div></div>
+          <div class="fatigue-option selected" data-value="normal"><div class="fat-icon">🟡</div><div class="fat-title">Normal</div></div>
+          <div class="fatigue-option" data-value="tired"><div class="fat-icon">🟠</div><div class="fat-title">Cansado</div></div>
+          <div class="fatigue-option" data-value="exhausted"><div class="fat-icon">🔴</div><div class="fat-title">Agotado</div></div>
+        </div>
+        <div class="fatigue-hint" id="fatigueHint">🟡 Sesión estándar.</div>
       </div>
-      <div class="fatigue-hint" id="fatigueHint"></div>
+      <div class="section"><h3>1 · Nivel</h3><select id="experienceLevel"><option value="beginner">🌱 Principiante</option><option value="intermediate" selected>💪 Intermedio</option><option value="advanced">🔥 Avanzado</option><option value="expert"> Experto</option></select></div>
+      <div class="section"><h3>2 · Tipo</h3><select id="routineType"><option value="fullbody">Full Body</option><option value="upper">Tren Superior</option><option value="lower">Tren Inferior</option><option value="push">Empuje</option><option value="pull">Tirón</option></select></div>
+      <div class="section"><h3>3 · Equipamiento</h3><div class="equip-grid" id="equipGrid"></div></div>
+      <button class="btn btn-primary" id="btnGenerate">🚀 Generar Rutina</button>
     </div>
-    <div class="section"><h3 data-i18n="sec1">1 · Tu nivel de experiencia</h3><label class="sel-label" data-i18n="sec1Label">¿Cuánto llevas entrenando?</label><select id="experienceLevel"><option value="beginner" data-i18n="optBeginner">🌱 Principiante · Menos de 6 meses</option><option value="intermediate" selected data-i18n="optIntermediate">💪 Intermedio · 6 meses - 2 años</option><option value="advanced" data-i18n="optAdvanced">🔥 Avanzado · 2 - 5 años</option><option value="expert" data-i18n="optExpert">⚡ Experto · Más de 5 años</option></select><div class="level-hint" id="levelHint"></div></div>
-    <div class="section"><h3 data-i18n="sec2">2 · Tipo de sesión</h3><label class="sel-label" data-i18n="sec2Label">Objetivo</label><select id="routineType"><option value="fullbody" data-i18n="optFullbody">Full Body · Global equilibrado</option><option value="upper" data-i18n="optUpper">Tren Superior · Torso completo</option><option value="lower" data-i18n="optLower">Tren Inferior · Pierna y glúteo</option><option value="push" data-i18n="optPush">Empuje · Pecho, hombro, tríceps</option><option value="pull" data-i18n="optPull">Tirón · Espalda, bíceps, trapecio</option><option value="custom" data-i18n="optCustom">🎯 Músculo específico…</option></select><div id="customGroupWrap" style="display:none;margin-top:12px"><label class="sel-label" data-i18n="customLabel">Elige el grupo muscular</label><select id="customGroup"></select></div></div>
-    <div class="section"><h3 data-i18n="sec3">3 · Estilo de ejercicio</h3><label class="sel-label" data-i18n="sec3Label">Tipo de ejercicios a incluir</label><select id="exerciseStyle"><option value="all" data-i18n="optAll">Todos (máx. variedad)</option><option value="bodyweight" data-i18n="optBodyweight">Solo peso corporal</option><option value="iso" data-i18n="optIso">Incluir isométricos</option><option value="mix" data-i18n="optMix">Mixto (equipo + peso corporal)</option></select></div>
-    <div class="section"><h3 data-i18n="sec4">4 · Volumen de series</h3><label class="sel-label" data-i18n="sec4Label">Nivel de exigencia</label><select id="level"><option value="2" data-i18n="optLevel2">Baja · 2 series</option><option value="3" selected data-i18n="optLevel3">Media · 3 series</option><option value="4" data-i18n="optLevel4">Alta · 4 series</option></select></div>
-    <div class="section"><h3 data-i18n="sec5">5 · Tu equipamiento hoy</h3><div class="equip-grid" id="equipGrid"></div></div>
-    <button class="btn btn-primary" id="btnGenerate"><span>🚀</span><span data-i18n="btnGenerate">Generar Rutina a Medida</span></button>
+
+    <div id="planForm" style="display:none">
+      <div class="section"><h3>Configuración del Plan</h3>
+        <label class="sel-label">Deporte principal</label>
+        <select id="planSport"><option value="cycling">🚴 Ciclismo</option><option value="running">🏃 Running</option><option value="fitness">💪 Fitness</option><option value="other">🎯 Otro</option></select>
+        <label class="sel-label" style="margin-top:10px">Objetivo</label>
+        <select id="planGoal"><option value="performance">🚀 Rendimiento</option><option value="injury">🛡️ Prevención</option><option value="muscle">💪 Hipertrofia</option><option value="balance"> Equilibrio</option></select>
+      </div>
+      <div class="section"><h3>Equipamiento disponible</h3><div class="equip-grid" id="planEquipGrid"></div></div>
+      <button class="btn btn-primary" id="btnGeneratePlan"> Generar y Guardar Plan</button>
+    </div>
   </div>
 </div>
 
 <div class="view" id="view-browse">
   <div class="section">
-    <h3 data-i18n="browseTitle">🔍 Explorar ejercicios</h3>
-    <div class="search-box"><span class="icon">🔍</span><input type="text" id="exerciseSearch" data-i18n-placeholder="searchPlaceholder" placeholder="Buscar por nombre, músculo, equipamiento..."></div>
-    <div class="filter-bar">
-      <select id="filterCategory"><option value="" data-i18n="allCategories">Todos los grupos</option></select>
-      <select id="filterEquip"><option value="" data-i18n="allEquipment">Todo el equipamiento</option></select>
-      <select id="filterDiff"><option value="" data-i18n="allDifficulty">Todas las dificultades</option><option value="beginner" data-i18n="diffBeginner">🌱 Principiante</option><option value="intermediate" data-i18n="diffIntermediate">💪 Intermedio</option><option value="advanced" data-i18n="diffAdvanced">🔥 Avanzado</option><option value="expert" data-i18n="diffExpert">⚡ Experto</option></select>
-    </div>
-    <div class="result-count" id="resultCount">0 ejercicios</div>
-    <div id="browseList" class="browse-grid"></div>
-  </div>
-  <div class="my-routine-panel" id="myRoutinePanel" style="display:none">
-    <h3 data-i18n="myRoutineTitle">📋 Mi rutina personalizada <span class="my-routine-count" id="myRoutineCount">0</span></h3>
-    <div id="myRoutineList"></div>
-    <div class="btn-row"><button class="btn btn-green" id="btnStartCustom" data-i18n="btnStartCustom">🚀 Iniciar sesión con estos ejercicios</button><button class="btn btn-red" id="btnClearCustom" data-i18n="btnClearCustom">🗑 Vaciar rutina</button></div>
+    <h3>🔍 Explorar</h3>
+    <input type="text" id="exerciseSearch" placeholder="Buscar..." style="margin-bottom:10px">
+    <div id="browseList" class="exercise-grid"></div>
   </div>
 </div>
 
 <div class="view" id="view-session">
-  <div id="sessionEmpty" class="empty"><div class="ic">🏋️</div><span data-i18n="emptySession">No hay sesión en curso.<br>Ve a <b>Crear</b> o <b>Ejercicios</b> para empezar.</span></div>
+  <div id="sessionEmpty" class="loader">No hay sesión activa. Ve a Crear o Planes.</div>
   <div id="sessionContent" style="display:none">
-    <div class="section"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div><div style="font-size:12px;color:var(--muted);font-weight:600" data-i18n="sessionActive">SESIÓN EN CURSO</div><div id="sessionTitle" style="font-size:17px;font-weight:800;margin-top:2px"></div></div><button class="btn btn-red" id="btnCancelSession">✕</button></div></div>
-    <div class="donate-section"><h3 data-i18n="donateTitle">☕ Invítame a una cerveza</h3><p data-i18n="donateText">Esta app es 100% gratuita y sin anuncios.</p><div class="donate-actions"><a href="https://www.paypal.com/paypalme/viferor" target="_blank" class="btn btn-accent" data-i18n="btnPaypal">💳 Donar con PayPal</a><button class="btn btn-purple" id="btnCopyBizum" data-i18n="btnBizum">📱 Copiar Bizum</button></div></div>
-    <div class="section"><h3 style="margin-bottom:10px" data-i18n="shareTitle">💾 Compartir esta rutina</h3><div class="btn-row"><button class="btn btn-accent" id="btnSaveToLibrary" style="padding:12px;font-size:13px" data-i18n="btnSave">💾 Guardar</button><button class="btn btn-purple" id="btnShareLink" style="padding:12px;font-size:13px" data-i18n="btnShare">🔗 Enlace</button><button class="btn btn-secondary" id="btnExportJSON" style="padding:12px;font-size:13px" data-i18n="btnExport">📤 Exportar</button><button class="btn btn-secondary" id="btnImportJSON" style="padding:12px;font-size:13px" data-i18n="btnImport">📥 Importar</button></div><div id="shareBox" class="share-box" style="display:none"></div></div>
+    <div class="section"><div style="display:flex;justify-content:space-between"><div id="sessionTitle" style="font-size:16px;font-weight:800"></div><button class="btn btn-red" id="btnCancelSession" style="width:auto;margin:0">✕</button></div></div>
     <div id="exercisesList" class="exercise-grid"></div>
-    <div class="sticky-bottom"><textarea id="sessionNotes" data-i18n-placeholder="notesPlaceholder" placeholder="📝 Notas del entrenamiento…"></textarea><div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:10px;background:var(--card2);border-radius:8px"><input type="checkbox" id="exportPDF" style="width:18px;height:18px"><label for="exportPDF" style="font-size:13px;color:var(--muted);margin:0" data-i18n="exportPDFLabel">📄 Exportar sesión a PDF al finalizar</label></div><button class="btn btn-green" id="btnFinish" data-i18n="btnFinish">✓ Finalizar y guardar</button></div>
+    <div class="sticky-bottom" style="position:sticky;bottom:0;background:var(--bg);padding:10px 0">
+      <textarea id="sessionNotes" placeholder="Notas..."></textarea>
+      <button class="btn btn-green" id="btnFinish">✓ Finalizar y guardar</button>
+    </div>
   </div>
 </div>
 
-<div class="view" id="view-library">
-  <div class="section">
-    <h3 style="margin-bottom:10px" data-i18n="libTitle">📚 Mi biblioteca de rutinas</h3>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:12px" data-i18n="libDesc">Guarda tus rutinas favoritas y compártelas.</p>
-    <div class="import-zone" id="importZone"><div style="font-size:32px;margin-bottom:8px">📥</div><div style="font-weight:600" data-i18n="importZoneTitle">Importar rutina desde archivo</div><div style="font-size:12px;color:var(--muted)" data-i18n="importZoneDesc">Haz clic o arrastra un archivo .json</div><input type="file" id="importFile" accept=".json"></div>
-    <div style="margin-top:10px"><label class="sel-label" data-i18n="importLinkLabel">O pega un enlace compartido:</label><div style="display:flex;gap:8px"><input type="text" id="importLinkInput" data-i18n-placeholder="importLinkPlaceholder" placeholder="Pega aquí el enlace..."><button class="btn btn-accent" id="btnImportLink" style="width:auto;padding:12px 20px" data-i18n="btnLoad">Cargar</button></div></div>
-  </div>
-  <div id="libraryList" class="lib-grid"></div>
+<div class="view" id="view-plans">
+  <div class="section"><h3>📆 Mis Planes</h3><p style="color:var(--muted);font-size:13px">Tus rutinas semanales y mensuales.</p></div>
+  <div id="plansList"></div>
 </div>
 
-<div class="view" id="view-history"><div id="historyList" class="hist-grid"></div></div>
-<div class="view" id="view-detail"><button class="detail-back" id="btnBackHist">← <span data-i18n="btnBack">Volver</span></button><div id="detailBody"></div></div>
-
-<div class="view" id="view-legal">
-  <div class="section">
-    <h3 data-i18n="legalTitle">⚖️ Avisos legales y atribuciones</h3>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:16px" data-i18n="legalDesc">Esta aplicación utiliza recursos de terceros bajo distintas licencias.</p>
-    <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--accent)"><h4 data-i18n="legalMediaTitle">🎬 Animaciones e imágenes</h4><p style="font-size:13px;color:var(--muted)" data-i18n="legalMediaText">Las animaciones GIF y las imágenes son propiedad de <strong>© Gym visual</strong>.</p></div>
-    <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--green)"><h4 data-i18n="legalDbTitle">📋 Base de datos</h4><p style="font-size:13px;color:var(--muted)" data-i18n="legalDbText">Bajo <strong>MIT License</strong>.</p></div>
-    <div style="background:var(--card2);border-radius:10px;padding:14px;border-left:3px solid var(--purple)"><h4 data-i18n="legalPrivacyTitle">💾 Privacidad</h4><p style="font-size:13px;color:var(--muted)" data-i18n="legalPrivacyText">Tus datos se almacenan <strong>exclusivamente en tu navegador</strong>.</p></div>
-  </div>
-</div>
-</div>
-
-<div class="legal-footer">
-  <div data-i18n="footerCredit">Cuidate !!</div>
-  <div data-i18n="footerText">Animaciones © Gym visual · Dataset exercises-dataset (MIT)</div>
-  <div class="license-badges"><span class="badge">MIT License</span><span class="badge">© Gym visual</span><span class="badge" data-i18n="badgeLocal">Datos locales</span></div>
-  <div class="disclaimer"><strong data-i18n="footerDisclaimerTitle">⚠️ Aviso importante:</strong><span data-i18n="footerDisclaimer">Herramienta de organización personal. No sustituye consejo médico.</span></div>
+<div class="view" id="view-library"><div class="section"><h3>📚 Biblioteca</h3><div id="libraryList"></div></div></div>
+<div class="view" id="view-history"><div class="section"><h3>📅 Historial</h3><div id="historyList"></div></div></div>
+<div class="view" id="view-legal"><div class="section"><h3>⚖️ Legal</h3><p style="color:var(--muted);font-size:13px">Animaciones © Gym visual. Datos locales.</p></div></div>
 </div>
 
 <div class="wizard-modal" id="wizardModal">
   <div class="wizard-box">
-    <div class="wizard-header"><h2 data-i18n="wizardWelcomeTitle">👋 ¡Bienvenido a Cuidate !!</h2><p data-i18n="wizardWelcomeSub">Personaliza tu experiencia en 5 pasos</p></div>
-    <div class="wizard-progress">
-      <div class="wizard-step-dot active" data-step="1"></div><div class="wizard-step-dot" data-step="2"></div><div class="wizard-step-dot" data-step="3"></div><div class="wizard-step-dot" data-step="4"></div><div class="wizard-step-dot" data-step="5"></div>
-    </div>
     <div class="wizard-step active" data-step="1">
-      <div class="wizard-question" data-i18n="wizardQ1">¿Cuál es tu deporte principal?</div>
-      <div class="wizard-options" id="wizardSportOptions">
-        <div class="wizard-option" data-value="cycling"><div class="opt-icon">🚴</div><div class="opt-title" data-i18n="sportCycling">Ciclismo</div><div class="opt-desc" data-i18n="sportCyclingDesc">Carretera, MTB, gravel</div></div>
-        <div class="wizard-option" data-value="running"><div class="opt-icon">🏃</div><div class="opt-title" data-i18n="sportRunning">Running</div><div class="opt-desc" data-i18n="sportRunningDesc">Trail, asfalto, ultra</div></div>
-        <div class="wizard-option" data-value="fitness"><div class="opt-icon">💪</div><div class="opt-title" data-i18n="sportFitness">Fitness general</div><div class="opt-desc" data-i18n="sportFitnessDesc">Gimnasio, tonificación</div></div>
-        <div class="wizard-option" data-value="other"><div class="opt-icon">🎯</div><div class="opt-title" data-i18n="sportOther">Otro deporte</div><div class="opt-desc" data-i18n="sportOtherDesc">Fútbol, natación, etc.</div></div>
-      </div>
-      <div class="wizard-nav"><button class="btn btn-secondary" id="wizardSkip" data-i18n="wizardSkip">Saltar</button><button class="btn btn-accent" id="wizardNext1" data-i18n="wizardNext">Siguiente →</button></div>
+      <h3 style="text-align:center;margin-bottom:16px">¿Cuál es tu deporte?</h3>
+      <div class="wizard-option" data-val="cycling">🚴 Ciclismo</div>
+      <div class="wizard-option" data-val="running">🏃 Running</div>
+      <div class="wizard-option" data-val="fitness"> Fitness</div>
+      <div class="wizard-option" data-val="other">🎯 Otro</div>
+      <button class="btn btn-accent" id="wNext1">Siguiente</button>
     </div>
     <div class="wizard-step" data-step="2">
-      <div class="wizard-question" data-i18n="wizardQ2">¿Cuántos días a la semana entrenas fuerza?</div>
-      <div class="wizard-options" id="wizardDaysOptions">
-        <div class="wizard-option" data-value="1"><div class="opt-icon">1️⃣</div><div class="opt-title" data-i18n="days1">1 día</div></div>
-        <div class="wizard-option" data-value="2"><div class="opt-icon">2️⃣</div><div class="opt-title" data-i18n="days2">2 días</div></div>
-        <div class="wizard-option" data-value="3"><div class="opt-icon">3️⃣</div><div class="opt-title" data-i18n="days3">3 días</div></div>
-        <div class="wizard-option" data-value="4"><div class="opt-icon">4️⃣+</div><div class="opt-title" data-i18n="days4">4+ días</div></div>
-      </div>
-      <div class="wizard-question" data-i18n="wizardQ2b">¿Cuánto tiempo por sesión?</div>
-      <div class="wizard-options" id="wizardTimeOptions">
-        <div class="wizard-option" data-value="30"><div class="opt-icon">⏱️</div><div class="opt-title" data-i18n="time30">30 min</div></div>
-        <div class="wizard-option" data-value="45"><div class="opt-icon">⏰</div><div class="opt-title" data-i18n="time45">45 min</div></div>
-        <div class="wizard-option" data-value="60"><div class="opt-icon">🕐</div><div class="opt-title" data-i18n="time60">60 min</div></div>
-        <div class="wizard-option" data-value="90"><div class="opt-icon">🕑</div><div class="opt-title" data-i18n="time90">+60 min</div></div>
-      </div>
-      <div class="wizard-nav"><button class="btn btn-secondary" id="wizardBack2" data-i18n="wizardBack">← Atrás</button><button class="btn btn-accent" id="wizardNext2" data-i18n="wizardNext">Siguiente →</button></div>
+      <h3 style="text-align:center;margin-bottom:16px">¿Cuántos días entrenas fuerza?</h3>
+      <div class="wizard-option" data-val="2">2 días</div>
+      <div class="wizard-option" data-val="3">3 días</div>
+      <div class="wizard-option" data-val="4">4+ días</div>
+      <button class="btn btn-accent" id="wNext2">Siguiente</button>
     </div>
     <div class="wizard-step" data-step="3">
-      <div class="wizard-question" data-i18n="wizardQ3">¿Qué buscas con el entrenamiento de fuerza?</div>
-      <div class="wizard-options" id="wizardGoalOptions">
-        <div class="wizard-option" data-value="performance"><div class="opt-icon">🚀</div><div class="opt-title" data-i18n="goalPerformance">Rendir más</div></div>
-        <div class="wizard-option" data-value="injury"><div class="opt-icon">🛡️</div><div class="opt-title" data-i18n="goalInjury">Prevenir lesiones</div></div>
-        <div class="wizard-option" data-value="weight"><div class="opt-icon">⚖️</div><div class="opt-title" data-i18n="goalWeight">Perder peso</div></div>
-        <div class="wizard-option" data-value="muscle"><div class="opt-icon">💪</div><div class="opt-title" data-i18n="goalMuscle">Ganar músculo</div></div>
-        <div class="wizard-option" data-value="balance" style="grid-column:1/-1"><div class="opt-icon">🧘</div><div class="opt-title" data-i18n="goalBalance">Equilibrio general</div></div>
-      </div>
-      <div class="wizard-nav"><button class="btn btn-secondary" id="wizardBack3" data-i18n="wizardBack">← Atrás</button><button class="btn btn-accent" id="wizardNext3" data-i18n="wizardNext">Siguiente →</button></div>
-    </div>
-    <div class="wizard-step" data-step="4">
-      <div class="wizard-question" data-i18n="wizardQ4">¿Qué equipamiento tienes?</div>
-      <div class="equip-recommend"><h4 data-i18n="equipRecommended">Recomendado para tu perfil</h4><p class="equip-note" id="equipRecommendNote"></p><div class="equip-grid" id="wizardEquipGrid"></div></div>
-      <div class="wizard-nav"><button class="btn btn-secondary" id="wizardBack4" data-i18n="wizardBack">← Atrás</button><button class="btn btn-accent" id="wizardNext4" data-i18n="wizardNext">Siguiente →</button></div>
-    </div>
-    <div class="wizard-step" data-step="5">
-      <div class="wizard-question" data-i18n="wizardQ5">¿Cómo te sientes normalmente?</div>
-      <div class="fatigue-selector" id="wizardFatigueSelector">
-        <div class="fatigue-option" data-value="fresh"><div class="fat-icon">🟢</div><div class="fat-title" data-i18n="fatFresh">Fresco</div></div>
-        <div class="fatigue-option selected" data-value="normal"><div class="fat-icon">🟡</div><div class="fat-title" data-i18n="fatNormal">Normal</div></div>
-        <div class="fatigue-option" data-value="tired"><div class="fat-icon">🟠</div><div class="fat-title" data-i18n="fatTired">Cansado</div></div>
-        <div class="fatigue-option" data-value="exhausted"><div class="fat-icon">🔴</div><div class="fat-title" data-i18n="fatExhausted">Agotado</div></div>
-      </div>
-      <div class="wizard-nav"><button class="btn btn-secondary" id="wizardBack5" data-i18n="wizardBack">← Atrás</button><button class="btn btn-green" id="wizardFinish" data-i18n="wizardFinish">✨ Configurar mi app</button></div>
-    </div>
-    <div class="wizard-step" data-step="6">
-      <div class="wizard-question" data-i18n="wizardSummaryTitle">✨ ¡Tu perfil está listo!</div>
-      <div class="wizard-summary" id="wizardSummary"></div>
-      <button class="btn btn-green" id="wizardStart" data-i18n="wizardStart">🚀 Empezar a entrenar</button>
+      <h3 style="text-align:center;margin-bottom:16px">¿Objetivo?</h3>
+      <div class="wizard-option" data-val="performance">🚀 Rendimiento</div>
+      <div class="wizard-option" data-val="injury">🛡️ Prevención</div>
+      <div class="wizard-option" data-val="muscle">💪 Músculo</div>
+      <button class="btn btn-green" id="wFinish">✨ Configurar</button>
     </div>
   </div>
 </div>
 
-<div class="modal" id="gifModal"><button class="modal-close" id="modalClose">✕</button><div class="modal-content"><img id="modalImg" src="" alt=""><h3 id="modalTitle"></h3><div class="instructions" id="modalInstr"></div><div style="margin-top:10px;font-size:11px;color:var(--muted)">© Gym visual</div></div></div>
-<div class="modal" id="replaceModal"><button class="modal-close" id="replaceModalClose">✕</button><div class="modal-content"><h3 style="margin-bottom:12px" data-i18n="modalReplaceTitle">🔄 Cambiar ejercicio</h3><p style="color:var(--muted);font-size:13px;margin-bottom:12px"><span data-i18n="modalReplaceInfo">Sustituyendo:</span> <span id="replaceInfo"></span></p><div class="replace-list" id="replaceList"></div></div></div>
-<div class="modal" id="donateModal"><button class="modal-close" id="donateModalClose">✕</button><div class="modal-content" style="padding:24px"><h3 style="color:var(--yellow)">☕ Invítame a una cerveza</h3><p style="font-size:14px;color:var(--muted);margin:16px 0" data-i18n="donateText">App gratuita y sin anuncios.</p><div style="display:flex;flex-direction:column;gap:10px"><a href="https://www.paypal.com/paypalme/viferor" target="_blank" class="btn btn-accent" style="text-decoration:none">💳 Donar con PayPal</a><button class="btn btn-purple" id="btnCopyBizumModal">📱 Copiar Bizum: +34 638 00 05 05</button></div></div></div>
+<div class="modal" id="gifModal"><button class="modal-close" id="modalClose">✕</button><div class="modal-content"><img id="modalImg"><h3 id="modalTitle"></h3><div id="modalInstr" style="color:var(--muted);font-size:13px;margin-top:10px"></div></div></div>
 
 <script>
 const DATA_URLS=['https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/data/exercises.json','https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/data/exercises.json'];
 const MEDIA_BASE='https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/';
-const PROFILE_KEY='viferor_profile_v1';
-const EQUIP_LIST=[{key:'body weight',label:'equipBodyweight'},{key:'dumbbell',label:'equipDumbbell'},{key:'barbell',label:'equipBarbell'},{key:'kettlebell',label:'equipKettlebell'},{key:'cable',label:'equipCable'},{key:'leverage machine',label:'equipMachine'},{key:'smith machine',label:'equipSmith'},{key:'band',label:'equipBand'},{key:'stability ball',label:'equipBall'},{key:'ez barbell',label:'equipEZ'},{key:'medicine ball',label:'equipMedBall'},{key:'foam roll',label:'equipFoamRoll'},{key:'pull-up bar',label:'equipPullUpBar'},{key:'battle rope',label:'equipBattleRope'},{key:'other',label:'equipOther'}];
-let DB=[],currentSession=null,replaceIdx=null,myCustomRoutine=[];
-const STORAGE_KEY='viferor_sessions_v1',LIBRARY_KEY='viferor_library_v1';
-const EQUIP_MAP={'body weight':'equipBodyweight','bodyweight':'equipBodyweight','dumbbell':'equipDumbbell','barbell':'equipBarbell','kettlebell':'equipKettlebell','cable':'equipCable','leverage machine':'equipMachine','machine':'equipMachine','smith machine':'equipSmith','band':'equipBand','bands':'equipBand','stability ball':'equipBall','exercise ball':'equipBall','ez barbell':'equipEZ','ez bar':'equipEZ','medicine ball':'equipMedBall','foam roll':'equipFoamRoll','pull-up bar':'equipPullUpBar','battle rope':'equipBattleRope','other':'equipOther'};
-const PULLUP_KEYWORDS=['pull-up','pullup','pull up','chin-up','chinup','chin up','hanging','muscle-up','toes to bar','knee raise','leg raise','l-sit'];
-function isPullUpExercise(ex){const n=(ex.name||'').toLowerCase();return PULLUP_KEYWORDS.some(k=>n.includes(k));}
-const exerciseTranslations={'Barbell Bench Press':'Press de Banca con Barra','Dumbbell Bench Press':'Press de Banca con Mancuernas','Push-Up':'Flexión','Pushups':'Flexiones','Pull-Up':'Dominada','Pullups':'Dominadas','Chin-Up':'Dominada Supina','Barbell Squat':'Sentadilla con Barra','Squats':'Sentadillas','Front Squat':'Sentadilla Frontal','Deadlift':'Peso Muerto','Romanian Deadlift':'Peso Muerto Rumano','Barbell Row':'Remo con Barra','Dumbbell Row':'Remo con Mancuerna','Overhead Press':'Press Militar','Shoulder Press':'Press de Hombros','Lateral Raise':'Elevaciones Laterales','Bicep Curl':'Curl de Bíceps','Hammer Curl':'Curl Martillo','Tricep Extension':'Extensión de Tríceps','Tricep Pushdown':'Pushdown de Tríceps','Leg Press':'Prensa de Piernas','Leg Curl':'Curl de Pierna','Leg Extension':'Extensión de Pierna','Calf Raise':'Elevación de Gemelos','Plank':'Plancha','Side Plank':'Plancha Lateral','Crunch':'Abdominal Crunch','Sit-Up':'Abdominal Sit-Up','Russian Twist':'Giros Rusos','Lunge':'Zancada','Lunges':'Zancadas','Bulgarian Split Squat':'Sentadilla Búlgara','Hip Thrust':'Hip Thrust','Glute Bridge':'Puente de Glúteos','Lat Pulldown':'Jalón al Pecho','Cable Fly':'Cruce de Poleas','Chest Fly':'Aperturas de Pecho','Incline Bench Press':'Press Banca Inclinado','Decline Bench Press':'Press Banca Declinado','Dips':'Fondos','Close-Grip Bench Press':'Press Banca Agarre Cerrado','Wide-Grip Pull-Up':'Dominada Agarre Abierto','Face Pull':'Face Pull','Shrug':'Encogimiento de Hombros','Upright Row':'Remo al Mentón','Good Morning':'Buenos Días','Box Jump':'Salto al Cajón','Jump Squat':'Sentadilla con Salto','Burpee':'Burpee','Mountain Climber':'Escalador','High Knees':'Rodillas Altas','Jumping Jack':'Jumping Jack','Wall Sit':'Sentadilla en Pared','Hanging Leg Raise':'Elevación de Piernas Colgado','Knee Raise':'Elevación de Rodillas','Superman':'Superman','Back Extension':'Extensión de Espalda','Kettlebell Swing':'Swing con Kettlebell','Turkish Get-Up':'Turkish Get-Up','Goblet Squat':'Sentadilla Goblet','Sumo Deadlift':'Peso Muerto Sumo','Single Leg Deadlift':'Peso Muerto a Una Pierna','Pistol Squat':'Sentadilla Pistol','Handstand Push-Up':'Flexión de Pino','Muscle-Up':'Muscle-Up','L-Sit':'L-Sit','Dragon Flag':'Dragon Flag','Planche':'Planche','Ring Dip':'Fondos en Anillas','Ring Push-Up':'Flexión en Anillas','Ring Row':'Remo en Anillas','TRX Row':'Remo TRX','Cable Crunch':'Crunch en Polea','Woodchopper':'Leñador','Pallof Press':'Pallof Press','Ab Wheel Rollout':'Rueda Abdominal','Hanging Knee Raise':'Elevación de Rodillas Colgado','Decline Crunch':'Crunch Declinado','Reverse Crunch':'Crunch Inverso','Bicycle Crunch':'Crunch de Bicicleta','Leg Raise':'Elevación de Piernas','Hip Raise':'Elevación de Cadera','Glute Kickback':'Patada de Glúteo','Donkey Kick':'Patada de Burro','Fire Hydrant':'Hidrante','Clamshell':'Almeja','Monster Walk':'Caminata de Monstruo','Toes To Bar':'Pies a la Barra','Battle Rope':'Cuerda de Batalla','Medicine Ball Slam':'Lanzamiento de Balón Medicinal','Farmers Walk':'Paseo del Granjero','Sled Push':'Empuje de Trineo','Clean and Press':'Cargada y Press','Snatch':'Arranque','Clean':'Cargada','Jerk':'Envión'};
-function formatExerciseName(n){if(currentLang==='es'&&exerciseTranslations[n])return exerciseTranslations[n];return n;}
+const PROFILE_KEY='viferor_profile_v1',STORAGE_KEY='viferor_sessions_v1',LIBRARY_KEY='viferor_library_v1',PLANS_KEY='viferor_plans_v1';
+const EQUIP_LIST=[{key:'body weight',l:'🏃 Peso'},{key:'dumbbell',l:'🏋️ Mancuernas'},{key:'barbell',l:'💪 Barra'},{key:'kettlebell',l:' KB'},{key:'band',l:'🎽 Bandas'},{key:'pull-up bar',l:'🏗️ Dominadas'},{key:'stability ball',l:'⚽ Fitball'},{key:'foam roll',l:'🧘 Rodillo'}];
+let DB=[],currentSession=null,currentFatigue='normal',currentMode='today';
+const EQUIP_MAP={'body weight':'body weight','dumbbell':'dumbbell','barbell':'barbell','kettlebell':'kettlebell','band':'band','pull-up bar':'pull-up bar','stability ball':'stability ball','foam roll':'foam roll'};
 
-const i18n={
-es:{title:"Cuidate !!",sub:"¡Tu app de entrenamiento!",langBtn:"🇬🇧 EN",tabCreate:"➕ Crear",tabBrowse:"🔍 Ejercicios",tabSession:"💪 Sesión",tabLibrary:"📚 Biblioteca",tabHistory:"📅 Historial",tabLegal:"⚖️ Legal",loading:"Cargando base de datos…",fatigueSection:"⚡ ¿Cómo te sientes hoy?",fatigueLabel:"Ajusta la sesión a tu nivel de energía",fatFresh:"Fresco",fatFreshDesc:"Descansado, a tope",fatNormal:"Normal",fatNormalDesc:"Día estándar",fatTired:"Cansado",fatTiredDesc:"Baja energía",fatExhausted:"Agotado",fatExhaustedDesc:"Solo movilidad",fatHintFresh:"🟢 ¡A por todas! Volumen alto y ejercicios técnicos.",fatHintNormal:"🟡 Sesión estándar. Volumen e intensidad normales.",fatHintTired:"🟠 Sesión adaptada. Menos series, prioridad a técnica.",fatHintExhausted:"🔴 Solo movilidad y recuperación activa.",sec1:"1 · Tu nivel de experiencia",sec1Label:"¿Cuánto llevas entrenando?",optBeginner:"🌱 Principiante · Menos de 6 meses",optIntermediate:"💪 Intermedio · 6 meses - 2 años",optAdvanced:"🔥 Avanzado · 2 - 5 años",optExpert:"⚡ Experto · Más de 5 años",hintBeginner:"🌱 Ejercicios básicos. Prioriza la técnica.",hintIntermediate:"💪 Ejercicios equilibrados con técnica intermedia.",hintAdvanced:"🔥 Movimientos técnicos y exigentes.",hintExpert:"⚡ Alta complejidad técnica.",sec2:"2 · Tipo de sesión",sec2Label:"Objetivo",optFullbody:"Full Body · Global",optUpper:"Tren Superior",optLower:"Tren Inferior",optPush:"Empuje",optPull:"Tirón",optCustom:"🎯 Músculo específico…",customLabel:"Elige el grupo muscular",sec3:"3 · Estilo de ejercicio",sec3Label:"Tipo de ejercicios",optAll:"Todos",optBodyweight:"Solo peso corporal",optIso:"Incluir isométricos",optMix:"Mixto",sec4:"4 · Volumen de series",sec4Label:"Nivel de exigencia",optLevel2:"Baja · 2 series",optLevel3:"Media · 3 series",optLevel4:"Alta · 4 series",sec5:"5 · Tu equipamiento hoy",btnGenerate:"🚀 Generar Rutina a Medida",browseTitle:"🔍 Explorar ejercicios",searchPlaceholder:"Buscar por nombre, músculo, equipamiento...",allCategories:"Todos los grupos",allEquipment:"Todo el equipamiento",allDifficulty:"Todas las dificultades",diffBeginner:"🌱 Principiante",diffIntermediate:"💪 Intermedio",diffAdvanced:"🔥 Avanzado",diffExpert:"⚡ Experto",myRoutineTitle:"📋 Mi rutina personalizada",btnStartCustom:"🚀 Iniciar sesión",btnClearCustom:"🗑 Vaciar rutina",addedToRoutine:"✅ Añadido",removedFromRoutine:"❌ Eliminado",routineCleared:"🗑 Vac
+const i18n={es:{fatHintFresh:"🟢 ¡A tope! Volumen alto.",fatHintNormal:"🟡 Sesión estándar.",fatHintTired:"🟠 Menos series, técnica.",fatHintExhausted:"🔴 Solo movilidad."},en:{fatHintFresh:"🟢 Full power! High volume.",fatHintNormal:"🟡 Standard session.",fatHintTired:"🟠 Fewer sets, focus on form.",fatHintExhausted:" Mobility only."}};
+let currentLang='es';
+
+// INIT
+(async function init(){
+  const grids=['equipGrid','planEquipGrid'];
+  grids.forEach(id=>{
+    const g=document.getElementById(id);
+    EQUIP_LIST.forEach(eq=>{
+      const l=document.createElement('label');
+      l.innerHTML=`<input type="checkbox" value="${eq.key}" ${eq.key==='body weight'?'checked':''}><span class="dot"></span><span>${eq.l}</span>`;
+      g.appendChild(l);
+    });
+  });
+  
+  document.querySelectorAll('.mode-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.mode-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      currentMode=b.dataset.mode;
+      document.getElementById('todayForm').style.display=currentMode==='today'?'block':'none';
+      document.getElementById('planForm').style.display=currentMode==='today'?'none':'block';
+    });
+  });
+
+  document.querySelectorAll('#fatigueSelector .fatigue-option').forEach(o=>{
+    o.addEventListener('click',()=>{
+      document.querySelectorAll('#fatigueSelector .fatigue-option').forEach(x=>x.classList.remove('selected'));
+      o.classList.add('selected');
+      currentFatigue=o.dataset.value;
+      document.getElementById('fatigueHint').textContent=i18n[currentLang]['fatHint'+currentFatigue.charAt(0).toUpperCase()+currentFatigue.slice(1)];
+    });
+  });
+
+  document.getElementById('btnGenerate').addEventListener('click',generateRoutine);
+  document.getElementById('btnGeneratePlan').addEventListener('click',generatePlan);
+  document.getElementById('btnFinish').addEventListener('click',finishSession);
+  document.getElementById('btnCancelSession').addEventListener('click',()=>{currentSession=null;renderSession();});
+  document.getElementById('exerciseSearch').addEventListener('input',renderBrowse);
+  document.getElementById('btnSettings').addEventListener('click',()=>document.getElementById('wizardModal').classList.add('show'));
+  document.getElementById('modalClose').addEventListener('click',()=>document.getElementById('gifModal').classList.remove('show'));
+  document.getElementById('langToggle').addEventListener('click',()=>{currentLang=currentLang==='es'?'en':'es';document.getElementById('langToggle').textContent=currentLang==='es'?'🇬🇧 EN':'🇸 ES';});
+
+  await loadDB();
+  renderPlans();
+  renderHistory();
+  renderLibrary();
+})();
+
+async function loadDB(){
+  for(let u of DATA_URLS){
+    try{
+      const r=await fetch(u);
+      if(r.ok){DB=await r.json();document.getElementById('loaderBlock').style.display='none';document.getElementById('formBlock').style.display='block';renderBrowse();return;}
+    }catch(e){}
+  }
+  document.getElementById('loaderBlock').innerHTML='<p style="color:var(--red)">Error cargando DB. Revisa tu conexión o AdBlock.</p>';
+}
+
+function classifyDifficulty(ex){
+  const n=(ex.name||'').toLowerCase();
+  let s=0;
+  if(['handstand','pistol','planche','muscle up','snatch'].some(k=>n.includes(k)))s+=4;
+  if(['bulgarian','single leg','jump','explosive'].some(k=>n.includes(k)))s+=2;
+  if(['beginner','basic','machine','body weight','easy'].some(k=>n.includes(k)))s-=2;
+  return s>=6?'expert':s>=3?'advanced':s>=0?'intermediate':'beginner';
+}
+
+function filterByLevel(exs,lvl){
+  const allowed={beginner:['beginner'],intermediate:['beginner','intermediate'],advanced:['beginner','intermediate','advanced'],expert:['beginner','intermediate','advanced','expert']};
+  return exs.filter(e=>allowed[lvl].includes(classifyDifficulty(e)));
+}
+
+function filterByEquip(exs,equips){
+  return exs.filter(e=>equips.includes(e.equipment));
+}
+
+function generateRoutine(){
+  const lvl=document.getElementById('experienceLevel').value;
+  const type=document.getElementById('routineType').value;
+  const equips=[...document.querySelectorAll('#equipGrid input:checked')].map(i=>i.value);
+  if(equips.length===0){alert('Selecciona equipamiento');return;}
+
+  let pool=filterByEquip(DB,equips);
+  pool=filterByLevel(pool,lvl);
+  
+  if(currentFatigue==='exhausted'){
+    pool=pool.filter(e=>['stretch','mobility','foam','plank','bridge'].some(k=>(e.name||'').toLowerCase().includes(k))||classifyDifficulty(e)==='beginner');
+  } else if(currentFatigue==='tired'){
+    pool=pool.filter(e=>classifyDifficulty(e)!=='expert');
+  }
+
+  const cats={fullbody:['chest','back','upper legs','waist'],upper:['chest','back','shoulders'],lower:['upper legs','lower legs','waist'],push:['chest','shoulders','upper arms'],pull:['back','upper arms']};
+  const targetCats=cats[type]||['chest','back'];
+  let count=type==='fullbody'?2:3;
+  if(currentFatigue==='tired')count=Math.max(1,count-1);
+  if(currentFatigue==='fresh')count=count+1;
+
+  const chosen=[];
+  targetCats.forEach(c=>{
+    const cp=pool.filter(e=>e.category===c).sort(()=>Math.random()-.5);
+    chosen.push(...cp.slice(0,count));
+  });
+
+  let sets=3;
+  if(currentFatigue==='tired')sets=2;
+  if(currentFatigue==='fresh')sets=4;
+  if(currentFatigue==='exhausted')sets=1;
+
+  currentSession={
+    id:Date.now(),date:new Date().toISOString(),routineType:type,level:sets,experienceLevel:lvl,
+    equipment:equips,name:`Sesión ${type} (${currentFatigue})`,fatigue:currentFatigue,
+    exercises:chosen.slice(0,8).map(e=>({...e,difficulty:classifyDifficulty(e),sets:Array.from({length:sets},(_,i)=>({n:i+1,kg:'',reps:'',done:false}))})),
+    notes:''
+  };
+  renderSession();
+  showView('session');
+}
+
+// PLANES
+const planTemplates={
+  cycling:[{d:'Lunes',t:'rest',f:'normal'},{d:'Martes',t:'upper',f:'normal'},{d:'Miércoles',t:'rest',f:'normal'},{d:'Jueves',t:'lower',f:'fresh'},{d:'Viernes',t:'core',f:'normal'},{d:'Sábado',t:'rest',f:'tired'},{d:'Domingo',t:'mobility',f:'exhausted'}],
+  running:[{d:'Lunes',t:'rest',f:'normal'},{d:'Martes',t:'lower',f:'normal'},{d:'Miércoles',t:'upper',f:'normal'},{d:'Jueves',t:'rest',f:'normal'},{d:'Viernes',t:'lower',f:'fresh'},{d:'Sábado',t:'rest',f:'tired'},{d:'Domingo',t:'mobility',f:'exhausted'}],
+  fitness:[{d:'Lunes',t:'push',f:'fresh'},{d:'Martes',t:'pull',f:'normal'},{d:'Miércoles',t:'lower',f:'normal'},{d:'Jueves',t:'rest',f:'normal'},{d:'Viernes',t:'fullbody',f:'tired'},{d:'Sábado',t:'mobility',f:'normal'},{d:'Domingo',t:'rest',f:'exhausted'}],
+  other:[{d:'Lunes',t:'fullbody',f:'fresh'},{d:'Martes',t:'rest',f:'normal'},{d:'Miércoles',t:'upper',f:'normal'},{d:'Jueves',t:'rest',f:'normal'},{d:'Viernes',t:'lower',f:'normal'},{d:'Sábado',t:'mobility',f:'tired'},{d:'Domingo',t:'rest',f:'exhausted'}]
+};
+
+function generatePlan(){
+  const sport=document.getElementById('planSport').value;
+  const equips=[...document.querySelectorAll('#planEquipGrid input:checked')].map(i=>i.value);
+  const template=planTemplates[sport]||planTemplates.other;
+  const plan={id:Date.now(),name:`Plan ${sport} (${new Date().toLocaleDateString()})`,sport,equips,days:template};
+  const plans=JSON.parse(localStorage.getItem(PLANS_KEY)||'[]');
+  plans.unshift(plan);
+  localStorage.setItem(PLANS_KEY,JSON.stringify(plans));
+  alert('✅ Plan guardado. Ve a la pestaña Planes.');
+  renderPlans();
+  showView('plans');
+}
+
+function loadPlanDay(planId,dayIdx){
+  const plans=JSON.parse(localStorage.getItem(PLANS_KEY)||'[]');
+  const plan=plans.find(p=>p.id===planId);
+  if(!plan)return;
+  const day=plan.days[dayIdx];
+  if(day.t==='rest'||day.t==='mobility'){
+    currentSession={id:Date.now(),date:new Date().toISOString(),routineType:day.t,level:1,experienceLevel:'beginner',equipment:['body weight'],name:`${day.d}: ${day.t}`,fatigue:day.f,exercises:[],notes:'Día de descanso o movilidad activa.'};
+  } else {
+    // Generar rutina para ese día
+    const lvl='intermediate';
+    let pool=filterByEquip(DB,plan.equips);
+    pool=filterByLevel(pool,lvl);
+    if(day.f==='tired')pool=pool.filter(e=>classifyDifficulty(e)!=='expert');
+    
+    const cats={fullbody:['chest','back','upper legs','waist'],upper:['chest','back','shoulders'],lower:['upper legs','lower legs','waist'],push:['chest','shoulders','upper arms'],pull:['back','upper arms'],core:['waist']};
+    const targetCats=cats[day.t]||['chest','back'];
+    const chosen=[];
+    targetCats.forEach(c=>{
+      const cp=pool.filter(e=>e.category===c).sort(()=>Math.random()-.5);
+      chosen.push(...cp.slice(0,2));
+    });
+    let sets=day.f==='fresh'?4:day.f==='tired'?2:3;
+    currentSession={id:Date.now(),date:new Date().toISOString(),routineType:day.t,level:sets,experienceLevel:lvl,equipment:plan.equips,name:`${day.d}: ${day.t}`,fatigue:day.f,exercises:chosen.slice(0,6).map(e=>({...e,difficulty:classifyDifficulty(e),sets:Array.from({length:sets},(_,i)=>({n:i+1,kg:'',reps:'',done:false}))})),notes:''};
+  }
+  renderSession();
+  showView('session');
+}
+
+function renderPlans(){
+  const plans=JSON.parse(localStorage.getItem(PLANS_KEY)||'[]');
+  const list=document.getElementById('plansList');
+  if(plans.length===0){list.innerHTML='<p style="color:var(--muted);text-align:center;padding:20px">No hay planes. Crea uno en "Crear".</p>';return;}
+  list.innerHTML=plans.map(p=>`
+    <div class="section">
+      <h3>${p.name}</h3>
+      ${p.days.map((d,i)=>`
+        <div class="plan-day-card">
+          <div class="plan-day-info">
+            <h4>${d.d} · ${d.t.toUpperCase()}</h4>
+            <p>Fatiga: ${d.f} · Series: ${d.t==='rest'?0:d.f==='fresh'?4:d.f==='tired'?2:3}</p>
+          </div>
+          <div class="plan-day-actions">
+            <button onclick="loadPlanDay(${p.id},${i})">▶ Iniciar</button>
+          </div>
+        </div>
+      `).join('')}
+      <button class="btn btn-red" onclick="deletePlan(${p.id})" style="margin-top:10px">🗑 Eliminar Plan</button>
+    </div>
+  `).join('');
+}
+
+function deletePlan(id){
+  if(!confirm('¿Eliminar plan?'))return;
+  const plans=JSON.parse(localStorage.getItem(PLANS_KEY)||'[]').filter(p=>p.id!==id);
+  localStorage.setItem(PLANS_KEY,JSON.stringify(plans));
+  renderPlans();
+}
+
+function renderSession(){
+  const empty=document.getElementById('sessionEmpty');
+  const content=document.getElementById('sessionContent');
+  if(!currentSession){empty.style.display='block';content.style.display='none';return;}
+  empty.style.display='none';content.style.display='block';
+  const icons={fresh:'',normal:'🟡',tired:'',exhausted:'🔴'};
+  document.getElementById('sessionTitle').textContent=`${icons[currentSession.fatigue]||''} ${currentSession.name}`;
+  const list=document.getElementById('exercisesList');
+  list.innerHTML=currentSession.exercises.map((ex,idx)=>`
+    <div class="exercise-card">
+      <div class="exercise-head">
+        <img class="exercise-thumb" src="${ex.image?MEDIA_BASE+ex.image:''}" onclick="openGif(${idx})">
+        <div class="exercise-info"><h4>${ex.name}</h4><div class="meta">${ex.category} · <span class="tag diff">${ex.difficulty}</span></div></div>
+      </div>
+      ${ex.sets.map((s,i)=>`
+        <div class="set-row">
+          <div class="num">${i+1}</div>
+          <input type="number" placeholder="KG" value="${s.kg}" onchange="currentSession.exercises[${idx}].sets[${i}].kg=this.value">
+          <input type="number" placeholder="Reps" value="${s.reps}" onchange="currentSession.exercises[${idx}].sets[${i}].reps=this.value">
+          <button class="set-check ${s.done?'done':''}" onclick="toggleSet(${idx},${i})">✓</button>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function toggleSet(exIdx,setIdx){
+  currentSession.exercises[exIdx].sets[setIdx].done=!currentSession.exercises[exIdx].sets[setIdx].done;
+  renderSession();
+}
+
+function openGif(idx){
+  const ex=currentSession.exercises[idx];
+  document.getElementById('modalImg').src=ex.gif_url?MEDIA_BASE+ex.gif_url:(ex.image?MEDIA_BASE+ex.image:'');
+  document.getElementById('modalTitle').textContent=ex.name;
+  document.getElementById('modalInstr').textContent=ex.instructions?.en||'Sigue el GIF.';
+  document.getElementById('gifModal').classList.add('show');
+}
+
+function finishSession(){
+  if(!currentSession)return;
+  currentSession.notes=document.getElementById('sessionNotes').value;
+  const totalSets=currentSession.exercises.reduce((a,e)=>a+e.sets.length,0);
+  const doneSets=currentSession.exercises.reduce((a,e)=>a+e.sets.filter(s=>s.done).length,0);
+  currentSession.stats={exercises:currentSession.exercises.length,totalSets,doneSets};
+  const all=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  all.unshift(currentSession);
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(all));
+  currentSession=null;
+  renderSession();renderHistory();
+  showView('history');
+  alert('✅ Sesión guardada');
+}
+
+function renderBrowse(){
+  const search=document.getElementById('exerciseSearch').value.toLowerCase();
+  const filtered=DB.filter(e=>!search||e.name.toLowerCase().includes(search)).slice(0,50);
+  document.getElementById('browseList').innerHTML=filtered.map(ex=>`
+    <div class="exercise-card">
+      <div class="exercise-head">
+        <img class="exercise-thumb" src="${ex.image?MEDIA_BASE+ex.image:''}">
+        <div class="exercise-info"><h4>${ex.name}</h4><div class="meta">${ex.category} · <span class="tag diff">${classifyDifficulty(ex)}</span></div></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderHistory(){
+  const all=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  document.getElementById('historyList').innerHTML=all.length===0?'<p style="color:var(--muted);text-align:center">Sin historial.</p>':all.map(s=>`
+    <div class="section" style="padding:12px">
+      <div style="font-weight:700">${s.name}</div>
+      <div style="font-size:12px;color:var(--muted)">${new Date(s.date).toLocaleDateString()} · ${s.stats?.doneSets||0}/${s.stats?.totalSets||0} series</div>
+    </div>
+  `).join('');
+}
+
+function renderLibrary(){document.getElementById('libraryList').innerHTML='<p style="color:var(--muted);text-align:center">Biblioteca vacía.</p>';}
+
+function showView(name){
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===name));
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>showView(t.dataset.view)));
+
+// Wizard simple
+document.querySelectorAll('.wizard-option').forEach(o=>o.addEventListener('click',function(){this.parentElement.querySelectorAll('.wizard-option').forEach(x=>x.classList.remove('selected'));this.classList.add('selected');}));
+document.getElementById('wNext1').addEventListener('click',()=>document.querySelector('.wizard-step[data-step="2"]').classList.add('active')||document.querySelectorAll('.wizard-step').forEach(s=>s.classList.remove('active'))||document.querySelector('.wizard-step[data-step="2"]').classList.add('active'));
+document.getElementById('wNext2').addEventListener('click',()=>{document.querySelectorAll('.wizard-step').forEach(s=>s.classList.remove('active'));document.querySelector('.wizard-step[data-step="3"]').classList.add('active');});
+document.getElementById('wFinish').addEventListener('click',()=>{document.getElementById('wizardModal').classList.remove('show');alert('✅ Perfil configurado');});
+</script>
+</body>
+</html>
