@@ -452,6 +452,209 @@ const EQUIP_MAP = {
   'other': 'equipOther'
 };
 
+// Diccionario de traducciones de ejercicios comunes
+const exerciseTranslations = {
+  'Barbell Bench Press': 'Press de Banca con Barra',
+  'Dumbbell Bench Press': 'Press de Banca con Mancuernas',
+  'Push-Up': 'Flexión',
+  'Pull-Up': 'Dominada',
+  'Chin-Up': 'Dominada Supina',
+  'Barbell Squat': 'Sentadilla con Barra',
+  'Front Squat': 'Sentadilla Frontal',
+  'Deadlift': 'Peso Muerto',
+  'Romanian Deadlift': 'Peso Muerto Rumano',
+  'Barbell Row': 'Remo con Barra',
+  'Dumbbell Row': 'Remo con Mancuerna',
+  'Overhead Press': 'Press Militar',
+  'Shoulder Press': 'Press de Hombros',
+  'Lateral Raise': 'Elevaciones Laterales',
+  'Bicep Curl': 'Curl de Bíceps',
+  'Hammer Curl': 'Curl Martillo',
+  'Tricep Extension': 'Extensión de Tríceps',
+  'Tricep Pushdown': 'Pushdown de Tríceps',
+  'Leg Press': 'Prensa de Piernas',
+  'Leg Curl': 'Curl de Pierna',
+  'Leg Extension': 'Extensión de Pierna',
+  'Calf Raise': 'Elevación de Gemelos',
+  'Plank': 'Plancha',
+  'Side Plank': 'Plancha Lateral',
+  'Crunch': 'Abdominal Crunch',
+  'Sit-Up': 'Abdominal Sit-Up',
+  'Russian Twist': 'Giros Rusos',
+  'Lunge': 'Zancada',
+  'Bulgarian Split Squat': 'Sentadilla Búlgara',
+  'Hip Thrust': 'Hip Thrust',
+  'Glute Bridge': 'Puente de Glúteos',
+  'Lat Pulldown': 'Jalón al Pecho',
+  'Cable Fly': 'Cruce de Poleas',
+  'Chest Fly': 'Aperturas de Pecho',
+  'Incline Bench Press': 'Press Banca Inclinado',
+  'Decline Bench Press': 'Press Banca Declinado',
+  'Dips': 'Fondos',
+  'Close-Grip Bench Press': 'Press Banca Agarre Cerrado',
+  'Wide-Grip Pull-Up': 'Dominada Agarre Abierto',
+  'Face Pull': 'Face Pull',
+  'Shrug': 'Encogimiento de Hombros',
+  'Upright Row': 'Remo al Mentón',
+  'Good Morning': 'Buenos Días',
+  'Box Jump': 'Salto al Cajón',
+  'Jump Squat': 'Sentadilla con Salto',
+  'Burpee': 'Burpee',
+  'Mountain Climber': 'Escalador',
+  'High Knees': 'Rodillas Altas',
+  'Jumping Jack': 'Jumping Jack',
+  'Wall Sit': 'Sentadilla en Pared',
+  'Hanging Leg Raise': 'Elevación de Piernas Colgado',
+  'Knee Raise': 'Elevación de Rodillas',
+  'Toe Touch': 'Toe Touch',
+  'Superman': 'Superman',
+  'Back Extension': 'Extensión de Espalda',
+  'Kettlebell Swing': 'Swing con Kettlebell',
+  'Turkish Get-Up': 'Turkish Get-Up',
+  'Goblet Squat': 'Sentadilla Goblet',
+  'Clean and Press': 'Cargada y Press',
+  'Snatch': 'Arranque',
+  'Clean': 'Cargada',
+  'Jerk': 'Envión',
+  'Farmers Walk': 'Paseo del Granjero',
+  'Battle Rope': 'Cuerda de Batalla',
+  'Sled Push': 'Empuje de Trineo',
+  'Tire Flip': 'Volteo de Neumático',
+  'Medicine Ball Slam': 'Lanzamiento de Balón Medicinal',
+  'Box Squat': 'Sentadilla en Caja',
+  'Sumo Deadlift': 'Peso Muerto Sumo',
+  'Single Leg Deadlift': 'Peso Muerto a Una Pierna',
+  'Pistol Squat': 'Sentadilla Pistol',
+  'Handstand Push-Up': 'Flexión de Pino',
+  'Muscle-Up': 'Muscle-Up',
+  'L-Sit': 'L-Sit',
+  'Dragon Flag': 'Dragon Flag',
+  'Human Flag': 'Bandera Humana',
+  'Planche': 'Planche',
+  'Front Lever': 'Front Lever',
+  'Back Lever': 'Back Lever',
+  'Ring Dip': 'Fondos en Anillas',
+  'Ring Push-Up': 'Flexión en Anillas',
+  'Ring Row': 'Remo en Anillas',
+  'TRX Row': 'Remo TRX',
+  'TRX Push-Up': 'Flexión TRX',
+  'Cable Crunch': 'Crunch en Polea',
+  'Woodchopper': 'Leñador',
+  'Pallof Press': 'Pallof Press',
+  'Ab Wheel Rollout': 'Rueda Abdominal',
+  'Hanging Knee Raise': 'Elevación de Rodillas Colgado',
+  'Captain Chair Knee Raise': 'Elevación de Rodillas en Silla Capitán',
+  'Decline Crunch': 'Crunch Declinado',
+  'Incline Crunch': 'Crunch Inclinado',
+  'Reverse Crunch': 'Crunch Inverso',
+  'Bicycle Crunch': 'Crunch de Bicicleta',
+  'Flutter Kick': 'Patada Flutter',
+  'Scissor Kick': 'Patada de Tijera',
+  'Leg Raise': 'Elevación de Piernas',
+  'Hip Raise': 'Elevación de Cadera',
+  'Glute Kickback': 'Patada de Glúteo',
+  'Donkey Kick': 'Patada de Burro',
+  'Fire Hydrant': 'Hidrante',
+  'Clamshell': 'Almeja',
+  'Monster Walk': 'Caminata de Monstruo',
+  'Band Pull-Apart': 'Separación de Banda',
+  'Band Row': 'Remo con Banda',
+  'Band Squat': 'Sentadilla con Banda',
+  'Band Chest Press': 'Press de Pecho con Banda',
+  'Band Shoulder Press': 'Press de Hombros con Banda',
+  'Band Bicep Curl': 'Curl de Bíceps con Banda',
+  'Band Tricep Extension': 'Extensión de Tríceps con Banda',
+  'Band Lateral Raise': 'Elevación Lateral con Banda',
+  'Band Face Pull': 'Face Pull con Banda',
+  'Band Deadlift': 'Peso Muerto con Banda',
+  'Band Good Morning': 'Buenos Días con Banda',
+  'Band Leg Curl': 'Curl de Pierna con Banda',
+  'Band Leg Extension': 'Extensión de Pierna con Banda',
+  'Band Calf Raise': 'Elevación de Gemelos con Banda',
+  'Band Shrug': 'Encogimiento con Banda',
+  'Band Upright Row': 'Remo al Mentón con Banda',
+  'Band Lat Pulldown': 'Jalón al Pecho con Banda',
+  'Band Chest Fly': 'Aperturas con Banda',
+  'Band Row': 'Remo con Banda',
+  'Band Pull-Over': 'Pull-Over con Banda',
+  'Band Kickback': 'Patada con Banda',
+  'Band Abduction': 'Abducción con Banda',
+  'Band Adduction': 'Aducción con Banda',
+  'Band Rotation': 'Rotación con Banda',
+  'Band Woodchopper': 'Leñador con Banda',
+  'Band Pallof Press': 'Pallof Press con Banda',
+  'Band Plank': 'Plancha con Banda',
+  'Band Side Plank': 'Plancha Lateral con Banda',
+  'Band Crunch': 'Crunch con Banda',
+  'Band Russian Twist': 'Giros Rusos con Banda',
+  'Band Leg Raise': 'Elevación de Piernas con Banda',
+  'Band Hip Raise': 'Elevación de Cadera con Banda',
+  'Band Glute Bridge': 'Puente de Glúteos con Banda',
+  'Band Hip Thrust': 'Hip Thrust con Banda',
+  'Band Lunge': 'Zancada con Banda',
+  'Band Step-Up': 'Step-Up con Banda',
+  'Band Box Jump': 'Salto al Cajón con Banda',
+  'Band Jump Squat': 'Sentadilla con Salto con Banda',
+  'Band Burpee': 'Burpee con Banda',
+  'Band Mountain Climber': 'Escalador con Banda',
+  'Band High Knees': 'Rodillas Altas con Banda',
+  'Band Jumping Jack': 'Jumping Jack con Banda',
+  'Band Wall Sit': 'Sentadilla en Pared con Banda',
+  'Band Hanging Leg Raise': 'Elevación de Piernas Colgado con Banda',
+  'Band Knee Raise': 'Elevación de Rodillas con Banda',
+  'Band Toe Touch': 'Toe Touch con Banda',
+  'Band Superman': 'Superman con Banda',
+  'Band Back Extension': 'Extensión de Espalda con Banda',
+  'Band Kettlebell Swing': 'Swing con Banda',
+  'Band Turkish Get-Up': 'Turkish Get-Up con Banda',
+  'Band Goblet Squat': 'Sentadilla Goblet con Banda',
+  'Band Clean and Press': 'Cargada y Press con Banda',
+  'Band Snatch': 'Arranque con Banda',
+  'Band Clean': 'Cargada con Banda',
+  'Band Jerk': 'Envión con Banda',
+  'Band Farmers Walk': 'Paseo del Granjero con Banda',
+  'Band Battle Rope': 'Cuerda de Batalla con Banda',
+  'Band Sled Push': 'Empuje de Trineo con Banda',
+  'Band Tire Flip': 'Volteo de Neumático con Banda',
+  'Band Medicine Ball Slam': 'Lanzamiento de Balón Medicinal con Banda',
+  'Band Box Squat': 'Sentadilla en Caja con Banda',
+  'Band Sumo Deadlift': 'Peso Muerto Sumo con Banda',
+  'Band Single Leg Deadlift': 'Peso Muerto a Una Pierna con Banda',
+  'Band Pistol Squat': 'Sentadilla Pistol con Banda',
+  'Band Handstand Push-Up': 'Flexión de Pino con Banda',
+  'Band Muscle-Up': 'Muscle-Up con Banda',
+  'Band L-Sit': 'L-Sit con Banda',
+  'Band Dragon Flag': 'Dragon Flag con Banda',
+  'Band Human Flag': 'Bandera Humana con Banda',
+  'Band Planche': 'Planche con Banda',
+  'Band Front Lever': 'Front Lever con Banda',
+  'Band Back Lever': 'Back Lever con Banda',
+  'Band Ring Dip': 'Fondos en Anillas con Banda',
+  'Band Ring Push-Up': 'Flexión en Anillas con Banda',
+  'Band Ring Row': 'Remo en Anillas con Banda',
+  'Band TRX Row': 'Remo TRX con Banda',
+  'Band TRX Push-Up': 'Flexión TRX con Banda',
+  'Band Cable Crunch': 'Crunch en Polea con Banda',
+  'Band Woodchopper': 'Leñador con Banda',
+  'Band Pallof Press': 'Pallof Press con Banda',
+  'Band Ab Wheel Rollout': 'Rueda Abdominal con Banda',
+  'Band Hanging Knee Raise': 'Elevación de Rodillas Colgado con Banda',
+  'Band Captain Chair Knee Raise': 'Elevación de Rodillas en Silla Capitán con Banda',
+  'Band Decline Crunch': 'Crunch Declinado con Banda',
+  'Band Incline Crunch': 'Crunch Inclinado con Banda',
+  'Band Reverse Crunch': 'Crunch Inverso con Banda',
+  'Band Bicycle Crunch': 'Crunch de Bicicleta con Banda',
+  'Band Flutter Kick': 'Patada Flutter con Banda',
+  'Band Scissor Kick': 'Patada de Tijera con Banda'
+};
+
+function formatExerciseName(name) {
+  if (currentLang === 'es' && exerciseTranslations[name]) {
+    return exerciseTranslations[name];
+  }
+  return name;
+}
+
 const i18n = {
   es: {
     title:"Cuidate !!", sub:"¡Tu app de entrenamiento!", langBtn:"🇬🇧 EN",
@@ -605,7 +808,6 @@ function updateLanguage(lang) {
     }
   });
   
-  // Recargar filtros si estamos en la vista browse
   if(document.getElementById('view-browse').classList.contains('active')) {
     populateBrowseFilters();
     renderBrowse();
@@ -734,7 +936,6 @@ function populateBrowseFilters(){
   const equips = [...new Set(DB.map(e=>e.equipment))].sort();
   const t = i18n[currentLang];
   
-  // Categorías traducidas
   const catTranslations = {
     'chest': currentLang === 'es' ? 'Pecho' : 'Chest',
     'back': currentLang === 'es' ? 'Espalda' : 'Back',
@@ -751,8 +952,23 @@ function populateBrowseFilters(){
   catSel.innerHTML = `<option value="">${t.allCategories}</option>` + 
     cats.map(c=>`<option value="${c}">${catTranslations[c] || c}</option>`).join('');
   
+  const equipTranslations = {
+    'body weight': t.equipBodyweight || 'Bodyweight',
+    'dumbbell': t.equipDumbbell || 'Dumbbells',
+    'barbell': t.equipBarbell || 'Barbell',
+    'kettlebell': t.equipKettlebell || 'Kettlebell',
+    'cable': t.equipCable || 'Cable',
+    'leverage machine': t.equipMachine || 'Machine',
+    'smith machine': t.equipSmith || 'Smith',
+    'band': t.equipBand || 'Band',
+    'stability ball': t.equipBall || 'Fitball',
+    'ez barbell': t.equipEZ || 'EZ Bar',
+    'pull-up bar': t.equipPullUpBar || 'Pull-up bar',
+    'other': t.equipOther || 'Other'
+  };
+  
   equipSel.innerHTML = `<option value="">${t.allEquipment}</option>` + 
-    equips.map(e=>`<option value="${e}">${formatEquip(e)}</option>`).join('');
+    equips.map(e=>`<option value="${e}">${equipTranslations[e] || e}</option>`).join('');
 }
 
 function formatCategory(c){ 
@@ -782,7 +998,25 @@ function formatCategory(c){
   }; 
   return currentLang === 'en' ? (mapEn[c] || c) : (map[c] || c); 
 }
-function formatEquip(eq){ return i18n[currentLang][EQUIP_MAP[eq]] || eq; }
+
+function formatEquip(eq){
+  const t = i18n[currentLang];
+  const translations = {
+    'body weight': t.equipBodyweight,
+    'dumbbell': t.equipDumbbell,
+    'barbell': t.equipBarbell,
+    'kettlebell': t.equipKettlebell,
+    'cable': t.equipCable,
+    'leverage machine': t.equipMachine,
+    'smith machine': t.equipSmith,
+    'band': t.equipBand,
+    'stability ball': t.equipBall,
+    'ez barbell': t.equipEZ,
+    'pull-up bar': t.equipPullUpBar,
+    'other': t.equipOther
+  };
+  return translations[eq] || eq;
+}
 
 function bindEvents(){
   document.getElementById('langToggle').addEventListener('click', ()=>{ updateLanguage(currentLang === 'es' ? 'en' : 'es'); });
@@ -873,7 +1107,8 @@ function renderBrowse(){
     const diff = classifyDifficulty(ex);
     const isAdded = myCustomRoutine.some(r => r.id === ex.id);
     const thumbUrl = ex.image ? MEDIA_BASE + ex.image : '';
-    return `<div class="browse-card"><div class="exercise-head"><img class="browse-thumb" src="${thumbUrl}" alt="" loading="lazy" onerror="this.style.background='#2a2a2a'" onclick="openGifModal(DB.find(e=>e.id==='${ex.id}'))"><div class="browse-info"><h4>${ex.name}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div><span class="tag diff">${i18n[currentLang].diffLabels[diff] || diff}</span>${ex.target?`<span class="tag">🎯 ${ex.target}</span>`:''}</div></div><button class="add-btn" ${isAdded?'disabled':''} onclick="addToCustomRoutine('${ex.id}')">${isAdded ? (currentLang==='es'?'✓ Añadido':'✓ Added') : (currentLang==='es'?'+ Añadir a mi rutina':'+ Add to my routine')}</button></div>`;
+    const displayName = formatExerciseName(ex.name);
+    return `<div class="browse-card"><div class="exercise-head"><img class="browse-thumb" src="${thumbUrl}" alt="" loading="lazy" onerror="this.style.background='#2a2a2a'" onclick="openGifModal(DB.find(e=>e.id==='${ex.id}'))"><div class="browse-info"><h4>${displayName}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div><span class="tag diff">${i18n[currentLang].diffLabels[diff] || diff}</span>${ex.target?`<span class="tag">🎯 ${ex.target}</span>`:''}</div></div><button class="add-btn" ${isAdded?'disabled':''} onclick="addToCustomRoutine('${ex.id}')">${isAdded ? (currentLang==='es'?'✓ Añadido':'✓ Added') : (currentLang==='es'?'+ Añadir a mi rutina':'+ Add to my routine')}</button></div>`;
   }).join('');
   renderMyRoutinePanel();
 }
@@ -898,7 +1133,11 @@ function renderMyRoutinePanel(){
   if(myCustomRoutine.length === 0){ panel.style.display = 'none'; return; }
   panel.style.display = 'block';
   count.textContent = myCustomRoutine.length;
-  list.innerHTML = myCustomRoutine.map(ex => { const thumbUrl = ex.image ? MEDIA_BASE + ex.image : ''; return `<div class="my-routine-item"><img src="${thumbUrl}" onerror="this.style.background='#2a2a2a'"><div class="info"><h4>${ex.name}</h4><p>${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</p></div><button class="remove-btn" onclick="removeFromCustomRoutine('${ex.id}')">✕</button></div>`; }).join('');
+  list.innerHTML = myCustomRoutine.map(ex => { 
+    const thumbUrl = ex.image ? MEDIA_BASE + ex.image : ''; 
+    const displayName = formatExerciseName(ex.name);
+    return `<div class="my-routine-item"><img src="${thumbUrl}" onerror="this.style.background='#2a2a2a'"><div class="info"><h4>${displayName}</h4><p>${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</p></div><button class="remove-btn" onclick="removeFromCustomRoutine('${ex.id}')">✕</button></div>`; 
+  }).join('');
 }
 
 function startCustomRoutine(){
@@ -958,186 +1197,8 @@ function buildExerciseCard(ex, idx){
   const isIso = (ex.name||'').toLowerCase().match(/plank|hold|isometric|wall sit|hollow|superman hold|bridge hold|static|l-sit|dead hang|handstand hold/);
   const diff = ex.difficulty || classifyDifficulty(ex);
   const t = i18n[currentLang];
-  card.innerHTML = `<div class="exercise-actions"><button class="act-btn" title="${t.exerciseActions.up}" data-act="up">↑</button><button class="act-btn" title="${t.exerciseActions.down}" data-act="down">↓</button><button class="act-btn" title="${t.exerciseActions.replace}" data-act="replace">🔄</button><button class="act-btn danger" title="${t.exerciseActions.remove}" data-act="remove">✕</button></div><div class="exercise-head"><img class="exercise-thumb" src="${thumbUrl}" alt="" loading="lazy" onerror="this.style.background='#2a2a2a'"><div class="exercise-info"><h4>${ex.name}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div>${isBodyweight?`<span class="tag body">🏃 ${currentLang==='es'?'Peso corporal':'Bodyweight'}</span>`:''}${isIso?`<span class="tag iso">⏱ ${currentLang==='es'?'Isométrico':'Isometric'}</span>`:''}<span class="tag diff">${t.diffLabels[diff] || diff}</span>${ex.target?`<span class="tag">🎯 ${ex.target}</span>`:''}</div></div><div class="sets-table"><div class="hdr"><div>${t.setHeaders.set}</div><div>${t.setHeaders.kg}</div><div>${t.setHeaders.reps}</div><div></div></div>${ex.sets.map((s,i)=>`<div class="set-row" data-set="${i}"><div class="num">${i+1}</div><input type="number" step="0.5" min="0" placeholder="0" value="${s.kg}" data-field="kg"><input type="number" min="0" placeholder="0" value="${s.reps}" data-field="reps"><button class="set-check ${s.done?'done':''}">✓</button></div>`).join('')}</div>`;
+  const displayName = formatExerciseName(ex.name);
+  card.innerHTML = `<div class="exercise-actions"><button class="act-btn" title="${t.exerciseActions.up}" data-act="up">↑</button><button class="act-btn" title="${t.exerciseActions.down}" data-act="down">↓</button><button class="act-btn" title="${t.exerciseActions.replace}" data-act="replace">🔄</button><button class="act-btn danger" title="${t.exerciseActions.remove}" data-act="remove">✕</button></div><div class="exercise-head"><img class="exercise-thumb" src="${thumbUrl}" alt="" loading="lazy" onerror="this.style.background='#2a2a2a'"><div class="exercise-info"><h4>${displayName}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div>${isBodyweight?`<span class="tag body">🏃 ${currentLang==='es'?'Peso corporal':'Bodyweight'}</span>`:''}${isIso?`<span class="tag iso">⏱ ${currentLang==='es'?'Isométrico':'Isometric'}</span>`:''}<span class="tag diff">${t.diffLabels[diff] || diff}</span>${ex.target?`<span class="tag">🎯 ${ex.target}</span>`:''}</div></div><div class="sets-table"><div class="hdr"><div>${t.setHeaders.set}</div><div>${t.setHeaders.kg}</div><div>${t.setHeaders.reps}</div><div></div></div>${ex.sets.map((s,i)=>`<div class="set-row" data-set="${i}"><div class="num">${i+1}</div><input type="number" step="0.5" min="0" placeholder="0" value="${s.kg}" data-field="kg"><input type="number" min="0" placeholder="0" value="${s.reps}" data-field="reps"><button class="set-check ${s.done?'done':''}">✓</button></div>`).join('')}</div>`;
   card.querySelectorAll('.act-btn').forEach(btn=>{ btn.addEventListener('click',()=>{ const act = btn.dataset.act; if(act==='up') moveExercise(idx, -1); else if(act==='down') moveExercise(idx, 1); else if(act==='replace') openReplaceModal(idx); else if(act==='remove') removeExercise(idx); }); });
   card.querySelector('.exercise-thumb').addEventListener('click',()=>openGifModal(ex));
-  card.querySelectorAll('input').forEach(inp=>{ inp.addEventListener('input', e=>{ const setIdx = parseInt(e.target.closest('.set-row').dataset.set); currentSession.exercises[idx].sets[setIdx][e.target.dataset.field] = e.target.value; }); });
-  card.querySelectorAll('.set-check').forEach((btn,i)=>{ btn.addEventListener('click',()=>{ currentSession.exercises[idx].sets[i].done = !currentSession.exercises[idx].sets[i].done; btn.classList.toggle('done'); btn.closest('.set-row').classList.toggle('done', currentSession.exercises[idx].sets[i].done); }); });
-  return card;
-}
-
-function moveExercise(idx, dir){ const newIdx = idx + dir; if(newIdx < 0 || newIdx >= currentSession.exercises.length) return; [currentSession.exercises[idx], currentSession.exercises[newIdx]] = [currentSession.exercises[newIdx], currentSession.exercises[idx]]; renderSessionView(); }
-function removeExercise(idx){ if(!confirm(i18n[currentLang].confirmDeleteExercise)) return; currentSession.exercises.splice(idx, 1); renderSessionView(); }
-
-function openReplaceModal(idx){
-  replaceIdx = idx;
-  const ex = currentSession.exercises[idx];
-  document.getElementById('replaceInfo').textContent = `${ex.name} (${formatCategory(ex.category)})`;
-  const equipSet = new Set(currentSession.equipment);
-  let alternatives = DB.filter(e => e.category === ex.category && e.name !== ex.name && equipSet.has(e.equipment));
-  alternatives = filterByLevel(alternatives, currentSession.experienceLevel).slice(0, 20);
-  const list = document.getElementById('replaceList');
-  if(alternatives.length === 0){ list.innerHTML = `<p style="color:var(--muted);text-align:center;padding:20px">${i18n[currentLang].noAlternatives}</p>`; }
-  else { const diffLabels = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'}; list.innerHTML = alternatives.map((alt,i)=>{ const d = classifyDifficulty(alt); return `<div class="replace-item" data-idx="${i}"><img src="${alt.image ? MEDIA_BASE + alt.image : ''}" onerror="this.style.background='#2a2a2a'"><div class="info"><h4>${alt.name}</h4><p>${diffLabels[d]||''} ${formatEquip(alt.equipment)}${alt.target ? ' · 🎯 '+alt.target : ''}</p></div></div>`; }).join(''); }
-  list.querySelectorAll('.replace-item').forEach(item=>{ item.addEventListener('click',()=>{ const alt = alternatives[parseInt(item.dataset.idx)]; currentSession.exercises[replaceIdx] = { ...alt, difficulty: classifyDifficulty(alt), sets: currentSession.exercises[replaceIdx].sets }; document.getElementById('replaceModal').classList.remove('show'); renderSessionView(); }); });
-  document.getElementById('replaceModal').classList.add('show');
-}
-
-function openGifModal(ex){ if(!ex) return; const modal = document.getElementById('gifModal'); document.getElementById('modalImg').src = ex.gif_url ? MEDIA_BASE + ex.gif_url : (ex.image ? MEDIA_BASE + ex.image : ''); document.getElementById('modalTitle').textContent = ex.name; document.getElementById('modalInstr').textContent = (currentLang === 'es' ? (ex.instructions?.es || ex.instructions?.en) : (ex.instructions?.en || ex.instructions?.es)) || (currentLang==='es'?'Sigue las indicaciones del GIF.':'Follow the GIF instructions.'); modal.classList.add('show'); }
-
-function finishSession(exportPDF = false){
-  if(!currentSession) return;
-  currentSession.notes = document.getElementById('sessionNotes').value.trim();
-  const anyDone = currentSession.exercises.some(e=>e.sets.some(s=>s.done));
-  if(!anyDone && !confirm(i18n[currentLang].noSeriesMarked)) return;
-  const totalSets = currentSession.exercises.reduce((a,e)=>a+e.sets.length,0);
-  const doneSets = currentSession.exercises.reduce((a,e)=>a+e.sets.filter(s=>s.done).length,0);
-  const totalVolume = currentSession.exercises.reduce((a,e)=>a + e.sets.reduce((b,s)=> b + (s.done && s.kg && s.reps ? parseFloat(s.kg)*parseInt(s.reps) : 0), 0),0);
-  currentSession.stats = {exercises: currentSession.exercises.length, totalSets, doneSets, volume: Math.round(totalVolume)};
-  const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  all.unshift(currentSession);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-  
-  if(exportPDF){
-    exportSessionToPDF(currentSession);
-  }
-  
-  currentSession = null;
-  document.getElementById('sessionNotes').value = '';
-  document.getElementById('exportPDF').checked = false;
-  renderSessionView(); renderHistory(); showView('history');
-}
-
-function renderHistory(){
-  const list = document.getElementById('historyList');
-  const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  const t = i18n[currentLang];
-  if(all.length===0){ list.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="ic">📋</div><h3>${t.emptyHistory}</h3><p>${t.emptyHistoryDesc}</p></div>`; return; }
-  list.innerHTML = all.map(s=>{ const d = new Date(s.date); const dateStr = d.toLocaleDateString(currentLang==='es'?'es-ES':'en-US',{weekday:'short',day:'numeric',month:'short'}); const timeStr = d.toLocaleTimeString(currentLang==='es'?'es-ES':'en-US',{hour:'2-digit',minute:'2-digit'}); const expNames = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'}; return `<div class="hist-card" data-id="${s.id}"><button class="hist-del" data-del="${s.id}">🗑</button><button class="hist-pdf" data-pdf="${s.id}">📄 PDF</button><div class="hist-date">${dateStr} · ${timeStr}</div><div class="hist-title">${expNames[s.experienceLevel]||''} ${t.routineTypes[s.routineType]||'Session'}</div><div class="hist-stats"><span><strong>${s.exercises?.length||0}</strong> ${t.exercises}</span><span><strong>${s.stats?.doneSets??0}/${s.stats?.totalSets??0}</strong> ${t.sets}</span>${s.stats?.volume?`<span><strong>${s.stats.volume.toLocaleString(currentLang==='es'?'es-ES':'en-US')}</strong> kg</span>`:''}</div></div>`; }).join('');
-  list.querySelectorAll('.hist-card').forEach(c=>c.addEventListener('click', e=>{ if(!e.target.dataset.del && !e.target.classList.contains('hist-pdf')) openDetail(parseInt(c.dataset.id)); }));
-  list.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click', e=>{ e.stopPropagation(); if(!confirm(t.confirmDeleteTraining)) return; const h = JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]').filter(x=>x.id!==parseInt(b.dataset.del)); localStorage.setItem(STORAGE_KEY, JSON.stringify(h)); renderHistory(); }));
-}
-
-function renderLibrary(){
-  const list = document.getElementById('libraryList');
-  const lib = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
-  const t = i18n[currentLang];
-  if(lib.length===0){ list.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="ic">📚</div><h3>${t.emptyLibrary}</h3><p>${t.emptyLibraryDesc}</p></div>`; return; }
-  list.innerHTML = lib.map(item=>{ const d = new Date(item.date); const dateStr = d.toLocaleDateString(currentLang==='es'?'es-ES':'en-US',{day:'numeric',month:'short',year:'numeric'}); const slim = decompressRoutine(item.data); const expNames = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'}; return `<div class="lib-card"><h4>${item.name}</h4><div class="meta">${dateStr} · ${expNames[slim?.el]||''} ${t.routineTypes[slim?.rt]||''} · ${slim?.ex?.length||0} ${t.exercises}</div><div class="actions"><button class="load" data-load="${item.id}">📂 ${t.load}</button><button class="share" data-share="${item.id}">🔗 ${t.share}</button><button class="pdf-btn" data-pdf-lib="${item.id}">📄 PDF</button><button class="del" data-del="${item.id}">🗑 ${t.delete}</button></div></div>`; }).join('');
-  list.querySelectorAll('[data-load]').forEach(b=>b.addEventListener('click', ()=>{ const item = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').find(x=>x.id===parseInt(b.dataset.load)); if(item) loadFromLibrary(item.data); }));
-  list.querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click', ()=>{ const item = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').find(x=>x.id===parseInt(b.dataset.share)); if(!item) return; const link = window.location.href.split('#')[0].split('?')[0] + '#r=' + item.data; navigator.clipboard.writeText(link).then(()=> showToast(t.linkCopied)).catch(()=> prompt('Copy:', link)); }));
-  list.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click', ()=>{ if(!confirm(t.confirmDeleteLibrary)) return; const lib = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').filter(x=>x.id!==parseInt(b.dataset.del)); localStorage.setItem(LIBRARY_KEY, JSON.stringify(lib)); renderLibrary(); }));
-}
-
-function openDetail(id){
-  const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  const s = all.find(x=>x.id===id);
-  if(!s) return;
-  const d = new Date(s.date);
-  const t = i18n[currentLang];
-  const body = document.getElementById('detailBody');
-  body.innerHTML = `<div class="detail-head"><h2>${t.routineTypes[s.routineType]||'Session'}</h2><div class="meta">${d.toLocaleDateString(currentLang==='es'?'es-ES':'en-US',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${t.expLevels[s.experienceLevel]||''}</div><div class="detail-stats"><div class="detail-stat"><div class="v">${s.exercises?.length||0}</div><div class="l">${t.detailExercises}</div></div><div class="detail-stat"><div class="v">${s.stats?.doneSets||0}</div><div class="l">${t.detailSets}</div></div><div class="detail-stat"><div class="v">${(s.stats?.volume||0).toLocaleString(currentLang==='es'?'es-ES':'en-US')}</div><div class="l">${t.detailVolume}</div></div></div></div><div class="exercise-grid">${s.exercises.map(ex=>`<div class="exercise-card"><div class="exercise-head"><img class="exercise-thumb" src="${ex.image?MEDIA_BASE+ex.image:''}"><div class="exercise-info"><h4>${ex.name}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">${ex.sets.map(set=>`<div style="background:var(--card2);padding:6px 10px;border-radius:8px;font-size:12px;${set.done?'':'opacity:.5'}">${set.n}ª · ${set.kg||'–'}kg × ${set.reps||'–'} ${set.done?'✓':''}</div>`).join('')}</div></div>`).join('')}</div>${s.notes ? `<div class="section" style="font-style:italic;color:var(--muted)">"${s.notes}"</div>` : ''}`;
-  body.querySelectorAll('.exercise-thumb').forEach((el,i)=> el.addEventListener('click',()=>openGifModal(s.exercises[i])));
-  showView('detail');
-}
-
-function exportSessionToPDF(session){
-  const t = i18n[currentLang];
-  const date = new Date(session.date);
-  const dateStr = date.toLocaleDateString(currentLang==='es'?'es-ES':'en-US', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
-  
-  const exercisesHTML = session.exercises.map((ex, idx)=>{
-    const setsHTML = ex.sets.map(set=>`
-      <tr style="border-bottom:1px solid #e5e7eb">
-        <td style="padding:8px;text-align:center;font-weight:600">${set.n}</td>
-        <td style="padding:8px;text-align:center">${set.kg || '–'}</td>
-        <td style="padding:8px;text-align:center">${set.reps || '–'}</td>
-        <td style="padding:8px;text-align:center">${set.done ? '✅' : '⬜'}</td>
-      </tr>
-    `).join('');
-    
-    return `
-      <div style="margin-bottom:20px;padding:12px;background:#f9fafb;border-radius:8px">
-        <h3 style="margin:0 0 8px 0;color:#1f2937;font-size:16px">${idx+1}. ${ex.name}</h3>
-        <p style="margin:0 0 10px 0;color:#6b7280;font-size:13px">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)} · ${t.diffLabels[ex.difficulty] || ex.difficulty}</p>
-        <table style="width:100%;border-collapse:collapse;font-size:13px">
-          <thead>
-            <tr style="background:#e5e7eb">
-              <th style="padding:8px;text-align:center">Serie</th>
-              <th style="padding:8px;text-align:center">KG</th>
-              <th style="padding:8px;text-align:center">Reps</th>
-              <th style="padding:8px;text-align:center">Estado</th>
-            </tr>
-          </thead>
-          <tbody>${setsHTML}</tbody>
-        </table>
-      </div>
-    `;
-  }).join('');
-  
-  const pdfContent = `
-    <div style="font-family:Arial,sans-serif;max-width:800px;margin:0 auto;padding:20px;color:#333">
-      <div style="text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:3px solid #0a84ff">
-        <h1 style="margin:0;color:#0a84ff;font-size:28px">💪 Cuidate !!</h1>
-        <p style="margin:5px 0 0 0;color:#6b7280;font-size:14px">${t.sub}</p>
-      </div>
-      
-      <div style="background:#f3f4f6;padding:15px;border-radius:8px;margin-bottom:20px">
-        <h2 style="margin:0 0 10px 0;color:#1f2937;font-size:20px">${t.routineTypes[session.routineType] || 'Session'}</h2>
-        <p style="margin:5px 0;color:#4b5563;font-size:14px">📅 ${dateStr}</p>
-        <p style="margin:5px 0;color:#4b5563;font-size:14px">${t.expLevels[session.experienceLevel] || ''}</p>
-      </div>
-      
-      <div style="display:flex;gap:15px;margin-bottom:25px;flex-wrap:wrap">
-        <div style="flex:1;min-width:150px;background:#0a84ff;color:#fff;padding:15px;border-radius:8px;text-align:center">
-          <div style="font-size:24px;font-weight:bold">${session.exercises?.length||0}</div>
-          <div style="font-size:12px;opacity:0.9">${t.detailExercises}</div>
-        </div>
-        <div style="flex:1;min-width:150px;background:#32d74b;color:#fff;padding:15px;border-radius:8px;text-align:center">
-          <div style="font-size:24px;font-weight:bold">${session.stats?.doneSets||0}/${session.stats?.totalSets||0}</div>
-          <div style="font-size:12px;opacity:0.9">${t.detailSets}</div>
-        </div>
-        <div style="flex:1;min-width:150px;background:#bf5af2;color:#fff;padding:15px;border-radius:8px;text-align:center">
-          <div style="font-size:24px;font-weight:bold">${(session.stats?.volume||0).toLocaleString(currentLang==='es'?'es-ES':'en-US')}</div>
-          <div style="font-size:12px;opacity:0.9">${t.detailVolume}</div>
-        </div>
-      </div>
-      
-      <h2 style="color:#1f2937;border-bottom:2px solid #0a84ff;padding-bottom:8px;margin-bottom:15px">🏋️ ${t.detailExercises}</h2>
-      ${exercisesHTML}
-      
-      ${session.notes ? `
-        <div style="margin-top:25px;padding:15px;background:#fef3c7;border-left:4px solid #f59e0b;border-radius:4px">
-          <h3 style="margin:0 0 8px 0;color:#92400e;font-size:16px">📝 ${t.workoutNotes || 'Notas'}</h3>
-          <p style="margin:0;color:#78350f;font-style:italic">${session.notes}</p>
-        </div>
-      ` : ''}
-      
-      <div style="margin-top:30px;padding-top:20px;border-top:1px solid #e5e7eb;text-align:center;color:#9ca3af;font-size:12px">
-        <p>Generado por Cuidate !! · ${new Date().toLocaleString(currentLang==='es'?'es-ES':'en-US')}</p>
-        <p>github.com/viferor/Creador-rutinas-fuerza-en-casa</p>
-      </div>
-    </div>
-  `;
-
-  const container = document.createElement('div');
-  container.innerHTML = pdfContent;
-  document.body.appendChild(container);
-
-  const opt = {
-    margin: 10,
-    filename: `cuidate-${session.routineType}-${session.id}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  };
-
-  showToast(t.pdfGenerating);
-  html2pdf().set(opt).from(container).save().then(()=>{
-    document.body.removeChild(container);
-    showToast(t.pdfDone);
-  });
-}
-</script>
-</body>
-</html>
+  card.querySelectorAll('input').forEach(inp=>{ inp.addEventListener('input', e=>{ const setIdx = parseInt(e.target.closest('.set-row')).
