@@ -25,34 +25,34 @@ Genera rutinas personalizadas con más de 1.300 ejercicios animados o crea la tu
 ### 🏠 1. Generador de Rutinas
 *Configura tu rutina en segundos: elige tipo, nivel y equipamiento*
 
-![Generador](https://raw.githubusercontent.com/viferor/Creador-rutinas-fuerza-en-casa/main/screenshots/01-generador.png)
+![Generador](https://github.com/viferor/Creador-rutinas-fuerza-en-casa/raw/main/screenshots/01-generador.png)
 
 ### 🔍 2. Explorador de Ejercicios
 *Busca, filtra y añade ejercicios a tu rutina personalizada*
 
-![Explorador](https://raw.githubusercontent.com/viferor/Creador-rutinas-fuerza-en-casa/main/screenshots/02-explorador.png)
+![Explorador](https://github.com/viferor/Creador-rutinas-fuerza-en-casa/raw/main/screenshots/02-explorador.png)
 
 ### 💪 3. Sesión de Entrenamiento
 *Registra series, pesos y repeticiones en tiempo real*
 
-![Sesión](https://raw.githubusercontent.com/viferor/Creador-rutinas-fuerza-en-casa/main/screenshots/03-sesion.png)
+![Sesión](https://github.com/viferor/Creador-rutinas-fuerza-en-casa/raw/main/screenshots/03-sesion.png)
 
 ### 📊 4. Historial y Estadísticas
 *Visualiza tu progreso y sesiones completadas*
 
-![Historial](https://raw.githubusercontent.com/viferor/Creador-rutinas-fuerza-en-casa/main/screenshots/04-historial.png)
+![Historial](https://github.com/viferor/Creador-rutinas-fuerza-en-casa/raw/main/screenshots/04-historial.png)
 
 ### 📚 5. Biblioteca de Rutinas
 *Guarda y comparte tus rutinas favoritas*
 
-![Biblioteca](https://raw.githubusercontent.com/viferor/Creador-rutinas-fuerza-en-casa/main/screenshots/05-biblioteca.png)
+![Biblioteca](https://github.com/viferor/Creador-rutinas-fuerza-en-casa/raw/main/screenshots/05-biblioteca.png)
 
 </div>
 
 ---
 
 <a id="español"></a>
-# 🇸 Español
+# 🇪🇸 Español
 
 ## 🎯 ¿Qué es Cuidate !!?
 
@@ -85,17 +85,18 @@ Crea rutinas adaptadas a **tu realidad**, no a una plantilla genérica:
 
 > 💡 **Filtrado inteligente**: La app solo te propone ejercicios que puedes hacer con el material que tienes disponible. ¿Solo tienes tu cuerpo? Perfecto, te generará una rutina 100% bodyweight.
 
-### 🔍 2. Explorador de Ejercicios (¡NUEVO!)
+### 🔍 2. Explorador de Ejercicios
 
 La joya de la corona: **navega, busca y crea tu rutina a medida**.
 
 - 🔎 **Buscador en tiempo real** — Filtra al instante por nombre, músculo o equipamiento
--  **Filtros combinables** — Grupo muscular · Equipamiento · Dificultad
+- 🎯 **Filtros combinables** — Grupo muscular · Equipamiento · Dificultad
 - 🖼️ **Vista visual con GIFs** — 1.324 ejercicios con animación
--  **Botón "+ Añadir"** — Suma cualquier ejercicio a tu rutina personalizada
+- ➕ **Botón "+ Añadir"** — Suma cualquier ejercicio a tu rutina personalizada
 - 📋 **Panel "Mi rutina"** — Ve lo que has seleccionado con contador en vivo
 - 🗑️ **Quita o vacía** — Control total sobre tu selección
 - 🚀 **"Iniciar sesión"** — Convierte tu selección en una sesión real con series configurables
+- 📄 **Exportar a PDF** — Genera un PDF completo de tu sesión
 
 > 💡 **Flujo de uso**: Vas a *Ejercicios* → Filtras lo que te apetece → Añades los que quieras → Pulsas *Iniciar sesión* → ¡A entrenar!
 
@@ -105,10 +106,11 @@ Una vez generada la rutina (automática o personalizada), tú mandas:
 
 - ⬆️⬇️ **Reordena** los ejercicios como quieras
 - 🔄 **Sustituye** cualquier ejercicio por una alternativa del mismo grupo muscular
--  **Elimina** lo que no te convenza
+- ✕ **Elimina** lo que no te convenza
 - ✅ **Marca series completadas** en tiempo real
 - ⌨️ **Registra kg y repeticiones** de cada serie
 - 📝 **Añade notas** sobre sensaciones, molestias o PRs
+- 📄 **Exporta a PDF** con un clic (opcional al finalizar)
 
 ### 📖 4. Biblioteca de Rutinas
 
@@ -116,6 +118,7 @@ Una vez generada la rutina (automática o personalizada), tú mandas:
 - 🔗 **Compártelas por enlace** — envíalas por WhatsApp, email, lo que quieras
 - 📤 **Exporta como archivo JSON** para backup o para usar en otro dispositivo
 - 📥 **Importa rutinas** desde archivo o desde un enlace compartido
+- 📄 **Exporta cualquier rutina a PDF** directamente desde la biblioteca
 - 🗑️ **Gestiona tu biblioteca** — edita, comparte o elimina cuando quieras
 
 ### 📊 5. Historial y Estadísticas
@@ -128,17 +131,18 @@ Cada entrenamiento finalizado se guarda automáticamente:
 - ⚖️ **Volumen total en kg** (series × kg × reps)
 - 📝 Tus notas personales
 - 🔍 **Vista detallada** de cada sesión con todos los ejercicios
+- 📄 **Exportar cualquier sesión pasada a PDF**
 
 ### 🌍 6. Bilingüe Real
 
 No es una traducción automática cutre. Cada texto, cada botón, cada mensaje está cuidadosamente traducido:
 
 - 🇪🇸 **Español** completo
-- 🇬 **Inglés** completo
+- 🇬🇧 **Inglés** completo
 - 🔄 Cambio instantáneo con un solo clic en la cabecera
 - 💾 Tu idioma preferido se guarda automáticamente
 
-###  7. Apoya el Proyecto
+### ☕ 7. Apoya el Proyecto
 
 Un botón **☕** siempre visible en la cabecera te permite:
 
@@ -151,7 +155,7 @@ Un botón **☕** siempre visible en la cabecera te permite:
 
 Inspirado en las mejores apps de fitness del mercado:
 
--  **Modo oscuro** elegante y descansado para la vista
+- 🌙 **Modo oscuro** elegante y descansado para la vista
 - 📱 **100% responsive** — perfecto en móvil, tablet y escritorio
 - ⚡ **Animaciones fluidas** y transiciones suaves
 - 🎯 **Tipografía moderna** (Inter / SF Pro)
@@ -192,6 +196,7 @@ Inspirado en las mejores apps de fitness del mercado:
 - **JavaScript ES6+** (sin frameworks, sin dependencias)
 - **CDN**: jsDelivr para carga rápida
 - **Almacenamiento**: `localStorage` del navegador
+- **Exportación PDF**: html2pdf.js
 
 ---
 
