@@ -18,8 +18,41 @@ Genera rutinas personalizadas con más de 1.300 ejercicios animados o crea la tu
 
 ---
 
+## 📸 Capturas de Pantalla
+
+<div align="center">
+
+### 🏠 1. Generador de Rutinas
+*Configura tu rutina en segundos: elige tipo, nivel y equipamiento*
+
+![Generador](screenshots/01-generador.png)
+
+### 🔍 2. Explorador de Ejercicios
+*Busca, filtra y añade ejercicios a tu rutina personalizada*
+
+![Explorador](screenshots/02-explorador.png)
+
+### 💪 3. Sesión de Entrenamiento
+*Registra series, pesos y repeticiones en tiempo real*
+
+![Sesión](screenshots/03-sesion.png)
+
+### 📊 4. Historial y Estadísticas
+*Visualiza tu progreso y sesiones completadas*
+
+![Historial](screenshots/04-historial.png)
+
+### 📚 5. Biblioteca de Rutinas
+*Guarda y comparte tus rutinas favoritas*
+
+![Biblioteca](screenshots/05-biblioteca.png)
+
+</div>
+
+---
+
 <a id="español"></a>
-# 🇪🇸 Español
+# 🇸 Español
 
 ## 🎯 ¿Qué es Cuidate !!?
 
@@ -36,7 +69,7 @@ Genera rutinas personalizadas con más de 1.300 ejercicios animados o crea la tu
 
 ---
 
-##  Características Principales
+## 🚀 Características Principales
 
 ### 🧠 1. Generador Inteligente de Rutinas
 
@@ -45,7 +78,7 @@ Crea rutinas adaptadas a **tu realidad**, no a una plantilla genérica:
 | Parámetro | Opciones |
 |-----------|----------|
 | 🎯 **Tipo de sesión** | Full Body · Tren Superior · Tren Inferior · Empuje · Tirón · Músculo específico |
-|  **Nivel de experiencia** | 🌱 Principiante · 💪 Intermedio · 🔥 Avanzado · ⚡ Experto |
+| 💪 **Nivel de experiencia** | 🌱 Principiante · 💪 Intermedio · 🔥 Avanzado · ⚡ Experto |
 | 🏋️ **Estilo** | Todos · Solo peso corporal · Isométricos · Mixto |
 | 🔢 **Volumen** | 2, 3 o 4 series por ejercicio |
 | 🛠️ **Equipamiento** | 11 tipos: Mancuernas, Barra, Kettlebell, Polea, Máquina, Smith, Bandas, Fitball, Barra Z, Peso corporal y más |
@@ -57,25 +90,25 @@ Crea rutinas adaptadas a **tu realidad**, no a una plantilla genérica:
 La joya de la corona: **navega, busca y crea tu rutina a medida**.
 
 - 🔎 **Buscador en tiempo real** — Filtra al instante por nombre, músculo o equipamiento
-- 🎯 **Filtros combinables** — Grupo muscular · Equipamiento · Dificultad
+-  **Filtros combinables** — Grupo muscular · Equipamiento · Dificultad
 - 🖼️ **Vista visual con GIFs** — 1.324 ejercicios con animación
 -  **Botón "+ Añadir"** — Suma cualquier ejercicio a tu rutina personalizada
 - 📋 **Panel "Mi rutina"** — Ve lo que has seleccionado con contador en vivo
-- ️ **Quita o vacía** — Control total sobre tu selección
+- 🗑️ **Quita o vacía** — Control total sobre tu selección
 - 🚀 **"Iniciar sesión"** — Convierte tu selección en una sesión real con series configurables
 
->  **Flujo de uso**: Vas a *Ejercicios* → Filtras lo que te apetece → Añades los que quieras → Pulsas *Iniciar sesión* → ¡A entrenar!
+> 💡 **Flujo de uso**: Vas a *Ejercicios* → Filtras lo que te apetece → Añades los que quieras → Pulsas *Iniciar sesión* → ¡A entrenar!
 
 ### 🔄 3. Control Total de tu Sesión
 
 Una vez generada la rutina (automática o personalizada), tú mandas:
 
-- ️⬇️ **Reordena** los ejercicios como quieras
+- ⬆️⬇️ **Reordena** los ejercicios como quieras
 - 🔄 **Sustituye** cualquier ejercicio por una alternativa del mismo grupo muscular
-- ✕ **Elimina** lo que no te convenza
+-  **Elimina** lo que no te convenza
 - ✅ **Marca series completadas** en tiempo real
 - ⌨️ **Registra kg y repeticiones** de cada serie
--  **Añade notas** sobre sensaciones, molestias o PRs
+- 📝 **Añade notas** sobre sensaciones, molestias o PRs
 
 ### 📖 4. Biblioteca de Rutinas
 
@@ -90,7 +123,7 @@ Una vez generada la rutina (automática o personalizada), tú mandas:
 Cada entrenamiento finalizado se guarda automáticamente:
 
 - 📅 Fecha y hora
-- ️ Número de ejercicios
+- 🏋️ Número de ejercicios
 - ✅ Series completadas vs totales
 - ⚖️ **Volumen total en kg** (series × kg × reps)
 - 📝 Tus notas personales
@@ -100,12 +133,12 @@ Cada entrenamiento finalizado se guarda automáticamente:
 
 No es una traducción automática cutre. Cada texto, cada botón, cada mensaje está cuidadosamente traducido:
 
-- 🇸 **Español** completo
-- 🇬🇧 **Inglés** completo
+- 🇪🇸 **Español** completo
+- 🇬 **Inglés** completo
 - 🔄 Cambio instantáneo con un solo clic en la cabecera
 - 💾 Tu idioma preferido se guarda automáticamente
 
-### ☕ 7. Apoya el Proyecto
+###  7. Apoya el Proyecto
 
 Un botón **☕** siempre visible en la cabecera te permite:
 
@@ -118,9 +151,9 @@ Un botón **☕** siempre visible en la cabecera te permite:
 
 Inspirado en las mejores apps de fitness del mercado:
 
-- 🌙 **Modo oscuro** elegante y descansado para la vista
+-  **Modo oscuro** elegante y descansado para la vista
 - 📱 **100% responsive** — perfecto en móvil, tablet y escritorio
--  **Animaciones fluidas** y transiciones suaves
+- ⚡ **Animaciones fluidas** y transiciones suaves
 - 🎯 **Tipografía moderna** (Inter / SF Pro)
 - 🖼️ **Imágenes de alta calidad** para cada ejercicio
 
@@ -134,11 +167,11 @@ Inspirado en las mejores apps de fitness del mercado:
 
 ### ⚖️ 10. Legal y Transparente
 
--  **Avisos legales completos** en la pestaña "Legal"
+- 📜 **Avisos legales completos** en la pestaña "Legal"
 - 🎬 **Atribución correcta** a Gym visual (propietario de los GIFs)
 - 📋 **Licencia MIT** para el código y la estructura de datos
 - ⚠️ **Descargo de responsabilidad** sobre consejo médico/profesional
--  **Política de privacidad** clara y honesta
+- 🔐 **Política de privacidad** clara y honesta
 
 ---
 
