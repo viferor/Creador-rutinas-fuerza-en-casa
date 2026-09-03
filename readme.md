@@ -25,27 +25,27 @@ Genera rutinas personalizadas con más de 1.300 ejercicios animados o crea la tu
 ### 🏠 1. Generador de Rutinas
 *Configura tu rutina en segundos: elige tipo, nivel y equipamiento*
 
-![Generador](screenshots/01-generador.png)
+![Generador](https://raw.githubusercontent.com/viferor/Creador-rutinas-fuerza-en-casa/main/screenshots/01-generador.png)
 
 ### 🔍 2. Explorador de Ejercicios
 *Busca, filtra y añade ejercicios a tu rutina personalizada*
 
-![Explorador](screenshots/02-explorador.png)
+![Explorador](https://raw.githubusercontent.com/viferor/Creador-rutinas-fuerza-en-casa/main/screenshots/02-explorador.png)
 
 ### 💪 3. Sesión de Entrenamiento
 *Registra series, pesos y repeticiones en tiempo real*
 
-![Sesión](screenshots/03-sesion.png)
+![Sesión](https://raw.githubusercontent.com/viferor/Creador-rutinas-fuerza-en-casa/main/screenshots/03-sesion.png)
 
 ### 📊 4. Historial y Estadísticas
 *Visualiza tu progreso y sesiones completadas*
 
-![Historial](screenshots/04-historial.png)
+![Historial](https://raw.githubusercontent.com/viferor/Creador-rutinas-fuerza-en-casa/main/screenshots/04-historial.png)
 
 ### 📚 5. Biblioteca de Rutinas
 *Guarda y comparte tus rutinas favoritas*
 
-![Biblioteca](screenshots/05-biblioteca.png)
+![Biblioteca](https://raw.githubusercontent.com/viferor/Creador-rutinas-fuerza-en-casa/main/screenshots/05-biblioteca.png)
 
 </div>
 
