@@ -192,82 +192,26 @@ textarea{resize:vertical;min-height:70px}
   <button class="tab" data-view="legal" data-i18n="tabLegal">⚖️ Legal</button>
 </div>
 
-<!-- VISTA: CREAR -->
 <div class="view active" id="view-create">
   <div id="loaderBlock" class="loader"><div class="spinner"></div><span data-i18n="loading">Cargando base de datos…</span></div>
   <div id="formBlock" style="display:none">
-    <div class="section">
-      <h3 data-i18n="sec1">1 · Tu nivel de experiencia</h3>
-      <label class="sel-label" data-i18n="sec1Label">¿Cuánto llevas entrenando?</label>
-      <select id="experienceLevel">
-        <option value="beginner" data-i18n="optBeginner">🌱 Principiante · Menos de 6 meses</option>
-        <option value="intermediate" selected data-i18n="optIntermediate">💪 Intermedio · 6 meses - 2 años</option>
-        <option value="advanced" data-i18n="optAdvanced">🔥 Avanzado · 2 - 5 años</option>
-        <option value="expert" data-i18n="optExpert">⚡ Experto · Más de 5 años</option>
-      </select>
-      <div class="level-hint" id="levelHint" data-i18n="hintIntermediate">💪 Ejercicios equilibrados con técnica intermedia.</div>
-    </div>
-    <div class="section">
-      <h3 data-i18n="sec2">2 · Tipo de sesión</h3>
-      <label class="sel-label" data-i18n="sec2Label">Objetivo</label>
-      <select id="routineType">
-        <option value="fullbody" data-i18n="optFullbody">Full Body · Global equilibrado</option>
-        <option value="upper" data-i18n="optUpper">Tren Superior · Torso completo</option>
-        <option value="lower" data-i18n="optLower">Tren Inferior · Pierna y glúteo</option>
-        <option value="push" data-i18n="optPush">Empuje · Pecho, hombro, tríceps</option>
-        <option value="pull" data-i18n="optPull">Tirón · Espalda, bíceps, trapecio</option>
-        <option value="custom" data-i18n="optCustom">🎯 Músculo específico…</option>
-      </select>
-      <div id="customGroupWrap" style="display:none;margin-top:12px">
-        <label class="sel-label" data-i18n="customLabel">Elige el grupo muscular</label>
-        <select id="customGroup"></select>
-      </div>
-    </div>
-    <div class="section">
-      <h3 data-i18n="sec3">3 · Estilo de ejercicio</h3>
-      <label class="sel-label" data-i18n="sec3Label">Tipo de ejercicios a incluir</label>
-      <select id="exerciseStyle">
-        <option value="all" data-i18n="optAll">Todos (máx. variedad)</option>
-        <option value="bodyweight" data-i18n="optBodyweight">Solo peso corporal</option>
-        <option value="iso" data-i18n="optIso">Incluir isométricos</option>
-        <option value="mix" data-i18n="optMix">Mixto (equipo + peso corporal)</option>
-      </select>
-    </div>
-    <div class="section">
-      <h3 data-i18n="sec4">4 · Volumen de series</h3>
-      <label class="sel-label" data-i18n="sec4Label">Nivel de exigencia</label>
-      <select id="level">
-        <option value="2" data-i18n="optLevel2">Baja · 2 series</option>
-        <option value="3" selected data-i18n="optLevel3">Media · 3 series</option>
-        <option value="4" data-i18n="optLevel4">Alta · 4 series</option>
-      </select>
-    </div>
-    <div class="section">
-      <h3 data-i18n="sec5">5 · Tu equipamiento hoy</h3>
-      <div class="equip-grid" id="equipGrid"></div>
-    </div>
+    <div class="section"><h3 data-i18n="sec1">1 · Tu nivel de experiencia</h3><label class="sel-label" data-i18n="sec1Label">¿Cuánto llevas entrenando?</label><select id="experienceLevel"><option value="beginner" data-i18n="optBeginner">🌱 Principiante · Menos de 6 meses</option><option value="intermediate" selected data-i18n="optIntermediate">💪 Intermedio · 6 meses - 2 años</option><option value="advanced" data-i18n="optAdvanced">🔥 Avanzado · 2 - 5 años</option><option value="expert" data-i18n="optExpert">⚡ Experto · Más de 5 años</option></select><div class="level-hint" id="levelHint" data-i18n="hintIntermediate">💪 Ejercicios equilibrados con técnica intermedia.</div></div>
+    <div class="section"><h3 data-i18n="sec2">2 · Tipo de sesión</h3><label class="sel-label" data-i18n="sec2Label">Objetivo</label><select id="routineType"><option value="fullbody" data-i18n="optFullbody">Full Body · Global equilibrado</option><option value="upper" data-i18n="optUpper">Tren Superior · Torso completo</option><option value="lower" data-i18n="optLower">Tren Inferior · Pierna y glúteo</option><option value="push" data-i18n="optPush">Empuje · Pecho, hombro, tríceps</option><option value="pull" data-i18n="optPull">Tirón · Espalda, bíceps, trapecio</option><option value="custom" data-i18n="optCustom">🎯 Músculo específico…</option></select><div id="customGroupWrap" style="display:none;margin-top:12px"><label class="sel-label" data-i18n="customLabel">Elige el grupo muscular</label><select id="customGroup"></select></div></div>
+    <div class="section"><h3 data-i18n="sec3">3 · Estilo de ejercicio</h3><label class="sel-label" data-i18n="sec3Label">Tipo de ejercicios a incluir</label><select id="exerciseStyle"><option value="all" data-i18n="optAll">Todos (máx. variedad)</option><option value="bodyweight" data-i18n="optBodyweight">Solo peso corporal</option><option value="iso" data-i18n="optIso">Incluir isométricos</option><option value="mix" data-i18n="optMix">Mixto (equipo + peso corporal)</option></select></div>
+    <div class="section"><h3 data-i18n="sec4">4 · Volumen de series</h3><label class="sel-label" data-i18n="sec4Label">Nivel de exigencia</label><select id="level"><option value="2" data-i18n="optLevel2">Baja · 2 series</option><option value="3" selected data-i18n="optLevel3">Media · 3 series</option><option value="4" data-i18n="optLevel4">Alta · 4 series</option></select></div>
+    <div class="section"><h3 data-i18n="sec5">5 · Tu equipamiento hoy</h3><div class="equip-grid" id="equipGrid"></div></div>
     <button class="btn btn-primary" id="btnGenerate"><span>🚀</span><span data-i18n="btnGenerate">Generar Rutina a Medida</span></button>
   </div>
 </div>
 
-<!-- VISTA: EXPLORAR EJERCICIOS -->
 <div class="view" id="view-browse">
   <div class="section">
     <h3 data-i18n="browseTitle">🔍 Explorar ejercicios</h3>
-    <div class="search-box">
-      <span class="icon">🔍</span>
-      <input type="text" id="exerciseSearch" data-i18n-placeholder="searchPlaceholder" placeholder="Buscar por nombre, músculo, equipamiento...">
-    </div>
+    <div class="search-box"><span class="icon">🔍</span><input type="text" id="exerciseSearch" data-i18n-placeholder="searchPlaceholder" placeholder="Buscar por nombre, músculo, equipamiento..."></div>
     <div class="filter-bar">
       <select id="filterCategory"><option value="" data-i18n="allCategories">Todos los grupos</option></select>
       <select id="filterEquip"><option value="" data-i18n="allEquipment">Todo el equipamiento</option></select>
-      <select id="filterDiff">
-        <option value="" data-i18n="allDifficulty">Todas las dificultades</option>
-        <option value="beginner" data-i18n="diffBeginner">🌱 Principiante</option>
-        <option value="intermediate" data-i18n="diffIntermediate">💪 Intermedio</option>
-        <option value="advanced" data-i18n="diffAdvanced">🔥 Avanzado</option>
-        <option value="expert" data-i18n="diffExpert">⚡ Experto</option>
-      </select>
+      <select id="filterDiff"><option value="" data-i18n="allDifficulty">Todas las dificultades</option><option value="beginner" data-i18n="diffBeginner">🌱 Principiante</option><option value="intermediate" data-i18n="diffIntermediate">💪 Intermedio</option><option value="advanced" data-i18n="diffAdvanced">🔥 Avanzado</option><option value="expert" data-i18n="diffExpert">⚡ Experto</option></select>
     </div>
     <div class="result-count" id="resultCount">0 ejercicios</div>
     <div id="browseList" class="browse-grid"></div>
@@ -275,157 +219,61 @@ textarea{resize:vertical;min-height:70px}
   <div class="my-routine-panel" id="myRoutinePanel" style="display:none">
     <h3 data-i18n="myRoutineTitle">📋 Mi rutina personalizada <span class="my-routine-count" id="myRoutineCount">0</span></h3>
     <div id="myRoutineList"></div>
-    <div class="btn-row" style="margin-top:12px">
-      <button class="btn btn-green" id="btnStartCustom" data-i18n="btnStartCustom">🚀 Iniciar sesión con estos ejercicios</button>
-      <button class="btn btn-red" id="btnClearCustom" data-i18n="btnClearCustom">🗑 Vaciar rutina</button>
-    </div>
+    <div class="btn-row" style="margin-top:12px"><button class="btn btn-green" id="btnStartCustom" data-i18n="btnStartCustom">🚀 Iniciar sesión con estos ejercicios</button><button class="btn btn-red" id="btnClearCustom" data-i18n="btnClearCustom">🗑 Vaciar rutina</button></div>
   </div>
 </div>
 
-<!-- VISTA: SESIÓN -->
 <div class="view" id="view-session">
   <div id="sessionEmpty" class="empty"><div class="ic">🏋️</div><span data-i18n="emptySession">No hay sesión en curso.<br>Ve a <b>Crear</b> o <b>Ejercicios</b> para empezar.</span></div>
   <div id="sessionContent" style="display:none">
-    <div class="section" style="padding:12px 16px;margin-bottom:12px">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-        <div>
-          <div style="font-size:12px;color:var(--muted);font-weight:600" data-i18n="sessionActive">SESIÓN EN CURSO</div>
-          <div id="sessionTitle" style="font-size:17px;font-weight:800;margin-top:2px"></div>
-        </div>
-        <button class="btn btn-red" id="btnCancelSession">✕</button>
-      </div>
-    </div>
-    <div class="donate-section">
-      <h3 data-i18n="donateTitle">☕ Invítame a una cerveza</h3>
-      <p data-i18n="donateText">Esta app es 100% gratuita y sin anuncios. Si consideras que mi trabajo merece la pena, puedes invitarme a una cerveza o hacer una donación. ¡Gracias por tu apoyo! 🍺</p>
-      <div class="donate-actions">
-        <a href="https://www.paypal.com/paypalme/viferor" target="_blank" class="btn btn-accent" data-i18n="btnPaypal">💳 Donar con PayPal</a>
-        <button class="btn btn-purple" id="btnCopyBizum" data-i18n="btnBizum">📱 Copiar Bizum</button>
-      </div>
-    </div>
-    <div class="section" style="padding:12px 16px;margin-bottom:12px">
-      <h3 style="margin-bottom:10px" data-i18n="shareTitle">💾 Compartir esta rutina</h3>
-      <div class="btn-row">
-        <button class="btn btn-accent" id="btnSaveToLibrary" style="padding:12px;font-size:13px" data-i18n="btnSave">💾 Guardar</button>
-        <button class="btn btn-purple" id="btnShareLink" style="padding:12px;font-size:13px" data-i18n="btnShare">🔗 Enlace</button>
-        <button class="btn btn-secondary" id="btnExportJSON" style="padding:12px;font-size:13px" data-i18n="btnExport">📤 Exportar</button>
-        <button class="btn btn-secondary" id="btnImportJSON" style="padding:12px;font-size:13px" data-i18n="btnImport">📥 Importar</button>
-      </div>
-      <div id="shareBox" class="share-box" style="display:none"></div>
-    </div>
+    <div class="section" style="padding:12px 16px;margin-bottom:12px"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div><div style="font-size:12px;color:var(--muted);font-weight:600" data-i18n="sessionActive">SESIÓN EN CURSO</div><div id="sessionTitle" style="font-size:17px;font-weight:800;margin-top:2px"></div></div><button class="btn btn-red" id="btnCancelSession">✕</button></div></div>
+    <div class="donate-section"><h3 data-i18n="donateTitle">☕ Invítame a una cerveza</h3><p data-i18n="donateText">Esta app es 100% gratuita y sin anuncios. Si consideras que mi trabajo merece la pena, puedes invitarme a una cerveza o hacer una donación. ¡Gracias por tu apoyo! 🍺</p><div class="donate-actions"><a href="https://www.paypal.com/paypalme/viferor" target="_blank" class="btn btn-accent" data-i18n="btnPaypal">💳 Donar con PayPal</a><button class="btn btn-purple" id="btnCopyBizum" data-i18n="btnBizum">📱 Copiar Bizum</button></div></div>
+    <div class="section" style="padding:12px 16px;margin-bottom:12px"><h3 style="margin-bottom:10px" data-i18n="shareTitle">💾 Compartir esta rutina</h3><div class="btn-row"><button class="btn btn-accent" id="btnSaveToLibrary" style="padding:12px;font-size:13px" data-i18n="btnSave">💾 Guardar</button><button class="btn btn-purple" id="btnShareLink" style="padding:12px;font-size:13px" data-i18n="btnShare">🔗 Enlace</button><button class="btn btn-secondary" id="btnExportJSON" style="padding:12px;font-size:13px" data-i18n="btnExport">📤 Exportar</button><button class="btn btn-secondary" id="btnImportJSON" style="padding:12px;font-size:13px" data-i18n="btnImport">📥 Importar</button></div><div id="shareBox" class="share-box" style="display:none"></div></div>
     <div id="exercisesList" class="exercise-grid"></div>
-    <div class="sticky-bottom">
-      <textarea id="sessionNotes" data-i18n-placeholder="notesPlaceholder" placeholder="📝 Notas del entrenamiento…"></textarea>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:10px;background:var(--card2);border-radius:8px">
-        <input type="checkbox" id="exportPDF" style="width:18px;height:18px;cursor:pointer">
-        <label for="exportPDF" style="font-size:13px;color:var(--muted);cursor:pointer;margin:0" data-i18n="exportPDFLabel">📄 Exportar sesión a PDF al finalizar</label>
-      </div>
-      <button class="btn btn-green" id="btnFinish" data-i18n="btnFinish">✓ Finalizar y guardar</button>
-    </div>
+    <div class="sticky-bottom"><textarea id="sessionNotes" data-i18n-placeholder="notesPlaceholder" placeholder="📝 Notas del entrenamiento…"></textarea><div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:10px;background:var(--card2);border-radius:8px"><input type="checkbox" id="exportPDF" style="width:18px;height:18px;cursor:pointer"><label for="exportPDF" style="font-size:13px;color:var(--muted);cursor:pointer;margin:0" data-i18n="exportPDFLabel">📄 Exportar sesión a PDF al finalizar</label></div><button class="btn btn-green" id="btnFinish" data-i18n="btnFinish">✓ Finalizar y guardar</button></div>
   </div>
 </div>
 
-<!-- VISTA: BIBLIOTECA -->
 <div class="view" id="view-library">
   <div class="section" style="padding:12px 16px;margin-bottom:12px">
     <h3 style="margin-bottom:10px" data-i18n="libTitle">📚 Mi biblioteca de rutinas</h3>
     <p style="color:var(--muted);font-size:13px;margin-bottom:12px" data-i18n="libDesc">Guarda tus rutinas favoritas y compártelas.</p>
-    <div class="import-zone" id="importZone">
-      <div style="font-size:32px;margin-bottom:8px">📥</div>
-      <div style="font-weight:600;margin-bottom:4px" data-i18n="importZoneTitle">Importar rutina desde archivo</div>
-      <div style="font-size:12px;color:var(--muted)" data-i18n="importZoneDesc">Haz clic o arrastra un archivo .json</div>
-      <input type="file" id="importFile" accept=".json">
-    </div>
-    <div style="margin-top:10px">
-      <label class="sel-label" data-i18n="importLinkLabel">O pega un enlace compartido:</label>
-      <div style="display:flex;gap:8px">
-        <input type="text" id="importLinkInput" data-i18n-placeholder="importLinkPlaceholder" placeholder="Pega aquí el enlace...">
-        <button class="btn btn-accent" id="btnImportLink" style="width:auto;padding:12px 20px;white-space:nowrap" data-i18n="btnLoad">Cargar</button>
-      </div>
-    </div>
+    <div class="import-zone" id="importZone"><div style="font-size:32px;margin-bottom:8px">📥</div><div style="font-weight:600;margin-bottom:4px" data-i18n="importZoneTitle">Importar rutina desde archivo</div><div style="font-size:12px;color:var(--muted)" data-i18n="importZoneDesc">Haz clic o arrastra un archivo .json</div><input type="file" id="importFile" accept=".json"></div>
+    <div style="margin-top:10px"><label class="sel-label" data-i18n="importLinkLabel">O pega un enlace compartido:</label><div style="display:flex;gap:8px"><input type="text" id="importLinkInput" data-i18n-placeholder="importLinkPlaceholder" placeholder="Pega aquí el enlace..."><button class="btn btn-accent" id="btnImportLink" style="width:auto;padding:12px 20px;white-space:nowrap" data-i18n="btnLoad">Cargar</button></div></div>
   </div>
   <div id="libraryList" class="lib-grid"></div>
 </div>
 
-<!-- VISTA: HISTORIAL -->
 <div class="view" id="view-history"><div id="historyList" class="hist-grid"></div></div>
 
-<!-- VISTA: DETALLE -->
-<div class="view" id="view-detail">
-  <button class="detail-back" id="btnBackHist">← <span data-i18n="btnBack">Volver</span></button>
-  <div id="detailBody"></div>
-</div>
+<div class="view" id="view-detail"><button class="detail-back" id="btnBackHist">← <span data-i18n="btnBack">Volver</span></button><div id="detailBody"></div></div>
 
-<!-- VISTA: LEGAL -->
 <div class="view" id="view-legal">
   <div class="section">
     <h3 data-i18n="legalTitle">⚖️ Avisos legales y atribuciones</h3>
     <p style="color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:16px" data-i18n="legalDesc">Esta aplicación utiliza recursos de terceros bajo distintas licencias.</p>
-    <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--accent)">
-      <h4 style="font-size:14px;margin-bottom:6px" data-i18n="legalMediaTitle">🎬 Animaciones e imágenes</h4>
-      <p style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="legalMediaText">Las animaciones GIF y las imágenes son propiedad de <strong>© Gym visual</strong> y se utilizan con permiso a través del dataset exercises-dataset.</p>
-      <p style="font-size:12px;color:var(--muted);margin-top:8px"><a href="https://gymvisual.com" target="_blank" style="color:var(--accent)" data-i18n="legalMediaLink">→ Más información: gymvisual.com</a></p>
-    </div>
-    <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--green)">
-      <h4 style="font-size:14px;margin-bottom:6px" data-i18n="legalDbTitle">📋 Base de datos</h4>
-      <p style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="legalDbText">La estructura de datos, nombres e instrucciones están bajo <strong>MIT License</strong>.</p>
-    </div>
-    <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--orange)">
-      <h4 style="font-size:14px;margin-bottom:6px" data-i18n="legalDisclaimerTitle">⚠️ Descargo de responsabilidad</h4>
-      <p style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="legalDisclaimerText">Esta aplicación es una herramienta de organización personal. <strong>No sustituye el consejo de un profesional cualificado</strong>. Consulta con un especialista antes de iniciar cualquier programa de entrenamiento.</p>
-    </div>
-    <div style="background:var(--card2);border-radius:10px;padding:14px;border-left:3px solid var(--purple)">
-      <h4 style="font-size:14px;margin-bottom:6px" data-i18n="legalPrivacyTitle">💾 Privacidad</h4>
-      <p style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="legalPrivacyText">Todos tus datos se almacenan <strong>exclusivamente en tu navegador</strong>. <strong>No se envía información a servidores externos</strong>.</p>
-    </div>
+    <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--accent)"><h4 style="font-size:14px;margin-bottom:6px" data-i18n="legalMediaTitle">🎬 Animaciones e imágenes</h4><p style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="legalMediaText">Las animaciones GIF y las imágenes son propiedad de <strong>© Gym visual</strong> y se utilizan con permiso a través del dataset exercises-dataset.</p><p style="font-size:12px;color:var(--muted);margin-top:8px"><a href="https://gymvisual.com" target="_blank" style="color:var(--accent)" data-i18n="legalMediaLink">→ Más información: gymvisual.com</a></p></div>
+    <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--green)"><h4 style="font-size:14px;margin-bottom:6px" data-i18n="legalDbTitle">📋 Base de datos</h4><p style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="legalDbText">La estructura de datos, nombres e instrucciones están bajo <strong>MIT License</strong>.</p></div>
+    <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--orange)"><h4 style="font-size:14px;margin-bottom:6px" data-i18n="legalDisclaimerTitle">⚠️ Descargo de responsabilidad</h4><p style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="legalDisclaimerText">Esta aplicación es una herramienta de organización personal. <strong>No sustituye el consejo de un profesional cualificado</strong>. Consulta con un especialista antes de iniciar cualquier programa de entrenamiento.</p></div>
+    <div style="background:var(--card2);border-radius:10px;padding:14px;border-left:3px solid var(--purple)"><h4 style="font-size:14px;margin-bottom:6px" data-i18n="legalPrivacyTitle">💾 Privacidad</h4><p style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="legalPrivacyText">Todos tus datos se almacenan <strong>exclusivamente en tu navegador</strong>. <strong>No se envía información a servidores externos</strong>.</p></div>
   </div>
 </div>
 </div>
 
-<!-- FOOTER LEGAL -->
 <div class="legal-footer">
   <div class="credit" data-i18n="footerCredit">Cuidate !!</div>
   <div data-i18n="footerText">Animaciones © Gym visual · Dataset exercises-dataset (MIT)</div>
   <div class="license-badges"><span class="badge">MIT License</span><span class="badge">© Gym visual</span><span class="badge" data-i18n="badgeLocal">Datos locales</span></div>
-  <div class="disclaimer">
-    <strong data-i18n="footerDisclaimerTitle">⚠️ Aviso importante:</strong>
-    <span data-i18n="footerDisclaimer">Esta aplicación es una herramienta de organización personal. No sustituye el consejo médico ni de un entrenador profesional. Los medios visuales son propiedad de Gym visual y se utilizan con permiso.</span>
-  </div>
+  <div class="disclaimer"><strong data-i18n="footerDisclaimerTitle">⚠️ Aviso importante:</strong><span data-i18n="footerDisclaimer">Esta aplicación es una herramienta de organización personal. No sustituye el consejo médico ni de un entrenador profesional. Los medios visuales son propiedad de Gym visual y se utilizan con permiso.</span></div>
 </div>
 
-<!-- MODALES -->
-<div class="modal" id="gifModal">
-  <button class="modal-close" id="modalClose">✕</button>
-  <div class="modal-content">
-    <img id="modalImg" src="" alt="">
-    <h3 id="modalTitle"></h3>
-    <div class="instructions" id="modalInstr"></div>
-    <div style="margin-top:10px;font-size:11px;color:var(--muted)">Animación © <a href="https://gymvisual.com" target="_blank" style="color:var(--accent)">Gym visual</a></div>
-  </div>
-</div>
-<div class="modal" id="replaceModal">
-  <button class="modal-close" id="replaceModalClose">✕</button>
-  <div class="modal-content">
-    <h3 style="margin-bottom:12px" data-i18n="modalReplaceTitle">🔄 Cambiar ejercicio</h3>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:12px"><span data-i18n="modalReplaceInfo">Sustituyendo:</span> <span id="replaceInfo"></span></p>
-    <div class="replace-list" id="replaceList"></div>
-  </div>
-</div>
-<div class="modal" id="donateModal">
-  <button class="modal-close" id="donateModalClose">✕</button>
-  <div class="modal-content" style="padding:24px">
-    <h3 style="margin-bottom:16px;color:var(--yellow)">☕ Invítame a una cerveza</h3>
-    <p style="font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:20px" data-i18n="donateText">Esta app es 100% gratuita y sin anuncios. Si consideras que mi trabajo merece la pena, puedes invitarme a una cerveza o hacer una donación. ¡Gracias por tu apoyo! 🍺</p>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <a href="https://www.paypal.com/paypalme/viferor" target="_blank" class="btn btn-accent" style="text-decoration:none">💳 Donar con PayPal</a>
-      <button class="btn btn-purple" id="btnCopyBizumModal">📱 Copiar Bizum: +34 638 00 05 05</button>
-    </div>
-  </div>
-</div>
+<div class="modal" id="gifModal"><button class="modal-close" id="modalClose">✕</button><div class="modal-content"><img id="modalImg" src="" alt=""><h3 id="modalTitle"></h3><div class="instructions" id="modalInstr"></div><div style="margin-top:10px;font-size:11px;color:var(--muted)">Animación © <a href="https://gymvisual.com" target="_blank" style="color:var(--accent)">Gym visual</a></div></div></div>
+<div class="modal" id="replaceModal"><button class="modal-close" id="replaceModalClose">✕</button><div class="modal-content"><h3 style="margin-bottom:12px" data-i18n="modalReplaceTitle">🔄 Cambiar ejercicio</h3><p style="color:var(--muted);font-size:13px;margin-bottom:12px"><span data-i18n="modalReplaceInfo">Sustituyendo:</span> <span id="replaceInfo"></span></p><div class="replace-list" id="replaceList"></div></div></div>
+<div class="modal" id="donateModal"><button class="modal-close" id="donateModalClose">✕</button><div class="modal-content" style="padding:24px"><h3 style="margin-bottom:16px;color:var(--yellow)">☕ Invítame a una cerveza</h3><p style="font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:20px" data-i18n="donateText">Esta app es 100% gratuita y sin anuncios. Si consideras que mi trabajo merece la pena, puedes invitarme a una cerveza o hacer una donación. ¡Gracias por tu apoyo! 🍺</p><div style="display:flex;flex-direction:column;gap:10px"><a href="https://www.paypal.com/paypalme/viferor" target="_blank" class="btn btn-accent" style="text-decoration:none">💳 Donar con PayPal</a><button class="btn btn-purple" id="btnCopyBizumModal">📱 Copiar Bizum: +34 638 00 05 05</button></div></div></div>
 
 <script>
 // ============================================
-// CONFIGURACIÓN Y CONSTANTES
+// CONFIGURACIÓN
 // ============================================
 const DATA_URLS = [
   'https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/data/exercises.json',
@@ -433,6 +281,7 @@ const DATA_URLS = [
 ];
 const MEDIA_BASE = 'https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/';
 
+// Lista completa de equipamientos (incluyendo los que NO están en la DB pero son útiles)
 const EQUIP_LIST = [
   {key:'body weight',label:'equipBodyweight'},
   {key:'dumbbell',label:'equipDumbbell'},
@@ -442,12 +291,22 @@ const EQUIP_LIST = [
   {key:'leverage machine',label:'equipMachine'},
   {key:'smith machine',label:'equipSmith'},
   {key:'band',label:'equipBand'},
+  {key:'bands',label:'equipBand'},
   {key:'stability ball',label:'equipBall'},
+  {key:'exercise ball',label:'equipBall'},
   {key:'ez barbell',label:'equipEZ'},
+  {key:'medicine ball',label:'equipMedBall'},
+  {key:'foam roll',label:'equipFoamRoll'},
   {key:'pull-up bar',label:'equipPullUpBar'},
+  {key:'battle rope',label:'equipBattleRope'},
+  {key:'tire',label:'equipTire'},
+  {key:'sled',label:'equipSled'},
+  {key:'rope',label:'equipRope'},
+  {key:'stationary bike',label:'equipBike'},
   {key:'other',label:'equipOther'}
 ];
 
+// Equipamientos marcados por defecto
 const DEFAULT_EQUIP = new Set(['body weight','dumbbell','barbell','kettlebell','cable','leverage machine','pull-up bar']);
 
 let DB = [];
@@ -458,422 +317,245 @@ let myCustomRoutine = [];
 const STORAGE_KEY = 'viferor_sessions_v1';
 const LIBRARY_KEY = 'viferor_library_v1';
 
+// Mapeo de claves de equipamiento a claves de traducción
 const EQUIP_MAP = {
   'body weight':'equipBodyweight',
+  'bodyweight':'equipBodyweight',
   'dumbbell':'equipDumbbell',
   'barbell':'equipBarbell',
   'kettlebell':'equipKettlebell',
   'cable':'equipCable',
   'leverage machine':'equipMachine',
+  'machine':'equipMachine',
   'smith machine':'equipSmith',
   'band':'equipBand',
+  'bands':'equipBand',
   'stability ball':'equipBall',
+  'exercise ball':'equipBall',
+  'swiss ball':'equipBall',
   'ez barbell':'equipEZ',
+  'ez bar':'equipEZ',
+  'medicine ball':'equipMedBall',
+  'foam roll':'equipFoamRoll',
   'pull-up bar':'equipPullUpBar',
+  'pullup bar':'equipPullUpBar',
+  'battle rope':'equipBattleRope',
+  'tire':'equipTire',
+  'sled':'equipSled',
+  'rope':'equipRope',
+  'stationary bike':'equipBike',
   'other':'equipOther'
 };
 
+// Palabras clave para identificar ejercicios de barra de dominadas
+const PULLUP_KEYWORDS = ['pull-up','pullup','pull up','chin-up','chinup','chin up','hanging','muscle-up','muscleup','muscle up','toes to bar','knee raise','leg raise','l-sit'];
+
+function isPullUpExercise(ex) {
+  const name = (ex.name || '').toLowerCase();
+  return PULLUP_KEYWORDS.some(k => name.includes(k));
+}
+
 // ============================================
-// TRADUCCIONES DE EJERCICIOS (ES)
+// TRADUCCIONES DE EJERCICIOS
 // ============================================
 const exerciseTranslations = {
-  'Barbell Bench Press':'Press de Banca con Barra',
-  'Dumbbell Bench Press':'Press de Banca con Mancuernas',
-  'Push-Up':'Flexión','Pushups':'Flexiones',
-  'Pull-Up':'Dominada','Pullups':'Dominadas',
-  'Chin-Up':'Dominada Supina',
-  'Barbell Squat':'Sentadilla con Barra','Squats':'Sentadillas',
-  'Front Squat':'Sentadilla Frontal',
-  'Deadlift':'Peso Muerto','Deadlifts':'Peso Muerto',
-  'Romanian Deadlift':'Peso Muerto Rumano',
-  'Barbell Row':'Remo con Barra',
-  'Dumbbell Row':'Remo con Mancuerna',
-  'Overhead Press':'Press Militar',
-  'Shoulder Press':'Press de Hombros',
-  'Lateral Raise':'Elevaciones Laterales',
-  'Bicep Curl':'Curl de Bíceps','Bicep Curls':'Curl de Bíceps',
-  'Hammer Curl':'Curl Martillo',
-  'Tricep Extension':'Extensión de Tríceps',
-  'Tricep Pushdown':'Pushdown de Tríceps',
-  'Leg Press':'Prensa de Piernas',
-  'Leg Curl':'Curl de Pierna',
-  'Leg Extension':'Extensión de Pierna',
-  'Calf Raise':'Elevación de Gemelos',
-  'Plank':'Plancha','Planks':'Planchas',
-  'Side Plank':'Plancha Lateral',
-  'Crunch':'Abdominal Crunch','Crunches':'Abdominales',
-  'Sit-Up':'Abdominal Sit-Up','Sit-Ups':'Abdominales',
-  'Russian Twist':'Giros Rusos',
-  'Lunge':'Zancada','Lunges':'Zancadas',
-  'Bulgarian Split Squat':'Sentadilla Búlgara',
-  'Hip Thrust':'Hip Thrust',
-  'Glute Bridge':'Puente de Glúteos',
-  'Lat Pulldown':'Jalón al Pecho',
-  'Cable Fly':'Cruce de Poleas',
-  'Chest Fly':'Aperturas de Pecho',
-  'Incline Bench Press':'Press Banca Inclinado',
-  'Decline Bench Press':'Press Banca Declinado',
-  'Dips':'Fondos',
-  'Close-Grip Bench Press':'Press Banca Agarre Cerrado',
-  'Wide-Grip Pull-Up':'Dominada Agarre Abierto',
-  'Face Pull':'Face Pull',
-  'Shrug':'Encogimiento de Hombros',
-  'Upright Row':'Remo al Mentón',
-  'Good Morning':'Buenos Días',
-  'Box Jump':'Salto al Cajón',
-  'Jump Squat':'Sentadilla con Salto',
-  'Burpee':'Burpee',
-  'Mountain Climber':'Escalador',
-  'High Knees':'Rodillas Altas',
-  'Jumping Jack':'Jumping Jack',
-  'Wall Sit':'Sentadilla en Pared',
-  'Hanging Leg Raise':'Elevación de Piernas Colgado',
-  'Knee Raise':'Elevación de Rodillas',
-  'Superman':'Superman',
-  'Back Extension':'Extensión de Espalda',
-  'Kettlebell Swing':'Swing con Kettlebell',
-  'Turkish Get-Up':'Turkish Get-Up',
-  'Goblet Squat':'Sentadilla Goblet',
-  'Clean and Press':'Cargada y Press',
-  'Snatch':'Arranque',
-  'Clean':'Cargada',
-  'Jerk':'Envión',
-  'Farmers Walk':'Paseo del Granjero',
-  'Battle Rope':'Cuerda de Batalla',
-  'Sled Push':'Empuje de Trineo',
-  'Medicine Ball Slam':'Lanzamiento de Balón Medicinal',
-  'Box Squat':'Sentadilla en Caja',
-  'Sumo Deadlift':'Peso Muerto Sumo',
-  'Single Leg Deadlift':'Peso Muerto a Una Pierna',
-  'Pistol Squat':'Sentadilla Pistol',
-  'Handstand Push-Up':'Flexión de Pino',
-  'Muscle-Up':'Muscle-Up',
-  'L-Sit':'L-Sit',
-  'Dragon Flag':'Dragon Flag',
-  'Planche':'Planche',
-  'Front Lever':'Front Lever',
-  'Back Lever':'Back Lever',
-  'Ring Dip':'Fondos en Anillas',
-  'Ring Push-Up':'Flexión en Anillas',
-  'Ring Row':'Remo en Anillas',
-  'TRX Row':'Remo TRX',
-  'TRX Push-Up':'Flexión TRX',
-  'Cable Crunch':'Crunch en Polea',
-  'Woodchopper':'Leñador',
-  'Pallof Press':'Pallof Press',
-  'Ab Wheel Rollout':'Rueda Abdominal',
-  'Hanging Knee Raise':'Elevación de Rodillas Colgado',
-  'Decline Crunch':'Crunch Declinado',
-  'Reverse Crunch':'Crunch Inverso',
-  'Bicycle Crunch':'Crunch de Bicicleta',
-  'Flutter Kick':'Patada Flutter',
-  'Scissor Kick':'Patada de Tijera',
-  'Leg Raise':'Elevación de Piernas',
-  'Hip Raise':'Elevación de Cadera',
-  'Glute Kickback':'Patada de Glúteo',
-  'Donkey Kick':'Patada de Burro',
-  'Fire Hydrant':'Hidrante',
-  'Clamshell':'Almeja',
-  'Monster Walk':'Caminata de Monstruo',
-  'Band Pull-Apart':'Separación de Banda',
-  'Band Row':'Remo con Banda',
-  'Band Squat':'Sentadilla con Banda',
-  'Band Chest Press':'Press de Pecho con Banda',
-  'Band Bicep Curl':'Curl de Bíceps con Banda',
-  'Band Tricep Extension':'Extensión de Tríceps con Banda',
-  'Band Lateral Raise':'Elevación Lateral con Banda',
-  'Band Face Pull':'Face Pull con Banda',
-  'Band Deadlift':'Peso Muerto con Banda',
-  'Band Leg Curl':'Curl de Pierna con Banda',
-  'Band Leg Extension':'Extensión de Pierna con Banda',
-  'Band Calf Raise':'Elevación de Gemelos con Banda',
-  'Band Hip Thrust':'Hip Thrust con Banda',
-  'Band Lunge':'Zancada con Banda',
-  'Band Glute Bridge':'Puente de Glúteos con Banda',
-  'Band Plank':'Plancha con Banda',
-  'Band Russian Twist':'Giros Rusos con Banda',
-  'Band Woodchopper':'Leñador con Banda',
-  'Band Pallof Press':'Pallof Press con Banda',
-  'Band Ab Wheel Rollout':'Rueda Abdominal con Banda',
-  'Band Bicycle Crunch':'Crunch de Bicicleta con Banda',
-  'Band Reverse Crunch':'Crunch Inverso con Banda'
+  'Barbell Bench Press':'Press de Banca con Barra','Dumbbell Bench Press':'Press de Banca con Mancuernas',
+  'Push-Up':'Flexión','Pushups':'Flexiones','Pull-Up':'Dominada','Pullups':'Dominadas','Chin-Up':'Dominada Supina',
+  'Barbell Squat':'Sentadilla con Barra','Squats':'Sentadillas','Front Squat':'Sentadilla Frontal',
+  'Deadlift':'Peso Muerto','Deadlifts':'Peso Muerto','Romanian Deadlift':'Peso Muerto Rumano',
+  'Barbell Row':'Remo con Barra','Dumbbell Row':'Remo con Mancuerna',
+  'Overhead Press':'Press Militar','Shoulder Press':'Press de Hombros',
+  'Lateral Raise':'Elevaciones Laterales','Bicep Curl':'Curl de Bíceps','Bicep Curls':'Curl de Bíceps',
+  'Hammer Curl':'Curl Martillo','Tricep Extension':'Extensión de Tríceps','Tricep Pushdown':'Pushdown de Tríceps',
+  'Leg Press':'Prensa de Piernas','Leg Curl':'Curl de Pierna','Leg Extension':'Extensión de Pierna',
+  'Calf Raise':'Elevación de Gemelos','Plank':'Plancha','Planks':'Planchas',
+  'Side Plank':'Plancha Lateral','Crunch':'Abdominal Crunch','Crunches':'Abdominales',
+  'Sit-Up':'Abdominal Sit-Up','Sit-Ups':'Abdominales','Russian Twist':'Giros Rusos',
+  'Lunge':'Zancada','Lunges':'Zancadas','Bulgarian Split Squat':'Sentadilla Búlgara',
+  'Hip Thrust':'Hip Thrust','Glute Bridge':'Puente de Glúteos','Lat Pulldown':'Jalón al Pecho',
+  'Cable Fly':'Cruce de Poleas','Chest Fly':'Aperturas de Pecho',
+  'Incline Bench Press':'Press Banca Inclinado','Decline Bench Press':'Press Banca Declinado',
+  'Dips':'Fondos','Close-Grip Bench Press':'Press Banca Agarre Cerrado',
+  'Wide-Grip Pull-Up':'Dominada Agarre Abierto','Face Pull':'Face Pull',
+  'Shrug':'Encogimiento de Hombros','Upright Row':'Remo al Mentón',
+  'Good Morning':'Buenos Días','Box Jump':'Salto al Cajón',
+  'Jump Squat':'Sentadilla con Salto','Burpee':'Burpee','Mountain Climber':'Escalador',
+  'High Knees':'Rodillas Altas','Jumping Jack':'Jumping Jack','Wall Sit':'Sentadilla en Pared',
+  'Hanging Leg Raise':'Elevación de Piernas Colgado','Knee Raise':'Elevación de Rodillas',
+  'Superman':'Superman','Back Extension':'Extensión de Espalda',
+  'Kettlebell Swing':'Swing con Kettlebell','Turkish Get-Up':'Turkish Get-Up',
+  'Goblet Squat':'Sentadilla Goblet','Clean and Press':'Cargada y Press',
+  'Snatch':'Arranque','Clean':'Cargada','Jerk':'Envión',
+  'Farmers Walk':'Paseo del Granjero','Battle Rope':'Cuerda de Batalla',
+  'Sled Push':'Empuje de Trineo','Medicine Ball Slam':'Lanzamiento de Balón Medicinal',
+  'Box Squat':'Sentadilla en Caja','Sumo Deadlift':'Peso Muerto Sumo',
+  'Single Leg Deadlift':'Peso Muerto a Una Pierna','Pistol Squat':'Sentadilla Pistol',
+  'Handstand Push-Up':'Flexión de Pino','Muscle-Up':'Muscle-Up',
+  'L-Sit':'L-Sit','Dragon Flag':'Dragon Flag','Planche':'Planche',
+  'Front Lever':'Front Lever','Back Lever':'Back Lever',
+  'Ring Dip':'Fondos en Anillas','Ring Push-Up':'Flexión en Anillas','Ring Row':'Remo en Anillas',
+  'TRX Row':'Remo TRX','TRX Push-Up':'Flexión TRX','Cable Crunch':'Crunch en Polea',
+  'Woodchopper':'Leñador','Pallof Press':'Pallof Press','Ab Wheel Rollout':'Rueda Abdominal',
+  'Hanging Knee Raise':'Elevación de Rodillas Colgado','Decline Crunch':'Crunch Declinado',
+  'Reverse Crunch':'Crunch Inverso','Bicycle Crunch':'Crunch de Bicicleta',
+  'Flutter Kick':'Patada Flutter','Scissor Kick':'Patada de Tijera',
+  'Leg Raise':'Elevación de Piernas','Hip Raise':'Elevación de Cadera',
+  'Glute Kickback':'Patada de Glúteo','Donkey Kick':'Patada de Burro',
+  'Fire Hydrant':'Hidrante','Clamshell':'Almeja','Monster Walk':'Caminata de Monstruo',
+  'Toes To Bar':'Pies a la Barra','Hanging Toes To Bar':'Pies a la Barra Colgado'
 };
 
 function formatExerciseName(name) {
-  if (currentLang === 'es' && exerciseTranslations[name]) {
-    return exerciseTranslations[name];
-  }
+  if (currentLang === 'es' && exerciseTranslations[name]) return exerciseTranslations[name];
   return name;
 }
 
 // ============================================
-// DICCIONARIO i18n
+// i18n
 // ============================================
 const i18n = {
   es: {
-    title:"Cuidate !!", sub:"¡Tu app de entrenamiento!", langBtn:"🇬🇧 EN",
-    tabCreate:"➕ Crear", tabBrowse:"🔍 Ejercicios", tabSession:"💪 Sesión", tabLibrary:"📚 Biblioteca", tabHistory:"📅 Historial", tabLegal:"⚖️ Legal",
-    loading:"Cargando base de datos de ejercicios…",
-    sec1:"1 · Tu nivel de experiencia", sec1Label:"¿Cuánto llevas entrenando?",
-    optBeginner:"🌱 Principiante · Menos de 6 meses",
-    optIntermediate:"💪 Intermedio · 6 meses - 2 años",
-    optAdvanced:"🔥 Avanzado · 2 - 5 años",
-    optExpert:"⚡ Experto · Más de 5 años",
+    title:"Cuidate !!",sub:"¡Tu app de entrenamiento!",langBtn:"🇬🇧 EN",
+    tabCreate:"➕ Crear",tabBrowse:"🔍 Ejercicios",tabSession:"💪 Sesión",tabLibrary:"📚 Biblioteca",tabHistory:"📅 Historial",tabLegal:"⚖️ Legal",
+    loading:"Cargando base de datos de ejercicios…",sec1:"1 · Tu nivel de experiencia",sec1Label:"¿Cuánto llevas entrenando?",
+    optBeginner:"🌱 Principiante · Menos de 6 meses",optIntermediate:"💪 Intermedio · 6 meses - 2 años",
+    optAdvanced:"🔥 Avanzado · 2 - 5 años",optExpert:"⚡ Experto · Más de 5 años",
     hintBeginner:"🌱 Ejercicios básicos y sencillos. Prioriza aprender la técnica correcta.",
     hintIntermediate:"💪 Ejercicios equilibrados con técnica intermedia.",
     hintAdvanced:"🔥 Movimientos más técnicos y exigentes. Unilaterales, pliométricos.",
     hintExpert:"⚡ Ejercicios de alta complejidad técnica. Solo para atletas experimentados.",
-    sec2:"2 · Tipo de sesión", sec2Label:"Objetivo",
-    optFullbody:"Full Body · Global equilibrado",
-    optUpper:"Tren Superior · Torso completo",
-    optLower:"Tren Inferior · Pierna y glúteo",
-    optPush:"Empuje · Pecho, hombro, tríceps",
-    optPull:"Tirón · Espalda, bíceps, trapecio",
-    optCustom:"🎯 Músculo específico…", customLabel:"Elige el grupo muscular",
-    sec3:"3 · Estilo de ejercicio", sec3Label:"Tipo de ejercicios a incluir",
-    optAll:"Todos (máx. variedad)",
-    optBodyweight:"Solo peso corporal",
-    optIso:"Incluir isométricos",
-    optMix:"Mixto (equipo + peso corporal)",
-    sec4:"4 · Volumen de series", sec4Label:"Nivel de exigencia",
-    optLevel2:"Baja · 2 series", optLevel3:"Media · 3 series", optLevel4:"Alta · 4 series",
-    sec5:"5 · Tu equipamiento hoy",
-    btnGenerate:"🚀 Generar Rutina a Medida",
-    browseTitle:"🔍 Explorar ejercicios",
-    searchPlaceholder:"Buscar por nombre, músculo, equipamiento...",
-    allCategories:"Todos los grupos",
-    allEquipment:"Todo el equipamiento",
-    allDifficulty:"Todas las dificultades",
-    diffBeginner:"🌱 Principiante",
-    diffIntermediate:"💪 Intermedio",
-    diffAdvanced:"🔥 Avanzado",
-    diffExpert:"⚡ Experto",
-    myRoutineTitle:"📋 Mi rutina personalizada",
-    btnStartCustom:"🚀 Iniciar sesión con estos ejercicios",
-    btnClearCustom:"🗑 Vaciar rutina",
-    addedToRoutine:"✅ Añadido a tu rutina",
-    removedFromRoutine:"❌ Eliminado de tu rutina",
-    routineCleared:"🗑 Rutina vaciada",
-    emptySession:"No hay sesión en curso.<br>Ve a <b>Crear</b> o <b>Ejercicios</b> para empezar.",
-    sessionActive:"SESIÓN EN CURSO",
-    donateTitle:"☕ Invítame a una cerveza",
-    donateText:"Esta app es 100% gratuita y sin anuncios. Si consideras que mi trabajo merece la pena, puedes invitarme a una cerveza o hacer una donación. ¡Gracias por tu apoyo! 🍺",
-    btnPaypal:"💳 Donar con PayPal",
-    btnBizum:"📱 Copiar Bizum",
-    bizumCopied:"📋 Número de Bizum copiado al portapapeles",
-    shareTitle:"💾 Compartir esta rutina",
-    btnSave:"💾 Guardar", btnShare:"🔗 Enlace", btnExport:"📤 Exportar", btnImport:"📥 Importar",
-    notesPlaceholder:"📝 Notas del entrenamiento…",
-    btnFinish:"✓ Finalizar y guardar",
-    exportPDFLabel:"📄 Exportar sesión a PDF al finalizar",
-    libTitle:"📚 Mi biblioteca de rutinas",
-    libDesc:"Guarda tus rutinas favoritas y compártelas.",
-    importZoneTitle:"Importar rutina desde archivo",
-    importZoneDesc:"Haz clic o arrastra un archivo .json",
-    importLinkLabel:"O pega un enlace compartido:",
-    importLinkPlaceholder:"Pega aquí el enlace...",
-    btnLoad:"Cargar",
-    legalTitle:"⚖️ Avisos legales y atribuciones",
-    legalDesc:"Esta aplicación utiliza recursos de terceros bajo distintas licencias.",
-    legalMediaTitle:"🎬 Animaciones e imágenes",
-    legalMediaText:"Las animaciones GIF y las imágenes son propiedad de <strong>© Gym visual</strong> y se utilizan con permiso a través del dataset exercises-dataset.",
-    legalMediaLink:"→ Más información: gymvisual.com",
-    legalDbTitle:"📋 Base de datos",
-    legalDbText:"La estructura de datos, nombres e instrucciones están bajo <strong>MIT License</strong>.",
-    legalDisclaimerTitle:"⚠️ Descargo de responsabilidad",
-    legalDisclaimerText:"Esta aplicación es una herramienta de organización personal. <strong>No sustituye el consejo de un profesional cualificado</strong>. Consulta con un especialista antes de iniciar cualquier programa de entrenamiento.",
-    legalPrivacyTitle:"💾 Privacidad",
-    legalPrivacyText:"Todos tus datos se almacenan <strong>exclusivamente en tu navegador</strong>. <strong>No se envía información a servidores externos</strong>.",
-    footerCredit:"Cuidate !!",
-    footerText:"Animaciones © Gym visual · Dataset exercises-dataset (MIT)",
-    badgeLocal:"Datos locales",
-    footerDisclaimerTitle:"⚠️ Aviso importante:",
-    footerDisclaimer:"Esta aplicación es una herramienta de organización personal. No sustituye el consejo médico ni de un entrenador profesional. Los medios visuales son propiedad de Gym visual y se utilizan con permiso.",
-    modalReplaceTitle:"🔄 Cambiar ejercicio",
-    modalReplaceInfo:"Sustituyendo:",
-    noAlternatives:"No hay alternativas disponibles.",
-    emptyHistory:"Aún no hay entrenamientos",
-    emptyHistoryDesc:"Cuando termines tu primera sesión aparecerá aquí.",
-    emptyLibrary:"Tu biblioteca está vacía",
-    emptyLibraryDesc:"Guarda rutinas desde la sesión para tenerlas siempre a mano.",
-    confirmDiscard:"¿Descartar la sesión actual?",
-    confirmDeleteExercise:"¿Eliminar este ejercicio de la sesión?",
-    confirmDeleteTraining:"¿Eliminar este entrenamiento?",
-    confirmDeleteLibrary:"¿Eliminar esta rutina de tu biblioteca?",
-    noActiveSession:"No hay sesión activa",
-    linkCopied:"📋 Enlace copiado al portapapeles",
-    fileDownloaded:"📤 Archivo descargado",
-    invalidFile:"❌ Formato de archivo no válido",
-    readError:"❌ Error al leer el archivo",
-    routineLoaded:"✅ Rutina cargada",
-    routineImported:"✅ Rutina importada",
-    sharedRoutineDetected:"Se ha detectado una rutina compartida. ¿Cargarla ahora?",
-    selectEquip:"Selecciona al menos un equipamiento.",
-    noExercises:"No hay ejercicios disponibles con ese nivel y equipamiento.",
-    noSeriesMarked:"No has marcado ninguna serie. ¿Guardar de todos modos?",
-    pasteLink:"Pega un enlace",
+    sec2:"2 · Tipo de sesión",sec2Label:"Objetivo",
+    optFullbody:"Full Body · Global equilibrado",optUpper:"Tren Superior · Torso completo",
+    optLower:"Tren Inferior · Pierna y glúteo",optPush:"Empuje · Pecho, hombro, tríceps",
+    optPull:"Tirón · Espalda, bíceps, trapecio",optCustom:"🎯 Músculo específico…",customLabel:"Elige el grupo muscular",
+    sec3:"3 · Estilo de ejercicio",sec3Label:"Tipo de ejercicios a incluir",
+    optAll:"Todos (máx. variedad)",optBodyweight:"Solo peso corporal",optIso:"Incluir isométricos",optMix:"Mixto (equipo + peso corporal)",
+    sec4:"4 · Volumen de series",sec4Label:"Nivel de exigencia",optLevel2:"Baja · 2 series",optLevel3:"Media · 3 series",optLevel4:"Alta · 4 series",
+    sec5:"5 · Tu equipamiento hoy",btnGenerate:"🚀 Generar Rutina a Medida",
+    browseTitle:"🔍 Explorar ejercicios",searchPlaceholder:"Buscar por nombre, músculo, equipamiento...",
+    allCategories:"Todos los grupos",allEquipment:"Todo el equipamiento",allDifficulty:"Todas las dificultades",
+    diffBeginner:"🌱 Principiante",diffIntermediate:"💪 Intermedio",diffAdvanced:"🔥 Avanzado",diffExpert:"⚡ Experto",
+    myRoutineTitle:"📋 Mi rutina personalizada",btnStartCustom:"🚀 Iniciar sesión con estos ejercicios",btnClearCustom:"🗑 Vaciar rutina",
+    addedToRoutine:"✅ Añadido a tu rutina",removedFromRoutine:"❌ Eliminado de tu rutina",routineCleared:"🗑 Rutina vaciada",
+    emptySession:"No hay sesión en curso.<br>Ve a <b>Crear</b> o <b>Ejercicios</b> para empezar.",sessionActive:"SESIÓN EN CURSO",
+    donateTitle:"☕ Invítame a una cerveza",donateText:"Esta app es 100% gratuita y sin anuncios. Si consideras que mi trabajo merece la pena, puedes invitarme a una cerveza o hacer una donación. ¡Gracias por tu apoyo! 🍺",
+    btnPaypal:"💳 Donar con PayPal",btnBizum:"📱 Copiar Bizum",bizumCopied:"📋 Número de Bizum copiado al portapapeles",
+    shareTitle:"💾 Compartir esta rutina",btnSave:"💾 Guardar",btnShare:"🔗 Enlace",btnExport:"📤 Exportar",btnImport:"📥 Importar",
+    notesPlaceholder:"📝 Notas del entrenamiento…",btnFinish:"✓ Finalizar y guardar",exportPDFLabel:"📄 Exportar sesión a PDF al finalizar",
+    libTitle:"📚 Mi biblioteca de rutinas",libDesc:"Guarda tus rutinas favoritas y compártelas.",
+    importZoneTitle:"Importar rutina desde archivo",importZoneDesc:"Haz clic o arrastra un archivo .json",
+    importLinkLabel:"O pega un enlace compartido:",importLinkPlaceholder:"Pega aquí el enlace...",btnLoad:"Cargar",
+    legalTitle:"⚖️ Avisos legales y atribuciones",legalDesc:"Esta aplicación utiliza recursos de terceros bajo distintas licencias.",
+    legalMediaTitle:"🎬 Animaciones e imágenes",legalMediaText:"Las animaciones GIF y las imágenes son propiedad de <strong>© Gym visual</strong> y se utilizan con permiso a través del dataset exercises-dataset.",
+    legalMediaLink:"→ Más información: gymvisual.com",legalDbTitle:"📋 Base de datos",legalDbText:"La estructura de datos, nombres e instrucciones están bajo <strong>MIT License</strong>.",
+    legalDisclaimerTitle:"⚠️ Descargo de responsabilidad",legalDisclaimerText:"Esta aplicación es una herramienta de organización personal. <strong>No sustituye el consejo de un profesional cualificado</strong>. Consulta con un especialista antes de iniciar cualquier programa de entrenamiento.",
+    legalPrivacyTitle:"💾 Privacidad",legalPrivacyText:"Todos tus datos se almacenan <strong>exclusivamente en tu navegador</strong>. <strong>No se envía información a servidores externos</strong>.",
+    footerCredit:"Cuidate !!",footerText:"Animaciones © Gym visual · Dataset exercises-dataset (MIT)",badgeLocal:"Datos locales",
+    footerDisclaimerTitle:"⚠️ Aviso importante:",footerDisclaimer:"Esta aplicación es una herramienta de organización personal. No sustituye el consejo médico ni de un entrenador profesional. Los medios visuales son propiedad de Gym visual y se utilizan con permiso.",
+    modalReplaceTitle:"🔄 Cambiar ejercicio",modalReplaceInfo:"Sustituyendo:",noAlternatives:"No hay alternativas disponibles.",
+    emptyHistory:"Aún no hay entrenamientos",emptyHistoryDesc:"Cuando termines tu primera sesión aparecerá aquí.",
+    emptyLibrary:"Tu biblioteca está vacía",emptyLibraryDesc:"Guarda rutinas desde la sesión para tenerlas siempre a mano.",
+    confirmDiscard:"¿Descartar la sesión actual?",confirmDeleteExercise:"¿Eliminar este ejercicio de la sesión?",
+    confirmDeleteTraining:"¿Eliminar este entrenamiento?",confirmDeleteLibrary:"¿Eliminar esta rutina de tu biblioteca?",
+    noActiveSession:"No hay sesión activa",linkCopied:"📋 Enlace copiado al portapapeles",fileDownloaded:"📤 Archivo descargado",
+    invalidFile:"❌ Formato de archivo no válido",readError:"❌ Error al leer el archivo",routineLoaded:"✅ Rutina cargada",
+    routineImported:"✅ Rutina importada",sharedRoutineDetected:"Se ha detectado una rutina compartida. ¿Cargarla ahora?",
+    selectEquip:"Selecciona al menos un equipamiento.",noExercises:"No hay ejercicios disponibles con ese nivel y equipamiento.",
+    noSeriesMarked:"No has marcado ninguna serie. ¿Guardar de todos modos?",pasteLink:"Pega un enlace",
     dbError:'❌ Error cargando la base de datos.<br><small style="display:block;margin-top:8px">1. Desactiva tu bloqueador de anuncios (AdBlock).<br>2. Comprueba tu conexión a internet.<br><br><button onclick="retryLoadDB()" style="margin-top:10px;padding:8px 16px;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700">🔄 Reintentar</button></small>',
     btnBack:"Volver",
-    equipBodyweight:"🏃 Peso corporal",
-    equipDumbbell:"🏋️ Mancuernas",
-    equipBarbell:"💪 Barra",
-    equipKettlebell:"🔔 Kettlebell",
-    equipCable:"🔗 Polea/Cable",
-    equipMachine:"⚙️ Máquina",
-    equipSmith:"🔩 Smith",
-    equipBand:"🎽 Banda elástica",
-    equipBall:"⚽ Fitball",
-    equipEZ:"🌀 Barra Z",
-    equipPullUpBar:"🏗️ Barra de dominadas",
-    equipOther:"➕ Otro",
+    equipBodyweight:"🏃 Peso corporal",equipDumbbell:"🏋️ Mancuernas",equipBarbell:"💪 Barra",
+    equipKettlebell:"🔔 Kettlebell",equipCable:"🔗 Polea/Cable",equipMachine:"⚙️ Máquina",
+    equipSmith:"🔩 Smith",equipBand:"🎽 Banda elástica",equipBall:"⚽ Fitball",
+    equipEZ:"🌀 Barra Z",equipMedBall:"💊 Balón medicinal",equipFoamRoll:"🧘 Rodillo de espuma",
+    equipPullUpBar:"🏗️ Barra de dominadas",equipBattleRope:"🪢 Cuerda de batalla",
+    equipTire:"🛞 Neumático",equipSled:"🛷 Trineo",equipRope:"🪢 Cuerda",
+    equipBike:"🚴 Bici estática",equipOther:"➕ Otro",
     routineTypes:{fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Músculo específico'},
     expLevels:{beginner:'🌱 Principiante',intermediate:'💪 Intermedio',advanced:'🔥 Avanzado',expert:'⚡ Experto'},
     diffLabels:{beginner:'🌱 Fácil',intermediate:'💪 Media',advanced:'🔥 Difícil',expert:'⚡ Experto'},
     exerciseActions:{up:'Subir',down:'Bajar',replace:'Cambiar',remove:'Eliminar'},
     setHeaders:{set:'SET',kg:'KG',reps:'REPS'},
-    exercises:'ejercicios', sets:'series',
-    load:'Cargar', share:'Compartir', delete:'Eliminar',
-    detailExercises:'Ejercicios', detailSets:'Series', detailVolume:'Volumen (kg)',
-    alreadyInRoutine:"⚠️ Ya está en tu rutina",
-    customRoutine:"Rutina personalizada",
-    pdfGenerating:"Generando PDF...",
-    pdfDone:"✅ PDF descargado"
+    exercises:'ejercicios',sets:'series',
+    load:'Cargar',share:'Compartir',delete:'Eliminar',
+    detailExercises:'Ejercicios',detailSets:'Series',detailVolume:'Volumen (kg)',
+    alreadyInRoutine:"⚠️ Ya está en tu rutina",customRoutine:"Rutina personalizada",
+    pdfGenerating:"Generando PDF...",pdfDone:"✅ PDF descargado"
   },
   en: {
-    title:"Cuidate !!", sub:"Your workout app!", langBtn:"🇪🇸 ES",
-    tabCreate:"➕ Create", tabBrowse:"🔍 Exercises", tabSession:"💪 Session", tabLibrary:"📚 Library", tabHistory:"📅 History", tabLegal:"⚖️ Legal",
-    loading:"Loading exercise database…",
-    sec1:"1 · Your experience level", sec1Label:"How long have you been training?",
-    optBeginner:"🌱 Beginner · Less than 6 months",
-    optIntermediate:"💪 Intermediate · 6 months - 2 years",
-    optAdvanced:"🔥 Advanced · 2 - 5 years",
-    optExpert:"⚡ Expert · More than 5 years",
+    title:"Cuidate !!",sub:"Your workout app!",langBtn:"🇪🇸 ES",
+    tabCreate:"➕ Create",tabBrowse:"🔍 Exercises",tabSession:"💪 Session",tabLibrary:"📚 Library",tabHistory:"📅 History",tabLegal:"⚖️ Legal",
+    loading:"Loading exercise database…",sec1:"1 · Your experience level",sec1Label:"How long have you been training?",
+    optBeginner:"🌱 Beginner · Less than 6 months",optIntermediate:"💪 Intermediate · 6 months - 2 years",
+    optAdvanced:"🔥 Advanced · 2 - 5 years",optExpert:"⚡ Expert · More than 5 years",
     hintBeginner:"🌱 Basic and simple exercises. Prioritize learning correct technique.",
     hintIntermediate:"💪 Balanced exercises with intermediate technique.",
     hintAdvanced:"🔥 More technical and demanding movements. Unilateral, plyometric.",
     hintExpert:"⚡ High complexity technical exercises. For experienced athletes only.",
-    sec2:"2 · Session type", sec2Label:"Goal",
-    optFullbody:"Full Body · Balanced global",
-    optUpper:"Upper Body · Complete torso",
-    optLower:"Lower Body · Legs and glutes",
-    optPush:"Push · Chest, shoulders, triceps",
-    optPull:"Pull · Back, biceps, traps",
-    optCustom:"🎯 Specific muscle…", customLabel:"Choose muscle group",
-    sec3:"3 · Exercise style", sec3Label:"Type of exercises to include",
-    optAll:"All (max variety)",
-    optBodyweight:"Bodyweight only",
-    optIso:"Include isometrics",
-    optMix:"Mixed (equipment + bodyweight)",
-    sec4:"4 · Set volume", sec4Label:"Intensity level",
-    optLevel2:"Low · 2 sets", optLevel3:"Medium · 3 sets", optLevel4:"High · 4 sets",
-    sec5:"5 · Your equipment today",
-    btnGenerate:"🚀 Generate Custom Routine",
-    browseTitle:"🔍 Browse exercises",
-    searchPlaceholder:"Search by name, muscle, equipment...",
-    allCategories:"All categories",
-    allEquipment:"All equipment",
-    allDifficulty:"All difficulties",
-    diffBeginner:"🌱 Beginner",
-    diffIntermediate:"💪 Intermediate",
-    diffAdvanced:"🔥 Advanced",
-    diffExpert:"⚡ Expert",
-    myRoutineTitle:"📋 My custom routine",
-    btnStartCustom:"🚀 Start session with these",
-    btnClearCustom:"🗑 Clear routine",
-    addedToRoutine:"✅ Added to your routine",
-    removedFromRoutine:"❌ Removed from routine",
-    routineCleared:"🗑 Routine cleared",
-    emptySession:"No active session.<br>Go to <b>Create</b> or <b>Exercises</b> to start.",
-    sessionActive:"ACTIVE SESSION",
-    donateTitle:"☕ Buy me a beer",
-    donateText:"This app is 100% free and ad-free. If you think my work is worth it, you can buy me a beer or make a donation. Thanks for your support! 🍺",
-    btnPaypal:"💳 Donate with PayPal",
-    btnBizum:"📱 Copy Bizum",
-    bizumCopied:"📋 Bizum number copied to clipboard",
-    shareTitle:"💾 Share this routine",
-    btnSave:"💾 Save", btnShare:"🔗 Link", btnExport:"📤 Export", btnImport:"📥 Import",
-    notesPlaceholder:"📝 Workout notes…",
-    btnFinish:"✓ Finish and save",
-    exportPDFLabel:"📄 Export session to PDF on finish",
-    libTitle:"📚 My routine library",
-    libDesc:"Save your favorite routines and share them.",
-    importZoneTitle:"Import routine from file",
-    importZoneDesc:"Click or drag a .json file",
-    importLinkLabel:"Or paste a shared link:",
-    importLinkPlaceholder:"Paste link here...",
-    btnLoad:"Load",
-    legalTitle:"⚖️ Legal notices and attributions",
-    legalDesc:"This application uses third-party resources under different licenses.",
-    legalMediaTitle:"🎬 Animations and images",
-    legalMediaText:"GIF animations and images are property of <strong>© Gym visual</strong> and used with permission via the exercises-dataset.",
-    legalMediaLink:"→ More info: gymvisual.com",
-    legalDbTitle:"📋 Database",
-    legalDbText:"Data structure, names, and instructions are under <strong>MIT License</strong>.",
-    legalDisclaimerTitle:"⚠️ Disclaimer",
-    legalDisclaimerText:"This app is a personal organization tool. <strong>It does not replace professional advice</strong>. Consult a specialist before starting any training program.",
-    legalPrivacyTitle:"💾 Privacy",
-    legalPrivacyText:"All your data is stored <strong>exclusively in your browser</strong>. <strong>No information is sent to external servers</strong>.",
-    footerCredit:"Cuidate !!",
-    footerText:"Animations © Gym visual · Dataset exercises-dataset (MIT)",
-    badgeLocal:"Local data",
-    footerDisclaimerTitle:"⚠️ Important:",
-    footerDisclaimer:"This app is a personal organization tool. It does not replace medical or professional trainer advice. Visual media is property of Gym visual and used with permission.",
-    modalReplaceTitle:"🔄 Change exercise",
-    modalReplaceInfo:"Replacing:",
-    noAlternatives:"No alternatives available.",
-    emptyHistory:"No workouts yet",
-    emptyHistoryDesc:"When you finish your first session it will appear here.",
-    emptyLibrary:"Your library is empty",
-    emptyLibraryDesc:"Save routines from the session to keep them handy.",
-    confirmDiscard:"Discard current session?",
-    confirmDeleteExercise:"Remove this exercise from the session?",
-    confirmDeleteTraining:"Delete this workout?",
-    confirmDeleteLibrary:"Delete this routine from your library?",
-    noActiveSession:"No active session",
-    linkCopied:"📋 Link copied to clipboard",
-    fileDownloaded:"📤 File downloaded",
-    invalidFile:"❌ Invalid file format",
-    readError:"❌ Error reading file",
-    routineLoaded:"✅ Routine loaded",
-    routineImported:"✅ Routine imported",
-    sharedRoutineDetected:"A shared routine was detected. Load it now?",
-    selectEquip:"Select at least one equipment.",
-    noExercises:"No exercises available for this level and equipment.",
-    noSeriesMarked:"You haven't marked any sets. Save anyway?",
-    pasteLink:"Paste a link",
+    sec2:"2 · Session type",sec2Label:"Goal",
+    optFullbody:"Full Body · Balanced global",optUpper:"Upper Body · Complete torso",
+    optLower:"Lower Body · Legs and glutes",optPush:"Push · Chest, shoulders, triceps",
+    optPull:"Pull · Back, biceps, traps",optCustom:"🎯 Specific muscle…",customLabel:"Choose muscle group",
+    sec3:"3 · Exercise style",sec3Label:"Type of exercises to include",
+    optAll:"All (max variety)",optBodyweight:"Bodyweight only",optIso:"Include isometrics",optMix:"Mixed (equipment + bodyweight)",
+    sec4:"4 · Set volume",sec4Label:"Intensity level",optLevel2:"Low · 2 sets",optLevel3:"Medium · 3 sets",optLevel4:"High · 4 sets",
+    sec5:"5 · Your equipment today",btnGenerate:"🚀 Generate Custom Routine",
+    browseTitle:"🔍 Browse exercises",searchPlaceholder:"Search by name, muscle, equipment...",
+    allCategories:"All categories",allEquipment:"All equipment",allDifficulty:"All difficulties",
+    diffBeginner:"🌱 Beginner",diffIntermediate:"💪 Intermediate",diffAdvanced:"🔥 Advanced",diffExpert:"⚡ Expert",
+    myRoutineTitle:"📋 My custom routine",btnStartCustom:"🚀 Start session with these",btnClearCustom:"🗑 Clear routine",
+    addedToRoutine:"✅ Added to your routine",removedFromRoutine:"❌ Removed from routine",routineCleared:"🗑 Routine cleared",
+    emptySession:"No active session.<br>Go to <b>Create</b> or <b>Exercises</b> to start.",sessionActive:"ACTIVE SESSION",
+    donateTitle:"☕ Buy me a beer",donateText:"This app is 100% free and ad-free. If you think my work is worth it, you can buy me a beer or make a donation. Thanks for your support! 🍺",
+    btnPaypal:"💳 Donate with PayPal",btnBizum:"📱 Copy Bizum",bizumCopied:"📋 Bizum number copied to clipboard",
+    shareTitle:"💾 Share this routine",btnSave:"💾 Save",btnShare:"🔗 Link",btnExport:"📤 Export",btnImport:"📥 Import",
+    notesPlaceholder:"📝 Workout notes…",btnFinish:"✓ Finish and save",exportPDFLabel:"📄 Export session to PDF on finish",
+    libTitle:"📚 My routine library",libDesc:"Save your favorite routines and share them.",
+    importZoneTitle:"Import routine from file",importZoneDesc:"Click or drag a .json file",
+    importLinkLabel:"Or paste a shared link:",importLinkPlaceholder:"Paste link here...",btnLoad:"Load",
+    legalTitle:"⚖️ Legal notices and attributions",legalDesc:"This application uses third-party resources under different licenses.",
+    legalMediaTitle:"🎬 Animations and images",legalMediaText:"GIF animations and images are property of <strong>© Gym visual</strong> and used with permission via the exercises-dataset.",
+    legalMediaLink:"→ More info: gymvisual.com",legalDbTitle:"📋 Database",legalDbText:"Data structure, names, and instructions are under <strong>MIT License</strong>.",
+    legalDisclaimerTitle:"⚠️ Disclaimer",legalDisclaimerText:"This app is a personal organization tool. <strong>It does not replace professional advice</strong>. Consult a specialist before starting any training program.",
+    legalPrivacyTitle:"💾 Privacy",legalPrivacyText:"All your data is stored <strong>exclusively in your browser</strong>. <strong>No information is sent to external servers</strong>.",
+    footerCredit:"Cuidate !!",footerText:"Animations © Gym visual · Dataset exercises-dataset (MIT)",badgeLocal:"Local data",
+    footerDisclaimerTitle:"⚠️ Important:",footerDisclaimer:"This app is a personal organization tool. It does not replace medical or professional trainer advice. Visual media is property of Gym visual and used with permission.",
+    modalReplaceTitle:"🔄 Change exercise",modalReplaceInfo:"Replacing:",noAlternatives:"No alternatives available.",
+    emptyHistory:"No workouts yet",emptyHistoryDesc:"When you finish your first session it will appear here.",
+    emptyLibrary:"Your library is empty",emptyLibraryDesc:"Save routines from the session to keep them handy.",
+    confirmDiscard:"Discard current session?",confirmDeleteExercise:"Remove this exercise from the session?",
+    confirmDeleteTraining:"Delete this workout?",confirmDeleteLibrary:"Delete this routine from your library?",
+    noActiveSession:"No active session",linkCopied:"📋 Link copied to clipboard",fileDownloaded:"📤 File downloaded",
+    invalidFile:"❌ Invalid file format",readError:"❌ Error reading file",routineLoaded:"✅ Routine loaded",
+    routineImported:"✅ Routine imported",sharedRoutineDetected:"A shared routine was detected. Load it now?",
+    selectEquip:"Select at least one equipment.",noExercises:"No exercises available for this level and equipment.",
+    noSeriesMarked:"You haven't marked any sets. Save anyway?",pasteLink:"Paste a link",
     dbError:'❌ Error loading database.<br><small style="display:block;margin-top:8px">1. Disable your ad-blocker (AdBlock).<br>2. Check your internet connection.<br><br><button onclick="retryLoadDB()" style="margin-top:10px;padding:8px 16px;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700">🔄 Retry</button></small>',
     btnBack:"Back",
-    equipBodyweight:"🏃 Bodyweight",
-    equipDumbbell:"🏋️ Dumbbells",
-    equipBarbell:"💪 Barbell",
-    equipKettlebell:"🔔 Kettlebell",
-    equipCable:"🔗 Cable",
-    equipMachine:"⚙️ Machine",
-    equipSmith:"🔩 Smith",
-    equipBand:"🎽 Band",
-    equipBall:"⚽ Fitball",
-    equipEZ:"🌀 EZ Bar",
-    equipPullUpBar:"🏗️ Pull-up bar",
-    equipOther:"➕ Other",
+    equipBodyweight:"🏃 Bodyweight",equipDumbbell:"🏋️ Dumbbells",equipBarbell:"💪 Barbell",
+    equipKettlebell:"🔔 Kettlebell",equipCable:"🔗 Cable",equipMachine:"⚙️ Machine",
+    equipSmith:"🔩 Smith",equipBand:"🎽 Band",equipBall:"⚽ Fitball",
+    equipEZ:"🌀 EZ Bar",equipMedBall:"💊 Medicine ball",equipFoamRoll:"🧘 Foam roll",
+    equipPullUpBar:"🏗️ Pull-up bar",equipBattleRope:"🪢 Battle rope",
+    equipTire:"🛞 Tire",equipSled:"🛷 Sled",equipRope:"🪢 Rope",
+    equipBike:"🚴 Stationary bike",equipOther:"➕ Other",
     routineTypes:{fullbody:'Full Body',upper:'Upper Body',lower:'Lower Body',push:'Push',pull:'Pull',custom:'Specific Muscle'},
     expLevels:{beginner:'🌱 Beginner',intermediate:'💪 Intermediate',advanced:'🔥 Advanced',expert:'⚡ Expert'},
     diffLabels:{beginner:'🌱 Easy',intermediate:'💪 Medium',advanced:'🔥 Hard',expert:'⚡ Expert'},
     exerciseActions:{up:'Move Up',down:'Move Down',replace:'Replace',remove:'Remove'},
     setHeaders:{set:'SET',kg:'KG',reps:'REPS'},
-    exercises:'exercises', sets:'sets',
-    load:'Load', share:'Share', delete:'Delete',
-    detailExercises:'Exercises', detailSets:'Sets', detailVolume:'Volume (kg)',
-    alreadyInRoutine:"⚠️ Already in your routine",
-    customRoutine:"Custom routine",
-    pdfGenerating:"Generating PDF...",
-    pdfDone:"✅ PDF downloaded"
+    exercises:'exercises',sets:'sets',
+    load:'Load',share:'Share',delete:'Delete',
+    detailExercises:'Exercises',detailSets:'Sets',detailVolume:'Volume (kg)',
+    alreadyInRoutine:"⚠️ Already in your routine",customRoutine:"Custom routine",
+    pdfGenerating:"Generating PDF...",pdfDone:"✅ PDF downloaded"
   }
 };
 
 let currentLang = localStorage.getItem('viferor_lang') || 'es';
 
 // ============================================
-// FUNCIONES DE CARGA Y UTILIDAD
+// FUNCIONES DE CARGA
 // ============================================
 async function retryLoadDB() {
   document.getElementById('loaderBlock').innerHTML = '<div class="spinner"></div><span>Cargando base de datos…</span>';
@@ -925,8 +607,9 @@ function updateLanguage(lang) {
   document.querySelectorAll('#equipGrid label').forEach(lbl => {
     const input = lbl.querySelector('input');
     const span = lbl.querySelector('span:last-child');
-    if (input && span && EQUIP_MAP[input.value] && t[EQUIP_MAP[input.value]]) {
-      span.textContent = t[EQUIP_MAP[input.value]];
+    if (input && span) {
+      const mapKey = EQUIP_MAP[input.value];
+      if (mapKey && t[mapKey]) span.textContent = t[mapKey];
     }
   });
   if (DB.length && document.getElementById('view-browse').classList.contains('active')) {
@@ -976,12 +659,7 @@ function classifyDifficulty(exercise) {
 }
 
 function filterByLevel(exercises, level) {
-  const allowed = {
-    beginner: ['beginner'],
-    intermediate: ['beginner','intermediate'],
-    advanced: ['beginner','intermediate','advanced'],
-    expert: ['beginner','intermediate','advanced','expert']
-  };
+  const allowed = {beginner:['beginner'],intermediate:['beginner','intermediate'],advanced:['beginner','intermediate','advanced'],expert:['beginner','intermediate','advanced','expert']};
   const permitted = new Set(allowed[level]);
   return exercises.filter(ex => permitted.has(classifyDifficulty(ex)));
 }
@@ -1091,9 +769,18 @@ function checkURLForSharedRoutine() {
 // ============================================
 (async function init() {
   const grid = document.getElementById('equipGrid');
+  // Evitar duplicados en la cuadrícula (band/bands, stability ball/exercise ball)
+  const shown = new Set();
   EQUIP_LIST.forEach(eq => {
+    if (shown.has(eq.key)) return;
+    shown.add(eq.key);
+    // Si ya mostramos 'band', no mostrar 'bands'
+    if (eq.key === 'bands' && shown.has('band')) return;
+    if (eq.key === 'exercise ball' && shown.has('stability ball')) return;
+    
     const lbl = document.createElement('label');
-    const translatedLabel = i18n[currentLang][EQUIP_MAP[eq.key]] || eq.label;
+    const mapKey = EQUIP_MAP[eq.key];
+    const translatedLabel = i18n[currentLang][mapKey] || eq.label;
     lbl.innerHTML = `<input type="checkbox" value="${eq.key}" ${DEFAULT_EQUIP.has(eq.key)?'checked':''}><span class="dot"></span><span>${translatedLabel}</span>`;
     grid.appendChild(lbl);
   });
@@ -1101,9 +788,6 @@ function checkURLForSharedRoutine() {
   await loadDatabase();
 })();
 
-// ============================================
-// NAVEGACIÓN
-// ============================================
 document.querySelectorAll('.tab').forEach(t => {
   t.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
@@ -1150,6 +834,16 @@ function populateBrowseFilters() {
   catSel.innerHTML = `<option value="">${t.allCategories}</option>` +
     cats.map(c => `<option value="${c}">${catT[c] || c}</option>`).join('');
   
+  // Lista única de equipamientos para el filtro (incluyendo pull-up bar aunque no esté en DB)
+  const uniqueEquips = [];
+  const seen = new Set();
+  EQUIP_LIST.forEach(eq => {
+    if (!seen.has(eq.key)) {
+      seen.add(eq.key);
+      uniqueEquips.push(eq);
+    }
+  });
+  
   const eqT = {
     'body weight': t.equipBodyweight,
     'dumbbell': t.equipDumbbell,
@@ -1161,12 +855,19 @@ function populateBrowseFilters() {
     'band': t.equipBand,
     'stability ball': t.equipBall,
     'ez barbell': t.equipEZ,
+    'medicine ball': t.equipMedBall,
+    'foam roll': t.equipFoamRoll,
     'pull-up bar': t.equipPullUpBar,
+    'battle rope': t.equipBattleRope,
+    'tire': t.equipTire,
+    'sled': t.equipSled,
+    'rope': t.equipRope,
+    'stationary bike': t.equipBike,
     'other': t.equipOther
   };
   
   equipSel.innerHTML = `<option value="">${t.allEquipment}</option>` +
-    EQUIP_LIST.map(eq => `<option value="${eq.key}">${eqT[eq.key] || eq.key}</option>`).join('');
+    uniqueEquips.map(eq => `<option value="${eq.key}">${eqT[eq.key] || eq.key}</option>`).join('');
 }
 
 function formatCategory(c) {
@@ -1187,36 +888,38 @@ function formatCategory(c) {
 
 function formatEquip(eq) {
   const t = i18n[currentLang];
-  const tr = {
-    'body weight': t.equipBodyweight,
-    'bodyweight': t.equipBodyweight,
-    'assisted bodyweight': t.equipBodyweight,
-    'dumbbell': t.equipDumbbell,
-    'barbell': t.equipBarbell,
-    'kettlebell': t.equipKettlebell,
-    'cable': t.equipCable,
-    'leverage machine': t.equipMachine,
-    'machine': t.equipMachine,
-    'smith machine': t.equipSmith,
-    'smith': t.equipSmith,
-    'band': t.equipBand,
-    'bands': t.equipBand,
-    'stability ball': t.equipBall,
-    'exercise ball': t.equipBall,
-    'swiss ball': t.equipBall,
-    'ez barbell': t.equipEZ,
-    'ez bar': t.equipEZ,
-    'pull-up bar': t.equipPullUpBar,
-    'pullup bar': t.equipPullUpBar,
-    'pull up bar': t.equipPullUpBar,
-    'medicine ball': currentLang === 'es' ? '💊 Balón medicinal' : '💊 Medicine ball',
-    'foam roll': currentLang === 'es' ? '🧘 Rodillo de espuma' : '🧘 Foam roll',
-    'rope': currentLang === 'es' ? '🪢 Cuerda' : '🪢 Rope',
-    'tire': currentLang === 'es' ? '🛞 Neumático' : '🛞 Tire',
-    'sled': currentLang === 'es' ? '🛷 Trineo' : '🛷 Sled',
-    'other': t.equipOther
-  };
-  return tr[eq] || eq;
+  const mapKey = EQUIP_MAP[eq];
+  if (mapKey && t[mapKey]) return t[mapKey];
+  return eq;
+}
+
+// Función especial para filtrar por equipamiento (maneja casos especiales)
+function filterByEquipment(exercises, equipment) {
+  if (!equipment) return exercises;
+  
+  // Caso especial: barra de dominadas - mostrar ejercicios body weight con palabras clave
+  if (equipment === 'pull-up bar') {
+    return exercises.filter(ex => 
+      ex.equipment === 'body weight' && isPullUpExercise(ex)
+    );
+  }
+  
+  // Caso especial: bandas (band o bands)
+  if (equipment === 'band') {
+    return exercises.filter(ex => ex.equipment === 'band' || ex.equipment === 'bands');
+  }
+  
+  // Caso especial: fitball (stability ball o exercise ball)
+  if (equipment === 'stability ball') {
+    return exercises.filter(ex => 
+      ex.equipment === 'stability ball' || 
+      ex.equipment === 'exercise ball' || 
+      ex.equipment === 'swiss ball'
+    );
+  }
+  
+  // Caso normal
+  return exercises.filter(ex => ex.equipment === equipment);
 }
 
 // ============================================
@@ -1310,7 +1013,6 @@ function bindEvents() {
   document.getElementById('btnStartCustom').addEventListener('click', startCustomRoutine);
   document.getElementById('btnClearCustom').addEventListener('click', clearCustomRoutine);
   
-  // Delegación de eventos para botones PDF
   document.addEventListener('click', e => {
     if (e.target.classList.contains('hist-pdf') || e.target.dataset.pdf) {
       const id = parseInt(e.target.dataset.pdf || e.target.dataset.export);
@@ -1350,7 +1052,7 @@ function bindEvents() {
 }
 
 // ============================================
-// EXPLORADOR DE EJERCICIOS
+// EXPLORADOR
 // ============================================
 function renderBrowse() {
   const search = document.getElementById('exerciseSearch').value.toLowerCase();
@@ -1362,7 +1064,7 @@ function renderBrowse() {
     const nt = formatExerciseName(ex.name).toLowerCase();
     const ms = !search || ex.name.toLowerCase().includes(search) || nt.includes(search) || (ex.target||'').toLowerCase().includes(search) || (ex.equipment||'').toLowerCase().includes(search) || formatCategory(ex.category).toLowerCase().includes(search);
     const mc = !catFilter || ex.category === catFilter;
-    const me = !equipFilter || ex.equipment === equipFilter;
+    const me = !equipFilter || filterByEquipment([ex], equipFilter).length > 0;
     const d = classifyDifficulty(ex);
     const md = !diffFilter || d === diffFilter;
     return ms && mc && me && md;
@@ -1450,7 +1152,7 @@ function startCustomRoutine() {
 }
 
 // ============================================
-// GENERADOR DE RUTINAS
+// GENERADOR
 // ============================================
 function generateRoutine() {
   const rt = document.getElementById('routineType').value;
@@ -1461,7 +1163,14 @@ function generateRoutine() {
   
   if (equipSet.size === 0) { alert(i18n[currentLang].selectEquip); return; }
   
-  let pool = DB.filter(e => equipSet.has(e.equipment));
+  // Filtrar por equipamiento (usando función especial para casos como pull-up bar)
+  let pool = [];
+  equipSet.forEach(eq => {
+    pool = pool.concat(filterByEquipment(DB, eq));
+  });
+  // Eliminar duplicados por id
+  pool = pool.filter((ex, idx, self) => self.findIndex(e => e.id === ex.id) === idx);
+  
   pool = filterByLevel(pool, expLevel);
   let isoPool = [];
   
@@ -1528,7 +1237,7 @@ function generateRoutine() {
 }
 
 // ============================================
-// SESIÓN ACTIVA
+// SESIÓN
 // ============================================
 function renderSessionView() {
   const empty = document.getElementById('sessionEmpty');
