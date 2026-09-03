@@ -5,13 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Creador de Rutinas Viferor</title>
 <style>
-:root{--bg:#0a0a0a;--bg2:#151515;--card:#1c1c1e;--card2:#252527;--border:#2e2e30;--text:#fff;--muted:#8e8e93;--accent:#0a84ff;--green:#32d74b;--red:#ff453a;--orange:#ff9f0a;--purple:#bf5af2;--radius:14px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,sans-serif}
+:root{--bg:#0a0a0a;--bg2:#151515;--card:#1c1c1e;--card2:#252527;--border:#2e2e30;--text:#fff;--muted:#8e8e93;--accent:#0a84ff;--green:#32d74b;--red:#ff453a;--orange:#ff9f0a;--purple:#bf5af2;--yellow:#ffd60a;--radius:14px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,sans-serif}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
 body{margin:0 auto;padding:0 0 120px;width:100%}
-header{position:sticky;top:0;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:16px 24px;border-bottom:1px solid var(--border);z-index:100;display:flex;justify-content:space-between;align-items:center}
-header h1{font-size:22px;font-weight:800;letter-spacing:-.5px}
+header{position:sticky;top:0;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:16px 24px;border-bottom:1px solid var(--border);z-index:100;display:flex;justify-content:space-between;align-items:center;gap:12px}
+header h1{font-size:22px;font-weight:800;letter-spacing:-.5px;flex:1}
 header .sub{font-size:12px;color:var(--muted);font-weight:500}
+.lang-btn{background:var(--card2);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lang-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.donate-btn{background:linear-gradient(135deg,var(--yellow),var(--orange));color:#000;border:none;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.donate-btn:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(255,214,10,.3)}
+.donate-btn:active{transform:scale(.95)}
 .container{max-width:1400px;margin:0 auto;padding:0 20px}
 .tabs{display:flex;gap:4px;padding:12px 0;flex-wrap:wrap}
 .tab{background:var(--card);border:none;color:var(--muted);padding:10px 14px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;flex:1;min-width:0}
@@ -98,18 +103,16 @@ textarea{resize:vertical;min-height:70px}
 .replace-item .info{flex:1}
 .replace-item .info h4{font-size:14px;font-weight:600;margin-bottom:2px}
 .replace-item .info p{font-size:12px;color:var(--muted)}
-.hist-grid{display:grid;grid-template-columns:1fr;gap:10px}
-@media(min-width:768px){.hist-grid{grid-template-columns:1fr 1fr}}
-@media(min-width:1200px){.hist-grid{grid-template-columns:repeat(3,1fr)}}
-.hist-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:transform .1s;position:relative}
-.hist-card:active{transform:scale(.98)}
+.hist-grid,.lib-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:768px){.hist-grid,.lib-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1200px){.hist-grid,.lib-grid{grid-template-columns:repeat(3,1fr)}}
+.hist-card,.lib-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:transform .1s;position:relative}
+.hist-card:active,.lib-card:active{transform:scale(.98)}
 .hist-date{color:var(--accent);font-size:13px;font-weight:700;margin-bottom:4px}
-.hist-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.hist-title,.lib-card h4{font-size:15px;font-weight:700;margin-bottom:6px}
 .hist-stats{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:6px;flex-wrap:wrap}
 .hist-stats span strong{color:var(--text);font-weight:700}
 .hist-del{float:right;background:none;border:none;color:var(--red);font-size:18px;cursor:pointer;padding:4px}
-.lib-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;position:relative}
-.lib-card h4{font-size:15px;font-weight:700;margin-bottom:4px}
 .lib-card .meta{font-size:12px;color:var(--muted);margin-bottom:8px}
 .lib-card .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .lib-card .actions button{flex:1;min-width:80px;padding:8px;font-size:12px;border-radius:8px;border:none;font-weight:600;cursor:pointer}
@@ -136,6 +139,11 @@ textarea{resize:vertical;min-height:70px}
 .import-zone{border:2px dashed var(--border);border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:all .15s;margin-top:10px}
 .import-zone:hover{border-color:var(--accent);background:rgba(10,132,255,.05)}
 .import-zone input{display:none}
+.donate-section{background:linear-gradient(135deg,rgba(255,214,10,.1),rgba(255,159,10,.1));border:1px solid rgba(255,214,10,.3);border-radius:var(--radius);padding:18px;margin-bottom:14px;text-align:center}
+.donate-section h3{color:var(--yellow);margin-bottom:8px}
+.donate-section p{font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5}
+.donate-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.donate-actions .btn{width:auto;padding:10px 16px;font-size:13px}
 .legal-footer{margin-top:40px;padding:24px 20px;border-top:1px solid var(--border);text-align:center;font-size:11px;color:var(--muted);line-height:1.7}
 .legal-footer a{color:var(--accent);text-decoration:none}
 .legal-footer a:hover{text-decoration:underline}
@@ -149,159 +157,183 @@ textarea{resize:vertical;min-height:70px}
 <body>
 <header>
   <div>
-    <h1>Creador de Rutinas Viferor</h1>
-    <div class="sub">Tu diario de fuerza personalizado</div>
+    <h1 data-i18n="title">Creador de Rutinas Viferor</h1>
+    <div class="sub" data-i18n="sub">Tu diario de fuerza personalizado</div>
+  </div>
+  <div style="display:flex;gap:8px">
+    <button class="lang-btn" id="langToggle" data-i18n="langBtn">🇧 EN</button>
+    <button class="donate-btn" id="btnDonateHeader">☕</button>
   </div>
 </header>
 <div class="container">
 <div class="tabs">
-  <button class="tab active" data-view="create">➕ Crear</button>
-  <button class="tab" data-view="session">💪 Sesión</button>
-  <button class="tab" data-view="library">📚 Biblioteca</button>
-  <button class="tab" data-view="history">📅 Historial</button>
-  <button class="tab" data-view="legal">⚖️ Legal</button>
+  <button class="tab active" data-view="create" data-i18n="tabCreate">➕ Crear</button>
+  <button class="tab" data-view="session" data-i18n="tabSession">💪 Sesión</button>
+  <button class="tab" data-view="library" data-i18n="tabLibrary">📚 Biblioteca</button>
+  <button class="tab" data-view="history" data-i18n="tabHistory">📅 Historial</button>
+  <button class="tab" data-view="legal" data-i18n="tabLegal">️ Legal</button>
 </div>
+
 <div class="view active" id="view-create">
-  <div id="loaderBlock" class="loader"><div class="spinner"></div>Cargando base de datos…</div>
+  <div id="loaderBlock" class="loader"><div class="spinner"></div><span data-i18n="loading">Cargando base de datos…</span></div>
   <div id="formBlock" style="display:none">
     <div class="section">
-      <h3>1 · Tu nivel de experiencia</h3>
-      <label class="sel-label">¿Cuánto llevas entrenando?</label>
+      <h3 data-i18n="sec1">1 · Tu nivel de experiencia</h3>
+      <label class="sel-label" data-i18n="sec1Label">¿Cuánto llevas entrenando?</label>
       <select id="experienceLevel">
-        <option value="beginner">🌱 Principiante · Menos de 6 meses</option>
-        <option value="intermediate" selected>💪 Intermedio · 6 meses - 2 años</option>
-        <option value="advanced">🔥 Avanzado · 2 - 5 años</option>
-        <option value="expert">⚡ Experto · Más de 5 años</option>
+        <option value="beginner" data-i18n="optBeginner">🌱 Principiante · Menos de 6 meses</option>
+        <option value="intermediate" selected data-i18n="optIntermediate">💪 Intermedio · 6 meses - 2 años</option>
+        <option value="advanced" data-i18n="optAdvanced">🔥 Avanzado · 2 - 5 años</option>
+        <option value="expert" data-i18n="optExpert">⚡ Experto · Más de 5 años</option>
       </select>
-      <div class="level-hint" id="levelHint">💪 Ejercicios equilibrados con técnica intermedia.</div>
+      <div class="level-hint" id="levelHint" data-i18n="hintIntermediate">💪 Ejercicios equilibrados con técnica intermedia.</div>
     </div>
     <div class="section">
-      <h3>2 · Tipo de sesión</h3>
-      <label class="sel-label">Objetivo</label>
+      <h3 data-i18n="sec2">2 · Tipo de sesión</h3>
+      <label class="sel-label" data-i18n="sec2Label">Objetivo</label>
       <select id="routineType">
-        <option value="fullbody">Full Body · Global equilibrado</option>
-        <option value="upper">Tren Superior · Torso completo</option>
-        <option value="lower">Tren Inferior · Pierna y glúteo</option>
-        <option value="push">Empuje · Pecho, hombro, tríceps</option>
-        <option value="pull">Tirón · Espalda, bíceps, trapecio</option>
-        <option value="custom">🎯 Músculo específico…</option>
+        <option value="fullbody" data-i18n="optFullbody">Full Body · Global equilibrado</option>
+        <option value="upper" data-i18n="optUpper">Tren Superior · Torso completo</option>
+        <option value="lower" data-i18n="optLower">Tren Inferior · Pierna y glúteo</option>
+        <option value="push" data-i18n="optPush">Empuje · Pecho, hombro, tríceps</option>
+        <option value="pull" data-i18n="optPull">Tirón · Espalda, bíceps, trapecio</option>
+        <option value="custom" data-i18n="optCustom">🎯 Músculo específico…</option>
       </select>
       <div id="customGroupWrap" style="display:none;margin-top:12px">
-        <label class="sel-label">Elige el grupo muscular</label>
+        <label class="sel-label" data-i18n="customLabel">Elige el grupo muscular</label>
         <select id="customGroup"></select>
       </div>
     </div>
     <div class="section">
-      <h3>3 · Estilo de ejercicio</h3>
+      <h3 data-i18n="sec3">3 · Estilo de ejercicio</h3>
+      <label class="sel-label" data-i18n="sec3Label">Tipo de ejercicios a incluir</label>
       <select id="exerciseStyle">
-        <option value="all">Todos (máx. variedad)</option>
-        <option value="bodyweight">Solo peso corporal</option>
-        <option value="iso">Incluir isométricos</option>
-        <option value="mix">Mixto (equipo + peso corporal)</option>
+        <option value="all" data-i18n="optAll">Todos (máx. variedad)</option>
+        <option value="bodyweight" data-i18n="optBodyweight">Solo peso corporal</option>
+        <option value="iso" data-i18n="optIso">Incluir isométricos</option>
+        <option value="mix" data-i18n="optMix">Mixto (equipo + peso corporal)</option>
       </select>
     </div>
     <div class="section">
-      <h3>4 · Volumen de series</h3>
+      <h3 data-i18n="sec4">4 · Volumen de series</h3>
+      <label class="sel-label" data-i18n="sec4Label">Nivel de exigencia</label>
       <select id="level">
-        <option value="2">Baja · 2 series</option>
-        <option value="3" selected>Media · 3 series</option>
-        <option value="4">Alta · 4 series</option>
+        <option value="2" data-i18n="optLevel2">Baja · 2 series</option>
+        <option value="3" selected data-i18n="optLevel3">Media · 3 series</option>
+        <option value="4" data-i18n="optLevel4">Alta · 4 series</option>
       </select>
     </div>
     <div class="section">
-      <h3>5 · Tu equipamiento hoy</h3>
+      <h3 data-i18n="sec5">5 · Tu equipamiento hoy</h3>
       <div class="equip-grid" id="equipGrid"></div>
     </div>
-    <button class="btn btn-primary" id="btnGenerate"><span>🚀</span><span>Generar Rutina a Medida</span></button>
+    <button class="btn btn-primary" id="btnGenerate"><span>🚀</span><span data-i18n="btnGenerate">Generar Rutina a Medida</span></button>
   </div>
 </div>
+
 <div class="view" id="view-session">
-  <div id="sessionEmpty" class="empty"><div class="ic">🏋️</div>No hay sesión en curso.<br>Ve a <b>Crear</b> para empezar.</div>
+  <div id="sessionEmpty" class="empty"><div class="ic">️</div><span data-i18n="emptySession">No hay sesión en curso.<br>Ve a <b>Crear</b> para empezar.</span></div>
   <div id="sessionContent" style="display:none">
     <div class="section" style="padding:12px 16px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
         <div>
-          <div style="font-size:12px;color:var(--muted);font-weight:600">SESIÓN EN CURSO</div>
+          <div style="font-size:12px;color:var(--muted);font-weight:600" data-i18n="sessionActive">SESIÓN EN CURSO</div>
           <div id="sessionTitle" style="font-size:17px;font-weight:800;margin-top:2px"></div>
         </div>
         <button class="btn btn-red" id="btnCancelSession">✕</button>
       </div>
     </div>
+    
+    <div class="donate-section">
+      <h3 data-i18n="donateTitle">☕ Invítame a una cerveza</h3>
+      <p data-i18n="donateText">Esta app es 100% gratuita y sin anuncios. Si consideras que mi trabajo merece la pena, puedes invitarme a una cerveza o hacer una donación. ¡Gracias por tu apoyo! 🍺</p>
+      <div class="donate-actions">
+        <a href="https://www.paypal.com/paypalme/viferor" target="_blank" class="btn btn-accent" data-i18n="btnPaypal">💳 Donar con PayPal</a>
+        <button class="btn btn-purple" id="btnCopyBizum" data-i18n="btnBizum">📱 Copiar Bizum</button>
+      </div>
+    </div>
+
     <div class="section" style="padding:12px 16px;margin-bottom:12px">
-      <h3 style="margin-bottom:10px">💾 Compartir esta rutina</h3>
+      <h3 style="margin-bottom:10px" data-i18n="shareTitle">💾 Compartir esta rutina</h3>
       <div class="btn-row">
-        <button class="btn btn-accent" id="btnSaveToLibrary" style="padding:12px;font-size:13px">💾 Guardar</button>
-        <button class="btn btn-purple" id="btnShareLink" style="padding:12px;font-size:13px">🔗 Enlace</button>
-        <button class="btn btn-secondary" id="btnExportJSON" style="padding:12px;font-size:13px">📤 Exportar</button>
-        <button class="btn btn-secondary" id="btnImportJSON" style="padding:12px;font-size:13px">📥 Importar</button>
+        <button class="btn btn-accent" id="btnSaveToLibrary" style="padding:12px;font-size:13px" data-i18n="btnSave">💾 Guardar</button>
+        <button class="btn btn-purple" id="btnShareLink" style="padding:12px;font-size:13px" data-i18n="btnShare">🔗 Enlace</button>
+        <button class="btn btn-secondary" id="btnExportJSON" style="padding:12px;font-size:13px" data-i18n="btnExport">📤 Exportar</button>
+        <button class="btn btn-secondary" id="btnImportJSON" style="padding:12px;font-size:13px" data-i18n="btnImport">📥 Importar</button>
       </div>
       <div id="shareBox" class="share-box" style="display:none"></div>
     </div>
     <div id="exercisesList" class="exercise-grid"></div>
     <div class="sticky-bottom">
-      <textarea id="sessionNotes" placeholder="📝 Notas del entrenamiento…"></textarea>
-      <button class="btn btn-green" id="btnFinish">✓ Finalizar y guardar</button>
+      <textarea id="sessionNotes" data-i18n-placeholder="notesPlaceholder" placeholder="📝 Notas del entrenamiento…"></textarea>
+      <button class="btn btn-green" id="btnFinish" data-i18n="btnFinish">✓ Finalizar y guardar</button>
     </div>
   </div>
 </div>
+
 <div class="view" id="view-library">
   <div class="section" style="padding:12px 16px;margin-bottom:12px">
-    <h3 style="margin-bottom:10px">📚 Mi biblioteca de rutinas</h3>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:12px">Guarda tus rutinas favoritas y compártelas.</p>
+    <h3 style="margin-bottom:10px" data-i18n="libTitle">📚 Mi biblioteca de rutinas</h3>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:12px" data-i18n="libDesc">Guarda tus rutinas favoritas y compártelas.</p>
     <div class="import-zone" id="importZone">
       <div style="font-size:32px;margin-bottom:8px">📥</div>
-      <div style="font-weight:600;margin-bottom:4px">Importar rutina desde archivo</div>
-      <div style="font-size:12px;color:var(--muted)">Haz clic o arrastra un archivo .json</div>
+      <div style="font-weight:600;margin-bottom:4px" data-i18n="importZoneTitle">Importar rutina desde archivo</div>
+      <div style="font-size:12px;color:var(--muted)" data-i18n="importZoneDesc">Haz clic o arrastra un archivo .json</div>
       <input type="file" id="importFile" accept=".json">
     </div>
     <div style="margin-top:10px">
-      <label class="sel-label">O pega un enlace compartido:</label>
+      <label class="sel-label" data-i18n="importLinkLabel">O pega un enlace compartido:</label>
       <div style="display:flex;gap:8px">
-        <input type="text" id="importLinkInput" placeholder="Pega aquí el enlace...">
-        <button class="btn btn-accent" id="btnImportLink" style="width:auto;padding:12px 20px;white-space:nowrap">Cargar</button>
+        <input type="text" id="importLinkInput" data-i18n-placeholder="importLinkPlaceholder" placeholder="Pega aquí el enlace...">
+        <button class="btn btn-accent" id="btnImportLink" style="width:auto;padding:12px 20px;white-space:nowrap" data-i18n="btnLoad">Cargar</button>
       </div>
     </div>
   </div>
-  <div id="libraryList" class="hist-grid"></div>
+  <div id="libraryList" class="lib-grid"></div>
 </div>
+
 <div class="view" id="view-history"><div id="historyList" class="hist-grid"></div></div>
+
 <div class="view" id="view-detail">
-  <button class="detail-back" id="btnBackHist">← Volver</button>
+  <button class="detail-back" id="btnBackHist">← <span data-i18n="btnBack">Volver</span></button>
   <div id="detailBody"></div>
 </div>
+
 <div class="view" id="view-legal">
   <div class="section">
-    <h3>⚖️ Avisos legales y atribuciones</h3>
-    <p style="color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:16px">Esta aplicación utiliza recursos de terceros bajo distintas licencias.</p>
+    <h3 data-i18n="legalTitle">⚖️ Avisos legales y atribuciones</h3>
+    <p style="color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:16px" data-i18n="legalDesc">Esta aplicación utiliza recursos de terceros bajo distintas licencias.</p>
     <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--accent)">
-      <h4 style="font-size:14px;margin-bottom:6px">🎬 Animaciones e imágenes</h4>
-      <p style="font-size:13px;color:var(--muted);line-height:1.6">Las animaciones GIF y las imágenes son propiedad de <strong style="color:var(--text)">© Gym visual</strong> y se utilizan con permiso a través del dataset <em>exercises-dataset</em> de <a href="https://github.com/hasaneyldrm/exercises-dataset" target="_blank" style="color:var(--accent)">hasaneyldrm</a>.</p>
-      <p style="font-size:12px;color:var(--muted);margin-top:8px">→ Más información: <a href="https://gymvisual.com" target="_blank" style="color:var(--accent)">gymvisual.com</a></p>
+      <h4 style="font-size:14px;margin-bottom:6px" data-i18n="legalMediaTitle">🎬 Animaciones e imágenes</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="legalMediaText">Las animaciones GIF y las imágenes son propiedad de <strong>© Gym visual</strong> y se utilizan con permiso a través del dataset exercises-dataset.</p>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px"><a href="https://gymvisual.com" target="_blank" style="color:var(--accent)" data-i18n="legalMediaLink">→ Más información: gymvisual.com</a></p>
     </div>
     <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--green)">
-      <h4 style="font-size:14px;margin-bottom:6px">📋 Base de datos</h4>
-      <p style="font-size:13px;color:var(--muted);line-height:1.6">La estructura de datos, nombres e instrucciones están bajo <strong style="color:var(--text)">MIT License</strong>.</p>
+      <h4 style="font-size:14px;margin-bottom:6px" data-i18n="legalDbTitle">📋 Base de datos</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="legalDbText">La estructura de datos, nombres e instrucciones están bajo <strong>MIT License</strong>.</p>
     </div>
     <div style="background:var(--card2);border-radius:10px;padding:14px;margin-bottom:12px;border-left:3px solid var(--orange)">
-      <h4 style="font-size:14px;margin-bottom:6px">⚠️ Descargo de responsabilidad</h4>
-      <p style="font-size:13px;color:var(--muted);line-height:1.6">Esta aplicación es una herramienta de organización personal. <strong style="color:var(--text)">No sustituye el consejo de un profesional cualificado</strong>. Consulta con un especialista antes de iniciar cualquier programa de entrenamiento.</p>
+      <h4 style="font-size:14px;margin-bottom:6px" data-i18n="legalDisclaimerTitle">⚠️ Descargo de responsabilidad</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="legalDisclaimerText">Esta aplicación es una herramienta de organización personal. <strong>No sustituye el consejo de un profesional cualificado</strong>. Consulta con un especialista antes de iniciar cualquier programa de entrenamiento.</p>
     </div>
     <div style="background:var(--card2);border-radius:10px;padding:14px;border-left:3px solid var(--purple)">
-      <h4 style="font-size:14px;margin-bottom:6px">💾 Privacidad</h4>
-      <p style="font-size:13px;color:var(--muted);line-height:1.6">Todos tus datos se almacenan <strong style="color:var(--text)">exclusivamente en tu navegador</strong>. <strong style="color:var(--text)">No se envía información a servidores externos</strong>.</p>
+      <h4 style="font-size:14px;margin-bottom:6px" data-i18n="legalPrivacyTitle">💾 Privacidad</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6" data-i18n="legalPrivacyText">Todos tus datos se almacenan <strong>exclusivamente en tu navegador</strong>. <strong>No se envía información a servidores externos</strong>.</p>
     </div>
   </div>
 </div>
 </div>
+
 <div class="legal-footer">
-  <div class="credit"><strong>Creador de Rutinas Viferor</strong></div>
-  <div>Animaciones © <a href="https://gymvisual.com" target="_blank">Gym visual</a> · Dataset <a href="https://github.com/hasaneyldrm/exercises-dataset" target="_blank">exercises-dataset</a> (MIT)</div>
-  <div class="license-badges"><span class="badge">MIT License</span><span class="badge">© Gym visual</span><span class="badge">Datos locales</span></div>
+  <div class="credit" data-i18n="footerCredit">Creador de Rutinas Viferor</div>
+  <div data-i18n="footerText">Animaciones © Gym visual · Dataset exercises-dataset (MIT)</div>
+  <div class="license-badges"><span class="badge">MIT License</span><span class="badge">© Gym visual</span><span class="badge" data-i18n="badgeLocal">Datos locales</span></div>
   <div class="disclaimer">
-    <strong>⚠️ Aviso importante:</strong>
-    Esta aplicación es una herramienta de organización personal. No sustituye el consejo médico ni de un entrenador profesional. Consulta con un especialista antes de iniciar cualquier programa de entrenamiento. Los medios visuales son propiedad de Gym visual y se utilizan con permiso.
+    <strong data-i18n="footerDisclaimerTitle">⚠️ Aviso importante:</strong>
+    <span data-i18n="footerDisclaimer">Esta aplicación es una herramienta de organización personal. No sustituye el consejo médico ni de un entrenador profesional. Los medios visuales son propiedad de Gym visual y se utilizan con permiso.</span>
   </div>
 </div>
+
 <div class="modal" id="gifModal">
   <button class="modal-close" id="modalClose">✕</button>
   <div class="modal-content">
@@ -314,26 +346,27 @@ textarea{resize:vertical;min-height:70px}
 <div class="modal" id="replaceModal">
   <button class="modal-close" id="replaceModalClose">✕</button>
   <div class="modal-content">
-    <h3 style="margin-bottom:12px">🔄 Cambiar ejercicio</h3>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:12px" id="replaceInfo"></p>
+    <h3 style="margin-bottom:12px" data-i18n="modalReplaceTitle">🔄 Cambiar ejercicio</h3>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:12px"><span data-i18n="modalReplaceInfo">Sustituyendo:</span> <span id="replaceInfo"></span></p>
     <div class="replace-list" id="replaceList"></div>
   </div>
 </div>
+
 <script>
-const DATA_URL = 'https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/data/exercises.json';
+const DATA_URL = 'https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@main/data/exercises.json';
 const MEDIA_BASE = 'https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/';
 const EQUIP_LIST = [
-  {key:'body weight',label:'🏃 Peso corporal'},
-  {key:'dumbbell',label:'🏋️ Mancuernas'},
-  {key:'barbell',label:'💪 Barra'},
-  {key:'kettlebell',label:'🔔 Kettlebell'},
-  {key:'cable',label:'🔗 Polea/Cable'},
-  {key:'leverage machine',label:'⚙️ Máquina'},
-  {key:'smith machine',label:'🔩 Smith'},
-  {key:'band',label:'🎽 Banda elástica'},
-  {key:'stability ball',label:'⚽ Fitball'},
-  {key:'ez barbell',label:'🌀 Barra Z'},
-  {key:'other',label:'➕ Otro'}
+  {key:'body weight',label:'equipBodyweight'},
+  {key:'dumbbell',label:'equipDumbbell'},
+  {key:'barbell',label:'equipBarbell'},
+  {key:'kettlebell',label:'equipKettlebell'},
+  {key:'cable',label:'equipCable'},
+  {key:'leverage machine',label:'equipMachine'},
+  {key:'smith machine',label:'equipSmith'},
+  {key:'band',label:'equipBand'},
+  {key:'stability ball',label:'equipBall'},
+  {key:'ez barbell',label:'equipEZ'},
+  {key:'other',label:'equipOther'}
 ];
 const DEFAULT_EQUIP = new Set(['body weight','dumbbell','barbell','kettlebell','cable','leverage machine']);
 let DB = [];
@@ -342,25 +375,161 @@ let replaceIdx = null;
 const STORAGE_KEY = 'viferor_sessions_v1';
 const LIBRARY_KEY = 'viferor_library_v1';
 
-const DIFFICULTY = {
-  beginner: {keywords:['beginner','basic','assisted','machine','bodyweight','body weight','easy','light','simple','supported','knee','incline','decline push','wall','seated','lying','chest supported']},
-  intermediate: {keywords:['dumbbell','barbell','kettlebell','cable','press','curl','row','squat','lunge','raise','extension','fly','pull','push']},
-  advanced: {keywords:['bulgarian','single leg','single arm','one arm','one leg','unilateral','plyometric','jump','explosive','deficit','paused','tempo','weighted','close grip','wide grip','incline','decline']},
-  expert: {keywords:['handstand','pistol','planche','muscle up','l-sit','dragon flag','human flag','one arm pull','explosive','clap','plyo','advanced','complex','turkish','windmill','sotts','zercher','front squat','overhead squat','snatch','clean','jerk']}
+const i18n = {
+  es: {
+    title:"Creador de Rutinas Viferor", sub:"Tu diario de fuerza personalizado", langBtn:"🇬🇧 EN",
+    tabCreate:"➕ Crear", tabSession:"💪 Sesión", tabLibrary:"📚 Biblioteca", tabHistory:"📅 Historial", tabLegal:"⚖️ Legal",
+    loading:"Cargando base de datos de ejercicios…", sec1:"1 · Tu nivel de experiencia", sec1Label:"¿Cuánto llevas entrenando?",
+    optBeginner:"🌱 Principiante · Menos de 6 meses", optIntermediate:"💪 Intermedio · 6 meses - 2 años",
+    optAdvanced:"🔥 Avanzado · 2 - 5 años", optExpert:"⚡ Experto · Más de 5 años",
+    hintBeginner:"🌱 Ejercicios básicos y sencillos. Prioriza aprender la técnica correcta.",
+    hintIntermediate:" Ejercicios equilibrados con técnica intermedia.",
+    hintAdvanced:"🔥 Movimientos más técnicos y exigentes. Unilaterales, pliométricos.",
+    hintExpert:"⚡ Ejercicios de alta complejidad técnica. Solo para atletas experimentados.",
+    sec2:"2 · Tipo de sesión", sec2Label:"Objetivo",
+    optFullbody:"Full Body · Global equilibrado", optUpper:"Tren Superior · Torso completo",
+    optLower:"Tren Inferior · Pierna y glúteo", optPush:"Empuje · Pecho, hombro, tríceps",
+    optPull:"Tirón · Espalda, bíceps, trapecio", optCustom:"🎯 Músculo específico…", customLabel:"Elige el grupo muscular",
+    sec3:"3 · Estilo de ejercicio", sec3Label:"Tipo de ejercicios a incluir",
+    optAll:"Todos (máx. variedad)", optBodyweight:"Solo peso corporal", optIso:"Incluir isométricos", optMix:"Mixto (equipo + peso corporal)",
+    sec4:"4 · Volumen de series", sec4Label:"Nivel de exigencia", optLevel2:"Baja · 2 series", optLevel3:"Media · 3 series", optLevel4:"Alta · 4 series",
+    sec5:"5 · Tu equipamiento hoy", btnGenerate:"🚀 Generar Rutina a Medida",
+    emptySession:"No hay sesión en curso.<br>Ve a la pestaña <b>Crear</b> para empezar.", sessionActive:"SESIÓN EN CURSO",
+    donateTitle:"☕ Invítame a una cerveza", donateText:"Esta app es 100% gratuita y sin anuncios. Si consideras que mi trabajo merece la pena, puedes invitarme a una cerveza o hacer una donación. ¡Gracias por tu apoyo! 🍺",
+    btnPaypal:"💳 Donar con PayPal", btnBizum:"📱 Copiar Bizum", bizumCopied:"📋 Número de Bizum copiado al portapapeles",
+    shareTitle:"💾 Compartir esta rutina", btnSave:"💾 Guardar", btnShare:"🔗 Enlace", btnExport:"📤 Exportar", btnImport:"📥 Importar",
+    notesPlaceholder:"📝 Notas del entrenamiento…", btnFinish:"✓ Finalizar y guardar",
+    libTitle:"📚 Mi biblioteca de rutinas", libDesc:"Guarda tus rutinas favoritas y compártelas.",
+    importZoneTitle:"Importar rutina desde archivo", importZoneDesc:"Haz clic o arrastra un archivo .json",
+    importLinkLabel:"O pega un enlace compartido:", importLinkPlaceholder:"Pega aquí el enlace...", btnLoad:"Cargar",
+    legalTitle:"️ Avisos legales y atribuciones", legalDesc:"Esta aplicación utiliza recursos de terceros bajo distintas licencias.",
+    legalMediaTitle:"🎬 Animaciones e imágenes", legalMediaText:"Las animaciones GIF y las imágenes son propiedad de <strong>© Gym visual</strong> y se utilizan con permiso a través del dataset exercises-dataset.",
+    legalMediaLink:"→ Más información: gymvisual.com", legalDbTitle:"📋 Base de datos", legalDbText:"La estructura de datos, nombres e instrucciones están bajo <strong>MIT License</strong>.",
+    legalDisclaimerTitle:"⚠️ Descargo de responsabilidad", legalDisclaimerText:"Esta aplicación es una herramienta de organización personal. <strong>No sustituye el consejo de un profesional cualificado</strong>. Consulta con un especialista antes de iniciar cualquier programa de entrenamiento.",
+    legalPrivacyTitle:"💾 Privacidad", legalPrivacyText:"Todos tus datos se almacenan <strong>exclusivamente en tu navegador</strong>. <strong>No se envía información a servidores externos</strong>.",
+    footerCredit:"Creador de Rutinas Viferor", footerText:"Animaciones © Gym visual · Dataset exercises-dataset (MIT)", badgeLocal:"Datos locales",
+    footerDisclaimerTitle:"⚠️ Aviso importante:", footerDisclaimer:"Esta aplicación es una herramienta de organización personal. No sustituye el consejo médico ni de un entrenador profesional. Los medios visuales son propiedad de Gym visual y se utilizan con permiso.",
+    modalReplaceTitle:"🔄 Cambiar ejercicio", modalReplaceInfo:"Sustituyendo:", noAlternatives:"No hay alternativas disponibles.",
+    emptyHistory:"Aún no hay entrenamientos", emptyHistoryDesc:"Cuando termines tu primera sesión aparecerá aquí.",
+    emptyLibrary:"Tu biblioteca está vacía", emptyLibraryDesc:"Guarda rutinas desde la sesión para tenerlas siempre a mano.",
+    confirmDiscard:"¿Descartar la sesión actual?", confirmDeleteExercise:"¿Eliminar este ejercicio de la sesión?",
+    confirmDeleteTraining:"¿Eliminar este entrenamiento?", confirmDeleteLibrary:"¿Eliminar esta rutina de tu biblioteca?",
+    noActiveSession:"No hay sesión activa", linkCopied:"📋 Enlace copiado al portapapeles", fileDownloaded:"📤 Archivo descargado",
+    invalidFile:"❌ Formato de archivo no válido", readError:"❌ Error al leer el archivo", routineLoaded:"✅ Rutina cargada",
+    routineImported:"✅ Rutina importada", sharedRoutineDetected:"Se ha detectado una rutina compartida. ¿Cargarla ahora?",
+    selectEquip:"Selecciona al menos un equipamiento.", noExercises:"No hay ejercicios disponibles con ese nivel y equipamiento.",
+    noSeriesMarked:"No has marcado ninguna serie. ¿Guardar de todos modos?", pasteLink:"Pega un enlace",
+    dbError:`❌ Error cargando la base de datos.<br><small style="display:block;margin-top:8px">1. Desactiva tu bloqueador de anuncios (AdBlock).<br>2. Comprueba tu conexión a internet.<br><br><button onclick="location.reload()" style="margin-top:10px;padding:8px 16px;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700">🔄 Reintentar</button></small>`,
+    btnBack:"Volver",
+    equipBodyweight:" Peso corporal", equipDumbbell:"🏋️ Mancuernas", equipBarbell:"💪 Barra",
+    equipKettlebell:"🔔 Kettlebell", equipCable:"🔗 Polea/Cable", equipMachine:"⚙️ Máquina",
+    equipSmith:"🔩 Smith", equipBand:"🎽 Banda elástica", equipBall:"⚽ Fitball",
+    equipEZ:"🌀 Barra Z", equipOther:"➕ Otro"
+  },
+  en: {
+    title:"Viferor Routine Creator", sub:"Your personalized strength diary", langBtn:"🇪🇸 ES",
+    tabCreate:"➕ Create", tabSession:"💪 Session", tabLibrary:"📚 Library", tabHistory:"📅 History", tabLegal:"⚖️ Legal",
+    loading:"Loading exercise database…", sec1:"1 · Your experience level", sec1Label:"How long have you been training?",
+    optBeginner:"🌱 Beginner · Less than 6 months", optIntermediate:"💪 Intermediate · 6 months - 2 years",
+    optAdvanced:"🔥 Advanced · 2 - 5 years", optExpert:"⚡ Expert · More than 5 years",
+    hintBeginner:"🌱 Basic and simple exercises. Prioritize learning correct technique.",
+    hintIntermediate:"💪 Balanced exercises with intermediate technique.",
+    hintAdvanced:"🔥 More technical and demanding movements. Unilateral, plyometric.",
+    hintExpert:"⚡ High complexity technical exercises. For experienced athletes only.",
+    sec2:"2 · Session type", sec2Label:"Goal",
+    optFullbody:"Full Body · Balanced global", optUpper:"Upper Body · Complete torso",
+    optLower:"Lower Body · Legs and glutes", optPush:"Push · Chest, shoulders, triceps",
+    optPull:"Pull · Back, biceps, traps", optCustom:" Specific muscle…", customLabel:"Choose muscle group",
+    sec3:"3 · Exercise style", sec3Label:"Type of exercises to include",
+    optAll:"All (max variety)", optBodyweight:"Bodyweight only", optIso:"Include isometrics", optMix:"Mixed (equipment + bodyweight)",
+    sec4:"4 · Set volume", sec4Label:"Intensity level", optLevel2:"Low · 2 sets", optLevel3:"Medium · 3 sets", optLevel4:"High · 4 sets",
+    sec5:"5 · Your equipment today", btnGenerate:"🚀 Generate Custom Routine",
+    emptySession:"No active session.<br>Go to the <b>Create</b> tab to start.", sessionActive:"ACTIVE SESSION",
+    donateTitle:"☕ Buy me a beer", donateText:"This app is 100% free and ad-free. If you think my work is worth it, you can buy me a beer or make a donation. Thanks for your support! 🍺",
+    btnPaypal:"💳 Donate with PayPal", btnBizum:" Copy Bizum", bizumCopied:" Bizum number copied to clipboard",
+    shareTitle:"💾 Share this routine", btnSave:"💾 Save", btnShare:"🔗 Link", btnExport:"📤 Export", btnImport:"📥 Import",
+    notesPlaceholder:"📝 Workout notes…", btnFinish:"✓ Finish and save",
+    libTitle:"📚 My routine library", libDesc:"Save your favorite routines and share them.",
+    importZoneTitle:"Import routine from file", importZoneDesc:"Click or drag a .json file",
+    importLinkLabel:"Or paste a shared link:", importLinkPlaceholder:"Paste link here...", btnLoad:"Load",
+    legalTitle:"⚖️ Legal notices and attributions", legalDesc:"This application uses third-party resources under different licenses.",
+    legalMediaTitle:" Animations and images", legalMediaText:"GIF animations and images are property of <strong>© Gym visual</strong> and used with permission via the exercises-dataset.",
+    legalMediaLink:"→ More info: gymvisual.com", legalDbTitle:"📋 Database", legalDbText:"Data structure, names, and instructions are under <strong>MIT License</strong>.",
+    legalDisclaimerTitle:"⚠️ Disclaimer", legalDisclaimerText:"This app is a personal organization tool. <strong>It does not replace professional advice</strong>. Consult a specialist before starting any training program.",
+    legalPrivacyTitle:"💾 Privacy", legalPrivacyText:"All your data is stored <strong>exclusively in your browser</strong>. <strong>No information is sent to external servers</strong>.",
+    footerCredit:"Viferor Routine Creator", footerText:"Animations © Gym visual · Dataset exercises-dataset (MIT)", badgeLocal:"Local data",
+    footerDisclaimerTitle:"⚠️ Important:", footerDisclaimer:"This app is a personal organization tool. It does not replace medical or professional trainer advice. Visual media is property of Gym visual and used with permission.",
+    modalReplaceTitle:"🔄 Change exercise", modalReplaceInfo:"Replacing:", noAlternatives:"No alternatives available.",
+    emptyHistory:"No workouts yet", emptyHistoryDesc:"When you finish your first session it will appear here.",
+    emptyLibrary:"Your library is empty", emptyLibraryDesc:"Save routines from the session to keep them handy.",
+    confirmDiscard:"Discard current session?", confirmDeleteExercise:"Remove this exercise from the session?",
+    confirmDeleteTraining:"Delete this workout?", confirmDeleteLibrary:"Delete this routine from your library?",
+    noActiveSession:"No active session", linkCopied:"📋 Link copied to clipboard", fileDownloaded:" File downloaded",
+    invalidFile:"❌ Invalid file format", readError:"❌ Error reading file", routineLoaded:"✅ Routine loaded",
+    routineImported:"✅ Routine imported", sharedRoutineDetected:"A shared routine was detected. Load it now?",
+    selectEquip:"Select at least one equipment.", noExercises:"No exercises available for this level and equipment.",
+    noSeriesMarked:"You haven't marked any sets. Save anyway?", pasteLink:"Paste a link",
+    dbError:`❌ Error loading database.<br><small style="display:block;margin-top:8px">1. Disable your ad-blocker (AdBlock).<br>2. Check your internet connection.<br><br><button onclick="location.reload()" style="margin-top:10px;padding:8px 16px;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700"> Retry</button></small>`,
+    btnBack:"Back",
+    equipBodyweight:"🏃 Bodyweight", equipDumbbell:"🏋️ Dumbbells", equipBarbell:"💪 Barbell",
+    equipKettlebell:"🔔 Kettlebell", equipCable:"🔗 Cable", equipMachine:"⚙️ Machine",
+    equipSmith:"🔩 Smith", equipBand:" Band", equipBall:"⚽ Fitball",
+    equipEZ:"🌀 EZ Bar", equipOther:"➕ Other"
+  }
 };
-const LEVEL_HINTS = {
-  beginner:'🌱 Ejercicios básicos y sencillos. Prioriza aprender la técnica correcta antes de subir peso.',
-  intermediate:'💪 Ejercicios equilibrados con técnica intermedia. Ideal para quienes ya dominan los movimientos básicos.',
-  advanced:'🔥 Movimientos más técnicos y exigentes. Unilaterales, pliométricos y variantes avanzadas.',
-  expert:'⚡ Ejercicios de alta complejidad técnica. Solo para atletas con años de experiencia sólida.'
-};
+
+let currentLang = localStorage.getItem('viferor_lang') || 'es';
+
+function updateLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('viferor_lang', lang);
+  const t = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.innerHTML = t[key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (t[key]) el.placeholder = t[key];
+  });
+  const updateSelect = (id) => {
+    const sel = document.getElementById(id);
+    if(sel) Array.from(sel.options).forEach(opt => {
+      const key = opt.getAttribute('data-i18n');
+      if(key && t[key]) opt.textContent = t[key];
+    });
+  };
+  updateSelect('experienceLevel'); updateSelect('routineType'); updateSelect('exerciseStyle'); updateSelect('level');
+  const expSel = document.getElementById('experienceLevel');
+  if(expSel) document.getElementById('levelHint').innerHTML = t['hint'+expSel.value.charAt(0).toUpperCase()+expSel.value.slice(1)] || t.hintIntermediate;
+  
+  document.querySelectorAll('#equipGrid label span:last-child').forEach(span=>{
+    const input = span.parentElement.querySelector('input');
+    if(input && t[input.value]) span.textContent = t[input.value];
+  });
+  
+  document.documentElement.lang = lang;
+}
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 2500);
+}
 
 function classifyDifficulty(exercise){
   const name = (exercise.name || '').toLowerCase();
   let score = 0;
-  DIFFICULTY.expert.keywords.forEach(k => { if(name.includes(k)) score += 4; });
-  DIFFICULTY.advanced.keywords.forEach(k => { if(name.includes(k)) score += 2; });
-  DIFFICULTY.beginner.keywords.forEach(k => { if(name.includes(k)) score -= 2; });
+  const diff = {
+    expert: ['handstand','pistol','planche','muscle up','l-sit','dragon flag','human flag','one arm pull','explosive','clap','plyo','advanced','complex','turkish','windmill','sotts','zercher','front squat','overhead squat','snatch','clean','jerk'],
+    advanced: ['bulgarian','single leg','single arm','one arm','one leg','unilateral','plyometric','jump','explosive','deficit','paused','tempo','weighted','close grip','wide grip','incline','decline'],
+    beginner: ['beginner','basic','assisted','machine','bodyweight','body weight','easy','light','simple','supported','knee','incline','decline push','wall','seated','lying','chest supported']
+  };
+  diff.expert.forEach(k => { if(name.includes(k)) score += 4; });
+  diff.advanced.forEach(k => { if(name.includes(k)) score += 2; });
+  diff.beginner.forEach(k => { if(name.includes(k)) score -= 2; });
   if(score >= 6) return 'expert';
   if(score >= 3) return 'advanced';
   if(score >= 0) return 'intermediate';
@@ -371,15 +540,6 @@ function filterByLevel(exercises, level){
   const allowed = {beginner:['beginner'],intermediate:['beginner','intermediate'],advanced:['beginner','intermediate','advanced'],expert:['beginner','intermediate','advanced','expert']};
   const permitted = new Set(allowed[level]);
   return exercises.filter(ex => permitted.has(classifyDifficulty(ex)));
-}
-
-function showToast(msg, color){
-  const t = document.createElement('div');
-  t.className = 'toast';
-  if(color) t.style.background = color;
-  t.textContent = msg;
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(), 2500);
 }
 
 function compressRoutine(session){
@@ -396,67 +556,41 @@ function compressRoutine(session){
 }
 
 function decompressRoutine(str){
-  try {
-    const json = decodeURIComponent(escape(atob(str)));
-    return JSON.parse(json);
-  } catch(e){ return null; }
+  try { return JSON.parse(decodeURIComponent(escape(atob(str)))); } catch(e){ return null; }
 }
 
 function generateShareLink(session){
-  const data = compressRoutine(session);
-  const base = window.location.href.split('#')[0].split('?')[0];
-  return base + '#r=' + data;
+  return window.location.href.split('#')[0].split('?')[0] + '#r=' + compressRoutine(session);
 }
 
 function saveToLibrary(session){
-  const name = prompt('Nombre para esta rutina:', session.name || 'Mi rutina');
+  const name = prompt(currentLang==='es'?'Nombre para esta rutina:':'Name for this routine:', session.name || (currentLang==='es'?'Mi rutina':'My routine'));
   if(!name) return;
   const lib = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
-  const entry = {
-    id: Date.now(), name: name,
-    date: new Date().toISOString(),
-    data: compressRoutine(session)
-  };
-  lib.unshift(entry);
+  lib.unshift({ id: Date.now(), name: name, date: new Date().toISOString(), data: compressRoutine(session) });
   localStorage.setItem(LIBRARY_KEY, JSON.stringify(lib));
-  showToast('💾 Guardada en tu biblioteca');
+  showToast(i18n[currentLang].linkCopied.replace('Enlace','Guardada en tu biblioteca'));
   renderLibrary();
 }
 
 function loadFromLibrary(data){
   const slim = decompressRoutine(data);
-  if(!slim){ alert('❌ Enlace o archivo inválido'); return; }
+  if(!slim){ alert(i18n[currentLang].invalidFile); return; }
   const exercises = slim.ex.map(s => {
     const full = DB.find(e => e.id === s.id) || s;
-    return {
-      ...full, name: s.name, category: s.category,
-      equipment: s.equipment, target: s.target,
-      difficulty: s.difficulty || classifyDifficulty(full),
-      sets: Array.from({length: slim.lv}, (_,i)=>({n:i+1,kg:'',reps:'',done:false}))
-    };
+    return { ...full, name: s.name, category: s.category, equipment: s.equipment, target: s.target, difficulty: s.difficulty || classifyDifficulty(full), sets: Array.from({length: slim.lv}, (_,i)=>({n:i+1,kg:'',reps:'',done:false})) };
   });
-  currentSession = {
-    id: Date.now(), date: new Date().toISOString(),
-    routineType: slim.rt, level: slim.lv,
-    experienceLevel: slim.el || 'intermediate',
-    equipment: slim.eq, name: slim.nm || '',
-    exercises: exercises, notes: ''
-  };
-  renderSessionView();
-  showView('session');
-  showToast('✅ Rutina cargada');
+  currentSession = { id: Date.now(), date: new Date().toISOString(), routineType: slim.rt, level: slim.lv, experienceLevel: slim.el || 'intermediate', equipment: slim.eq, name: slim.nm || '', exercises: exercises, notes: '' };
+  renderSessionView(); showView('session'); showToast(i18n[currentLang].routineLoaded);
 }
 
 function exportJSON(session){
-  const data = {version: 1, exported: new Date().toISOString(), routine: session};
-  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const blob = new Blob([JSON.stringify({version: 1, exported: new Date().toISOString(), routine: session}, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = `rutina-viferor-${Date.now()}.json`;
-  a.click();
+  a.href = url; a.download = `rutina-viferor-${Date.now()}.json`; a.click();
   URL.revokeObjectURL(url);
-  showToast('📤 Archivo descargado');
+  showToast(i18n[currentLang].fileDownloaded);
 }
 
 function importJSONFile(file){
@@ -464,32 +598,23 @@ function importJSONFile(file){
   reader.onload = e => {
     try {
       const data = JSON.parse(e.target.result);
-      if(data.routine){ loadFromRoutine(data.routine); }
-      else { alert('❌ Formato de archivo no válido'); }
-    } catch(err){ alert('❌ Error al leer el archivo'); }
+      if(data.routine) loadFromRoutine(data.routine);
+      else alert(i18n[currentLang].invalidFile);
+    } catch(err){ alert(i18n[currentLang].readError); }
   };
   reader.readAsText(file);
 }
 
 function loadFromRoutine(routine){
-  currentSession = {
-    ...routine, id: Date.now(),
-    exercises: routine.exercises.map(ex => ({
-      ...ex,
-      sets: Array.from({length: routine.level}, (_,i)=>({n:i+1,kg:'',reps:'',done:false}))
-    }))
-  };
-  renderSessionView();
-  showView('session');
-  showToast('✅ Rutina importada');
+  currentSession = { ...routine, id: Date.now(), exercises: routine.exercises.map(ex => ({ ...ex, sets: Array.from({length: routine.level}, (_,i)=>({n:i+1,kg:'',reps:'',done:false})) })) };
+  renderSessionView(); showView('session'); showToast(i18n[currentLang].routineImported);
 }
 
 function checkURLForSharedRoutine(){
   const hash = window.location.hash;
   if(hash.startsWith('#r=')){
-    const data = hash.substring(3);
-    if(confirm('Se ha detectado una rutina compartida. ¿Cargarla ahora?')){
-      loadFromLibrary(data);
+    if(confirm(i18n[currentLang].sharedRoutineDetected)){
+      loadFromLibrary(hash.substring(3));
       history.replaceState(null, '', window.location.pathname);
     }
   }
@@ -502,15 +627,22 @@ function checkURLForSharedRoutine(){
     lbl.innerHTML = `<input type="checkbox" value="${eq.key}" ${DEFAULT_EQUIP.has(eq.key)?'checked':''}><span class="dot"></span><span>${eq.label}</span>`;
     grid.appendChild(lbl);
   });
+  updateLanguage(currentLang);
+  
   try {
-    const res = await fetch(DATA_URL);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    const res = await fetch(DATA_URL, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    if (!res.ok) throw new Error('Network response was not ok');
     DB = await res.json();
     document.getElementById('loaderBlock').style.display='none';
     document.getElementById('formBlock').style.display='block';
     populateGroups();
     checkURLForSharedRoutine();
   } catch(e){
-    document.getElementById('loaderBlock').innerHTML = '❌ Error cargando la base de datos.';
+    console.error(e);
+    document.getElementById('loaderBlock').innerHTML = i18n[currentLang].dbError;
     return;
   }
   renderHistory();
@@ -543,69 +675,70 @@ function populateGroups(){
 
 function formatCategory(c){
   const map = {'chest':'Pecho','back':'Espalda','shoulders':'Hombros','upper arms':'Brazos','lower arms':'Antebrazos','upper legs':'Piernas','lower legs':'Gemelos','waist':'Core/Abdomen','cardio':'Cardio','neck':'Cuello'};
-  return map[c] || c;
+  const mapEn = {'chest':'Chest','back':'Back','shoulders':'Shoulders','upper arms':'Arms','lower arms':'Forearms','upper legs':'Legs','lower legs':'Calves','waist':'Core/Abs','cardio':'Cardio','neck':'Neck'};
+  return currentLang === 'en' ? (mapEn[c] || c) : (map[c] || c);
 }
 
 function formatEquip(eq){
   const map = {'body weight':'Peso corporal','dumbbell':'Mancuernas','barbell':'Barra','kettlebell':'Kettlebell','cable':'Polea','leverage machine':'Máquina','smith machine':'Smith','band':'Banda','stability ball':'Fitball','ez barbell':'Barra Z'};
-  return map[eq] || eq;
+  const mapEn = {'body weight':'Bodyweight','dumbbell':'Dumbbell','barbell':'Barbell','kettlebell':'Kettlebell','cable':'Cable','leverage machine':'Machine','smith machine':'Smith','band':'Band','stability ball':'Fitball','ez barbell':'EZ Bar'};
+  return currentLang === 'en' ? (mapEn[eq] || eq) : (map[eq] || eq);
 }
 
 function bindEvents(){
-  const rt = document.getElementById('routineType');
-  rt.addEventListener('change',()=>{
-    document.getElementById('customGroupWrap').style.display = rt.value==='custom'?'block':'none';
+  document.getElementById('langToggle').addEventListener('click', ()=>{ updateLanguage(currentLang === 'es' ? 'en' : 'es'); });
+  
+  document.getElementById('btnDonateHeader').addEventListener('click', ()=>{
+    showView('session');
+    setTimeout(()=>{
+      const donate = document.querySelector('.donate-section');
+      if(donate) donate.scrollIntoView({behavior:'smooth',block:'center'});
+    },100);
   });
+
+  const rt = document.getElementById('routineType');
+  rt.addEventListener('change',()=>{ document.getElementById('customGroupWrap').style.display = rt.value==='custom'?'block':'none'; });
   const expSel = document.getElementById('experienceLevel');
-  const hint = document.getElementById('levelHint');
-  expSel.addEventListener('change',()=>{ hint.textContent = LEVEL_HINTS[expSel.value]; });
+  expSel.addEventListener('change',()=>{ 
+    const hints = {beginner:'hintBeginner',intermediate:'hintIntermediate',advanced:'hintAdvanced',expert:'hintExpert'};
+    document.getElementById('levelHint').innerHTML = i18n[currentLang][hints[expSel.value]]; 
+  });
   document.getElementById('btnGenerate').addEventListener('click', generateRoutine);
   document.getElementById('btnFinish').addEventListener('click', finishSession);
   document.getElementById('btnCancelSession').addEventListener('click', ()=>{
-    if(confirm('¿Descartar la sesión actual?')){ currentSession = null; renderSessionView(); }
+    if(confirm(i18n[currentLang].confirmDiscard)){ currentSession = null; renderSessionView(); }
+  });
+  document.getElementById('btnCopyBizum').addEventListener('click', ()=>{
+    navigator.clipboard.writeText('+34 638 00 05 05').then(()=> showToast(i18n[currentLang].bizumCopied));
   });
   document.getElementById('btnSaveToLibrary').addEventListener('click', ()=>{
-    if(!currentSession){alert('No hay sesión activa');return;}
+    if(!currentSession){alert(i18n[currentLang].noActiveSession);return;}
     saveToLibrary(currentSession);
   });
   document.getElementById('btnShareLink').addEventListener('click', ()=>{
-    if(!currentSession){alert('No hay sesión activa');return;}
+    if(!currentSession){alert(i18n[currentLang].noActiveSession);return;}
     const link = generateShareLink(currentSession);
     const box = document.getElementById('shareBox');
-    box.textContent = link;
-    box.style.display = 'block';
-    navigator.clipboard.writeText(link).then(()=>{
-      showToast('📋 Enlace copiado al portapapeles');
-    }).catch(()=>{
-      showToast('Enlace generado (cópialo manualmente)', '#ff9f0a');
-    });
+    box.textContent = link; box.style.display = 'block';
+    navigator.clipboard.writeText(link).then(()=> showToast(i18n[currentLang].linkCopied)).catch(()=> showToast(i18n[currentLang].linkCopied));
   });
   document.getElementById('btnExportJSON').addEventListener('click', ()=>{
-    if(!currentSession){alert('No hay sesión activa');return;}
+    if(!currentSession){alert(i18n[currentLang].noActiveSession);return;}
     exportJSON(currentSession);
   });
-  document.getElementById('btnImportJSON').addEventListener('click', ()=>{
-    document.getElementById('importFile').click();
-  });
-  document.getElementById('importFile').addEventListener('change', e=>{
-    if(e.target.files[0]) importJSONFile(e.target.files[0]);
-  });
+  document.getElementById('btnImportJSON').addEventListener('click', ()=> document.getElementById('importFile').click());
+  document.getElementById('importFile').addEventListener('change', e=>{ if(e.target.files[0]) importJSONFile(e.target.files[0]); });
   const importZone = document.getElementById('importZone');
   importZone.addEventListener('click', ()=>document.getElementById('importFile').click());
   importZone.addEventListener('dragover', e=>{e.preventDefault();importZone.style.borderColor='var(--accent)';});
   importZone.addEventListener('dragleave', ()=>{importZone.style.borderColor='';});
-  importZone.addEventListener('drop', e=>{
-    e.preventDefault();
-    importZone.style.borderColor='';
-    if(e.dataTransfer.files[0]) importJSONFile(e.dataTransfer.files[0]);
-  });
+  importZone.addEventListener('drop', e=>{ e.preventDefault(); importZone.style.borderColor=''; if(e.dataTransfer.files[0]) importJSONFile(e.dataTransfer.files[0]); });
   document.getElementById('btnImportLink').addEventListener('click', ()=>{
-    const input = document.getElementById('importLinkInput');
-    const val = input.value.trim();
-    if(!val){alert('Pega un enlace');return;}
+    const val = document.getElementById('importLinkInput').value.trim();
+    if(!val){alert(i18n[currentLang].pasteLink);return;}
     const match = val.match(/#r=([^&]+)/);
-    if(match){ loadFromLibrary(match[1]); input.value = ''; }
-    else { loadFromLibrary(val); }
+    loadFromLibrary(match ? match[1] : val);
+    document.getElementById('importLinkInput').value = '';
   });
   document.getElementById('modalClose').addEventListener('click',()=>document.getElementById('gifModal').classList.remove('show'));
   document.getElementById('gifModal').addEventListener('click', e=>{if(e.target.id==='gifModal') e.currentTarget.classList.remove('show');});
@@ -613,13 +746,14 @@ function bindEvents(){
   document.getElementById('replaceModal').addEventListener('click', e=>{if(e.target.id==='replaceModal') e.currentTarget.classList.remove('show');});
   document.getElementById('btnBackHist').addEventListener('click',()=>showView('history'));
 }
+
 function generateRoutine(){
   const rt = document.getElementById('routineType').value;
   const level = parseInt(document.getElementById('level').value);
   const style = document.getElementById('exerciseStyle').value;
   const expLevel = document.getElementById('experienceLevel').value;
   const equipSet = new Set([...document.querySelectorAll('#equipGrid input:checked')].map(i=>i.value));
-  if(equipSet.size===0){alert('Selecciona al menos un equipamiento.');return;}
+  if(equipSet.size===0){alert(i18n[currentLang].selectEquip);return;}
   let pool = DB.filter(e => equipSet.has(e.equipment));
   pool = filterByLevel(pool, expLevel);
   let isoPool = [];
@@ -630,55 +764,45 @@ function generateRoutine(){
     isoPool = pool.filter(isIso);
     pool = pool.filter(e=>!isIso(e));
   }
-  if(pool.length===0){alert('No hay ejercicios disponibles con ese nivel y equipamiento.');return;}
-  let targetCats = [];
-  const countPerCat = {};
+  if(pool.length===0){alert(i18n[currentLang].noExercises);return;}
+  let targetCats = [], countPerCat = {};
   if(rt==='fullbody'){targetCats = ['chest','back','shoulders','upper legs','waist'];targetCats.forEach(c=>countPerCat[c]=2);}
   else if(rt==='upper'){targetCats = ['chest','back','shoulders','upper arms'];countPerCat.chest=2;countPerCat.back=2;countPerCat.shoulders=2;countPerCat['upper arms']=2;}
   else if(rt==='lower'){targetCats = ['upper legs','lower legs','waist'];countPerCat['upper legs']=3;countPerCat['lower legs']=2;countPerCat.waist=2;}
   else if(rt==='push'){targetCats = ['chest','shoulders','upper arms'];countPerCat.chest=2;countPerCat.shoulders=2;countPerCat['upper arms']=2;}
   else if(rt==='pull'){targetCats = ['back','upper arms'];countPerCat.back=3;countPerCat['upper arms']=2;}
-  else if(rt==='custom'){const g = document.getElementById('customGroup').value;targetCats = [g];countPerCat[g] = 5;}
+  else {const g = document.getElementById('customGroup').value;targetCats = [g];countPerCat[g] = 5;}
   const chosen = [];
   targetCats.forEach(cat=>{
     const catPool = pool.filter(e=>e.category===cat);
-    chosen.push(...shuffle(catPool).slice(0,countPerCat[cat]||2));
+    const shuffled = [...catPool].sort(()=>Math.random()-.5);
+    chosen.push(...shuffled.slice(0,countPerCat[cat]||2));
   });
-  if(style==='iso' && isoPool.length){chosen.push(...shuffle(isoPool).slice(0,2));}
-  const finalExercises = shuffle(chosen).map(ex=>({
-    ...ex, difficulty: classifyDifficulty(ex),
-    sets: Array.from({length:level},(_,i)=>({n:i+1,kg:'',reps:'',done:false}))
-  }));
+  if(style==='iso' && isoPool.length){chosen.push(...[...isoPool].sort(()=>Math.random()-.5).slice(0,2));}
   currentSession = {
-    id: Date.now(), date: new Date().toISOString(),
-    routineType: rt, level: level, experienceLevel: expLevel,
-    equipment: [...equipSet], exercises: finalExercises, notes: ''
+    id: Date.now(), date: new Date().toISOString(), routineType: rt, level: level, experienceLevel: expLevel,
+    equipment: [...equipSet], 
+    exercises: [...chosen].sort(()=>Math.random()-.5).map(ex=>({
+      ...ex, difficulty: classifyDifficulty(ex), sets: Array.from({length:level},(_,i)=>({n:i+1,kg:'',reps:'',done:false}))
+    })), notes: ''
   };
-  renderSessionView();
-  showView('session');
-}
-
-function shuffle(arr){
-  const a = [...arr];
-  for(let i=a.length-1;i>0;i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [a[i],a[j]] = [a[j],a[i]];
-  }
-  return a;
+  renderSessionView(); showView('session');
 }
 
 function renderSessionView(){
-  const empty = document.getElementById('sessionEmpty');
-  const content = document.getElementById('sessionContent');
+  const empty = document.getElementById('sessionEmpty'), content = document.getElementById('sessionContent');
   if(!currentSession){empty.style.display='block';content.style.display='none';return;}
-  empty.style.display='none';
-  content.style.display='block';
-  const rtNames = {fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Músculo específico'};
-  const expNames = {beginner:'🌱 Principiante',intermediate:'💪 Intermedio',advanced:'🔥 Avanzado',expert:'⚡ Experto'};
-  document.getElementById('sessionTitle').textContent = (rtNames[currentSession.routineType] || 'Sesión') + ' · ' + (expNames[currentSession.experienceLevel] || '');
+  empty.style.display='none'; content.style.display='block';
+  const rtNames = {fullbody:'Full Body',upper:'Upper Body',lower:'Lower Body',push:'Push',pull:'Pull',custom:'Specific Muscle'};
+  const rtNamesEs = {fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Músculo específico'};
+  const expNames = {beginner:'🌱 Beginner',intermediate:'💪 Intermediate',advanced:'🔥 Advanced',expert:'⚡ Expert'};
+  const expNamesEs = {beginner:'🌱 Principiante',intermediate:'💪 Intermedio',advanced:'🔥 Avanzado',expert:'⚡ Experto'};
+  const name = currentLang === 'es' ? (rtNamesEs[currentSession.routineType] || 'Sesión') : (rtNames[currentSession.routineType] || 'Session');
+  const exp = currentLang === 'es' ? (expNamesEs[currentSession.experienceLevel] || '') : (expNames[currentSession.experienceLevel] || '');
+  document.getElementById('sessionTitle').textContent = name + ' · ' + exp;
   const list = document.getElementById('exercisesList');
   list.innerHTML = '';
-  currentSession.exercises.forEach((ex,idx)=>{list.appendChild(buildExerciseCard(ex,idx));});
+  currentSession.exercises.forEach((ex,idx)=>list.appendChild(buildExerciseCard(ex,idx)));
   document.getElementById('shareBox').style.display = 'none';
 }
 
@@ -689,7 +813,7 @@ function buildExerciseCard(ex, idx){
   const isBodyweight = ex.equipment === 'body weight';
   const isIso = (ex.name||'').toLowerCase().match(/plank|hold|isometric|wall sit|hollow|superman hold|bridge hold|static|l-sit|dead hang|handstand hold/);
   const diff = ex.difficulty || classifyDifficulty(ex);
-  const diffLabels = {beginner:'🌱 Fácil',intermediate:'💪 Media',advanced:'🔥 Difícil',expert:'⚡ Experto'};
+  const diffLabels = currentLang === 'es' ? {beginner:'🌱 Fácil',intermediate:' Media',advanced:'🔥 Difícil',expert:'⚡ Experto'} : {beginner:'🌱 Easy',intermediate:'💪 Medium',advanced:'🔥 Hard',expert:' Expert'};
   card.innerHTML = `
     <div class="exercise-actions">
       <button class="act-btn" title="Subir" data-act="up">↑</button>
@@ -702,8 +826,8 @@ function buildExerciseCard(ex, idx){
       <div class="exercise-info">
         <h4>${ex.name}</h4>
         <div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div>
-        ${isBodyweight?'<span class="tag body">🏃 Peso corporal</span>':''}
-        ${isIso?'<span class="tag iso">⏱ Isométrico</span>':''}
+        ${isBodyweight?'<span class="tag body">🏃 Bodyweight</span>':''}
+        ${isIso?'<span class="tag iso">⏱ Isometric</span>':''}
         <span class="tag diff">${diffLabels[diff] || diff}</span>
         ${ex.target?`<span class="tag">🎯 ${ex.target}</span>`:''}
       </div>
@@ -725,8 +849,7 @@ function buildExerciseCard(ex, idx){
   card.querySelectorAll('input').forEach(inp=>{
     inp.addEventListener('input', e=>{
       const setIdx = parseInt(e.target.closest('.set-row').dataset.set);
-      const field = e.target.dataset.field;
-      currentSession.exercises[idx].sets[setIdx][field] = e.target.value;
+      currentSession.exercises[idx].sets[setIdx][e.target.dataset.field] = e.target.value;
     });
   });
   card.querySelectorAll('.set-check').forEach((btn,i)=>{
@@ -742,13 +865,12 @@ function buildExerciseCard(ex, idx){
 function moveExercise(idx, dir){
   const newIdx = idx + dir;
   if(newIdx < 0 || newIdx >= currentSession.exercises.length) return;
-  const arr = currentSession.exercises;
-  [arr[idx], arr[newIdx]] = [arr[newIdx], arr[idx]];
+  [currentSession.exercises[idx], currentSession.exercises[newIdx]] = [currentSession.exercises[newIdx], currentSession.exercises[idx]];
   renderSessionView();
 }
 
 function removeExercise(idx){
-  if(!confirm('¿Eliminar este ejercicio de la sesión?')) return;
+  if(!confirm(i18n[currentLang].confirmDeleteExercise)) return;
   currentSession.exercises.splice(idx, 1);
   renderSessionView();
 }
@@ -756,15 +878,13 @@ function removeExercise(idx){
 function openReplaceModal(idx){
   replaceIdx = idx;
   const ex = currentSession.exercises[idx];
-  const expLevel = currentSession.experienceLevel || 'intermediate';
-  document.getElementById('replaceInfo').textContent = `Sustituyendo: ${ex.name} (${formatCategory(ex.category)})`;
+  document.getElementById('replaceInfo').textContent = `${ex.name} (${formatCategory(ex.category)})`;
   const equipSet = new Set(currentSession.equipment);
   let alternatives = DB.filter(e => e.category === ex.category && e.name !== ex.name && equipSet.has(e.equipment));
-  alternatives = filterByLevel(alternatives, expLevel).slice(0, 20);
+  alternatives = filterByLevel(alternatives, currentSession.experienceLevel).slice(0, 20);
   const list = document.getElementById('replaceList');
-  if(alternatives.length === 0){
-    list.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px">No hay alternativas disponibles.</p>';
-  } else {
+  if(alternatives.length === 0){ list.innerHTML = `<p style="color:var(--muted);text-align:center;padding:20px">${i18n[currentLang].noAlternatives}</p>`; }
+  else {
     const diffLabels = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'};
     list.innerHTML = alternatives.map((alt,i)=>{
       const d = classifyDifficulty(alt);
@@ -773,12 +893,8 @@ function openReplaceModal(idx){
   }
   list.querySelectorAll('.replace-item').forEach(item=>{
     item.addEventListener('click',()=>{
-      const altIdx = parseInt(item.dataset.idx);
-      const alt = alternatives[altIdx];
-      currentSession.exercises[replaceIdx] = {
-        ...alt, difficulty: classifyDifficulty(alt),
-        sets: currentSession.exercises[replaceIdx].sets
-      };
+      const alt = alternatives[parseInt(item.dataset.idx)];
+      currentSession.exercises[replaceIdx] = { ...alt, difficulty: classifyDifficulty(alt), sets: currentSession.exercises[replaceIdx].sets };
       document.getElementById('replaceModal').classList.remove('show');
       renderSessionView();
     });
@@ -788,10 +904,9 @@ function openReplaceModal(idx){
 
 function openGifModal(ex){
   const modal = document.getElementById('gifModal');
-  const gifUrl = ex.gif_url ? MEDIA_BASE + ex.gif_url : (ex.image ? MEDIA_BASE + ex.image : '');
-  document.getElementById('modalImg').src = gifUrl;
+  document.getElementById('modalImg').src = ex.gif_url ? MEDIA_BASE + ex.gif_url : (ex.image ? MEDIA_BASE + ex.image : '');
   document.getElementById('modalTitle').textContent = ex.name;
-  document.getElementById('modalInstr').textContent = ex.instructions?.es || ex.instructions?.en || 'Sigue las indicaciones del GIF.';
+  document.getElementById('modalInstr').textContent = (currentLang === 'es' ? (ex.instructions?.es || ex.instructions?.en) : (ex.instructions?.en || ex.instructions?.es)) || 'Follow the GIF instructions.';
   modal.classList.add('show');
 }
 
@@ -799,111 +914,75 @@ function finishSession(){
   if(!currentSession) return;
   currentSession.notes = document.getElementById('sessionNotes').value.trim();
   const anyDone = currentSession.exercises.some(e=>e.sets.some(s=>s.done));
-  if(!anyDone && !confirm('No has marcado ninguna serie. ¿Guardar de todos modos?')) return;
+  if(!anyDone && !confirm(i18n[currentLang].noSeriesMarked)) return;
   const totalSets = currentSession.exercises.reduce((a,e)=>a+e.sets.length,0);
   const doneSets = currentSession.exercises.reduce((a,e)=>a+e.sets.filter(s=>s.done).length,0);
   const totalVolume = currentSession.exercises.reduce((a,e)=>a + e.sets.reduce((b,s)=> b + (s.done && s.kg && s.reps ? parseFloat(s.kg)*parseInt(s.reps) : 0), 0),0);
-  currentSession.stats = {exercises: currentSession.exercises.length,totalSets, doneSets,volume: Math.round(totalVolume)};
+  currentSession.stats = {exercises: currentSession.exercises.length, totalSets, doneSets, volume: Math.round(totalVolume)};
   const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   all.unshift(currentSession);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
   currentSession = null;
   document.getElementById('sessionNotes').value = '';
-  renderSessionView();
-  renderHistory();
-  showView('history');
+  renderSessionView(); renderHistory(); showView('history');
 }
 
 function renderHistory(){
   const list = document.getElementById('historyList');
   const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   if(all.length===0){
-    list.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="ic">📋</div><h3>Aún no hay entrenamientos</h3><p>Cuando termines tu primera sesión aparecerá aquí.</p></div>`;
+    list.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="ic">📋</div><h3>${i18n[currentLang].emptyHistory}</h3><p>${i18n[currentLang].emptyHistoryDesc}</p></div>`;
     return;
   }
   list.innerHTML = all.map(s=>{
     const d = new Date(s.date);
-    const dateStr = d.toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'short'});
-    const timeStr = d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
-    const rtNames = {fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Específico'};
+    const dateStr = d.toLocaleDateString(currentLang==='es'?'es-ES':'en-US',{weekday:'short',day:'numeric',month:'short'});
+    const timeStr = d.toLocaleTimeString(currentLang==='es'?'es-ES':'en-US',{hour:'2-digit',minute:'2-digit'});
+    const rtNames = currentLang==='es' ? {fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Específico'} : {fullbody:'Full Body',upper:'Upper',lower:'Lower',push:'Push',pull:'Pull',custom:'Specific'};
     const expNames = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'};
-    const done = s.stats?.doneSets ?? 0;
-    const total = s.stats?.totalSets ?? 0;
-    const vol = s.stats?.volume ?? 0;
-    return `<div class="hist-card" data-id="${s.id}"><button class="hist-del" data-del="${s.id}">🗑</button><div class="hist-date">${dateStr} · ${timeStr}</div><div class="hist-title">${expNames[s.experienceLevel]||''} ${rtNames[s.routineType]||'Sesión'}</div><div class="hist-stats"><span><strong>${s.exercises?.length||0}</strong> ejercicios</span><span><strong>${done}/${total}</strong> series</span>${vol?`<span><strong>${vol.toLocaleString('es-ES')}</strong> kg</span>`:''}</div></div>`;
+    return `<div class="hist-card" data-id="${s.id}"><button class="hist-del" data-del="${s.id}">🗑</button><div class="hist-date">${dateStr} · ${timeStr}</div><div class="hist-title">${expNames[s.experienceLevel]||''} ${rtNames[s.routineType]||'Session'}</div><div class="hist-stats"><span><strong>${s.exercises?.length||0}</strong> ej.</span><span><strong>${s.stats?.doneSets??0}/${s.stats?.totalSets??0}</strong> sets</span>${s.stats?.volume?`<span><strong>${s.stats.volume.toLocaleString(currentLang==='es'?'es-ES':'en-US')}</strong> kg</span>`:''}</div></div>`;
   }).join('');
-  list.querySelectorAll('.hist-card').forEach(c=>{
-    c.addEventListener('click', e=>{
-      if(e.target.dataset.del) return;
-      openDetail(parseInt(c.dataset.id));
-    });
-  });
-  list.querySelectorAll('[data-del]').forEach(b=>{
-    b.addEventListener('click', e=>{
-      e.stopPropagation();
-      if(!confirm('¿Eliminar este entrenamiento?')) return;
-      const id = parseInt(b.dataset.del);
-      const h = JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]').filter(x=>x.id!==id);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(h));
-      renderHistory();
-    });
-  });
+  list.querySelectorAll('.hist-card').forEach(c=>c.addEventListener('click', e=>{ if(!e.target.dataset.del) openDetail(parseInt(c.dataset.id)); }));
+  list.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click', e=>{
+    e.stopPropagation();
+    if(!confirm(i18n[currentLang].confirmDeleteTraining)) return;
+    const h = JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]').filter(x=>x.id!==parseInt(b.dataset.del));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(h));
+    renderHistory();
+  }));
 }
 
 function renderLibrary(){
   const list = document.getElementById('libraryList');
   const lib = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
   if(lib.length===0){
-    list.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="ic">📚</div><h3>Tu biblioteca está vacía</h3><p>Guarda rutinas desde la sesión para tenerlas siempre a mano.</p></div>`;
+    list.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="ic">📚</div><h3>${i18n[currentLang].emptyLibrary}</h3><p>${i18n[currentLang].emptyLibraryDesc}</p></div>`;
     return;
   }
   list.innerHTML = lib.map(item=>{
     const d = new Date(item.date);
-    const dateStr = d.toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'});
+    const dateStr = d.toLocaleDateString(currentLang==='es'?'es-ES':'en-US',{day:'numeric',month:'short',year:'numeric'});
     const slim = decompressRoutine(item.data);
-    const exCount = slim?.ex?.length || 0;
     const expNames = {beginner:'🌱',intermediate:'💪',advanced:'🔥',expert:'⚡'};
-    const rtNames = {fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Específico'};
-    return `<div class="lib-card">
-      <h4>${item.name}</h4>
-      <div class="meta">${dateStr} · ${expNames[slim?.el]||''} ${rtNames[slim?.rt]||''} · ${exCount} ejercicios</div>
-      <div class="actions">
-        <button class="load" data-load="${item.id}">📂 Cargar</button>
-        <button class="share" data-share="${item.id}">🔗 Compartir</button>
-        <button class="del" data-del="${item.id}">🗑 Borrar</button>
-      </div>
-    </div>`;
+    const rtNames = currentLang==='es' ? {fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Específico'} : {fullbody:'Full Body',upper:'Upper',lower:'Lower',push:'Push',pull:'Pull',custom:'Specific'};
+    return `<div class="lib-card"><h4>${item.name}</h4><div class="meta">${dateStr} · ${expNames[slim?.el]||''} ${rtNames[slim?.rt]||''} · ${slim?.ex?.length||0} ej.</div><div class="actions"><button class="load" data-load="${item.id}">📂 Load</button><button class="share" data-share="${item.id}">🔗 Share</button><button class="del" data-del="${item.id}"> Del</button></div></div>`;
   }).join('');
-  list.querySelectorAll('[data-load]').forEach(b=>{
-    b.addEventListener('click', ()=>{
-      const id = parseInt(b.dataset.load);
-      const item = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').find(x=>x.id===id);
-      if(item) loadFromLibrary(item.data);
-    });
-  });
-  list.querySelectorAll('[data-share]').forEach(b=>{
-    b.addEventListener('click', ()=>{
-      const id = parseInt(b.dataset.share);
-      const item = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').find(x=>x.id===id);
-      if(!item) return;
-      const link = window.location.href.split('#')[0].split('?')[0] + '#r=' + item.data;
-      navigator.clipboard.writeText(link).then(()=>{
-        showToast(`📋 Enlace de "${item.name}" copiado`);
-      }).catch(()=>{
-        prompt('Copia este enlace:', link);
-      });
-    });
-  });
-  list.querySelectorAll('[data-del]').forEach(b=>{
-    b.addEventListener('click', ()=>{
-      if(!confirm('¿Eliminar esta rutina de tu biblioteca?')) return;
-      const id = parseInt(b.dataset.del);
-      const lib = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').filter(x=>x.id!==id);
-      localStorage.setItem(LIBRARY_KEY, JSON.stringify(lib));
-      renderLibrary();
-      showToast('🗑 Rutina eliminada');
-    });
-  });
+  list.querySelectorAll('[data-load]').forEach(b=>b.addEventListener('click', ()=>{
+    const item = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').find(x=>x.id===parseInt(b.dataset.load));
+    if(item) loadFromLibrary(item.data);
+  }));
+  list.querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click', ()=>{
+    const item = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').find(x=>x.id===parseInt(b.dataset.share));
+    if(!item) return;
+    const link = window.location.href.split('#')[0].split('?')[0] + '#r=' + item.data;
+    navigator.clipboard.writeText(link).then(()=> showToast(i18n[currentLang].linkCopied)).catch(()=> prompt('Copy:', link));
+  }));
+  list.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click', ()=>{
+    if(!confirm(i18n[currentLang].confirmDeleteLibrary)) return;
+    const lib = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]').filter(x=>x.id!==parseInt(b.dataset.del));
+    localStorage.setItem(LIBRARY_KEY, JSON.stringify(lib));
+    renderLibrary();
+  }));
 }
 
 function openDetail(id){
@@ -911,13 +990,11 @@ function openDetail(id){
   const s = all.find(x=>x.id===id);
   if(!s) return;
   const d = new Date(s.date);
-  const rtNames = {fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Específico'};
-  const expNames = {beginner:'🌱 Principiante',intermediate:'💪 Intermedio',advanced:'🔥 Avanzado',expert:'⚡ Experto'};
+  const rtNames = currentLang==='es' ? {fullbody:'Full Body',upper:'Tren Superior',lower:'Tren Inferior',push:'Empuje',pull:'Tirón',custom:'Específico'} : {fullbody:'Full Body',upper:'Upper',lower:'Lower',push:'Push',pull:'Pull',custom:'Specific'};
+  const expNames = currentLang==='es' ? {beginner:'🌱 Principiante',intermediate:'💪 Intermedio',advanced:'🔥 Avanzado',expert:'⚡ Experto'} : {beginner:'🌱 Beginner',intermediate:'💪 Intermediate',advanced:'🔥 Advanced',expert:'⚡ Expert'};
   const body = document.getElementById('detailBody');
-  body.innerHTML = `<div class="detail-head"><h2>${rtNames[s.routineType]||'Sesión'}</h2><div class="meta">${d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${expNames[s.experienceLevel]||''}</div><div class="detail-stats"><div class="detail-stat"><div class="v">${s.exercises?.length||0}</div><div class="l">Ejercicios</div></div><div class="detail-stat"><div class="v">${s.stats?.doneSets||0}</div><div class="l">Series</div></div><div class="detail-stat"><div class="v">${(s.stats?.volume||0).toLocaleString('es-ES')}</div><div class="l">Volumen (kg)</div></div></div></div><div class="exercise-grid">${s.exercises.map(ex=>`<div class="exercise-card"><div class="exercise-head"><img class="exercise-thumb" src="${ex.image?MEDIA_BASE+ex.image:''}"><div class="exercise-info"><h4>${ex.name}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">${ex.sets.map(set=>`<div style="background:var(--card2);padding:6px 10px;border-radius:8px;font-size:12px;${set.done?'':'opacity:.5'}">${set.n}ª · ${set.kg||'–'}kg × ${set.reps||'–'} ${set.done?'✓':''}</div>`).join('')}</div></div>`).join('')}</div>${s.notes ? `<div class="section" style="font-style:italic;color:var(--muted)">"${s.notes}"</div>` : ''}`;
-  body.querySelectorAll('.exercise-thumb').forEach((t,i)=>{
-    t.addEventListener('click',()=>openGifModal(s.exercises[i]));
-  });
+  body.innerHTML = `<div class="detail-head"><h2>${rtNames[s.routineType]||'Session'}</h2><div class="meta">${d.toLocaleDateString(currentLang==='es'?'es-ES':'en-US',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${expNames[s.experienceLevel]||''}</div><div class="detail-stats"><div class="detail-stat"><div class="v">${s.exercises?.length||0}</div><div class="l">Exercises</div></div><div class="detail-stat"><div class="v">${s.stats?.doneSets||0}</div><div class="l">Sets</div></div><div class="detail-stat"><div class="v">${(s.stats?.volume||0).toLocaleString(currentLang==='es'?'es-ES':'en-US')}</div><div class="l">Volume (kg)</div></div></div></div><div class="exercise-grid">${s.exercises.map(ex=>`<div class="exercise-card"><div class="exercise-head"><img class="exercise-thumb" src="${ex.image?MEDIA_BASE+ex.image:''}"><div class="exercise-info"><h4>${ex.name}</h4><div class="meta">${formatCategory(ex.category)} · ${formatEquip(ex.equipment)}</div></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">${ex.sets.map(set=>`<div style="background:var(--card2);padding:6px 10px;border-radius:8px;font-size:12px;${set.done?'':'opacity:.5'}">${set.n}ª · ${set.kg||'–'}kg × ${set.reps||'–'} ${set.done?'✓':''}</div>`).join('')}</div></div>`).join('')}</div>${s.notes ? `<div class="section" style="font-style:italic;color:var(--muted)">"${s.notes}"</div>` : ''}`;
+  body.querySelectorAll('.exercise-thumb').forEach((t,i)=> t.addEventListener('click',()=>openGifModal(s.exercises[i])));
   showView('detail');
 }
 </script>
