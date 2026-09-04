@@ -5,29 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Cuidate !!</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-.mode-selector{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
-.mode-option{background:var(--card2);border:2px solid var(--border);border-radius:11px;padding:14px 8px;cursor:pointer;text-align:center}
-.mode-option.selected{border-color:var(--accent);background:rgba(10,132,255,.1)}
-.mode-option .mode-icon{font-size:26px;margin-bottom:4px}
-.mode-option .mode-title{font-size:13px;font-weight:700}
-.mode-option .mode-desc{font-size:10px;color:var(--muted)}
-.fatigue-selector{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:7px}
-@media(min-width:600px){.fatigue-selector{grid-template-columns:repeat(4,1fr)}}
-.fatigue-option{background:var(--card2);border:2px solid var(--border);border-radius:11px;padding:12px 8px;cursor:pointer;text-align:center}
-.fatigue-option.selected{transform:translateY(-2px);border-color:var(--fc,var(--accent))}
-.fatigue-option.selected .fat-title{color:var(--fc,var(--accent))}
-.fatigue-option[data-value=fresh]{--fc:var(--green)}
-.fatigue-option[data-value=normal]{--fc:var(--accent)}
-.fatigue-option[data-value=tired]{--fc:var(--orange)}
-.fatigue-option[data-value=exhausted]{--fc:var(--red)}
-.fatigue-option .fat-icon{font-size:24px;margin-bottom:3px}
-.fatigue-option .fat-title{font-size:12px;font-weight:700}
-.fatigue-option .fat-desc{font-size:10px;color:var(--muted)}
-.fatigue-hint{margin-top:9px;padding:9px 11px;background:var(--card2);border-radius:7px;font-size:11px;color:var(--muted);border-left:3px solid var(--accent)}
-.weekly-summary{background:var(--card2);border-radius:10px;padding:12px;margin-top:12px}
-.weekly-summary h4{font-size:13px;color:var(--accent);margin-bottom:8px}
-.weekly-summary .day-row{display:flex;justify-content:space-between;padding:5px 0;font-size:12px;border-bottom:1px solid var(--border)}
-.weekly-summary .day-row:last-child{border:none}
 <style>
 :root{--bg:#0a0a0a;--bg2:#151515;--card:#1c1c1e;--card2:#252527;--border:#2e2e30;--text:#fff;--muted:#8e8e93;--accent:#0a84ff;--green:#32d74b;--red:#ff453a;--orange:#ff9f0a;--purple:#bf5af2;--yellow:#ffd60a;--radius:14px;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,sans-serif}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -262,23 +239,6 @@ textarea{resize:vertical;min-height:70px}
       </div>
     </div>
     
-<div class="section">
-  <h3>📅 Tipo de planificación</h3>
-  <div class="mode-selector" id="modeSelector">
-    <div class="mode-option selected" data-mode="today"><div class="mode-icon">📅</div><div class="mode-title">Hoy</div><div class="mode-desc">Una sesión · cuenta tu fatiga</div></div>
-    <div class="mode-option" data-mode="weekly"><div class="mode-icon">📆</div><div class="mode-title">Semanal</div><div class="mode-desc">7 días · sin preguntar fatiga</div></div>
-  </div>
-</div>
-<div class="section" id="fatigueSection">
-  <h3>⚡ ¿Cómo te sientes hoy?</h3>
-  <div class="fatigue-selector" id="fatigueSelector">
-    <div class="fatigue-option" data-value="fresh"><div class="fat-icon">🟢</div><div class="fat-title">Fresco</div><div class="fat-desc">A tope</div></div>
-    <div class="fatigue-option selected" data-value="normal"><div class="fat-icon">🟡</div><div class="fat-title">Normal</div><div class="fat-desc">Estándar</div></div>
-    <div class="fatigue-option" data-value="tired"><div class="fat-icon">🟠</div><div class="fat-title">Cansado</div><div class="fat-desc">Baja energía</div></div>
-    <div class="fatigue-option" data-value="exhausted"><div class="fat-icon">🔴</div><div class="fat-title">Agotado</div><div class="fat-desc">Solo movilidad</div></div>
-  </div>
-  <div class="fatigue-hint" id="fatigueHint"></div>
-</div>
     <div class="section"><h3 data-i18n="sec1">1 · Tu nivel de experiencia</h3><label class="sel-label" data-i18n="sec1Label">¿Cuánto llevas entrenando?</label><select id="experienceLevel"><option value="beginner" data-i18n="optBeginner">🌱 Principiante · Menos de 6 meses</option><option value="intermediate" selected data-i18n="optIntermediate">💪 Intermedio · 6 meses - 2 años</option><option value="advanced" data-i18n="optAdvanced">🔥 Avanzado · 2 - 5 años</option><option value="expert" data-i18n="optExpert">⚡ Experto · Más de 5 años</option></select><div class="level-hint" id="levelHint" data-i18n="hintIntermediate">💪 Ejercicios equilibrados con técnica intermedia.</div></div>
     <div class="section"><h3 data-i18n="sec2">2 · Tipo de sesión</h3><label class="sel-label" data-i18n="sec2Label">Objetivo</label><select id="routineType"><option value="fullbody" data-i18n="optFullbody">Full Body · Global equilibrado</option><option value="upper" data-i18n="optUpper">Tren Superior · Torso completo</option><option value="lower" data-i18n="optLower">Tren Inferior · Pierna y glúteo</option><option value="push" data-i18n="optPush">Empuje · Pecho, hombro, tríceps</option><option value="pull" data-i18n="optPull">Tirón · Espalda, bíceps, trapecio</option><option value="custom" data-i18n="optCustom">🎯 Músculo específico…</option></select><div id="customGroupWrap" style="display:none;margin-top:12px"><label class="sel-label" data-i18n="customLabel">Elige el grupo muscular</label><select id="customGroup"></select></div></div>
     <div class="section"><h3 data-i18n="sec3">3 · Estilo de ejercicio</h3><label class="sel-label" data-i18n="sec3Label">Tipo de ejercicios a incluir</label><select id="exerciseStyle"><option value="all" data-i18n="optAll">Todos (máx. variedad)</option><option value="bodyweight" data-i18n="optBodyweight">Solo peso corporal</option><option value="iso" data-i18n="optIso">Incluir isométricos</option><option value="mix" data-i18n="optMix">Mixto (equipo + peso corporal)</option></select></div>
@@ -1962,128 +1922,6 @@ function exportSessionToPDF(session) {
     showToast(t.pdfDone);
   });
 }
-// ============ MODO HOY/SEMANAL + FATIGA ============
-let currentMode='today', currentFatigue='normal';
-const PLANS_KEY='viferor_plans_v1';
-function langEs(){return (typeof currentLang!=='undefined'?currentLang:'es')==='es';}
-
-function updateFatigueHint(){
-  const h=document.getElementById('fatigueHint'); if(!h)return;
-  const hints={fresh:langEs()?'🟢 ¡A por todas! Volumen alto y ejercicios técnicos.':'🟢 Go for it! High volume.',
-    normal:langEs()?'🟡 Sesión estándar. Volumen e intensidad normales.':'🟡 Standard session.',
-    tired:langEs()?'🟠 Menos series y sin ejercicios expertos. Escucha a tu cuerpo.':'🟠 Fewer sets. Listen to your body.',
-    exhausted:langEs()?'🔴 Solo movilidad y recuperación activa.':'🔴 Mobility and active recovery only.'};
-  h.innerHTML=hints[currentFatigue]||hints.normal;
-  const c={fresh:'var(--green)',normal:'var(--accent)',tired:'var(--orange)',exhausted:'var(--red)'};
-  h.style.borderLeftColor=c[currentFatigue]||'var(--accent)';
-}
-
-function wkBuildPool(eq,st,el){
-  let pool=[]; eq.forEach(e=>{pool=pool.concat(filterByEquipment(DB,e));});
-  pool=pool.filter((ex,i,self)=>self.findIndex(x=>x.id===ex.id)===i);
-  if(st==='bodyweight')pool=pool.filter(e=>e.equipment==='body weight');
-  return filterByLevel(pool,el);
-}
-function wkCounts(rt){
-  if(rt==='fullbody'){const m={};['chest','back','shoulders','upper legs','waist'].forEach(c=>m[c]=2);return m;}
-  if(rt==='upper')return{chest:2,back:2,shoulders:2,'upper arms':2};
-  if(rt==='lower')return{'upper legs':3,'lower legs':2,waist:2};
-  if(rt==='push')return{chest:2,shoulders:2,'upper arms':2};
-  if(rt==='pull')return{back:3,'upper arms':2};
-  const g=document.getElementById('customGroup').value; return{[g]:5};
-}
-function wkPick(pool,m){const ch=[];Object.keys(m).forEach(cat=>{const cp=pool.filter(e=>e.category===cat).sort(()=>Math.random()-.5);ch.push(...cp.slice(0,m[cat]||2));});return ch;}
-function wkSession(rt,lv,el,eq,exs,fat,notes){return{id:Date.now()+Math.floor(Math.random()*1000),date:new Date().toISOString(),routineType:rt,level:lv,experienceLevel:el,equipment:eq,exercises:exs.map(ex=>({...ex,difficulty:ex.difficulty||classifyDifficulty(ex),sets:Array.from({length:lv},(_,i)=>({n:i+1,kg:'',reps:'',done:false}))})),notes:notes||'',fatigue:fat};}
-
-function smartGenerate(){
-  const eq=[...document.querySelectorAll('#equipGrid input:checked')].map(i=>i.value);
-  if(eq.length===0){alert(langEs()?'Selecciona al menos un equipamiento.':'Select at least one equipment.');return;}
-  const rt=document.getElementById('routineType').value, lv=parseInt(document.getElementById('level').value),
-        st=document.getElementById('exerciseStyle').value, el=document.getElementById('experienceLevel').value;
-  if(currentMode==='today')genToday(rt,lv,st,el,eq); else genWeekly(rt,lv,st,el,eq);
-}
-
-function genToday(rt,lv,st,el,eq){
-  if(currentFatigue==='exhausted'){
-    const rec=DB.filter(ex=>{const n=(ex.name||'').toLowerCase();return['stretch','mobility','foam','roll','plank','bridge','cat','cow','child','hip flexor','piriformis','superman','bird','yoga'].some(k=>n.includes(k))||classifyDifficulty(ex)==='beginner';}).slice(0,6);
-    if(!rec.length){alert(langEs()?'Sin ejercicios disponibles.':'No exercises.');return;}
-    currentSession=wkSession('recovery',1,el,['body weight'],rec,'exhausted',langEs()?'🌿 Recuperación activa':'🌿 Active recovery');
-    renderSessionView();showView('session');showToast(langEs()?'🌿 Sesión de recuperación':'🌿 Recovery');return;
-  }
-  let pool=wkBuildPool(eq,st,el);
-  if(currentFatigue==='tired')pool=pool.filter(ex=>classifyDifficulty(ex)!=='expert');
-  if(!pool.length){alert(langEs()?'Sin ejercicios disponibles.':'No exercises.');return;}
-  let m=wkCounts(rt), sets=lv;
-  if(currentFatigue==='tired'){Object.keys(m).forEach(k=>m[k]=Math.max(1,m[k]-1));sets=Math.max(2,lv-1);}
-  if(currentFatigue==='fresh'){Object.keys(m).forEach(k=>m[k]+=1);sets=Math.min(4,lv+1);}
-  currentSession=wkSession(rt,sets,el,eq,wkPick(pool,m),currentFatigue,'');
-  renderSessionView();showView('session');
-  showToast({fresh:langEs()?'🟢 Rutina de hoy (a tope)':'🟢 Today (full power)',normal:langEs()?'🟡 Rutina de hoy':'🟡 Today routine',tired:langEs()?'🟠 Rutina adaptada':'🟠 Adapted'}[currentFatigue]);
-}
-
-function genWeekly(rt,lv,st,el,eq){
-  const pool=wkBuildPool(eq,st,el);
-  if(!pool.length){alert(langEs()?'Sin ejercicios disponibles.':'No exercises.');return;}
-  const names=langEs()?['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  const types=['strength','recovery','strength','recovery','strength','cardio','recovery'];
-  const plan={id:Date.now(),name:langEs()?'Plan Semanal':'Weekly Plan',date:new Date().toISOString(),type:'weekly',days:[]};
-  for(let i=0;i<7;i++){
-    let ses=null;
-    if(types[i]==='strength'){ses=wkSession(rt,lv,el,eq,wkPick(pool,wkCounts(rt)),'normal','');}
-    else if(types[i]==='cardio'){
-      const c=pool.filter(ex=>['jump','run','cardio','burpee','sprint','skip','jack','climber','rope','swing'].some(k=>(ex.name||'').toLowerCase().includes(k))).slice(0,4);
-      if(c.length)ses=wkSession('fullbody',Math.max(2,lv-1),el,eq,c,'normal','');
-    }else{
-      const r=pool.filter(ex=>['stretch','mobility','foam','roll','plank','bridge','yoga','superman','bird'].some(k=>(ex.name||'').toLowerCase().includes(k))||classifyDifficulty(ex)==='beginner').slice(0,4);
-      if(r.length)ses=wkSession('recovery',2,el,eq,r,'tired','');
-    }
-    plan.days.push({day:i+1,name:names[i],type:types[i],session:ses});
-  }
-  const plans=JSON.parse(localStorage.getItem(PLANS_KEY)||'[]');plans.unshift(plan);localStorage.setItem(PLANS_KEY,JSON.stringify(plans));
-  showWeeklySummary(plan);
-  showToast(langEs()?'✅ Plan semanal guardado (7 días)':'✅ Weekly plan saved (7 days)');
-}
-
-function showWeeklySummary(plan){
-  const icons={strength:'💪',cardio:'🏃',recovery:'🌿'};
-  const lbl=langEs()?{strength:'Fuerza',cardio:'Cardio',recovery:'Recuperación'}:{strength:'Strength',cardio:'Cardio',recovery:'Recovery'};
-  const old=document.getElementById('weeklySummarySection');if(old)old.remove();
-  let html=`<div class="section" id="weeklySummarySection"><h3>📆 ${plan.name}</h3><div class="weekly-summary">`;
-  plan.days.forEach(d=>{html+=`<div class="day-row"><span>${icons[d.type]||''} ${d.name} · ${lbl[d.type]||''}</span><span>${d.session?d.session.exercises.length:0} ${langEs()?'ejercicios':'exercises'}</span></div>`;});
-  html+=`</div><div class="btn-row" style="margin-top:12px"><button class="btn btn-green" onclick="loadFirstDayOfPlan(${plan.id})">🚀 ${langEs()?'Empezar día 1':'Start day 1'}</button><button class="btn btn-secondary" onclick="document.getElementById('weeklySummarySection').remove()">✕ ${langEs()?'Cerrar':'Close'}</button></div></div>`;
-  document.getElementById('formBlock').insertAdjacentHTML('beforeend',html);
-}
-
-function loadFirstDayOfPlan(id){
-  const p=(JSON.parse(localStorage.getItem(PLANS_KEY)||'[]')).find(x=>x.id===id);if(!p)return;
-  const first=p.days.find(d=>d.session);if(!first)return;
-  currentSession={...first.session,id:Date.now()};
-  renderSessionView();showView('session');showToast('🚀 '+first.name);
-}
-
-function initNewFeatures(){
-  document.querySelectorAll('#modeSelector .mode-option').forEach(o=>o.addEventListener('click',()=>{
-    document.querySelectorAll('#modeSelector .mode-option').forEach(x=>x.classList.remove('selected'));
-    o.classList.add('selected');currentMode=o.dataset.mode;
-    const fs=document.getElementById('fatigueSection');if(fs)fs.style.display=(currentMode==='today')?'block':'none';
-    const bt=document.querySelector('#btnGenerate span[data-i18n="btnGenerate"]');
-    if(bt){bt.removeAttribute('data-i18n');bt.textContent=currentMode==='today'?(langEs()?'Generar rutina de hoy':'Generate today'):(langEs()?'Generar plan semanal':'Generate weekly plan');}
-  }));
-  document.querySelectorAll('#fatigueSelector .fatigue-option').forEach(o=>o.addEventListener('click',()=>{
-    document.querySelectorAll('#fatigueSelector .fatigue-option').forEach(x=>x.classList.remove('selected'));
-    o.classList.add('selected');currentFatigue=o.dataset.value;updateFatigueHint();
-  }));
-  updateFatigueHint();
-  // Espera a que la app cargue la BD y vincule el botón original, luego lo reemplaza
-  let tries=0;const t=setInterval(()=>{tries++;
-    if(typeof DB!=='undefined'&&DB.length>0){clearInterval(t);setTimeout(()=>{
-      const b=document.getElementById('btnGenerate');
-      if(b){const n=b.cloneNode(true);b.parentNode.replaceChild(n,b);n.addEventListener('click',smartGenerate);}
-    },150);}
-    else if(tries>150){clearInterval(t);}
-  },200);
-}
-initNewFeatures();
 </script>
 </body>
 </html>
